@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.cammin.ldtkunity": "6.11.2",
     "com.unity.2d.animation": "11.0.0",
     "com.unity.2d.aseprite": "1.2.5",
     "com.unity.2d.psdimporter": "10.1.1",
@@ -49,5 +50,15 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
-  }
+  },
+  "scopedRegistries": [
+    {
+      "name": "OpenUpm",
+      "url": "https://package.openupm.com",
+      "scopes": [
+        "com.cammin.ldtkunity"
+      ],
+      "overrideBuiltIns": true
+    }
+  ]
 }
