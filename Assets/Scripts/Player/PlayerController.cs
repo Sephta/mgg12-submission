@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("PlayerComponent References")]
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] SpriteRenderer renderer;
+    [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Animator animator;
 
     [Header("Movement Settings")]
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
         rb.linearVelocity = new Vector2(_horizontal * speed, rb.linearVelocity.y);
         if (_horizontal != 0)
         {
-            renderer.flipX = _horizontal < 0;
+            spriteRenderer.flipX = _horizontal < 0;
         }
         _isMoving = IsMoving();
         _isGrounded = IsGrounded();

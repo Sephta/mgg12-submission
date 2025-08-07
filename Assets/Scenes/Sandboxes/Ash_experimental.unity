@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!212 &592894451 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8559592661259607268, guid: 062382e3cd963fc45be7db5f3f78b914, type: 3}
+  m_PrefabInstance: {fileID: 9154851739042124755}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1307249737
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +351,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 221994583114962424, guid: 062382e3cd963fc45be7db5f3f78b914, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2604437672078842728, guid: 062382e3cd963fc45be7db5f3f78b914, type: 3}
       propertyPath: m_Name
       value: Swordsman_Copy
@@ -402,6 +411,14 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9066630734437751839, guid: 062382e3cd963fc45be7db5f3f78b914, type: 3}
+      propertyPath: jumpingPower
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9066630734437751839, guid: 062382e3cd963fc45be7db5f3f78b914, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 592894451}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
