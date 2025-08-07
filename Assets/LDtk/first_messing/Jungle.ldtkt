@@ -1,0 +1,40 @@
+{
+  "Rects": [
+    {
+      "x": 32,
+      "y": 48,
+      "w": 16,
+      "h": 16
+    }
+  ],
+  "Def": {
+    "__cHei": 5,
+    "__cWid": 11,
+    "cachedPixelData": {
+      "opaqueTiles": "0100011011001000110110000001101110000000001100000110100",
+      "averageColors": "e484f374e474d485e485f474f474e485f474f3440000d224f112d224c335d234f223f223d234f224f3440000c335d224c335b335d354f243f243d354f364f364f364d485d485d485c485c355d354d354c355d365f344f3440000000000000000d355f344f243d355f36400000000"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "Jungle",
+    "padding": 0,
+    "pxHei": 80,
+    "pxWid": 176,
+    "relPath": "../Sprites/Tilesets/JungleTileset[16x16] 1.0/Tiles/GroundTiles.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+      "Jungle"
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 16,
+    "uid": 279
+  }
+}
