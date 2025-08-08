@@ -77,5 +77,6 @@
   },
   "dotnet.defaultSolution": "mgg12-submission.sln",
   "editor.formatOnSave": true,
-  "editor.tabSize": 2
+  "editor.tabSize": 2,
+  "dotnet.formatting.organizeImportsOnFormat": true
 }
