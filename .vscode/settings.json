@@ -55,6 +55,14 @@
     "UserSettings/": true,
     "temp/": true,
     "Temp/": true,
+    "**/Assets/Prefabs": true,
+    "**/*PhysicsMaterials": true,
+    "**/Assets/ScriptableObjects": true,
+    "**/Assets/LDtk": true,
+    "**/Assets/Settings": true,
+    "**/Assets/Sprites": true,
+    "**/Assets/TextMesh Pro": true,
+    "**/Assets/Scenes": true,
     "TEST_BUILDS/**": true
   },
   "files.associations": {
