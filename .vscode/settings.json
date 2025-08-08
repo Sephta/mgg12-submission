@@ -54,7 +54,8 @@
         "ProjectSettings/": true,
         "UserSettings/": true,
         "temp/": true,
-        "Temp/": true
+        "Temp/": true,
+        "TEST_BUILDS/**": true
     },
     "files.associations": {
         "*.asset": "yaml",
