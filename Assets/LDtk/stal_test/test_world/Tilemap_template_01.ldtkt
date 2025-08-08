@@ -1,0 +1,33 @@
+{
+  "Rects": null,
+  "Def": {
+    "__cHei": 1,
+    "__cWid": 48,
+    "cachedPixelData": {
+      "opaqueTiles": "011111111111111111111111111111111111111111111111",
+      "averageColors": "0000faaafcccfaaaf777f999fbbbfbbbf999fcccfcccfcccfcccfeeefcccf999fbbbfdddfdddfbbbfcccfcccfcccfaaafcccfaaaf777fbbbfdddfdddfbbbfbbbf777f999f777f555f999fbbbfbbbf999faaafaaafaaafaaafcccfcccfcccfccc"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "Tilemap_template_01",
+    "padding": 0,
+    "pxHei": 16,
+    "pxWid": 768,
+    "relPath": "../../Sprites/Tilesets/tilemap_template_01.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 16,
+    "uid": 2
+  }
+}

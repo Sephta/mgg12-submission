@@ -1,0 +1,23 @@
+{
+    "PixelsPerUnit": 16,
+    "CustomLevelPrefab": {
+        "instanceID": 0
+    },
+    "IntGridValueColorsVisible": false,
+    "UseCompositeCollider": true,
+    "GeometryType": 0,
+    "CreateBackgroundColor": true,
+    "CreateLevelBoundsTrigger": false,
+    "UseParallax": true,
+    "IntGridValues": [
+        {
+            "_key": "BlockingIntGrid_1",
+            "_asset": {
+                "fileID": 11400000,
+                "guid": "d4bb3d4daaa7eb94faa0cd485506e596",
+                "type": 2
+            }
+        }
+    ],
+    "Entities": []
+}

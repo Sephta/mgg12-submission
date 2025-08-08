@@ -216,7 +216,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2253911629886400664, guid: 1c8601f6243a69449a959941ab92e730, type: 3}
       propertyPath: m_Name
-      value: Swordsman_Copy
+      value: Swordsman
       objectReference: {fileID: 0}
     - target: {fileID: 1160356261127867848, guid: 1c8601f6243a69449a959941ab92e730, type: 3}
       propertyPath: m_UpdateMode
@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3422081139642648519}
-  renderer: {fileID: 8559592661259607268}
+  spriteRenderer: {fileID: 8559592661259607268}
   animator: {fileID: 6090771930140705224}
   speed: 10
   jumpingPower: 20
