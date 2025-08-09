@@ -499,8 +499,7 @@ MonoBehaviour:
   rb: {fileID: 3422081139642648519}
   spriteRenderer: {fileID: 8559592661259607268}
   animator: {fileID: 6090771930140705224}
-  speed: 10
-  jumpingPower: 20
+  _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64

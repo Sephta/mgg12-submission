@@ -1,77 +1,74 @@
+using UnityEditor.Animations;
 using UnityEngine;
-using System.Collections;
 using UnityEngine.InputSystem;
-using System;
+
 public class PlayerController : MonoBehaviour
 {
-    [Header("PlayerComponent References")]
-    [SerializeField] Rigidbody2D rb;
-    [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Animator animator;
+  [Header("Data References")]
+  [SerializeField] private Rigidbody2D _rigidBody2D;
+  [SerializeField] private SpriteRenderer _spriteRenderer;
 
-    [Header("Movement Settings")]
-    [SerializeField] float speed;
-    [SerializeField] float jumpingPower;
+  [Header("Movement Settings")]
+  [SerializeField] private PlayerMovementDataSO _playerMovementDataSO;
 
-    [Header("Grounding")]
-    [SerializeField] LayerMask groundLayer;
-    [SerializeField] Transform groundCheck;
+  [Header("Debug")]
+  [SerializeField, ReadOnly] private float _horizontal;
 
-    private float _horizontal;
-    private bool _isMoving;
-    private bool _isGrounded;
+  /* ---------------------------------------------------------------- */
+  /*                           Unity Functions                        */
+  /* ---------------------------------------------------------------- */
 
-    public void Move(InputAction.CallbackContext context)
+  private void Awake()
+  {
+    if (_playerMovementDataSO == null)
     {
-        _horizontal = context.ReadValue<Vector2>().x;
-        animator.Play("Walk", 0);
+      Debug.LogError("PlayerController does not have defined PlayerMovementDataSO.");
     }
 
-    public void Jump(InputAction.CallbackContext context)
+    if (_spriteRenderer == null) _spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
+    if (_rigidBody2D == null) _rigidBody2D = gameObject.GetComponent<Rigidbody2D>();
+
+    _rigidBody2D.gravityScale = _playerMovementDataSO.GravityMultipler;
+  }
+
+  private void FixedUpdate()
+  {
+    _rigidBody2D.linearVelocity = new Vector2(
+      _horizontal * _playerMovementDataSO.MovementSpeed,
+      _rigidBody2D.linearVelocity.y
+    );
+
+    _playerMovementDataSO.UpdatePlayerVelocity(_rigidBody2D.linearVelocity);
+    _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
+  }
+
+  /* ---------------------------------------------------------------- */
+  /*                               PUBLIC                             */
+  /* ---------------------------------------------------------------- */
+
+  public void Move(InputAction.CallbackContext context)
+  {
+    _horizontal = context.ReadValue<Vector2>().x;
+  }
+
+  public void Jump(InputAction.CallbackContext context)
+  {
+    if (context.performed && IsGrounded())
     {
-        if (context.performed && IsGrounded())
-        {
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpingPower);
-        }
-
+      _rigidBody2D.linearVelocity = new Vector2(
+        _rigidBody2D.linearVelocity.x,
+        _playerMovementDataSO.JumpingPower
+      );
     }
+  }
 
+  /* ---------------------------------------------------------------- */
+  /*                               PRIVATE                            */
+  /* ---------------------------------------------------------------- */
 
-    private void FixedUpdate()
-    {
-        rb.linearVelocity = new Vector2(_horizontal * speed, rb.linearVelocity.y);
-        if (_horizontal != 0)
-        {
-            spriteRenderer.flipX = _horizontal < 0;
-        }
-        _isMoving = IsMoving();
-        _isGrounded = IsGrounded();
-        animator.Play(AnimationSelector(), 0);
-    }
-
-    private string AnimationSelector()
-    {
-        if (_isGrounded && !_isMoving)
-        {
-            return "Idle";
-        }
-
-        if (_isGrounded && _isMoving)
-        {
-            return "Walk";
-        }
-
-        return "Idle";
-    }
-
-    private bool IsGrounded()
-    {
-        return Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.5f, 1f), CapsuleDirection2D.Horizontal, 0, groundLayer);
-    }
-
-    private bool IsMoving()
-    {
-        return rb.linearVelocity.y != 0 && rb.linearVelocity.x != 0;
-    }
+  private bool IsGrounded()
+  {
+    return Physics2D.OverlapCapsule(transform.position, new Vector2(0.5f, 1f), CapsuleDirection2D.Horizontal, 0, _playerMovementDataSO.GroundLayerMask);
+  }
 
 }
