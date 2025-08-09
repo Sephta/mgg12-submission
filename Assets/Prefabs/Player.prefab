@@ -124,9 +124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 826833160901576928}
-  _rigidBody2D: {fileID: 3419596688855721037}
+  _spriteRenderer: {fileID: 5455573424448884633}
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
-  _horizontal: 0
   _isMoving: 0
   _isGrounded: 0
 --- !u!1 &2436689383711416720
@@ -387,4 +386,3 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 5455573424448884633}
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
   _horizontal: 0
-  _isGrounded: 0
