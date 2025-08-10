@@ -1,5 +1,7 @@
+using NaughtyAttributes;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
 public class AnimatorController : MonoBehaviour
 {
   [Header("Data References")]
@@ -7,43 +9,40 @@ public class AnimatorController : MonoBehaviour
   [SerializeField] private SpriteRenderer _spriteRenderer;
 
   [Header("Movement Settings")]
-  [SerializeField] private PlayerMovementDataSO _playerMovementDataSO;
+  [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementDataSO;
 
   [Header("Debug")]
   [SerializeField, ReadOnly] private bool _isMoving;
   [SerializeField, ReadOnly] private bool _isGrounded;
 
-
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
 
-  void Awake()
+  private void Awake()
   {
     if (_animator == null) _animator = GetComponent<Animator>();
     if (_spriteRenderer == null) _spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
-  void FixedUpdate()
+  private void Update()
+  {
+    if (_playerMovementDataSO.PlayerDirectionInput.x != 0)
+    {
+      _spriteRenderer.flipX = _playerMovementDataSO.PlayerDirectionInput.x < 0;
+    }
+  }
+
+  private void FixedUpdate()
   {
     _isMoving = IsMoving();
     _isGrounded = IsGrounded();
     _animator.Play(AnimationSelector(), 0);
-
-    if (_playerMovementDataSO.PlayerVelocity.x != 0)
-    {
-      _spriteRenderer.flipX = _playerMovementDataSO.PlayerVelocity.x < 0;
-    }
   }
 
   /* ---------------------------------------------------------------- */
   /*                               PUBLIC                             */
   /* ---------------------------------------------------------------- */
-
-  public void OnMove()
-  {
-    _animator.Play("run", 0);
-  }
 
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
@@ -76,7 +75,7 @@ public class AnimatorController : MonoBehaviour
 
   private bool IsMoving()
   {
-    return _playerMovementDataSO.PlayerVelocity.y != 0 && _playerMovementDataSO.PlayerVelocity.x != 0;
+    return _playerMovementDataSO.PlayerDirectionInput.y != 0 || _playerMovementDataSO.PlayerDirectionInput.x != 0;
   }
 
 }

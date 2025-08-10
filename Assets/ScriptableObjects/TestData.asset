@@ -12,11 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db5580eaf02bae4f92f5701c2ab11e6, type: 3}
   m_Name: TestData
   m_EditorClassIdentifier: 
-  _movementSpeed: 5
-  _jumpingPower: 7
-  _maxFallingSpeed: 10
-  _gravityMultiplier: 1
-  _gravityMultiplierWhileFalling: 2
+  _movementSpeed: 350
+  _maxFallingSpeed: 18.2
+  _gravityMultiplierWhenFalling: 2
+  _maxNumberOfJumps: 1
+  _jumpHeight: 3
+  _timeToApex: 0.426
+  _jumpInputBuffer: 0.1
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  _groundingRaycastDistance: 0.125
+  _coyoteTime: 0.056
+  _jumpingPower: 14.084508
+  _gravityScale: 3.3702574
+  _playerVelocity: {x: 0, y: -12.365267}
+  _playerDirectionInput: {x: 0, y: 0}
+  _isGrounded: 0

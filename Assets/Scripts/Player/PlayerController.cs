@@ -1,18 +1,25 @@
-using UnityEditor.Animations;
+using System;
+using NaughtyAttributes;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
 public class PlayerController : MonoBehaviour
 {
   [Header("Data References")]
   [SerializeField] private Rigidbody2D _rigidBody2D;
-  [SerializeField] private SpriteRenderer _spriteRenderer;
+  [SerializeField] private CapsuleCollider2D _capsuleCollider2D;
 
   [Header("Movement Settings")]
-  [SerializeField] private PlayerMovementDataSO _playerMovementDataSO;
+  [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementDataSO;
 
   [Header("Debug")]
-  [SerializeField, ReadOnly] private float _horizontal;
+  [SerializeField, Range(0f, 1f)] private float _groundingRaycastDistance = 0.25f;
+  [SerializeField, ReadOnly] private Vector2 _inputDirection;
+  [SerializeField, ReadOnly] private float _timeSinceJumpPressed;
+  [SerializeField, ReadOnly] private float _timeSinceGrounded;
+  [SerializeField, ReadOnly] private int _jumpCount;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -25,40 +32,45 @@ public class PlayerController : MonoBehaviour
       Debug.LogError("PlayerController does not have defined PlayerMovementDataSO.");
     }
 
-    if (_spriteRenderer == null) _spriteRenderer = gameObject.GetComponentInChildren<SpriteRenderer>();
-    if (_rigidBody2D == null) _rigidBody2D = gameObject.GetComponent<Rigidbody2D>();
-
-    _rigidBody2D.gravityScale = _playerMovementDataSO.GravityMultipler;
+    if (_rigidBody2D == null) _rigidBody2D = GetComponent<Rigidbody2D>();
+    if (_capsuleCollider2D == null) _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
   }
 
-  private void FixedUpdate()
+  private void Start()
   {
-    _rigidBody2D.linearVelocity = new Vector2(
-      _horizontal * _playerMovementDataSO.MovementSpeed,
-      _rigidBody2D.linearVelocity.y
-    );
+    _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale;
+    _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
+  }
 
-    _playerMovementDataSO.UpdatePlayerVelocity(_rigidBody2D.linearVelocity);
+  private void Update()
+  {
     _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
+    _playerMovementDataSO.UpdatePlayerVelocity(_rigidBody2D.linearVelocity);
+
+    _timeSinceJumpPressed = Mathf.Clamp(_timeSinceJumpPressed - Time.deltaTime, 0f, _playerMovementDataSO.JumpInputBuffer);
+    _timeSinceGrounded = Mathf.Clamp(_timeSinceGrounded - Time.deltaTime, 0f, _playerMovementDataSO.CoyoteTime);
+
+    MovePlayer();
+    PerformJump();
+    ClampPlayerMovement();
   }
 
   /* ---------------------------------------------------------------- */
   /*                               PUBLIC                             */
   /* ---------------------------------------------------------------- */
 
-  public void Move(InputAction.CallbackContext context)
+  public void OnMove(InputAction.CallbackContext context)
   {
-    _horizontal = context.ReadValue<Vector2>().x;
+    _inputDirection = context.ReadValue<Vector2>();
+    _playerMovementDataSO.UpdatePlayerDirectionInput(_inputDirection);
   }
 
-  public void Jump(InputAction.CallbackContext context)
+  public void OnJump(InputAction.CallbackContext context)
   {
-    if (context.performed && IsGrounded())
+    if (context.performed)
     {
-      _rigidBody2D.linearVelocity = new Vector2(
-        _rigidBody2D.linearVelocity.x,
-        _playerMovementDataSO.JumpingPower
-      );
+      _timeSinceJumpPressed = _playerMovementDataSO.JumpInputBuffer;
+      Debug.Log("Is grounded: " + _playerMovementDataSO.IsGrounded + " jumpCount: " + _jumpCount);
     }
   }
 
@@ -66,9 +78,55 @@ public class PlayerController : MonoBehaviour
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
 
+  private void MovePlayer()
+  {
+    _rigidBody2D.linearVelocityX = _inputDirection.x * _playerMovementDataSO.MovementSpeed * Time.fixedDeltaTime;
+
+    // If we are falling then we have a different gravity multiplier
+    if (_rigidBody2D.linearVelocityY < 0)
+    {
+      _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale * _playerMovementDataSO.GravityMultiplierWhenFalling;
+    }
+    else
+    {
+      _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale;
+    }
+  }
+
+  private void PerformJump()
+  {
+    if (_playerMovementDataSO.IsGrounded && _timeSinceJumpPressed > 0 && _jumpCount > 0)
+    {
+      Debug.Log("JUMP PERFORMED");
+      _jumpCount = Mathf.Clamp(_jumpCount - 1, 0, _playerMovementDataSO.MaxNumberOfJumps);
+      _timeSinceJumpPressed = 0;
+      _rigidBody2D.AddForce(_playerMovementDataSO.JumpingPower * Vector2.up, ForceMode2D.Impulse);
+    }
+  }
+
+  private void ClampPlayerMovement()
+  {
+    _rigidBody2D.linearVelocityY = Mathf.Clamp(_rigidBody2D.linearVelocityY, -_playerMovementDataSO.MaxFallingSpeed, _playerMovementDataSO.MaxFallingSpeed);
+  }
+
   private bool IsGrounded()
   {
-    return Physics2D.OverlapCapsule(transform.position, new Vector2(0.5f, 1f), CapsuleDirection2D.Horizontal, 0, _playerMovementDataSO.GroundLayerMask);
+    RaycastHit2D hit = Physics2D.Raycast(
+      new Vector2(transform.position.x, transform.position.y),
+      Vector2.down,
+      _capsuleCollider2D.bounds.extents.y + _groundingRaycastDistance,
+      _playerMovementDataSO.GroundLayerMask
+    );
+
+    Debug.DrawRay(transform.position, Vector3.down, Color.blue, 1f);
+
+    if (hit)
+    {
+      _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
+      _timeSinceGrounded = _playerMovementDataSO.CoyoteTime;
+    }
+
+    return _timeSinceGrounded > 0;
   }
 
 }
