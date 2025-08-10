@@ -74,12 +74,14 @@ public class PlayerController : MonoBehaviour
   /*                               PUBLIC                             */
   /* ---------------------------------------------------------------- */
 
+  // For used in the Player Input component.
   public void OnMove(InputAction.CallbackContext context)
   {
     _inputDirection = context.ReadValue<Vector2>();
     _playerMovementDataSO.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
   }
 
+  // For use in the Player Input component.
   public void OnJump(InputAction.CallbackContext context)
   {
     if (context.started) _isJumping = true;
