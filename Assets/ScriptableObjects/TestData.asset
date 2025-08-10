@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db5580eaf02bae4f92f5701c2ab11e6, type: 3}
   m_Name: TestData
   m_EditorClassIdentifier: 
-  _movementSpeed: 350
+  _movementSpeed: 3.5
   _maxFallingSpeed: 18.2
   _gravityMultiplierWhenFalling: 2.2
-  _groundDrag: 7.31
-  _airDrag: 1.69
+  _groundDrag: 2.76
+  _airDrag: 0.34
   _maxNumberOfJumps: 1
   _jumpHeight: 3
   _timeToApex: 0.442
   _jumpHangTimeThreshold: 0.1
   _jumpHangTimeGravityMultiplier: 0.5
-  _jumpInputBuffer: 0.2
+  _jumpInputBuffer: 0.1
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  _groundingRaycastDistance: 0.1
+  _groundingRaycastDistance: 0.05
   _surfaceContactFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -41,9 +41,9 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  _coyoteTime: 0.1
+  _coyoteTime: 0.2
   _jumpingPower: 13.574661
   _gravityScale: 3.130673
-  _playerVelocity: {x: 7.6128226e-13, y: 0}
+  _playerVelocity: {x: -1.4453e-41, y: 0}
   _playerDirectionInput: {x: 0, y: 0}
   _isGrounded: 1

@@ -188,7 +188,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!61 &4280466620504924823
 BoxCollider2D:
@@ -388,3 +388,5 @@ MonoBehaviour:
   _dragToApply: 0
   _isJumping: 0
   _wasGroundedLastFrame: 0
+  _frameThreshold: 0
+  _numFramesThatJumpCountIsZero: 0

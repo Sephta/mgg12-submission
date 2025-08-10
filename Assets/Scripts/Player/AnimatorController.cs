@@ -57,7 +57,7 @@ public class AnimatorController : MonoBehaviour
 
   private bool IsMoving()
   {
-    return _playerMovementDataSO.PlayerDirectionInput.y != 0 || _playerMovementDataSO.PlayerDirectionInput.x != 0;
+    return _playerMovementDataSO.PlayerDirectionInput.x != 0;
   }
 
 }

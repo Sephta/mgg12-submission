@@ -7,7 +7,7 @@ public class PlayerMovementDataSO : ScriptableObject
   /*                          Configurable Stats                      */
   /* ---------------------------------------------------------------- */
   [Header("Movement Data")]
-  [SerializeField, Tooltip("Determines how fast the player will move.")]
+  [SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player will move.")]
   private float _movementSpeed;
 
   [SerializeField, Range(9.8f, 50f), Tooltip("Limits the velocity at which the player can fall. Is measured in units/second. In Unity 1 unit = 1 meter.")]

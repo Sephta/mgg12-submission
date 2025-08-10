@@ -131,13 +131,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3242688827286640369, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
+      propertyPath: _frameThreshold
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4395788041346849919, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.63
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4395788041346849919, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.88
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 4395788041346849919, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
       propertyPath: m_LocalPosition.z

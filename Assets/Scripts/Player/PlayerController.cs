@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
   [Header("Debug")]
   [SerializeField, ReadOnly] private Vector2 _inputDirection;
+  [SerializeField, ReadOnly] private int _moveSpeedBase = 100;
   [SerializeField, ReadOnly] private float _jumpBufferWindow;
   [SerializeField, ReadOnly] private float _coyoteTime;
   [SerializeField, ReadOnly] private int _jumpCount;
@@ -54,15 +55,9 @@ public class PlayerController : MonoBehaviour
     _coyoteTime = Mathf.Clamp(_coyoteTime - Time.deltaTime, 0f, _playerMovementDataSO.CoyoteTime);
 
     // Reset timers 
-    if (!_playerMovementDataSO.IsGrounded && _wasGroundedLastFrame)
-    {
-      _coyoteTime = _playerMovementDataSO.CoyoteTime;
-    }
+    if (_playerMovementDataSO.IsGrounded) _coyoteTime = _playerMovementDataSO.CoyoteTime;
 
-    if (!_wasGroundedLastFrame && _playerMovementDataSO.IsGrounded)
-    {
-      _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
-    }
+    if (!_wasGroundedLastFrame && _playerMovementDataSO.IsGrounded) _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
 
     // Perform actions based on updates
     MovePlayer();
@@ -70,6 +65,7 @@ public class PlayerController : MonoBehaviour
     JumpHangTime();
     ClampPlayerMovement();
 
+    // cache grounded state at the end of this frame since next frame we might not be grounded.
     _wasGroundedLastFrame = IsGrounded();
   }
 
@@ -87,7 +83,10 @@ public class PlayerController : MonoBehaviour
   // For use in the Player Input component.
   public void OnJump(InputAction.CallbackContext context)
   {
-    if (context.started) _isJumping = true;
+    if (context.started)
+    {
+      _isJumping = true;
+    }
     if (context.canceled) _isJumping = false;
     if (context.performed)
     {
@@ -144,7 +143,8 @@ public class PlayerController : MonoBehaviour
 
     if (_playerMovementDataSO.PlayerDirectionInput.x != 0)
     {
-      _rigidBody2D.linearVelocityX = _playerMovementDataSO.PlayerDirectionInput.x * _playerMovementDataSO.MovementSpeed * Time.fixedDeltaTime;
+      float speed = _moveSpeedBase * _playerMovementDataSO.MovementSpeed;
+      _rigidBody2D.linearVelocityX = _playerMovementDataSO.PlayerDirectionInput.x * speed * Time.fixedDeltaTime;
     }
     else
     {
@@ -164,16 +164,22 @@ public class PlayerController : MonoBehaviour
 
   private void PerformJump()
   {
-    if (_jumpBufferWindow > 0 && (_coyoteTime > 0 || _playerMovementDataSO.IsGrounded) && _jumpCount > 0)
+    if (_jumpBufferWindow > 0 && _coyoteTime > 0 && _jumpCount > 0)
     {
       _jumpCount = Mathf.Clamp(_jumpCount - 1, 0, _playerMovementDataSO.MaxNumberOfJumps);
       _jumpBufferWindow = 0f;
+      _coyoteTime = 0f;
 
-      float finalJumpForce = _playerMovementDataSO.JumpingPower;
-      if (_rigidBody2D.linearVelocityY < 0) finalJumpForce -= _rigidBody2D.linearVelocityY;
-
-      _rigidBody2D.AddForce(finalJumpForce * Vector2.up, ForceMode2D.Impulse);
+      ExecuteJump();
     }
+  }
+
+  private void ExecuteJump()
+  {
+    float jumpForce = _playerMovementDataSO.JumpingPower;
+
+    // _rigidBody2D.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+    _rigidBody2D.linearVelocityY = jumpForce;
   }
 
   private void JumpHangTime()
