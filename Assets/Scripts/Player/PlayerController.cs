@@ -64,15 +64,13 @@ public class PlayerController : MonoBehaviour
       _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
     }
 
-    _wasGroundedLastFrame = IsGrounded();
-  }
-
-  private void FixedUpdate()
-  {
+    // Perform actions based on updates
     MovePlayer();
     PerformJump();
     JumpHangTime();
     ClampPlayerMovement();
+
+    _wasGroundedLastFrame = IsGrounded();
   }
 
   /* ---------------------------------------------------------------- */

@@ -26,7 +26,8 @@ MonoBehaviour:
   _groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  _groundingContactFilter:
+  _groundingRaycastDistance: 0.1
+  _surfaceContactFilter:
     useTriggers: 0
     useLayerMask: 0
     useDepth: 0
@@ -35,15 +36,14 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 64
+      m_Bits: 0
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  _groundingRaycastDistance: 0.1
   _coyoteTime: 0.1
   _jumpingPower: 13.574661
   _gravityScale: 3.130673
-  _playerVelocity: {x: 0.000033951077, y: 0}
+  _playerVelocity: {x: 7.6128226e-13, y: 0}
   _playerDirectionInput: {x: 0, y: 0}
   _isGrounded: 1
