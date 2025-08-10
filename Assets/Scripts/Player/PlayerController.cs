@@ -1,15 +1,13 @@
-using System;
 using NaughtyAttributes;
-using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(CapsuleCollider2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
   [Header("Data References")]
   [SerializeField] private Rigidbody2D _rigidBody2D;
-  [SerializeField] private CapsuleCollider2D _capsuleCollider2D;
+  [SerializeField] private BoxCollider2D _boxCollider2D;
 
   [Header("Movement Settings")]
   [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementDataSO;
@@ -35,7 +33,7 @@ public class PlayerController : MonoBehaviour
     }
 
     if (_rigidBody2D == null) _rigidBody2D = GetComponent<Rigidbody2D>();
-    if (_capsuleCollider2D == null) _capsuleCollider2D = GetComponent<CapsuleCollider2D>();
+    if (_boxCollider2D == null) _boxCollider2D = GetComponent<BoxCollider2D>();
   }
 
   private void Start()
@@ -66,13 +64,15 @@ public class PlayerController : MonoBehaviour
       _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
     }
 
-    // Perform actions based on updates
+    _wasGroundedLastFrame = IsGrounded();
+  }
+
+  private void FixedUpdate()
+  {
     MovePlayer();
     PerformJump();
     JumpHangTime();
     ClampPlayerMovement();
-
-    _wasGroundedLastFrame = IsGrounded();
   }
 
   /* ---------------------------------------------------------------- */
@@ -94,7 +94,6 @@ public class PlayerController : MonoBehaviour
     if (context.performed)
     {
       _jumpBufferWindow = _playerMovementDataSO.JumpInputBuffer;
-      // Debug.Log("Is grounded: " + _playerMovementDataSO.IsGrounded + " jumpCount: " + _jumpCount);
     }
   }
 
@@ -102,7 +101,44 @@ public class PlayerController : MonoBehaviour
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
 
-  private bool IsGrounded() => _rigidBody2D.IsTouching(_playerMovementDataSO.GroundingContactFilter);
+  private bool IsGrounded()
+  {
+    // using three distinct rays, the middle of which casts from player's origin position, 
+    // while the left and right cast from sids of the player's collider
+
+    Vector3 leftRayPosition = new(transform.position.x - _boxCollider2D.bounds.extents.x, transform.position.y, transform.position.z);
+    Vector3 middleRayPosition = transform.position;
+    Vector3 rightRayPosition = new(transform.position.x + _boxCollider2D.bounds.extents.x, transform.position.y, transform.position.z);
+
+    RaycastHit2D leftRay = Physics2D.Raycast(
+      leftRayPosition,
+      Vector2.down,
+      _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
+      _playerMovementDataSO.GroundLayerMask
+    );
+
+    RaycastHit2D middleRay = Physics2D.Raycast(
+      middleRayPosition,
+      Vector2.down,
+      _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
+      _playerMovementDataSO.GroundLayerMask
+    );
+
+    RaycastHit2D rightRay = Physics2D.Raycast(
+      rightRayPosition,
+      Vector2.down,
+      _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
+      _playerMovementDataSO.GroundLayerMask
+    );
+
+    // For debugging (only appears in the Scene window, not the game window)
+    // Debug.DrawRay(leftRayPosition, _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.blue, 1f);
+    // Debug.DrawRay(middleRayPosition, _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.blue, 1f);
+    // Debug.DrawRay(rightRayPosition, _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.blue, 1f);
+
+    // player is grounded if any of the following rays make contact with an object with on the specified LayerMask stored in _playerMovementDataSO
+    return leftRay || middleRay || rightRay;
+  }
 
   private void MovePlayer()
   {
@@ -139,8 +175,6 @@ public class PlayerController : MonoBehaviour
       if (_rigidBody2D.linearVelocityY < 0) finalJumpForce -= _rigidBody2D.linearVelocityY;
 
       _rigidBody2D.AddForce(finalJumpForce * Vector2.up, ForceMode2D.Impulse);
-      // Debug.Log("JUMP PERFORMED A, new jumpCount: " + _jumpCount);
-      Debug.Log("JUMP PERFORMED");
     }
   }
 
@@ -160,9 +194,6 @@ public class PlayerController : MonoBehaviour
 
 
   private void ResetGravityScale() => _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale;
-  private void UpdateGravityScale(float scale)
-  {
-    _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale * scale;
-  }
+  private void UpdateGravityScale(float scale) => _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale * scale;
 
 }

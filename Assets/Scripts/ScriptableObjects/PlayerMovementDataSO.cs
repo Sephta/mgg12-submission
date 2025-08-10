@@ -43,8 +43,12 @@ public class PlayerMovementDataSO : ScriptableObject
 
   [Space(5)]
   [Header("Grounding Data")]
-  [SerializeField, Tooltip("Used to check if the player's rigidbody is grounded.")]
-  private ContactFilter2D _groundingContactFilter;
+  [SerializeField, Tooltip("The layer to use when checking if the player is grounded.")]
+  private LayerMask _groundLayerMask;
+  [SerializeField, Range(0f, 1f), Tooltip("Controls how far the raycast goes to check if player is grounded.")]
+  private float _groundingRaycastDistance;
+  [SerializeField, Tooltip("Useful for checking if the player is touching a surface in the specified layer.")]
+  private ContactFilter2D _surfaceContactFilter;
 
   [Space(5)]
   [Header("Mechanical Data")]
@@ -72,9 +76,11 @@ public class PlayerMovementDataSO : ScriptableObject
   public float TimeToApex => _timeToApex;
   public float JumpHangTimeThreshold => _jumpHangTimeThreshold;
   public float JumpHangTimeGravityMultiplier => _jumpHangTimeGravityMultiplier;
-  public ContactFilter2D GroundingContactFilter => _groundingContactFilter;
-  public float CoyoteTime => _coyoteTime;
   public float JumpInputBuffer => _jumpInputBuffer;
+  public LayerMask GroundLayerMask => _groundLayerMask;
+  public float GroundingRayCastDistance => _groundingRaycastDistance;
+  public ContactFilter2D SurfaceContactFilter => _surfaceContactFilter;
+  public float CoyoteTime => _coyoteTime;
 
   /* ---------------------------------------------------------------- */
   /*                       Runtime Player Stats                       */

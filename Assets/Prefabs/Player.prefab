@@ -137,7 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4395788041346849919}
   - component: {fileID: 3419596688855721037}
-  - component: {fileID: 2354724445202499942}
+  - component: {fileID: 4280466620504924823}
   - component: {fileID: 4399096245682658266}
   - component: {fileID: 3242688827286640369}
   m_Layer: 0
@@ -190,8 +190,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!70 &2354724445202499942
-CapsuleCollider2D:
+--- !u!61 &4280466620504924823
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -225,8 +225,17 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.5}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
+  m_EdgeRadius: 0
 --- !u!114 &4399096245682658266
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,7 +379,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidBody2D: {fileID: 3419596688855721037}
-  _capsuleCollider2D: {fileID: 2354724445202499942}
+  _boxCollider2D: {fileID: 4280466620504924823}
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
   _inputDirection: {x: 0, y: 0}
   _jumpBufferWindow: 0
