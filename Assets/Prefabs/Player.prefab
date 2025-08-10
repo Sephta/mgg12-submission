@@ -127,7 +127,6 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 5455573424448884633}
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
   _isMoving: 0
-  _isGrounded: 0
 --- !u!1 &2436689383711416720
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +179,7 @@ Rigidbody2D:
   m_LinearDamping: 0
   m_AngularDamping: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 5f3c817798d377d42adf266a8a86bb5a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -373,5 +372,10 @@ MonoBehaviour:
   _rigidBody2D: {fileID: 3419596688855721037}
   _capsuleCollider2D: {fileID: 2354724445202499942}
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
-  _groundingRaycastDistance: 0.25
   _inputDirection: {x: 0, y: 0}
+  _jumpBufferWindow: 0
+  _coyoteTime: 0
+  _jumpCount: 0
+  _dragToApply: 0
+  _isJumping: 0
+  _wasGroundedLastFrame: 0

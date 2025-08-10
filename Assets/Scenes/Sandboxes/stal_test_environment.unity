@@ -271,30 +271,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 3242688827286640369, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
-      propertyPath: _groundingRaycastDistance
-      value: 0.125
-      objectReference: {fileID: 0}
-    - target: {fileID: 3242688827286640369, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
-      propertyPath: _contactFilter2D.layerMask.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    - target: {fileID: 3419596688855721037, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
-      propertyPath: m_Mass
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3419596688855721037, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
-      propertyPath: m_BodyType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3419596688855721037, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 6200000, guid: 5f3c817798d377d42adf266a8a86bb5a, type: 2}
-    - target: {fileID: 3419596688855721037, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
-      propertyPath: m_UseAutoMass
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4395788041346849919, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
       propertyPath: m_LocalPosition.x
       value: 43.43
@@ -334,18 +310,6 @@ PrefabInstance:
     - target: {fileID: 4395788041346849919, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
-      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnMove
-      objectReference: {fileID: 0}
-    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
-      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnJump
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

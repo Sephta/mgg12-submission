@@ -40,15 +40,22 @@ public class PlayerController : MonoBehaviour
 
   private void Start()
   {
-    _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale;
+    // Set default parameters
+    ResetGravityScale();
     _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
   }
 
   private void Update()
   {
+    // Update runtime movement data
     _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
     _playerMovementDataSO.UpdatePlayerVelocity(_rigidBody2D.linearVelocity);
 
+    // Update timers
+    _jumpBufferWindow = Mathf.Clamp(_jumpBufferWindow - Time.deltaTime, 0f, _playerMovementDataSO.JumpInputBuffer);
+    _coyoteTime = Mathf.Clamp(_coyoteTime - Time.deltaTime, 0f, _playerMovementDataSO.CoyoteTime);
+
+    // Reset timers 
     if (!_playerMovementDataSO.IsGrounded && _wasGroundedLastFrame)
     {
       _coyoteTime = _playerMovementDataSO.CoyoteTime;
@@ -59,9 +66,7 @@ public class PlayerController : MonoBehaviour
       _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
     }
 
-    _jumpBufferWindow = Mathf.Clamp(_jumpBufferWindow - Time.deltaTime, 0f, _playerMovementDataSO.JumpInputBuffer);
-    _coyoteTime = Mathf.Clamp(_coyoteTime - Time.deltaTime, 0f, _playerMovementDataSO.CoyoteTime);
-
+    // Perform actions based on updates
     MovePlayer();
     PerformJump();
     JumpHangTime();
@@ -97,10 +102,7 @@ public class PlayerController : MonoBehaviour
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
 
-  private bool IsGrounded()
-  {
-    return _rigidBody2D.IsTouching(_playerMovementDataSO.GroundingContactFilter);
-  }
+  private bool IsGrounded() => _rigidBody2D.IsTouching(_playerMovementDataSO.GroundingContactFilter);
 
   private void MovePlayer()
   {
@@ -118,11 +120,11 @@ public class PlayerController : MonoBehaviour
     // If we are falling then we have a different gravity multiplier
     if (_rigidBody2D.linearVelocityY < 0 && !_playerMovementDataSO.IsGrounded)
     {
-      _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale * _playerMovementDataSO.GravityMultiplierWhenFalling;
+      UpdateGravityScale(_playerMovementDataSO.GravityMultiplierWhenFalling);
     }
     else
     {
-      _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale;
+      ResetGravityScale();
     }
   }
 
@@ -146,7 +148,7 @@ public class PlayerController : MonoBehaviour
   {
     if (Mathf.Abs(_rigidBody2D.linearVelocityY) < _playerMovementDataSO.JumpHangTimeThreshold)
     {
-      _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale * _playerMovementDataSO.JumpHangTimeGravityMultiplier;
+      UpdateGravityScale(_playerMovementDataSO.JumpHangTimeGravityMultiplier);
     }
   }
 
@@ -154,6 +156,13 @@ public class PlayerController : MonoBehaviour
   {
     // Clamps vertical velocity by the amount configured in _playerMovementDataSO
     _rigidBody2D.linearVelocityY = Mathf.Clamp(_rigidBody2D.linearVelocityY, -_playerMovementDataSO.MaxFallingSpeed, _playerMovementDataSO.MaxFallingSpeed);
+  }
+
+
+  private void ResetGravityScale() => _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale;
+  private void UpdateGravityScale(float scale)
+  {
+    _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale * scale;
   }
 
 }
