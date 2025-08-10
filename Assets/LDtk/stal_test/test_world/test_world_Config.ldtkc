@@ -1,11 +1,13 @@
 {
     "PixelsPerUnit": 16,
     "CustomLevelPrefab": {
-        "instanceID": 0
+        "fileID": 8391000430539425469,
+        "guid": "1f9cecca588d5cb4f8ffbb02434c1fc8",
+        "type": 3
     },
     "IntGridValueColorsVisible": false,
     "UseCompositeCollider": true,
-    "GeometryType": 0,
+    "GeometryType": 1,
     "CreateBackgroundColor": true,
     "CreateLevelBoundsTrigger": false,
     "UseParallax": true,
@@ -19,5 +21,14 @@
             }
         }
     ],
-    "Entities": []
+    "Entities": [
+        {
+            "_key": "Player",
+            "_asset": {
+                "fileID": 2436689383711416720,
+                "guid": "a7298f226b578df4aa910b40aaedcf37",
+                "type": 3
+            }
+        }
+    ]
 }

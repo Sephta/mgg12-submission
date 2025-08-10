@@ -30,10 +30,7 @@ public class AnimatorController : MonoBehaviour
     {
       _spriteRenderer.flipX = _playerMovementDataSO.PlayerDirectionInput.x < 0;
     }
-  }
 
-  private void FixedUpdate()
-  {
     _isMoving = IsMoving();
     _animator.Play(AnimationSelector(), 0);
   }
@@ -48,22 +45,14 @@ public class AnimatorController : MonoBehaviour
 
   private string AnimationSelector()
   {
-    if (_playerMovementDataSO.IsGrounded && !_isMoving)
+    if (_playerMovementDataSO.IsGrounded)
     {
-      return "idle";
+      return _isMoving ? "run" : "idle";
     }
-
-    if (_playerMovementDataSO.IsGrounded && _isMoving)
-    {
-      return "run";
-    }
-
-    if (!_playerMovementDataSO.IsGrounded)
+    else
     {
       return "jump";
     }
-
-    return "idle";
   }
 
   private bool IsMoving()

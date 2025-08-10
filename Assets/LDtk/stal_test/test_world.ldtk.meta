@@ -11,10 +11,10 @@ ScriptedImporter:
   _reimportOnDependencyChange: 1
   _jsonFile: {fileID: -164016180542632921, guid: 27eb770cbc56e5a47af496dab6d05acc, type: 3}
   _pixelsPerUnit: 16
-  _customLevelPrefab: {instanceID: 0}
+  _customLevelPrefab: {fileID: 8391000430539425469, guid: 1f9cecca588d5cb4f8ffbb02434c1fc8, type: 3}
   _intGridValueColorsVisible: 0
   _useCompositeCollider: 1
-  _geometryType: 0
+  _geometryType: 1
   _createBackgroundColor: 1
   _createLevelBoundsTrigger: 0
   _useParallax: 1
@@ -22,7 +22,9 @@ ScriptedImporter:
   _intGridValues:
   - _key: BlockingIntGrid_1
     _asset: {fileID: 11400000, guid: d4bb3d4daaa7eb94faa0cd485506e596, type: 2}
-  _entities: []
+  _entities:
+  - _key: Player
+    _asset: {fileID: 2436689383711416720, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
   _enumGenerate: 0
   _enumPath: 
   _enumNamespace: 

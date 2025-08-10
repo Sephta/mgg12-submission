@@ -1,0 +1,40 @@
+{
+  "Rects": [
+    {
+      "x": 0,
+      "y": 0,
+      "w": 16,
+      "h": 16
+    }
+  ],
+  "Def": {
+    "__cHei": 1,
+    "__cWid": 9,
+    "cachedPixelData": {
+      "opaqueTiles": "000000000",
+      "averageColors": "7bbb6bbb6bbb7bbb6bbb7bbb7bbb7bbb7bbb"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "Player_test",
+    "padding": 0,
+    "pxHei": 16,
+    "pxWid": 144,
+    "relPath": "../../Sprites/test_character.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": 28,
+    "tileGridSize": 16,
+    "uid": 27
+  }
+}
