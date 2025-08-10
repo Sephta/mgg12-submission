@@ -15,11 +15,13 @@ public class PlayerController : MonoBehaviour
   [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementDataSO;
 
   [Header("Debug")]
-  [SerializeField, Range(0f, 1f)] private float _groundingRaycastDistance = 0.25f;
   [SerializeField, ReadOnly] private Vector2 _inputDirection;
-  [SerializeField, ReadOnly] private float _timeSinceJumpPressed;
-  [SerializeField, ReadOnly] private float _timeSinceGrounded;
+  [SerializeField, ReadOnly] private float _jumpBufferWindow;
+  [SerializeField, ReadOnly] private float _coyoteTime;
   [SerializeField, ReadOnly] private int _jumpCount;
+  [SerializeField, ReadOnly] private float _dragToApply;
+  [SerializeField, ReadOnly] private bool _isJumping;
+  [SerializeField, ReadOnly] private bool _wasGroundedLastFrame;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -47,12 +49,25 @@ public class PlayerController : MonoBehaviour
     _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
     _playerMovementDataSO.UpdatePlayerVelocity(_rigidBody2D.linearVelocity);
 
-    _timeSinceJumpPressed = Mathf.Clamp(_timeSinceJumpPressed - Time.deltaTime, 0f, _playerMovementDataSO.JumpInputBuffer);
-    _timeSinceGrounded = Mathf.Clamp(_timeSinceGrounded - Time.deltaTime, 0f, _playerMovementDataSO.CoyoteTime);
+    if (!_playerMovementDataSO.IsGrounded && _wasGroundedLastFrame)
+    {
+      _coyoteTime = _playerMovementDataSO.CoyoteTime;
+    }
+
+    if (!_wasGroundedLastFrame && _playerMovementDataSO.IsGrounded)
+    {
+      _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
+    }
+
+    _jumpBufferWindow = Mathf.Clamp(_jumpBufferWindow - Time.deltaTime, 0f, _playerMovementDataSO.JumpInputBuffer);
+    _coyoteTime = Mathf.Clamp(_coyoteTime - Time.deltaTime, 0f, _playerMovementDataSO.CoyoteTime);
 
     MovePlayer();
     PerformJump();
+    JumpHangTime();
     ClampPlayerMovement();
+
+    _wasGroundedLastFrame = IsGrounded();
   }
 
   /* ---------------------------------------------------------------- */
@@ -62,15 +77,17 @@ public class PlayerController : MonoBehaviour
   public void OnMove(InputAction.CallbackContext context)
   {
     _inputDirection = context.ReadValue<Vector2>();
-    _playerMovementDataSO.UpdatePlayerDirectionInput(_inputDirection);
+    _playerMovementDataSO.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
   }
 
   public void OnJump(InputAction.CallbackContext context)
   {
+    if (context.started) _isJumping = true;
+    if (context.canceled) _isJumping = false;
     if (context.performed)
     {
-      _timeSinceJumpPressed = _playerMovementDataSO.JumpInputBuffer;
-      Debug.Log("Is grounded: " + _playerMovementDataSO.IsGrounded + " jumpCount: " + _jumpCount);
+      _jumpBufferWindow = _playerMovementDataSO.JumpInputBuffer;
+      // Debug.Log("Is grounded: " + _playerMovementDataSO.IsGrounded + " jumpCount: " + _jumpCount);
     }
   }
 
@@ -78,12 +95,26 @@ public class PlayerController : MonoBehaviour
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
 
+  private bool IsGrounded()
+  {
+    return _rigidBody2D.IsTouching(_playerMovementDataSO.GroundingContactFilter);
+  }
+
   private void MovePlayer()
   {
-    _rigidBody2D.linearVelocityX = _inputDirection.x * _playerMovementDataSO.MovementSpeed * Time.fixedDeltaTime;
+    _dragToApply = _playerMovementDataSO.IsGrounded ? _playerMovementDataSO.GroundDrag : _playerMovementDataSO.AirDrag;
+
+    if (_playerMovementDataSO.PlayerDirectionInput.x != 0)
+    {
+      _rigidBody2D.linearVelocityX = _playerMovementDataSO.PlayerDirectionInput.x * _playerMovementDataSO.MovementSpeed * Time.fixedDeltaTime;
+    }
+    else
+    {
+      _rigidBody2D.linearVelocityX -= _rigidBody2D.linearVelocityX * _dragToApply * Time.fixedDeltaTime;
+    }
 
     // If we are falling then we have a different gravity multiplier
-    if (_rigidBody2D.linearVelocityY < 0)
+    if (_rigidBody2D.linearVelocityY < 0 && !_playerMovementDataSO.IsGrounded)
     {
       _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale * _playerMovementDataSO.GravityMultiplierWhenFalling;
     }
@@ -95,38 +126,32 @@ public class PlayerController : MonoBehaviour
 
   private void PerformJump()
   {
-    if (_playerMovementDataSO.IsGrounded && _timeSinceJumpPressed > 0 && _jumpCount > 0)
+    if (_jumpBufferWindow > 0 && (_coyoteTime > 0 || _playerMovementDataSO.IsGrounded) && _jumpCount > 0)
     {
-      Debug.Log("JUMP PERFORMED");
       _jumpCount = Mathf.Clamp(_jumpCount - 1, 0, _playerMovementDataSO.MaxNumberOfJumps);
-      _timeSinceJumpPressed = 0;
-      _rigidBody2D.AddForce(_playerMovementDataSO.JumpingPower * Vector2.up, ForceMode2D.Impulse);
+      _jumpBufferWindow = 0f;
+
+      float finalJumpForce = _playerMovementDataSO.JumpingPower;
+      if (_rigidBody2D.linearVelocityY < 0) finalJumpForce -= _rigidBody2D.linearVelocityY;
+
+      _rigidBody2D.AddForce(finalJumpForce * Vector2.up, ForceMode2D.Impulse);
+      // Debug.Log("JUMP PERFORMED A, new jumpCount: " + _jumpCount);
+      Debug.Log("JUMP PERFORMED");
+    }
+  }
+
+  private void JumpHangTime()
+  {
+    if (Mathf.Abs(_rigidBody2D.linearVelocityY) < _playerMovementDataSO.JumpHangTimeThreshold)
+    {
+      _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale * _playerMovementDataSO.JumpHangTimeGravityMultiplier;
     }
   }
 
   private void ClampPlayerMovement()
   {
+    // Clamps vertical velocity by the amount configured in _playerMovementDataSO
     _rigidBody2D.linearVelocityY = Mathf.Clamp(_rigidBody2D.linearVelocityY, -_playerMovementDataSO.MaxFallingSpeed, _playerMovementDataSO.MaxFallingSpeed);
-  }
-
-  private bool IsGrounded()
-  {
-    RaycastHit2D hit = Physics2D.Raycast(
-      new Vector2(transform.position.x, transform.position.y),
-      Vector2.down,
-      _capsuleCollider2D.bounds.extents.y + _groundingRaycastDistance,
-      _playerMovementDataSO.GroundLayerMask
-    );
-
-    Debug.DrawRay(transform.position, Vector3.down, Color.blue, 1f);
-
-    if (hit)
-    {
-      _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
-      _timeSinceGrounded = _playerMovementDataSO.CoyoteTime;
-    }
-
-    return _timeSinceGrounded > 0;
   }
 
 }

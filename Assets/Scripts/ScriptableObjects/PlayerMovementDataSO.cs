@@ -16,6 +16,12 @@ public class PlayerMovementDataSO : ScriptableObject
   [SerializeField, Range(1f, 10f), Tooltip("Affects influcence of gravity on the player as they're falling.")]
   private float _gravityMultiplierWhenFalling;
 
+  [SerializeField, Range(0f, 10f), Tooltip("Amount of friction on the ground")]
+  private float _groundDrag;
+
+  [SerializeField, Range(0f, 10f), Tooltip("Amount of friction in the air")]
+  private float _airDrag;
+
   [Space(5)]
   [Header("Jump Data")]
   [SerializeField, Tooltip("Maximum number of jumps the player can perform before touching the ground again.")]
@@ -26,20 +32,23 @@ public class PlayerMovementDataSO : ScriptableObject
   [SerializeField, Range(0.25f, 1.5f), Tooltip("How long it should take to reach the apex of the jump.")]
   private float _timeToApex;
 
+  [SerializeField, Range(0f, 0.5f), Tooltip("When the player's linear velocity on the y axis is within this threshold the gravity scale is changed based on Jump Hang Time Gravity Multiplier.")]
+  private float _jumpHangTimeThreshold;
+
+  [SerializeField, Range(0f, 1f), Tooltip("The influence of hang time on gravity.")]
+  private float _jumpHangTimeGravityMultiplier;
+
   [SerializeField, Range(0f, 1f), Tooltip("")]
   private float _jumpInputBuffer;
 
   [Space(5)]
   [Header("Grounding Data")]
-  [SerializeField, Tooltip("Layer Mask used for grounding the player.")]
-  private LayerMask _groundLayerMask;
-
-  [SerializeField, Range(0.125f, 1f), Tooltip("")]
-  private float _groundingRaycastDistance;
+  [SerializeField, Tooltip("Used to check if the player's rigidbody is grounded.")]
+  private ContactFilter2D _groundingContactFilter;
 
   [Space(5)]
   [Header("Mechanical Data")]
-  [SerializeField, Range(0f, 1.5f), Tooltip("")]
+  [SerializeField, Range(0f, 1f), Tooltip("Window of time the player has after leaving the ground to jump again.")]
   private float _coyoteTime;
 
   [Space(5)]
@@ -54,12 +63,16 @@ public class PlayerMovementDataSO : ScriptableObject
   /*                           Lambda Getters                         */
   /* ---------------------------------------------------------------- */
   public float MovementSpeed => _movementSpeed;
+  public float MaxFallingSpeed => _maxFallingSpeed;
+  public float GravityMultiplierWhenFalling => _gravityMultiplierWhenFalling;
+  public float GroundDrag => _groundDrag;
+  public float AirDrag => _airDrag;
   public int MaxNumberOfJumps => _maxNumberOfJumps;
   public float JumpHeight => _jumpHeight;
   public float TimeToApex => _timeToApex;
-  public float MaxFallingSpeed => _maxFallingSpeed;
-  public float GravityMultiplierWhenFalling => _gravityMultiplierWhenFalling;
-  public LayerMask GroundLayerMask => _groundLayerMask;
+  public float JumpHangTimeThreshold => _jumpHangTimeThreshold;
+  public float JumpHangTimeGravityMultiplier => _jumpHangTimeGravityMultiplier;
+  public ContactFilter2D GroundingContactFilter => _groundingContactFilter;
   public float CoyoteTime => _coyoteTime;
   public float JumpInputBuffer => _jumpInputBuffer;
 

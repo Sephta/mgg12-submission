@@ -13,7 +13,6 @@ public class AnimatorController : MonoBehaviour
 
   [Header("Debug")]
   [SerializeField, ReadOnly] private bool _isMoving;
-  [SerializeField, ReadOnly] private bool _isGrounded;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -36,7 +35,6 @@ public class AnimatorController : MonoBehaviour
   private void FixedUpdate()
   {
     _isMoving = IsMoving();
-    _isGrounded = IsGrounded();
     _animator.Play(AnimationSelector(), 0);
   }
 
@@ -50,27 +48,22 @@ public class AnimatorController : MonoBehaviour
 
   private string AnimationSelector()
   {
-    if (_isGrounded && !_isMoving)
+    if (_playerMovementDataSO.IsGrounded && !_isMoving)
     {
       return "idle";
     }
 
-    if (_isGrounded && _isMoving)
+    if (_playerMovementDataSO.IsGrounded && _isMoving)
     {
       return "run";
     }
 
-    if (!_isGrounded)
+    if (!_playerMovementDataSO.IsGrounded)
     {
       return "jump";
     }
 
     return "idle";
-  }
-
-  private bool IsGrounded()
-  {
-    return Physics2D.OverlapCapsule(transform.position, new Vector2(0.5f, 1f), CapsuleDirection2D.Horizontal, 0, _playerMovementDataSO.GroundLayerMask);
   }
 
   private bool IsMoving()

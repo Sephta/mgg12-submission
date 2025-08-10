@@ -14,18 +14,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 350
   _maxFallingSpeed: 18.2
-  _gravityMultiplierWhenFalling: 2
+  _gravityMultiplierWhenFalling: 2.2
+  _groundDrag: 2.59
+  _airDrag: 0.5
   _maxNumberOfJumps: 1
   _jumpHeight: 3
-  _timeToApex: 0.426
-  _jumpInputBuffer: 0.1
-  _groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  _groundingRaycastDistance: 0.125
-  _coyoteTime: 0.056
-  _jumpingPower: 14.084508
-  _gravityScale: 3.3702574
-  _playerVelocity: {x: 0, y: -12.365267}
+  _timeToApex: 0.442
+  _jumpHangTimeThreshold: 0.1
+  _jumpHangTimeGravityMultiplier: 0.5
+  _jumpInputBuffer: 0.2
+  _groundingContactFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  _coyoteTime: 0.2
+  _jumpingPower: 13.574661
+  _gravityScale: 3.130673
+  _playerVelocity: {x: 0.054861322, y: -0.00000008940697}
   _playerDirectionInput: {x: 0, y: 0}
-  _isGrounded: 0
+  _isGrounded: 1
