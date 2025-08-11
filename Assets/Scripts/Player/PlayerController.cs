@@ -190,7 +190,7 @@ public class PlayerController : MonoBehaviour
       ResetGravityScale();
     }
 
-    if (_jumpEndEarly) UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier);
+    if (_jumpEndEarly) UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier * _playerMovementDataSO.ShortJumpGravityMultiplier);
 
     if (Mathf.Abs(_rigidBody2D.linearVelocityY) < _playerMovementDataSO.JumpHangTimeThreshold)
     {

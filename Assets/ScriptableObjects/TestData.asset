@@ -20,10 +20,11 @@ MonoBehaviour:
   _velocityVerticalClamp: 18
   _fallingGravityMultiplier: 2.2
   _maxNumberOfJumps: 1
-  _jumpHeight: 3
-  _timeToApex: 0.45
+  _jumpHeight: 3.5
+  _jumpTimeToApex: 0.45
   _jumpHangTimeThreshold: 0.1
   _jumpHangTimeGravityMultiplier: 0.5
+  _shortJumpGravityMultiplier: 1.25
   _jumpInputBuffer: 0.1
   _groundLayerMask:
     serializedVersion: 2
@@ -43,9 +44,9 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  _coyoteTime: 0.2
-  _jumpingPower: 13.333334
-  _gravityScale: 3.0203495
-  _playerVelocity: {x: -1.4719455, y: -0.29631048}
+  _coyoteTime: 0.1
+  _jumpingPower: 15.555556
+  _gravityScale: 3.5237415
+  _playerVelocity: {x: 0, y: 0}
   _playerDirectionInput: {x: 0, y: 0}
-  _isGrounded: 0
+  _isGrounded: 1

@@ -32,17 +32,21 @@ public class PlayerMovementDataSO : ScriptableObject
   [Header("Jump Data")]
   [SerializeField, Tooltip("Maximum number of jumps the player can perform before touching the ground again.")]
   private int _maxNumberOfJumps;
-  [SerializeField, Range(1f, 10f), Tooltip("Height of the jump in units.")]
+
+  [SerializeField, Range(1f, 10f), Tooltip("Max height of the jump.")]
   private float _jumpHeight;
 
   [SerializeField, Range(0.25f, 1.5f), Tooltip("How long it should take to reach the apex of the jump.")]
-  private float _timeToApex;
+  private float _jumpTimeToApex;
 
   [SerializeField, Range(0f, 0.5f), Tooltip("When the player's linear velocity on the y axis is within this threshold the gravity scale is changed based on Jump Hang Time Gravity Multiplier.")]
   private float _jumpHangTimeThreshold;
 
   [SerializeField, Range(0f, 1f), Tooltip("The influence of hang time on gravity.")]
   private float _jumpHangTimeGravityMultiplier;
+
+  [SerializeField, Range(1f, 2f), Tooltip("Gravity mulitplier when performing a shorter jump.")]
+  private float _shortJumpGravityMultiplier;
 
   [SerializeField, Range(0f, 1f), Tooltip("")]
   private float _jumpInputBuffer;
@@ -51,8 +55,10 @@ public class PlayerMovementDataSO : ScriptableObject
   [Header("Grounding Data")]
   [SerializeField, Tooltip("The layer to use when checking if the player is grounded.")]
   private LayerMask _groundLayerMask;
+
   [SerializeField, Range(0f, 1f), Tooltip("Controls how far the raycast goes to check if player is grounded.")]
   private float _groundingRaycastDistance;
+
   [SerializeField, Tooltip("Useful for checking if the player is touching a surface in the specified layer.")]
   private ContactFilter2D _surfaceContactFilter;
 
@@ -66,7 +72,7 @@ public class PlayerMovementDataSO : ScriptableObject
   [SerializeField, ReadOnly, Tooltip("Equation: Abs(2 * jumpHeight / timeToApex^2) * timeToApex")]
   private float _jumpingPower;
 
-  [SerializeField, ReadOnly, Tooltip("Equation: Abs(2 * jumpHeight / timeToApex^2) / Physics2D.gravity.y")]
+  [SerializeField, ReadOnly, Tooltip("")]
   private float _gravityScale;
 
   /* ---------------------------------------------------------------- */
@@ -81,9 +87,10 @@ public class PlayerMovementDataSO : ScriptableObject
   public float FallingGravityMultiplier => _fallingGravityMultiplier;
   public int MaxNumberOfJumps => _maxNumberOfJumps;
   public float JumpHeight => _jumpHeight;
-  public float TimeToApex => _timeToApex;
+  public float JumpTimeToApex => _jumpTimeToApex;
   public float JumpHangTimeThreshold => _jumpHangTimeThreshold;
   public float JumpHangTimeGravityMultiplier => _jumpHangTimeGravityMultiplier;
+  public float ShortJumpGravityMultiplier => _shortJumpGravityMultiplier;
   public float JumpInputBuffer => _jumpInputBuffer;
   public LayerMask GroundLayerMask => _groundLayerMask;
   public float GroundingRayCastDistance => _groundingRaycastDistance;
@@ -125,15 +132,9 @@ public class PlayerMovementDataSO : ScriptableObject
 
   private void OnValidate()
   {
-    // gravity strength = Abs(2 * jumpHeight / timeToApex^2)
-    // float gravityStrength = 2f * _jumpHeight / Mathf.Pow(_timeToApex, 2);
+    float gravityStrength = -2 * _jumpHeight / Mathf.Pow(_jumpTimeToApex, 2);
 
-    // _jumpingPower = gravityStrength * _timeToApex;
-    // _gravityScale = Mathf.Abs(gravityStrength / Physics2D.gravity.y);
-
-    float gravityStrength = -2 * _jumpHeight / Mathf.Pow(_timeToApex, 2);
-
-    _jumpingPower = 2 * _jumpHeight / _timeToApex;
+    _jumpingPower = 2 * _jumpHeight / _jumpTimeToApex;
     _gravityScale = gravityStrength / Physics2D.gravity.y;
   }
 
