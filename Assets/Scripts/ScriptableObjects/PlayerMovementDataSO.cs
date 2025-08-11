@@ -5,21 +5,27 @@ using UnityEngine;
 public class PlayerMovementDataSO : ScriptableObject
 {
   /* ---------------------------------------------------------------- */
-  /*                          Configurable Stats                      */
+  /*                           Movement Data                          */
   /* ---------------------------------------------------------------- */
   [field: Header("Movement Data")]
 
   [field: SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player will move.")]
   public float MaxRunVelocity { get; private set; }
 
-  [field: SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player reach max speed.")]
-  public float Acceleration { get; private set; }
+  [field: SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player reach max speed while grounded.")]
+  public float AccelerationGround { get; private set; }
 
-  [field: SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player slows down while on the gournd.")]
+  [field: SerializeField, Range(0f, 20f), Tooltip("Determines how fast the player reach max speed while airborne.")]
+  public float AccelerationAir { get; private set; }
+
+  [field: SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player slows down while grounded.")]
   public float DecelerationGround { get; private set; }
 
-  [field: SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player slows down while in the air.")]
+  [field: SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player slows down while airborne.")]
   public float DecelerationAir { get; private set; }
+
+  [field: SerializeField, Tooltip("Determines whether turning around should be an intstantaneous change in velocity.")]
+  public bool IntstantaneousTurns { get; private set; }
 
   [field: SerializeField, Range(0f, 50f), Tooltip("Limits the velocity at which the player can move. Is measured in units/second. In Unity 1 unit = 1 meter.")]
   public float VelocityHorizontalClamp { get; private set; }
@@ -29,6 +35,10 @@ public class PlayerMovementDataSO : ScriptableObject
 
   [field: SerializeField, Range(1f, 10f), Tooltip("Affects influcence of gravity on the player as they're falling.")]
   public float FallingGravityMultiplier { get; private set; }
+
+  /* ---------------------------------------------------------------- */
+  /*                          Jumping Data                            */
+  /* ---------------------------------------------------------------- */
 
   [field: Space(5)]
   [field: Header("Jump Data")]
@@ -54,6 +64,10 @@ public class PlayerMovementDataSO : ScriptableObject
   [field: SerializeField, Range(0f, 1f), Tooltip("")]
   public float JumpInputBuffer { get; private set; }
 
+  /* ---------------------------------------------------------------- */
+  /*                          Grounding Data                          */
+  /* ---------------------------------------------------------------- */
+
   [field: Space(5)]
   [field: Header("Grounding Data")]
 
@@ -66,11 +80,21 @@ public class PlayerMovementDataSO : ScriptableObject
   [Tooltip("Useful for checking if the player is touching a surface in the specified layer.")]
   public ContactFilter2D SurfaceContactFilter;
 
+
+  /* ---------------------------------------------------------------- */
+  /*                          Mechanical Data                         */
+  /* ---------------------------------------------------------------- */
+
   [field: Space(5)]
   [field: Header("Mechanical Data")]
 
   [field: SerializeField, Range(0f, 1f), Tooltip("Window of time the player has after leaving the ground to jump again.")]
   public float CoyoteTime { get; private set; }
+
+
+  /* ---------------------------------------------------------------- */
+  /*                          Derived Data                            */
+  /* ---------------------------------------------------------------- */
 
   [field: Space(5)]
   [field: Header("Derived Data")]
@@ -84,6 +108,7 @@ public class PlayerMovementDataSO : ScriptableObject
   /* ---------------------------------------------------------------- */
   /*                       Runtime Player Stats                       */
   /* ---------------------------------------------------------------- */
+
   [field: Space(5)]
   [field: Header("Runtime Data")]
 

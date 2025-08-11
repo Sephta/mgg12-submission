@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
   [Header("Debug")]
   [SerializeField, ReadOnly] private Vector2 _inputDirection;
+  [SerializeField, ReadOnly] private Vector2 _inputDirectionLastFrame;
   [SerializeField, ReadOnly] private float _targetSpeed;
   [SerializeField, ReadOnly] private int _accelerationBase;
   [SerializeField, ReadOnly] private float _jumpBufferWindow;
@@ -49,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
   private void Update()
   {
+    _inputDirection = _playerMovementDataSO.PlayerDirectionInput;
+
     // Update runtime movement data
     _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
     _playerMovementDataSO.UpdatePlayerVelocity(_rigidBody2D.linearVelocity);
@@ -71,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
     // cache grounded state at the end of this frame since next frame we might not be grounded.
     _wasGroundedLastFrame = IsGrounded();
+    _inputDirectionLastFrame = _playerMovementDataSO.PlayerDirectionInput;
   }
 
   /* ---------------------------------------------------------------- */
@@ -78,11 +82,7 @@ public class PlayerController : MonoBehaviour
   /* ---------------------------------------------------------------- */
 
   // For used in the Player Input component.
-  public void OnMove(InputAction.CallbackContext context)
-  {
-    _inputDirection = context.ReadValue<Vector2>();
-    _playerMovementDataSO.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
-  }
+  public void OnMove(InputAction.CallbackContext context) => _playerMovementDataSO.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
 
   // For use in the Player Input component.
   public void OnJump(InputAction.CallbackContext context)
@@ -142,10 +142,17 @@ public class PlayerController : MonoBehaviour
   {
     if (_playerMovementDataSO.PlayerDirectionInput.x != 0)
     {
+      if (_inputDirectionLastFrame.x != _playerMovementDataSO.PlayerDirectionInput.x && _playerMovementDataSO.PlayerDirectionInput.x != 0 && _playerMovementDataSO.IntstantaneousTurns)
+      {
+        _rigidBody2D.linearVelocityX = -_rigidBody2D.linearVelocityX;
+      }
+
       // diff between desired speed and current 
       float delta = _targetSpeed - _rigidBody2D.linearVelocityX;
 
-      float force = delta * (_accelerationBase * _playerMovementDataSO.Acceleration);
+      float acceleration = _accelerationBase * (_playerMovementDataSO.IsGrounded ? _playerMovementDataSO.AccelerationGround : _playerMovementDataSO.AccelerationAir);
+
+      float force = delta * acceleration;
 
       Vector2 forceAsVector = new(force * Time.fixedDeltaTime, 0);
 
