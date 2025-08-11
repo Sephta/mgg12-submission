@@ -12,25 +12,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db5580eaf02bae4f92f5701c2ab11e6, type: 3}
   m_Name: TestData
   m_EditorClassIdentifier: 
-  _maxRunVelocity: 8
-  _acceleration: 5
-  _decelerationGround: 2
-  _decelerationAir: 0.2
-  _velocityHorizontalClamp: 18
-  _velocityVerticalClamp: 18
-  _fallingGravityMultiplier: 2.2
-  _maxNumberOfJumps: 1
-  _jumpHeight: 3.5
-  _jumpTimeToApex: 0.45
-  _jumpHangTimeThreshold: 0.1
-  _jumpHangTimeGravityMultiplier: 0.5
-  _shortJumpGravityMultiplier: 1.25
-  _jumpInputBuffer: 0.1
-  _groundLayerMask:
+  <MaxRunVelocity>k__BackingField: 7
+  <Acceleration>k__BackingField: 5
+  <DecelerationGround>k__BackingField: 2
+  <DecelerationAir>k__BackingField: 0.2
+  <VelocityHorizontalClamp>k__BackingField: 18
+  <VelocityVerticalClamp>k__BackingField: 18
+  <FallingGravityMultiplier>k__BackingField: 2.2
+  <MaxNumberOfJumps>k__BackingField: 1
+  <JumpHeight>k__BackingField: 3.5
+  <JumpTimeToApex>k__BackingField: 0.45
+  <JumpHangTimeThreshold>k__BackingField: 0.1
+  <JumpHangTimeGravityMultiplier>k__BackingField: 0.5
+  <ShortJumpGravityMultiplier>k__BackingField: 1.25
+  <JumpInputBuffer>k__BackingField: 0.1
+  <GroundLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
-  _groundingRaycastDistance: 0.05
-  _surfaceContactFilter:
+  <GroundingRayCastDistance>k__BackingField: 0.05
+  SurfaceContactFilter:
     useTriggers: 0
     useLayerMask: 0
     useDepth: 0
@@ -39,14 +39,14 @@ MonoBehaviour:
     useOutsideNormalAngle: 0
     layerMask:
       serializedVersion: 2
-      m_Bits: 0
+      m_Bits: 64
     minDepth: 0
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  _coyoteTime: 0.1
-  _jumpingPower: 15.555556
-  _gravityScale: 3.5237415
-  _playerVelocity: {x: 0, y: 0}
-  _playerDirectionInput: {x: 0, y: 0}
-  _isGrounded: 1
+  <CoyoteTime>k__BackingField: 0.1
+  <JumpingPower>k__BackingField: 15.555556
+  <GravityScale>k__BackingField: 3.5237415
+  <PlayerVelocity>k__BackingField: {x: -0.002162421, y: 0}
+  <PlayerDirectionInput>k__BackingField: {x: 0, y: 0}
+  <IsGrounded>k__BackingField: 1
