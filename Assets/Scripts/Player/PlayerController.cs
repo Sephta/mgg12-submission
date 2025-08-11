@@ -14,13 +14,14 @@ public class PlayerController : MonoBehaviour
 
   [Header("Debug")]
   [SerializeField, ReadOnly] private Vector2 _inputDirection;
-  [SerializeField, ReadOnly] private int _moveSpeedBase = 100;
+  [SerializeField, ReadOnly] private float _targetSpeed;
+  [SerializeField, ReadOnly] private int _accelerationBase;
   [SerializeField, ReadOnly] private float _jumpBufferWindow;
   [SerializeField, ReadOnly] private float _coyoteTime;
   [SerializeField, ReadOnly] private int _jumpCount;
-  [SerializeField, ReadOnly] private float _dragToApply;
   [SerializeField, ReadOnly] private bool _isJumping;
   [SerializeField, ReadOnly] private bool _wasGroundedLastFrame;
+  [SerializeField, ReadOnly] private bool _jumpEndEarly = false;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -42,6 +43,8 @@ public class PlayerController : MonoBehaviour
     // Set default parameters
     ResetGravityScale();
     _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
+
+    _accelerationBase = 10;
   }
 
   private void Update()
@@ -56,13 +59,14 @@ public class PlayerController : MonoBehaviour
 
     // Reset timers 
     if (_playerMovementDataSO.IsGrounded) _coyoteTime = _playerMovementDataSO.CoyoteTime;
-
     if (!_wasGroundedLastFrame && _playerMovementDataSO.IsGrounded) _jumpCount = _playerMovementDataSO.MaxNumberOfJumps;
+
+    _targetSpeed = _playerMovementDataSO.PlayerDirectionInput.x * _playerMovementDataSO.MaxRunVelocity;
 
     // Perform actions based on updates
     MovePlayer();
     PerformJump();
-    JumpHangTime();
+    HandleGravity();
     ClampPlayerMovement();
 
     // cache grounded state at the end of this frame since next frame we might not be grounded.
@@ -83,10 +87,7 @@ public class PlayerController : MonoBehaviour
   // For use in the Player Input component.
   public void OnJump(InputAction.CallbackContext context)
   {
-    if (context.started)
-    {
-      _isJumping = true;
-    }
+    if (context.started) _isJumping = true;
     if (context.canceled) _isJumping = false;
     if (context.performed)
     {
@@ -139,31 +140,28 @@ public class PlayerController : MonoBehaviour
 
   private void MovePlayer()
   {
-    _dragToApply = _playerMovementDataSO.IsGrounded ? _playerMovementDataSO.GroundDrag : _playerMovementDataSO.AirDrag;
-
     if (_playerMovementDataSO.PlayerDirectionInput.x != 0)
     {
-      float speed = _moveSpeedBase * _playerMovementDataSO.MovementSpeed;
-      _rigidBody2D.linearVelocityX = _playerMovementDataSO.PlayerDirectionInput.x * speed * Time.fixedDeltaTime;
-    }
-    else
-    {
-      _rigidBody2D.linearVelocityX -= _rigidBody2D.linearVelocityX * _dragToApply * Time.fixedDeltaTime;
-    }
+      // diff between desired speed and current 
+      float delta = _targetSpeed - _rigidBody2D.linearVelocityX;
 
-    // If we are falling then we have a different gravity multiplier
-    if (_rigidBody2D.linearVelocityY < 0 && !_playerMovementDataSO.IsGrounded)
-    {
-      UpdateGravityScale(_playerMovementDataSO.GravityMultiplierWhenFalling);
+      float force = delta * (_accelerationBase * _playerMovementDataSO.Acceleration);
+
+      Vector2 forceAsVector = new(force * Time.fixedDeltaTime, 0);
+
+      _rigidBody2D.AddForce(forceAsVector, ForceMode2D.Force);
     }
     else
     {
-      ResetGravityScale();
+      float deceleration = _playerMovementDataSO.IsGrounded ? _playerMovementDataSO.DecelerationGround : _playerMovementDataSO.DecelerationAir;
+      _rigidBody2D.linearVelocityX -= _rigidBody2D.linearVelocityX * deceleration * Time.fixedDeltaTime;
     }
   }
 
   private void PerformJump()
   {
+    if (!_jumpEndEarly && !_playerMovementDataSO.IsGrounded && !_isJumping && _rigidBody2D.linearVelocityY > 0) _jumpEndEarly = true;
+
     if (_jumpBufferWindow > 0 && _coyoteTime > 0 && _jumpCount > 0)
     {
       _jumpCount = Mathf.Clamp(_jumpCount - 1, 0, _playerMovementDataSO.MaxNumberOfJumps);
@@ -176,14 +174,24 @@ public class PlayerController : MonoBehaviour
 
   private void ExecuteJump()
   {
-    float jumpForce = _playerMovementDataSO.JumpingPower;
-
-    // _rigidBody2D.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
-    _rigidBody2D.linearVelocityY = jumpForce;
+    _jumpEndEarly = false;
+    _rigidBody2D.AddForce(_playerMovementDataSO.JumpingPower * Vector2.up, ForceMode2D.Impulse);
   }
 
-  private void JumpHangTime()
+  private void HandleGravity()
   {
+    // If we are falling then we have a different gravity multiplier
+    if (_rigidBody2D.linearVelocityY < 0 && !_playerMovementDataSO.IsGrounded)
+    {
+      UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier);
+    }
+    else
+    {
+      ResetGravityScale();
+    }
+
+    if (_jumpEndEarly) UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier);
+
     if (Mathf.Abs(_rigidBody2D.linearVelocityY) < _playerMovementDataSO.JumpHangTimeThreshold)
     {
       UpdateGravityScale(_playerMovementDataSO.JumpHangTimeGravityMultiplier);
@@ -192,8 +200,9 @@ public class PlayerController : MonoBehaviour
 
   private void ClampPlayerMovement()
   {
-    // Clamps vertical velocity by the amount configured in _playerMovementDataSO
-    _rigidBody2D.linearVelocityY = Mathf.Clamp(_rigidBody2D.linearVelocityY, -_playerMovementDataSO.MaxFallingSpeed, _playerMovementDataSO.MaxFallingSpeed);
+    // Clamps velocity by the amount configured in _playerMovementDataSO
+    _rigidBody2D.linearVelocityX = Mathf.Clamp(_rigidBody2D.linearVelocityX, -_playerMovementDataSO.VelocityHorizontalClamp, _playerMovementDataSO.VelocityHorizontalClamp);
+    _rigidBody2D.linearVelocityY = Mathf.Clamp(_rigidBody2D.linearVelocityY, -_playerMovementDataSO.VelocityVerticalClamp, _playerMovementDataSO.VelocityVerticalClamp);
   }
 
 

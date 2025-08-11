@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db5580eaf02bae4f92f5701c2ab11e6, type: 3}
   m_Name: TestData
   m_EditorClassIdentifier: 
-  _movementSpeed: 3.5
-  _maxFallingSpeed: 18.2
+  _maxRunVelocity: 8
+  _acceleration: 5
+  _decelerationGround: 2
+  _decelerationAir: 0.2
+  _velocityHorizontalClamp: 18
+  _velocityVerticalClamp: 18
   _gravityMultiplierWhenFalling: 2.2
-  _groundDrag: 2.76
-  _airDrag: 0.34
   _maxNumberOfJumps: 1
   _jumpHeight: 3
-  _timeToApex: 0.442
+  _timeToApex: 0.45
   _jumpHangTimeThreshold: 0.1
   _jumpHangTimeGravityMultiplier: 0.5
   _jumpInputBuffer: 0.1
@@ -42,8 +44,8 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   _coyoteTime: 0.2
-  _jumpingPower: 13.574661
-  _gravityScale: 3.130673
-  _playerVelocity: {x: -1.4453e-41, y: 0}
+  _jumpingPower: 13.333334
+  _gravityScale: 3.0203495
+  _playerVelocity: {x: -0.07849237, y: -0.0000011324883}
   _playerDirectionInput: {x: 0, y: 0}
   _isGrounded: 1

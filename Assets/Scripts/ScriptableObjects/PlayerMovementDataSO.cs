@@ -8,19 +8,25 @@ public class PlayerMovementDataSO : ScriptableObject
   /* ---------------------------------------------------------------- */
   [Header("Movement Data")]
   [SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player will move.")]
-  private float _movementSpeed;
+  private float _maxRunVelocity;
+
+  [SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player reach max speed.")]
+  private float _acceleration;
+
+  [SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player slows down while on the gournd.")]
+  private float _decelerationGround;
+
+  [SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player slows down while in the air.")]
+  private float _decelerationAir;
+
+  [SerializeField, Range(0f, 50f), Tooltip("Limits the velocity at which the player can move. Is measured in units/second. In Unity 1 unit = 1 meter.")]
+  private float _velocityHorizontalClamp;
 
   [SerializeField, Range(9.8f, 50f), Tooltip("Limits the velocity at which the player can fall. Is measured in units/second. In Unity 1 unit = 1 meter.")]
-  private float _maxFallingSpeed;
+  private float _velocityVerticalClamp;
 
   [SerializeField, Range(1f, 10f), Tooltip("Affects influcence of gravity on the player as they're falling.")]
-  private float _gravityMultiplierWhenFalling;
-
-  [SerializeField, Range(0f, 10f), Tooltip("Amount of friction on the ground")]
-  private float _groundDrag;
-
-  [SerializeField, Range(0f, 10f), Tooltip("Amount of friction in the air")]
-  private float _airDrag;
+  private float _fallingGravityMultiplier;
 
   [Space(5)]
   [Header("Jump Data")]
@@ -66,11 +72,13 @@ public class PlayerMovementDataSO : ScriptableObject
   /* ---------------------------------------------------------------- */
   /*                           Lambda Getters                         */
   /* ---------------------------------------------------------------- */
-  public float MovementSpeed => _movementSpeed;
-  public float MaxFallingSpeed => _maxFallingSpeed;
-  public float GravityMultiplierWhenFalling => _gravityMultiplierWhenFalling;
-  public float GroundDrag => _groundDrag;
-  public float AirDrag => _airDrag;
+  public float MaxRunVelocity => _maxRunVelocity;
+  public float Acceleration => _acceleration;
+  public float DecelerationGround => _decelerationGround;
+  public float DecelerationAir => _decelerationAir;
+  public float VelocityHorizontalClamp => _velocityHorizontalClamp;
+  public float VelocityVerticalClamp => _velocityVerticalClamp;
+  public float FallingGravityMultiplier => _fallingGravityMultiplier;
   public int MaxNumberOfJumps => _maxNumberOfJumps;
   public float JumpHeight => _jumpHeight;
   public float TimeToApex => _timeToApex;
@@ -118,10 +126,15 @@ public class PlayerMovementDataSO : ScriptableObject
   private void OnValidate()
   {
     // gravity strength = Abs(2 * jumpHeight / timeToApex^2)
-    float gravityStrength = 2f * _jumpHeight / Mathf.Pow(_timeToApex, 2);
+    // float gravityStrength = 2f * _jumpHeight / Mathf.Pow(_timeToApex, 2);
 
-    _jumpingPower = gravityStrength * _timeToApex;
-    _gravityScale = Mathf.Abs(gravityStrength / Physics2D.gravity.y);
+    // _jumpingPower = gravityStrength * _timeToApex;
+    // _gravityScale = Mathf.Abs(gravityStrength / Physics2D.gravity.y);
+
+    float gravityStrength = -2 * _jumpHeight / Mathf.Pow(_timeToApex, 2);
+
+    _jumpingPower = 2 * _jumpHeight / _timeToApex;
+    _gravityScale = gravityStrength / Physics2D.gravity.y;
   }
 
   /* ---------------------------------------------------------------- */
