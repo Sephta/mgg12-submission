@@ -175,7 +175,7 @@ public class PlayerController : MonoBehaviour
   private void ExecuteJump()
   {
     _jumpEndEarly = false;
-    _rigidBody2D.AddForce(_playerMovementDataSO.JumpingPower * Vector2.up, ForceMode2D.Impulse);
+    _rigidBody2D.linearVelocityY = _playerMovementDataSO.JumpingPower;
   }
 
   private void HandleGravity()
