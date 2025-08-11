@@ -18,7 +18,7 @@ MonoBehaviour:
   _decelerationAir: 0.2
   _velocityHorizontalClamp: 18
   _velocityVerticalClamp: 18
-  _gravityMultiplierWhenFalling: 2.2
+  _fallingGravityMultiplier: 2.2
   _maxNumberOfJumps: 1
   _jumpHeight: 3
   _timeToApex: 0.45
@@ -46,6 +46,6 @@ MonoBehaviour:
   _coyoteTime: 0.2
   _jumpingPower: 13.333334
   _gravityScale: 3.0203495
-  _playerVelocity: {x: -0.07849237, y: -0.0000011324883}
+  _playerVelocity: {x: -1.4719455, y: -0.29631048}
   _playerDirectionInput: {x: 0, y: 0}
-  _isGrounded: 1
+  _isGrounded: 0
