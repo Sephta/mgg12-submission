@@ -39,9 +39,6 @@ public class PlayerMovementDataSO : ScriptableObject
   [field: Header("Movement Settings")]
 
   [field: SerializeField, Tooltip("Determines whether turning around should be an intstantaneous change in velocity.")]
-  public bool IntstantaneousTurns { get; private set; }
-
-  [field: SerializeField, Tooltip("Determines whether turning around should be an intstantaneous change in velocity.")]
   public bool DoClampHorizontalVelocity { get; private set; }
 
   [field: SerializeField, Tooltip("Determines whether turning around should be an intstantaneous change in velocity.")]
