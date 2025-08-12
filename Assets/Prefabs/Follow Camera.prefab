@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4324345239635964858}
   - component: {fileID: 1601070627725553977}
-  - component: {fileID: 7821172079185602137}
+  - component: {fileID: 4086989718071505374}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2415672296009813291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.34000015, y: 1.3100004, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -58,7 +58,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 40
-    OrthographicSize: 7
+    OrthographicSize: 8
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -76,7 +76,7 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &7821172079185602137
+--- !u!114 &4086989718071505374
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,16 +85,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 2415672296009813291}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
+  m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrackerSettings:
-    BindingMode: 1
-    PositionDamping: {x: 0.5, y: 0.5, z: 0.5}
-    AngularDampingMode: 0
-    RotationDamping: {x: 1, y: 1, z: 1}
-    QuaternionDamping: 1
-  FollowOffset: {x: 0, y: 2, z: -10}
+  CameraDistance: 10
+  DeadZoneDepth: 0
+  Composition:
+    ScreenPosition: {x: 0, y: 0}
+    DeadZone:
+      Enabled: 0
+      Size: {x: 0.2, y: 0.2}
+    HardLimits:
+      Enabled: 1
+      Size: {x: 0.35, y: 0.47}
+      Offset: {x: 0, y: 0.12}
+  CenterOnActivate: 1
+  TargetOffset: {x: 0, y: 3.19, z: 0}
+  Damping: {x: 2, y: 5, z: 1}
+  Lookahead:
+    Enabled: 0
+    Time: 0
+    Smoothing: 0
+    IgnoreY: 0
 --- !u!1 &4781341648348012701
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +183,7 @@ Transform:
   m_GameObject: {fileID: 7585772071046746812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.34000015, y: 1.3100004, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -244,7 +256,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 8
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

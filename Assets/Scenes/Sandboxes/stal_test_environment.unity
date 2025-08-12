@@ -192,6 +192,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 367014990}
     m_Modifications:
+    - target: {fileID: 1601070627725553977, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
+      propertyPath: Target.TrackingTarget
+      value: 
+      objectReference: {fileID: 1188507716}
     - target: {fileID: 2469905015375672637, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6599998
@@ -238,19 +242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6755298045696715792, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
       propertyPath: orthographic size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9073707533636886448, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9073707533636886448, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9073707533636886448, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -10
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3547,6 +3539,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1395049504}
+    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnCrouch
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4399096245682658266, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3599,6 +3619,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4395788041346849919, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
   m_PrefabInstance: {fileID: 727239975}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1395049504 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3242688827286640369, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}
+  m_PrefabInstance: {fileID: 727239975}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e3a759f2e76384408592677a1dd88ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!19719996 &1583085553 stripped
 TilemapCollider2D:
   m_CorrespondingSourceObject: {fileID: 1180559394043971878, guid: 4af3b9e93d7fedc44a0c669e7052adb3, type: 3}

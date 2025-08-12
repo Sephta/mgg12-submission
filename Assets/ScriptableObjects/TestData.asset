@@ -12,22 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6db5580eaf02bae4f92f5701c2ab11e6, type: 3}
   m_Name: TestData
   m_EditorClassIdentifier: 
-  <MaxRunVelocity>k__BackingField: 7
-  <AccelerationGround>k__BackingField: 5
-  <AccelerationAir>k__BackingField: 20
-  <DecelerationGround>k__BackingField: 3
-  <DecelerationAir>k__BackingField: 0.2
-  <IntstantaneousTurns>k__BackingField: 0
+  <RunVelocityMaximum>k__BackingField: 6
+  <Acceleration>k__BackingField: 5
+  <AccelerationAirMultiplier>k__BackingField: 1
+  <Deceleration>k__BackingField: 5
+  <DecelerationAirMultiplier>k__BackingField: 0.5
   <VelocityHorizontalClamp>k__BackingField: 18
   <VelocityVerticalClamp>k__BackingField: 18
-  <FallingGravityMultiplier>k__BackingField: 2.2
-  <MaxNumberOfJumps>k__BackingField: 1
-  <JumpHeight>k__BackingField: 3.5
-  <JumpTimeToApex>k__BackingField: 0.45
-  <JumpHangTimeThreshold>k__BackingField: 0.1
-  <JumpHangTimeGravityMultiplier>k__BackingField: 0.5
-  <ShortJumpGravityMultiplier>k__BackingField: 1
+  <IntstantaneousTurns>k__BackingField: 1
+  <DoClampHorizontalVelocity>k__BackingField: 0
+  <DoClampVerticalVelocity>k__BackingField: 1
+  <JumpMaximum>k__BackingField: 1
+  <JumpHeight>k__BackingField: 3
+  <JumpTimeToApex>k__BackingField: 0.4
+  <JumpHangTimeThreshold>k__BackingField: 0.5
   <JumpInputBuffer>k__BackingField: 0.1
+  <FallingGravityMultiplier>k__BackingField: 1.5
+  <JumpHangTimeGravityMultiplier>k__BackingField: 0.5
+  <ShortJumpGravityMultiplier>k__BackingField: 1.4
   <GroundLayerMask>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
@@ -47,8 +49,10 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   <CoyoteTime>k__BackingField: 0.1
-  <JumpingPower>k__BackingField: 15.555556
-  <GravityScale>k__BackingField: 3.5237415
-  <PlayerVelocity>k__BackingField: {x: -1.8916992, y: 0}
+  <JumpingPower>k__BackingField: 15
+  <GravityScale>k__BackingField: 3.8226297
+  <RunAccelerationAmount>k__BackingField: 83.333336
+  <RunDecelerationAmount>k__BackingField: 83.333336
+  <PlayerVelocity>k__BackingField: {x: -0.058094505, y: 0}
   <PlayerDirectionInput>k__BackingField: {x: 0, y: 0}
   <IsGrounded>k__BackingField: 1
