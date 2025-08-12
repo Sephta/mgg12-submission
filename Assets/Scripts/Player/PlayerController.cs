@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
   [SerializeField, ReadOnly] private int _jumpCount;
   [SerializeField, ReadOnly] private bool _wasGroundedLastFrame;
   [SerializeField, ReadOnly] private bool _jumpEndEarly = false;
-  [SerializeField, ReadOnly] private int _accelerationBase;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -46,8 +45,6 @@ public class PlayerController : MonoBehaviour
     // Set default parameters
     ResetGravityScale();
     _jumpCount = _playerMovementDataSO.JumpMaximum;
-
-    _accelerationBase = 10;
   }
 
   private void Update()
