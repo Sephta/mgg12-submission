@@ -97,7 +97,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.53225136}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -107,7 +107,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.5, y: 1}
+  m_Size: {x: 0.4123249, y: 1.0645027}
   m_EdgeRadius: 0
 --- !u!114 &5800473421312445102
 MonoBehaviour:
@@ -264,6 +264,8 @@ MonoBehaviour:
   _jumpCount: 0
   _wasGroundedLastFrame: 0
   _jumpEndEarly: 0
+  _delta: 0
+  _rayCastDistance: 0
 --- !u!1 &8914680950688994293
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,3 +393,9 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 7403397474712722462}
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
   _isMoving: 0
+  _animationStates:
+    m_Keys:
+    - IDLE
+    - RUN
+    - JUMP
+    m_Values: 15b524dcc0a476501606b3a7

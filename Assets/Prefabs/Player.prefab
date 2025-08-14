@@ -127,6 +127,12 @@ MonoBehaviour:
   _spriteRenderer: {fileID: 5455573424448884633}
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
   _isMoving: 0
+  _animationStates:
+    m_Keys:
+    - IDLE
+    - RUN
+    - JUMP
+    m_Values: 15b524dcc0a476501606b3a7
 --- !u!1 &2436689383711416720
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +296,19 @@ MonoBehaviour:
     m_ActionId: 852140f2-7766-474d-8707-702459ba45f3
     m_ActionName: 'Player/Interact[/Keyboard/e,/XInputControllerWindows1/buttonNorth]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3242688827286640369}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnCrouch
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 27c5f898-bc57-4ee1-8800-db469aca5fe3
     m_ActionName: 'Player/Crouch[/XInputControllerWindows1/buttonEast,/Keyboard/leftCtrl]'
   - m_PersistentCalls:
@@ -382,11 +400,12 @@ MonoBehaviour:
   _boxCollider2D: {fileID: 4280466620504924823}
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
   _inputDirection: {x: 0, y: 0}
-  _jumpBufferWindow: 0
-  _coyoteTime: 0
-  _jumpCount: 0
-  _dragToApply: 0
+  _inputDirectionLastFrame: {x: 0, y: 0}
   _isJumping: 0
+  _isCrouching: 0
+  _targetSpeed: 0
+  _coyoteTime: 0
+  _jumpBufferWindow: 0
+  _jumpCount: 0
   _wasGroundedLastFrame: 0
-  _frameThreshold: 0
-  _numFramesThatJumpCountIsZero: 0
+  _jumpEndEarly: 0

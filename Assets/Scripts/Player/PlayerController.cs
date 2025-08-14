@@ -3,7 +3,6 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
 public class PlayerController : MonoBehaviour
 {
   [Header("Data References")]
@@ -14,10 +13,10 @@ public class PlayerController : MonoBehaviour
   [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementDataSO;
 
   [Header("Debug")]
+  [SerializeField] private bool _drawDebugGizmos;
   [SerializeField, ReadOnly] private Vector2 _inputDirection;
   [SerializeField, ReadOnly] private Vector2 _inputDirectionLastFrame;
   [SerializeField, ReadOnly] private bool _isJumping;
-  [SerializeField, ReadOnly] private bool _isCrouching;
   [SerializeField, ReadOnly] private float _targetSpeed;
   [SerializeField, ReadOnly] private float _coyoteTime;
   [SerializeField, ReadOnly] private float _jumpBufferWindow;
@@ -94,19 +93,16 @@ public class PlayerController : MonoBehaviour
     }
   }
 
-  // For used in the Player Input component.
-  public void OnCrouch(InputAction.CallbackContext context)
-  {
-    if (context.started) _isCrouching = true;
-    if (context.canceled) _isCrouching = false;
-  }
-
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
 
+  [SerializeField, ReadOnly] private float _rayCastDistance;
   private bool IsGrounded()
   {
+    // Exposing in the inspector. Needs to be removed but for now is fine. Was useful for testing some stuff.
+    _rayCastDistance = _playerMovementDataSO.GroundingRayCastDistance;
+
     // using three distinct rays, the middle of which casts from player's origin position, 
     // while the left and right cast from sids of the player's collider
 
@@ -117,28 +113,31 @@ public class PlayerController : MonoBehaviour
     RaycastHit2D leftRay = Physics2D.Raycast(
       leftRayPosition,
       Vector2.down,
-      _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
+      _boxCollider2D.bounds.extents.y * _rayCastDistance,
       _playerMovementDataSO.GroundLayerMask
     );
 
     RaycastHit2D middleRay = Physics2D.Raycast(
       middleRayPosition,
       Vector2.down,
-      _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
+      _boxCollider2D.bounds.extents.y * _rayCastDistance,
       _playerMovementDataSO.GroundLayerMask
     );
 
     RaycastHit2D rightRay = Physics2D.Raycast(
       rightRayPosition,
       Vector2.down,
-      _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
+      _boxCollider2D.bounds.extents.y * _rayCastDistance,
       _playerMovementDataSO.GroundLayerMask
     );
 
-    // For debugging (only appears in the Scene window, not the game window)
-    // Debug.DrawRay(leftRayPosition, _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.blue, 1f);
-    // Debug.DrawRay(middleRayPosition, _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.blue, 1f);
-    // Debug.DrawRay(rightRayPosition, _boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.blue, 1f);
+    if (_drawDebugGizmos)
+    {
+      // For debugging (only appears in the Scene window, not the game window)
+      Debug.DrawRay(leftRayPosition, _boxCollider2D.bounds.extents.y * _rayCastDistance * Vector3.down, Color.red, 1f);
+      Debug.DrawRay(middleRayPosition, _boxCollider2D.bounds.extents.y * _rayCastDistance * Vector3.down, Color.red, 1f);
+      Debug.DrawRay(rightRayPosition, _boxCollider2D.bounds.extents.y * _rayCastDistance * Vector3.down, Color.red, 1f);
+    }
 
     // player is grounded if any of the following rays make contact with an object with on the specified LayerMask stored in _playerMovementDataSO
     return leftRay || middleRay || rightRay;
