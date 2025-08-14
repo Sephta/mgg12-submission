@@ -254,17 +254,16 @@ MonoBehaviour:
   _rigidBody2D: {fileID: 339885319071252031}
   _boxCollider2D: {fileID: 2125156148447245723}
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
+  _drawDebugGizmos: 0
   _inputDirection: {x: 0, y: 0}
   _inputDirectionLastFrame: {x: 0, y: 0}
   _isJumping: 0
-  _isCrouching: 0
   _targetSpeed: 0
   _coyoteTime: 0
   _jumpBufferWindow: 0
   _jumpCount: 0
   _wasGroundedLastFrame: 0
   _jumpEndEarly: 0
-  _delta: 0
   _rayCastDistance: 0
 --- !u!1 &8914680950688994293
 GameObject:
@@ -344,7 +343,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2425718076081212515, guid: b2ad783c9b02c4642aae691e36fd4e7b, type: 3}
+  m_Sprite: {fileID: 31581087671141590, guid: cd70f3086b7a1aa43aff0e6bcdb078fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -365,7 +364,7 @@ Animator:
   m_GameObject: {fileID: 8914680950688994293}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 7698602235747453532, guid: b2ad783c9b02c4642aae691e36fd4e7b, type: 3}
+  m_Controller: {fileID: -6648296091378271654, guid: cd70f3086b7a1aa43aff0e6bcdb078fb, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -398,4 +397,5 @@ MonoBehaviour:
     - IDLE
     - RUN
     - JUMP
-    m_Values: 15b524dcc0a476501606b3a7
+    - FALLING
+    m_Values: 15b524dcc0a476501606b3a7d4ea3ef4

@@ -22,7 +22,8 @@ public class AnimatorController : MonoBehaviour
   {
     IDLE,
     RUN,
-    JUMP
+    JUMP,
+    FALLING
   }
 
   // Dictionaries are not serializable in the inspector by default in Unity. To get around this
@@ -91,8 +92,14 @@ public class AnimatorController : MonoBehaviour
     }
     else
     {
+      if (IsFalling()) return _animationStates[nameof(AnimationStates.FALLING)];
       return _animationStates[nameof(AnimationStates.JUMP)];
     }
+  }
+
+  private bool IsFalling()
+  {
+    return _playerMovementDataSO.PlayerVelocity.y < 0 && !_playerMovementDataSO.IsGrounded;
   }
 
   private bool IsMoving()
