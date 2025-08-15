@@ -1,0 +1,548 @@
+fileFormatVersion: 2
+guid: 175ac946a76ed744988805ac710cf458
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -883606035587077495
+    second: MG_justArm_Aug14_0
+  - first:
+      213: -1276317936281640701
+    second: MG_justArm_Aug14_1
+  - first:
+      213: -5204540546241230851
+    second: MG_justArm_Aug14_2
+  - first:
+      213: -5664171798297465206
+    second: MG_justArm_Aug14_3
+  - first:
+      213: 3120682059553917744
+    second: MG_justArm_Aug14_4
+  - first:
+      213: -6301782735387523572
+    second: MG_justArm_Aug14_5
+  - first:
+      213: -5917157282143338597
+    second: MG_justArm_Aug14_6
+  - first:
+      213: 4878448453671669192
+    second: MG_justArm_Aug14_7
+  - first:
+      213: -3469164533760309359
+    second: MG_justArm_Aug14_8
+  - first:
+      213: -4944741538137610822
+    second: MG_justArm_Aug14_9
+  - first:
+      213: -1348367675032822478
+    second: MG_justArm_Aug14_10
+  - first:
+      213: 4707257451997233048
+    second: MG_justArm_Aug14_11
+  - first:
+      213: -1190260284653638031
+    second: MG_justArm_Aug14_12
+  - first:
+      213: -2388619291080036382
+    second: MG_justArm_Aug14_13
+  - first:
+      213: -8500995060807174655
+    second: MG_justArm_Aug14_14
+  - first:
+      213: 2801939601136875183
+    second: MG_justArm_Aug14_15
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4ec1c21f76b72f499eb42c738bde63c
+      internalID: -288666621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_1
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3f5b82290c267284b996a5b951943ff4
+      internalID: 230580325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_2
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 415a486cbcde3014dbbbd61fe5876889
+      internalID: -1803019272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_3
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f264369f626e45f4d941c2d6f72384c7
+      internalID: -1842156013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_4
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77a98189b11ad8946aa0495db1a55137
+      internalID: -1742836891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_5
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67394f3c1ef21b644986fca67dc50aeb
+      internalID: 2122930060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_6
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76d53a63f08eeea47b741d63a98a7bd9
+      internalID: -576713875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_7
+      rect:
+        serializedVersion: 2
+        x: 672
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f85f42c20a884d4bb290523237e7d4e
+      internalID: 1593043162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_8
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 703071100bd32d841b4e89230a232916
+      internalID: -389431194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_9
+      rect:
+        serializedVersion: 2
+        x: 864
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1744c519d8e3e874b9bd4828061a79ed
+      internalID: 265809551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_10
+      rect:
+        serializedVersion: 2
+        x: 960
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b97721bd345d468439382e15bc03f77c
+      internalID: 1768232376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_11
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11d1220ab92466e4e8142ebc90f35b7d
+      internalID: 386112649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_12
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 624eb8fbeb6dd434ebac3696c13e77bc
+      internalID: 797610186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_13
+      rect:
+        serializedVersion: 2
+        x: 1248
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 618ddb26422c2494a8f3c43bd2aabe6b
+      internalID: 95418933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_14
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bca39701908c6c542a633b57652a1074
+      internalID: 1557947882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: MG_justArm_Aug14_15
+      rect:
+        serializedVersion: 2
+        x: 1440
+        y: 35
+        width: 96
+        height: 61
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18f90137e761a3544af5384f5bb121a4
+      internalID: -1568213150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 428c7d4e8fbf61a408c7561c378bdeba
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":96.0,"y":61.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":7,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      MG_justArm_Aug14_0: -288666621
+      MG_justArm_Aug14_1: 230580325
+      MG_justArm_Aug14_10: 1768232376
+      MG_justArm_Aug14_11: 386112649
+      MG_justArm_Aug14_12: 797610186
+      MG_justArm_Aug14_13: 95418933
+      MG_justArm_Aug14_14: 1557947882
+      MG_justArm_Aug14_15: -1568213150
+      MG_justArm_Aug14_2: -1803019272
+      MG_justArm_Aug14_3: -1842156013
+      MG_justArm_Aug14_4: -1742836891
+      MG_justArm_Aug14_5: 2122930060
+      MG_justArm_Aug14_6: -576713875
+      MG_justArm_Aug14_7: 1593043162
+      MG_justArm_Aug14_8: -389431194
+      MG_justArm_Aug14_9: 265809551
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
