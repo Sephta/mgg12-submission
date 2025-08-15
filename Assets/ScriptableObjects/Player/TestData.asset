@@ -29,7 +29,7 @@ MonoBehaviour:
   <FallingGravityMultiplier>k__BackingField: 1.5
   <JumpHangTimeGravityMultiplier>k__BackingField: 0.5
   <ShortJumpGravityMultiplier>k__BackingField: 1.4
-  <GroundLayerMask>k__BackingField:
+  <LayersConsideredForGroundingPlayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 64
   <GroundingRayCastDistance>k__BackingField: 0.1
@@ -52,6 +52,6 @@ MonoBehaviour:
   <GravityScale>k__BackingField: 3.8226297
   <RunAccelerationAmount>k__BackingField: 83.333336
   <RunDecelerationAmount>k__BackingField: 166.66667
-  <PlayerVelocity>k__BackingField: {x: -8.37696e-17, y: 0}
+  <PlayerVelocity>k__BackingField: {x: 0, y: 0}
   <PlayerDirectionInput>k__BackingField: {x: 0, y: 0}
-  <IsGrounded>k__BackingField: 1
+  <IsGrounded>k__BackingField: 0

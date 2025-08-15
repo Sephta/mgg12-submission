@@ -2,7 +2,7 @@ using System;
 using NaughtyAttributes;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerMovementDataSO", menuName = "Scriptable Objects/PlayerMovementData")]
+[CreateAssetMenu(fileName = "PlayerMovementDataSO", menuName = "Scriptable Objects/Player Movement Data")]
 public class PlayerMovementDataSO : ScriptableObject
 {
   /* ---------------------------------------------------------------- */
@@ -90,7 +90,7 @@ public class PlayerMovementDataSO : ScriptableObject
   [field: Header("Grounding Data")]
 
   [field: SerializeField, Tooltip("The layer to use when checking if the player is grounded.")]
-  public LayerMask GroundLayerMask { get; private set; }
+  public LayerMask LayersConsideredForGroundingPlayer { get; private set; }
 
   [field: SerializeField, Range(0f, 1f), Tooltip("Controls how far the raycast goes to check if player is grounded.")]
   public float GroundingRayCastDistance { get; private set; }

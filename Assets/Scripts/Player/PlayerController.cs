@@ -114,21 +114,21 @@ public class PlayerController : MonoBehaviour
       leftRayPosition,
       Vector2.down,
       _boxCollider2D.bounds.extents.y * _rayCastDistance,
-      _playerMovementDataSO.GroundLayerMask
+      _playerMovementDataSO.LayersConsideredForGroundingPlayer
     );
 
     RaycastHit2D middleRay = Physics2D.Raycast(
       middleRayPosition,
       Vector2.down,
       _boxCollider2D.bounds.extents.y * _rayCastDistance,
-      _playerMovementDataSO.GroundLayerMask
+      _playerMovementDataSO.LayersConsideredForGroundingPlayer
     );
 
     RaycastHit2D rightRay = Physics2D.Raycast(
       rightRayPosition,
       Vector2.down,
       _boxCollider2D.bounds.extents.y * _rayCastDistance,
-      _playerMovementDataSO.GroundLayerMask
+      _playerMovementDataSO.LayersConsideredForGroundingPlayer
     );
 
     if (_drawDebugGizmos)
