@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32019093cd4bdd2439c62dec5aa16c03, type: 3}
   m_Name: TestData
   m_EditorClassIdentifier: 
-  <NumberOfKnots>k__BackingField: 5
+  <NumberOfKnots>k__BackingField: 15
+  <KnotOffset>k__BackingField: 0.25
+  <KnotVariance>k__BackingField: {x: -0.5, y: 0.5}
+  <GrowthRate>k__BackingField: 1
+  <SurfaceNormal>k__BackingField: {x: 0, y: 0, z: 0}
