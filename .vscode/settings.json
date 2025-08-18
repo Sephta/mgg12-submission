@@ -63,6 +63,7 @@
     "**/Assets/Sprites": true,
     "**/Assets/TextMesh Pro": true,
     "**/Assets/Scenes": true,
+    "**/Assets/Plugins": true,
     "TEST_BUILDS/**": true
   },
   "files.associations": {
