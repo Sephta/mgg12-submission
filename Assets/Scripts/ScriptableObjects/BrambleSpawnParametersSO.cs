@@ -27,9 +27,4 @@ public class BrambleSpawnParametersSO : ScriptableObject
 
   [field: SerializeField, Tooltip("The ease of the animation.")]
   public Ease EaseType { get; private set; }
-
-  [field: Header("Runtime Data")]
-
-  [field: SerializeField, ReadOnly, Tooltip("Determines how many knots appear along the spline.")]
-  public Vector3 SurfaceNormal { get; private set; }
 }
