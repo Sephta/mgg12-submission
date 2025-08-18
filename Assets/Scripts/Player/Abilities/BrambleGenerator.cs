@@ -46,6 +46,8 @@ public class BrambleGenerator : MonoBehaviour
     DestroySplinesAndBramble();
 
     if (_brambleComponents.Count == 0) GenerateSplineWithBramble();
+
+    BuildGrowthSequence().Play();
   }
 
   /* ---------------------------------------------------------------- */
@@ -55,23 +57,15 @@ public class BrambleGenerator : MonoBehaviour
   [Button("Generate Spline")]
   private void GenerateSpline()
   {
+    if (_isTweening) return;
+
     DeleteSplines();
     CreateNewSpline();
   }
 
   private void CreateNewSpline()
   {
-    if (_splineContainer == null)
-    {
-      Debug.Log(name + " | Spline Container is Null.");
-      return;
-    }
-
-    if (_splineContainer.Splines.Count > 0)
-    {
-      Debug.Log(name + " | Spline count > 0");
-      return;
-    }
+    if (_splineContainer == null) return;
 
     if (_splineContainer.Splines.Count == 0)
     {
@@ -107,7 +101,7 @@ public class BrambleGenerator : MonoBehaviour
   [Button("Delete Spline Data From Container")]
   private void DeleteSplines()
   {
-    if (_splineContainer == null) return;
+    if (_splineContainer == null || _isTweening) return;
 
     if (_splineContainer.Splines.Count > 0)
     {
@@ -122,8 +116,12 @@ public class BrambleGenerator : MonoBehaviour
   [Button("Generate Spline With Bramble")]
   private void GenerateSplineWithBramble()
   {
+    if (_isTweening) return;
+
     GenerateSpline();
     InstantiateBrambleAlongSplineKnots();
+
+    BuildGrowthSequence().Play();
   }
 
   private void InstantiateBrambleAlongSplineKnots()
@@ -156,10 +154,11 @@ public class BrambleGenerator : MonoBehaviour
   [Button("Destroy Splines and Bramble")]
   private void DestroySplinesAndBramble()
   {
+    if (_isTweening) return;
+
     DeleteSplines();
     DestroyBrambleAlongSplineKnots();
   }
-
 
   private void DestroyBrambleAlongSplineKnots()
   {
@@ -175,28 +174,9 @@ public class BrambleGenerator : MonoBehaviour
   private void ActivateBramble()
   {
     if (_isTweening) return;
-
     if (_brambleComponents.Count == 0) return;
-    DG.Tweening.Sequence brambleSequence = DOTween.Sequence();
-    foreach (GameObject bramble in _brambleComponents)
-    {
-      bramble.SetActive(true);
-      brambleSequence.Append(
-        bramble.transform.DOScale(1f, _brambleSpawnParametersSO.GrowthRate / _brambleComponents.Count)
-        .SetEase(Ease.InOutCubic)
-      );
-    }
 
-    brambleSequence.OnStart(() =>
-    {
-      _isTweening = true;
-    });
-
-    brambleSequence.OnComplete(() =>
-    {
-      _isTweening = false;
-    });
-
+    DG.Tweening.Sequence brambleSequence = BuildGrowthSequence();
     brambleSequence.Play();
   }
 
@@ -204,34 +184,71 @@ public class BrambleGenerator : MonoBehaviour
   private void DeactivateBramble()
   {
     if (_isTweening) return;
-
     if (_brambleComponents.Count == 0) return;
+
+    DG.Tweening.Sequence brambleSequence = BuildDecaySequence();
+    brambleSequence.Play();
+  }
+
+  private DG.Tweening.Sequence BuildGrowthSequence()
+  {
     DG.Tweening.Sequence brambleSequence = DOTween.Sequence();
+
+    foreach (GameObject bramble in _brambleComponents)
+    {
+      bramble.SetActive(true);
+      brambleSequence.Append(
+        bramble.transform.DOScale(1f, _brambleSpawnParametersSO.GrowthRate / _brambleComponents.Count)
+        .SetEase(_brambleSpawnParametersSO.EaseType)
+      );
+    }
+
+    brambleSequence.OnStart(() => GrowthSequenceOnStart());
+    brambleSequence.OnComplete(() => GrowthSequenceOnComplete());
+
+    return brambleSequence;
+  }
+
+  private void GrowthSequenceOnStart()
+  {
+    _isTweening = true;
+  }
+
+  private void GrowthSequenceOnComplete()
+  {
+    _isTweening = false;
+  }
+
+  private DG.Tweening.Sequence BuildDecaySequence()
+  {
+    DG.Tweening.Sequence brambleSequence = DOTween.Sequence();
+
     foreach (GameObject bramble in _brambleComponents)
     {
       brambleSequence.Append(
         bramble.transform.DOScale(0f, _brambleSpawnParametersSO.GrowthRate / _brambleComponents.Count)
-        .SetEase(Ease.InOutCubic)
+        .SetEase(_brambleSpawnParametersSO.EaseType)
       );
     }
 
-    brambleSequence.OnStart(() =>
+    brambleSequence.OnStart(() => DecaySequenceOnStart());
+    brambleSequence.OnComplete(() => DecaySequenceOnComplete());
+
+    return brambleSequence;
+  }
+
+  private void DecaySequenceOnStart()
+  {
+    _isTweening = true;
+  }
+
+  private void DecaySequenceOnComplete()
+  {
+    foreach (GameObject bramble in _brambleComponents)
     {
-      _isTweening = true;
-    });
+      bramble.SetActive(false);
+    }
 
-    brambleSequence.OnComplete(() =>
-    {
-      foreach (GameObject bramble in _brambleComponents)
-      {
-        bramble.SetActive(false);
-      }
-
-      _isTweening = false;
-    });
-
-
-
-    brambleSequence.Play();
+    _isTweening = false;
   }
 }
