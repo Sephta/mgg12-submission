@@ -64,7 +64,8 @@
     "**/Assets/TextMesh Pro": true,
     "**/Assets/Scenes": true,
     "**/Assets/Plugins": true,
-    "TEST_BUILDS/**": true
+    "TEST_BUILDS/**": true,
+    "Packages/**": true
   },
   "files.associations": {
     "*.asset": "yaml",

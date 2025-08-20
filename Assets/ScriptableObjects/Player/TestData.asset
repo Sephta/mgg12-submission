@@ -47,11 +47,11 @@ MonoBehaviour:
     maxDepth: 0
     minNormalAngle: 0
     maxNormalAngle: 0
-  <CoyoteTime>k__BackingField: 0.16
+  <CoyoteTime>k__BackingField: 0.15
   <JumpingPower>k__BackingField: 15
   <GravityScale>k__BackingField: 3.8226297
   <RunAccelerationAmount>k__BackingField: 83.333336
   <RunDecelerationAmount>k__BackingField: 166.66667
-  <PlayerVelocity>k__BackingField: {x: -0.000224029, y: 0}
+  <PlayerVelocity>k__BackingField: {x: 0.04596541, y: 0}
   <PlayerDirectionInput>k__BackingField: {x: 0, y: 0}
   <IsGrounded>k__BackingField: 1
