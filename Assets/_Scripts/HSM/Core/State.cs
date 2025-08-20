@@ -66,11 +66,16 @@ namespace stal.HSM.Core
       if (stateToTransitionTo != null)
       {
         StateMachine.Sequencer.RequestTransition(this, stateToTransitionTo);
-        return;
+
+        // Used to return here if we requested a transition. I think this is for sequencing,
+        // but the current implementation of the sequencer is very basic and does not process
+        // the states prior to the transition... If I update the sequencer in the future 
+        // I may re-enable this...
+        // return;
       }
 
-      // If we are not transitioning to a new state and we have an active child state, call its update.
-      ActiveChild?.Update(deltaTime); // if ActiveChild is not nul then update.
+      // If we have an active child state, call its update.
+      ActiveChild?.Update(deltaTime);
 
       // Update children before we update ourselves
       OnUpdate(deltaTime);

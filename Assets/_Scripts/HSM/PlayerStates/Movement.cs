@@ -17,20 +17,6 @@ namespace stal.HSM.PlayerStates
 
     protected override void OnUpdate(float deltaTime)
     {
-      _playerContext.inputDirection = _playerMovementDataSO.PlayerDirectionInput;
-
-      // Update runtime movement data
-      _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
-      _playerMovementDataSO.UpdatePlayerVelocity(_playerContext.rigidbody2D.linearVelocity);
-
-      // Update timers
-      _playerContext.jumpBufferWindow = Mathf.Clamp(_playerContext.jumpBufferWindow - Time.deltaTime, 0f, _playerMovementDataSO.JumpInputBuffer);
-      _playerContext.coyoteTime = Mathf.Clamp(_playerContext.coyoteTime - Time.deltaTime, 0f, _playerMovementDataSO.CoyoteTime);
-
-      // Reset timers 
-      if (_playerMovementDataSO.IsGrounded) _playerContext.coyoteTime = _playerMovementDataSO.CoyoteTime;
-      if (!_playerContext.wasGroundedLastFrame && _playerMovementDataSO.IsGrounded) _playerContext.jumpCount = _playerMovementDataSO.JumpMaximum;
-
       _playerContext.targetSpeed = _playerMovementDataSO.PlayerDirectionInput.x * _playerMovementDataSO.RunVelocityMaximum;
 
       // Perform actions based on updates
@@ -39,51 +25,6 @@ namespace stal.HSM.PlayerStates
       HandleGravity();
       ClampPlayerMovement();
 
-      // cache grounded state at the end of this frame since next frame we might not be grounded.
-      _playerContext.wasGroundedLastFrame = IsGrounded();
-      _playerContext.inputDirectionLastFrame = _playerMovementDataSO.PlayerDirectionInput;
-    }
-
-    private bool IsGrounded()
-    {
-      // using three distinct rays, the middle of which casts from player's origin position, 
-      // while the left and right cast from sids of the player's collider
-
-      Vector3 leftRayPosition = new(_playerContext.transform.position.x - _playerContext.boxCollider2D.bounds.extents.x, _playerContext.transform.position.y, _playerContext.transform.position.z);
-      Vector3 middleRayPosition = _playerContext.transform.position;
-      Vector3 rightRayPosition = new(_playerContext.transform.position.x + _playerContext.boxCollider2D.bounds.extents.x, _playerContext.transform.position.y, _playerContext.transform.position.z);
-
-      RaycastHit2D leftRay = Physics2D.Raycast(
-        leftRayPosition,
-        Vector2.down,
-        _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
-        _playerMovementDataSO.LayersConsideredForGroundingPlayer
-      );
-
-      RaycastHit2D middleRay = Physics2D.Raycast(
-        middleRayPosition,
-        Vector2.down,
-        _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
-        _playerMovementDataSO.LayersConsideredForGroundingPlayer
-      );
-
-      RaycastHit2D rightRay = Physics2D.Raycast(
-        rightRayPosition,
-        Vector2.down,
-        _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
-        _playerMovementDataSO.LayersConsideredForGroundingPlayer
-      );
-
-      if (_playerContext.drawDebugGizmos)
-      {
-        // For debugging (only appears in the Scene window, not the game window)
-        Debug.DrawRay(leftRayPosition, _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.red, 1f);
-        Debug.DrawRay(middleRayPosition, _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.red, 1f);
-        Debug.DrawRay(rightRayPosition, _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.red, 1f);
-      }
-
-      // player is grounded if any of the following rays make contact with an object with on the specified LayerMask stored in _playerMovementDataSO
-      return leftRay || middleRay || rightRay;
     }
 
     private void MovePlayer()
