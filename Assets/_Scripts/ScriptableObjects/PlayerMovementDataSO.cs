@@ -145,6 +145,15 @@ public class PlayerMovementDataSO : ScriptableObject
   [field: SerializeField, ReadOnly]
   public bool IsGrounded { get; private set; }
 
+  [field: SerializeField, ReadOnly]
+  public bool IsJumping { get; private set; }
+
+  [field: SerializeField, ReadOnly]
+  public bool IsAttacking { get; private set; }
+
+  [field: SerializeField, ReadOnly]
+  public bool IsTakingAim { get; private set; }
+
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
@@ -184,6 +193,9 @@ public class PlayerMovementDataSO : ScriptableObject
   public void UpdatePlayerVelocity(Vector2 state) => PlayerVelocity = state;
   public void UpdatePlayerDirectionInput(Vector2 state) => PlayerDirectionInput = state;
   public void UpdateIsGrounded(bool state) => IsGrounded = state;
+  public void UpdateIsJumping(bool state) => IsJumping = state;
+  public void UpdateIsAttacking(bool state) => IsAttacking = state;
+  public void UpdateIsTakingAim(bool state) => IsTakingAim = state;
 
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
@@ -196,5 +208,4 @@ public class PlayerMovementDataSO : ScriptableObject
     PlayerDirectionInput = Vector2.zero;
     IsGrounded = false;
   }
-
 }

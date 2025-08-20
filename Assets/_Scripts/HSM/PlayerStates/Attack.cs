@@ -18,12 +18,14 @@ namespace stal.HSM.PlayerStates
       _playerContext = playerContext;
     }
 
-    protected override State GetTransition()
-    {
-      if (_attackTimer == 0f) return ((PlayerRoot)Parent).Movement;
+    protected override State GetTransition() => _playerContext.isAtacking ? null : ((PlayerRoot)Parent).Movement;
 
-      return null;
-    }
+    // protected override State GetTransition()
+    // {
+    //   if (_attackTimer == 0f) return ((PlayerRoot)Parent).Movement;
+
+    //   return null;
+    // }
 
     protected override void OnEnter()
     {

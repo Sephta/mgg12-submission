@@ -57,6 +57,9 @@ namespace stal.HSM.Drivers
     {
       _playerContext.inputDirection = _playerMovementDataSO.PlayerDirectionInput;
       _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
+      _playerMovementDataSO.UpdateIsJumping(_playerContext.isJumping);
+      _playerMovementDataSO.UpdateIsAttacking(_playerContext.isAtacking);
+      _playerMovementDataSO.UpdateIsTakingAim(_playerContext.isTakingAim);
       _playerMovementDataSO.UpdatePlayerVelocity(_playerContext.rigidbody2D.linearVelocity);
 
       // Update timers

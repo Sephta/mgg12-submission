@@ -23,7 +23,12 @@ public class AnimatorController : MonoBehaviour
     IDLE,
     RUN,
     JUMP,
-    FALLING
+    FALLING,
+    AIM,
+    ENVIRON01,
+    COMBAT01,
+    COMBAT02,
+    COMABT03
   }
 
   // Dictionaries are not serializable in the inspector by default in Unity. To get around this
@@ -88,7 +93,18 @@ public class AnimatorController : MonoBehaviour
   {
     if (_playerMovementDataSO.IsGrounded)
     {
-      return _isMoving ? _animationStates[nameof(AnimationStates.RUN)] : _animationStates[nameof(AnimationStates.IDLE)];
+      if (_playerMovementDataSO.IsTakingAim)
+      {
+        return _animationStates[nameof(AnimationStates.AIM)];
+      }
+      else if (_playerMovementDataSO.IsAttacking)
+      {
+        return _animationStates[nameof(AnimationStates.COMBAT01)];
+      }
+      else
+      {
+        return _isMoving ? _animationStates[nameof(AnimationStates.RUN)] : _animationStates[nameof(AnimationStates.IDLE)];
+      }
     }
     else
     {
@@ -109,6 +125,8 @@ public class AnimatorController : MonoBehaviour
 
   private void FlipSpriteBasedOnPlayerInput()
   {
+    if (_playerMovementDataSO.IsAttacking) return;
+
     if (_playerMovementDataSO.PlayerDirectionInput.x != 0)
     {
       _spriteRenderer.flipX = _playerMovementDataSO.PlayerDirectionInput.x < 0;
