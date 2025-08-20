@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 31581087671141590, guid: cd70f3086b7a1aa43aff0e6bcdb078fb, type: 3}
+  m_Sprite: {fileID: -5073028877702378488, guid: c1373b105ea4c1f49be84e3aa72bdc85, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,7 +99,7 @@ Animator:
   m_GameObject: {fileID: 1370699169781847061}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: -6648296091378271654, guid: cd70f3086b7a1aa43aff0e6bcdb078fb, type: 3}
+  m_Controller: {fileID: 8854332840252702712, guid: c1373b105ea4c1f49be84e3aa72bdc85, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -133,7 +133,12 @@ MonoBehaviour:
     - RUN
     - JUMP
     - FALLING
-    m_Values: 15b524dcc0a476501606b3a7d4ea3ef4
+    - AIM
+    - ENVIRON01
+    - COMBAT01
+    - COMBAT02
+    - COMABT03
+    m_Values: 15b524dcc0a476501606b3a7d4ea3ef40eb56831565d59b9b71ada4f0d4bd3d6a5aec1f4
 --- !u!1 &4753032256456121729
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,6 +405,8 @@ MonoBehaviour:
     inputDirection: {x: 0, y: 0}
     inputDirectionLastFrame: {x: 0, y: 0}
     isJumping: 0
+    isAtacking: 0
+    isTakingAim: 0
     targetSpeed: 0
     coyoteTime: 0
     jumpBufferWindow: 0

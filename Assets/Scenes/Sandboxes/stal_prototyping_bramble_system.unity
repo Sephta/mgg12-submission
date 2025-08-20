@@ -3422,62 +3422,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player HSM Test
       objectReference: {fileID: 0}
-    - target: {fileID: 4753032256456121729, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: _animationStates.m_Keys.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: _animationStates.m_Values.Array.size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Keys.Array.data[4]'
-      value: AIM
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Keys.Array.data[5]'
-      value: ENVIRON01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Keys.Array.data[6]'
-      value: COMBAT01
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Keys.Array.data[7]'
-      value: COMBAT02
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Keys.Array.data[8]'
-      value: COMABT03
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Values.Array.data[4]'
-      value: 828945678
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Values.Array.data[5]'
-      value: -1185325738
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Values.Array.data[6]'
-      value: 1339693751
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Values.Array.data[7]'
-      value: -690795763
-      objectReference: {fileID: 0}
-    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: '_animationStates.m_Values.Array.data[8]'
-      value: -188633435
-      objectReference: {fileID: 0}
-    - target: {fileID: 5267990119152243958, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 8854332840252702712, guid: c1373b105ea4c1f49be84e3aa72bdc85, type: 3}
     - target: {fileID: 5696392734424121139, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.16765
@@ -3518,10 +3462,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7490230254331191788, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -5073028877702378488, guid: c1373b105ea4c1f49be84e3aa72bdc85, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
