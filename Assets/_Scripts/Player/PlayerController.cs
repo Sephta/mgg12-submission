@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour
   [SerializeField] private Rigidbody2D _rigidBody2D;
   [SerializeField] private BoxCollider2D _boxCollider2D;
 
-  [Header("Movement Settings")]
-  [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementDataSO;
+  [Header("Player Data")]
+  [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementData;
+  [SerializeField, Expandable] private PlayerAttributesDataSO _playerAttributesData;
 
   [Header("Debug")]
   [SerializeField] private bool _drawDebugGizmos;
@@ -30,9 +31,16 @@ public class PlayerController : MonoBehaviour
 
   private void Awake()
   {
-    if (_playerMovementDataSO == null)
+    if (_playerMovementData == null)
     {
-      Debug.LogError("PlayerController does not have defined PlayerMovementDataSO.");
+      Debug.LogError(name + " does not have defined " + _playerMovementData.GetType().Name + ".  Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    if (_playerAttributesData == null)
+    {
+      Debug.LogError(name + " does not have defined " + _playerAttributesData.GetType().Name + ".  Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
     }
 
     if (_rigidBody2D == null) _rigidBody2D = GetComponent<Rigidbody2D>();
@@ -43,26 +51,26 @@ public class PlayerController : MonoBehaviour
   {
     // Set default parameters
     ResetGravityScale();
-    _jumpCount = _playerMovementDataSO.JumpMaximum;
+    _jumpCount = _playerMovementData.JumpMaximum;
   }
 
   private void Update()
   {
-    _inputDirection = _playerMovementDataSO.PlayerMoveDirection;
+    _inputDirection = _playerAttributesData.PlayerMoveDirection;
 
     // Update runtime movement data
-    _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
-    _playerMovementDataSO.UpdatePlayerVelocity(_rigidBody2D.linearVelocity);
+    _playerAttributesData.UpdateIsGrounded(IsGrounded());
+    _playerAttributesData.UpdatePlayerVelocity(_rigidBody2D.linearVelocity);
 
     // Update timers
-    _jumpBufferWindow = Mathf.Clamp(_jumpBufferWindow - Time.deltaTime, 0f, _playerMovementDataSO.JumpInputBuffer);
-    _coyoteTime = Mathf.Clamp(_coyoteTime - Time.deltaTime, 0f, _playerMovementDataSO.CoyoteTime);
+    _jumpBufferWindow = Mathf.Clamp(_jumpBufferWindow - Time.deltaTime, 0f, _playerMovementData.JumpInputBuffer);
+    _coyoteTime = Mathf.Clamp(_coyoteTime - Time.deltaTime, 0f, _playerMovementData.CoyoteTime);
 
     // Reset timers 
-    if (_playerMovementDataSO.IsGrounded) _coyoteTime = _playerMovementDataSO.CoyoteTime;
-    if (!_wasGroundedLastFrame && _playerMovementDataSO.IsGrounded) _jumpCount = _playerMovementDataSO.JumpMaximum;
+    if (_playerAttributesData.IsGrounded) _coyoteTime = _playerMovementData.CoyoteTime;
+    if (!_wasGroundedLastFrame && _playerAttributesData.IsGrounded) _jumpCount = _playerMovementData.JumpMaximum;
 
-    _targetSpeed = _playerMovementDataSO.PlayerMoveDirection.x * _playerMovementDataSO.RunVelocityMaximum;
+    _targetSpeed = _playerAttributesData.PlayerMoveDirection.x * _playerMovementData.RunVelocityMaximum;
 
     // Perform actions based on updates
     MovePlayer();
@@ -72,7 +80,7 @@ public class PlayerController : MonoBehaviour
 
     // cache grounded state at the end of this frame since next frame we might not be grounded.
     _wasGroundedLastFrame = IsGrounded();
-    _inputDirectionLastFrame = _playerMovementDataSO.PlayerMoveDirection;
+    _inputDirectionLastFrame = _playerAttributesData.PlayerMoveDirection;
   }
 
   /* ---------------------------------------------------------------- */
@@ -80,7 +88,7 @@ public class PlayerController : MonoBehaviour
   /* ---------------------------------------------------------------- */
 
   // For used in the Player Input component.
-  public void OnMove(InputAction.CallbackContext context) => _playerMovementDataSO.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
+  public void OnMove(InputAction.CallbackContext context) => _playerAttributesData.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
 
   // For use in the Player Input component.
   public void OnJump(InputAction.CallbackContext context)
@@ -89,7 +97,7 @@ public class PlayerController : MonoBehaviour
     if (context.canceled) _isJumping = false;
     if (context.performed)
     {
-      _jumpBufferWindow = _playerMovementDataSO.JumpInputBuffer;
+      _jumpBufferWindow = _playerMovementData.JumpInputBuffer;
     }
   }
 
@@ -101,7 +109,7 @@ public class PlayerController : MonoBehaviour
   private bool IsGrounded()
   {
     // Exposing in the inspector. Needs to be removed but for now is fine. Was useful for testing some stuff.
-    _rayCastDistance = _playerMovementDataSO.GroundingRayCastDistance;
+    _rayCastDistance = _playerMovementData.GroundingRayCastDistance;
 
     // using three distinct rays, the middle of which casts from player's origin position, 
     // while the left and right cast from sids of the player's collider
@@ -114,21 +122,21 @@ public class PlayerController : MonoBehaviour
       leftRayPosition,
       Vector2.down,
       _boxCollider2D.bounds.extents.y * _rayCastDistance,
-      _playerMovementDataSO.LayersConsideredForGroundingPlayer
+      _playerMovementData.LayersConsideredForGroundingPlayer
     );
 
     RaycastHit2D middleRay = Physics2D.Raycast(
       middleRayPosition,
       Vector2.down,
       _boxCollider2D.bounds.extents.y * _rayCastDistance,
-      _playerMovementDataSO.LayersConsideredForGroundingPlayer
+      _playerMovementData.LayersConsideredForGroundingPlayer
     );
 
     RaycastHit2D rightRay = Physics2D.Raycast(
       rightRayPosition,
       Vector2.down,
       _boxCollider2D.bounds.extents.y * _rayCastDistance,
-      _playerMovementDataSO.LayersConsideredForGroundingPlayer
+      _playerMovementData.LayersConsideredForGroundingPlayer
     );
 
     if (_drawDebugGizmos)
@@ -139,7 +147,7 @@ public class PlayerController : MonoBehaviour
       Debug.DrawRay(rightRayPosition, _boxCollider2D.bounds.extents.y * _rayCastDistance * Vector3.down, Color.red, 1f);
     }
 
-    // player is grounded if any of the following rays make contact with an object with on the specified LayerMask stored in _playerMovementDataSO
+    // player is grounded if any of the following rays make contact with an object with on the specified LayerMask stored in _playerMovementData
     return leftRay || middleRay || rightRay;
   }
 
@@ -147,15 +155,15 @@ public class PlayerController : MonoBehaviour
   {
     float accelRate;
 
-    if (_playerMovementDataSO.IsGrounded)
+    if (_playerAttributesData.IsGrounded)
     {
       if (Mathf.Abs(_targetSpeed) > 0.01f)
       {
-        accelRate = _playerMovementDataSO.RunAccelerationAmount;
+        accelRate = _playerMovementData.RunAccelerationAmount;
       }
       else
       {
-        accelRate = _playerMovementDataSO.RunDecelerationAmount;
+        accelRate = _playerMovementData.RunDecelerationAmount;
 
       }
     }
@@ -163,17 +171,17 @@ public class PlayerController : MonoBehaviour
     {
       if (Mathf.Abs(_targetSpeed) > 0.01f)
       {
-        accelRate = _playerMovementDataSO.RunAccelerationAmount * _playerMovementDataSO.AccelerationAirMultiplier;
+        accelRate = _playerMovementData.RunAccelerationAmount * _playerMovementData.AccelerationAirMultiplier;
       }
       else
       {
-        accelRate = _playerMovementDataSO.RunDecelerationAmount * _playerMovementDataSO.DecelerationAirMultiplier;
+        accelRate = _playerMovementData.RunDecelerationAmount * _playerMovementData.DecelerationAirMultiplier;
 
       }
     }
 
     // Conserve momentum
-    if (Mathf.Abs(_rigidBody2D.linearVelocityX) > Mathf.Abs(_targetSpeed) && Mathf.Sign(_rigidBody2D.linearVelocityX) == Mathf.Sign(_targetSpeed) && _targetSpeed > 0.01f && !_playerMovementDataSO.IsGrounded)
+    if (Mathf.Abs(_rigidBody2D.linearVelocityX) > Mathf.Abs(_targetSpeed) && Mathf.Sign(_rigidBody2D.linearVelocityX) == Mathf.Sign(_targetSpeed) && _targetSpeed > 0.01f && !_playerAttributesData.IsGrounded)
     {
       accelRate = 0;
     }
@@ -189,11 +197,11 @@ public class PlayerController : MonoBehaviour
 
   private void PerformJump()
   {
-    if (!_jumpEndEarly && !_playerMovementDataSO.IsGrounded && !_isJumping && _rigidBody2D.linearVelocityY > 0) _jumpEndEarly = true;
+    if (!_jumpEndEarly && !_playerAttributesData.IsGrounded && !_isJumping && _rigidBody2D.linearVelocityY > 0) _jumpEndEarly = true;
 
     if (_jumpBufferWindow > 0 && _coyoteTime > 0 && _jumpCount > 0)
     {
-      _jumpCount = Mathf.Clamp(_jumpCount - 1, 0, _playerMovementDataSO.JumpMaximum);
+      _jumpCount = Mathf.Clamp(_jumpCount - 1, 0, _playerMovementData.JumpMaximum);
       _jumpBufferWindow = 0f;
       _coyoteTime = 0f;
 
@@ -204,44 +212,44 @@ public class PlayerController : MonoBehaviour
   private void ExecuteJump()
   {
     _jumpEndEarly = false;
-    _rigidBody2D.linearVelocityY = _playerMovementDataSO.JumpingPower;
+    _rigidBody2D.linearVelocityY = _playerMovementData.JumpingPower;
   }
 
   private void HandleGravity()
   {
     // If we are falling then we have a different gravity multiplier
-    if (_rigidBody2D.linearVelocityY < 0 && !_playerMovementDataSO.IsGrounded)
+    if (_rigidBody2D.linearVelocityY < 0 && !_playerAttributesData.IsGrounded)
     {
-      UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier);
+      UpdateGravityScale(_playerMovementData.FallingGravityMultiplier);
     }
     else
     {
       ResetGravityScale();
     }
 
-    if (_jumpEndEarly) UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier * _playerMovementDataSO.ShortJumpGravityMultiplier);
+    if (_jumpEndEarly) UpdateGravityScale(_playerMovementData.FallingGravityMultiplier * _playerMovementData.ShortJumpGravityMultiplier);
 
-    if (_isJumping && (Mathf.Abs(_rigidBody2D.linearVelocityY) < _playerMovementDataSO.JumpHangTimeThreshold))
+    if (_isJumping && (Mathf.Abs(_rigidBody2D.linearVelocityY) < _playerMovementData.JumpHangTimeThreshold))
     {
-      UpdateGravityScale(_playerMovementDataSO.JumpHangTimeGravityMultiplier);
+      UpdateGravityScale(_playerMovementData.JumpHangTimeGravityMultiplier);
     }
   }
 
   private void ClampPlayerMovement()
   {
-    // Clamps velocity by the amount configured in _playerMovementDataSO
-    if (_playerMovementDataSO.DoClampHorizontalVelocity)
+    // Clamps velocity by the amount configured in _playerMovementData
+    if (_playerMovementData.DoClampHorizontalVelocity)
     {
-      _rigidBody2D.linearVelocityX = Mathf.Clamp(_rigidBody2D.linearVelocityX, -_playerMovementDataSO.VelocityHorizontalClamp, _playerMovementDataSO.VelocityHorizontalClamp);
+      _rigidBody2D.linearVelocityX = Mathf.Clamp(_rigidBody2D.linearVelocityX, -_playerMovementData.VelocityHorizontalClamp, _playerMovementData.VelocityHorizontalClamp);
     }
-    if (_playerMovementDataSO.DoClampVerticalVelocity)
+    if (_playerMovementData.DoClampVerticalVelocity)
     {
-      _rigidBody2D.linearVelocityY = Mathf.Clamp(_rigidBody2D.linearVelocityY, -_playerMovementDataSO.VelocityVerticalClamp, _playerMovementDataSO.VelocityVerticalClamp);
+      _rigidBody2D.linearVelocityY = Mathf.Clamp(_rigidBody2D.linearVelocityY, -_playerMovementData.VelocityVerticalClamp, _playerMovementData.VelocityVerticalClamp);
     }
   }
 
 
-  private void ResetGravityScale() => _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale;
-  private void UpdateGravityScale(float scale) => _rigidBody2D.gravityScale = _playerMovementDataSO.GravityScale * scale;
+  private void ResetGravityScale() => _rigidBody2D.gravityScale = _playerMovementData.GravityScale;
+  private void UpdateGravityScale(float scale) => _rigidBody2D.gravityScale = _playerMovementData.GravityScale * scale;
 
 }

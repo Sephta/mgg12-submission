@@ -6,18 +6,20 @@ namespace stal.HSM.PlayerStates
 {
   public class Movement : State
   {
+    private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerContext _playerContext;
 
-    public Movement(HierarchicalStateMachine stateMachine, State Parent, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
+    public Movement(HierarchicalStateMachine stateMachine, State Parent, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
     {
+      _playerAttributesDataSO = playerAttributesDataSO;
       _playerMovementDataSO = playerMovementDataSO;
       _playerContext = playerContext;
     }
 
     protected override void OnUpdate(float deltaTime)
     {
-      _playerContext.targetSpeed = _playerMovementDataSO.PlayerMoveDirection.x * _playerMovementDataSO.RunVelocityMaximum;
+      _playerContext.targetSpeed = _playerAttributesDataSO.PlayerMoveDirection.x * _playerMovementDataSO.RunVelocityMaximum;
 
       // Perform actions based on updates
       MovePlayer();
@@ -31,7 +33,7 @@ namespace stal.HSM.PlayerStates
     {
       float accelRate;
 
-      if (_playerMovementDataSO.IsGrounded)
+      if (_playerAttributesDataSO.IsGrounded)
       {
         if (Mathf.Abs(_playerContext.targetSpeed) > 0.01f)
         {
@@ -57,7 +59,7 @@ namespace stal.HSM.PlayerStates
       }
 
       // Conserve momentum
-      if (Mathf.Abs(_playerContext.rigidbody2D.linearVelocityX) > Mathf.Abs(_playerContext.targetSpeed) && Mathf.Sign(_playerContext.rigidbody2D.linearVelocityX) == Mathf.Sign(_playerContext.targetSpeed) && _playerContext.targetSpeed > 0.01f && !_playerMovementDataSO.IsGrounded)
+      if (Mathf.Abs(_playerContext.rigidbody2D.linearVelocityX) > Mathf.Abs(_playerContext.targetSpeed) && Mathf.Sign(_playerContext.rigidbody2D.linearVelocityX) == Mathf.Sign(_playerContext.targetSpeed) && _playerContext.targetSpeed > 0.01f && !_playerAttributesDataSO.IsGrounded)
       {
         accelRate = 0;
       }
@@ -73,7 +75,7 @@ namespace stal.HSM.PlayerStates
 
     private void PerformJump()
     {
-      if (!_playerContext.jumpEndEarly && !_playerMovementDataSO.IsGrounded && !_playerContext.isJumping && _playerContext.rigidbody2D.linearVelocityY > 0) _playerContext.jumpEndEarly = true;
+      if (!_playerContext.jumpEndEarly && !_playerAttributesDataSO.IsGrounded && !_playerContext.isJumping && _playerContext.rigidbody2D.linearVelocityY > 0) _playerContext.jumpEndEarly = true;
 
       if (_playerContext.jumpBufferWindow > 0 && _playerContext.coyoteTime > 0 && _playerContext.jumpCount > 0)
       {
@@ -94,7 +96,7 @@ namespace stal.HSM.PlayerStates
     private void HandleGravity()
     {
       // If we are falling then we have a different gravity multiplier
-      if (_playerContext.rigidbody2D.linearVelocityY < 0 && !_playerMovementDataSO.IsGrounded)
+      if (_playerContext.rigidbody2D.linearVelocityY < 0 && !_playerAttributesDataSO.IsGrounded)
       {
         UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier);
       }

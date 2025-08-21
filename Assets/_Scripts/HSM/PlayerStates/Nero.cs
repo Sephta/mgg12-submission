@@ -13,14 +13,14 @@ namespace stal.HSM.PlayerStates
 
     private readonly PlayerContext _playerContext;
 
-    public Nero(HierarchicalStateMachine stateMachine, State Parent, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
+    public Nero(HierarchicalStateMachine stateMachine, State Parent, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
     {
       _playerContext = playerContext;
 
-      Neutral = new(stateMachine, this, playerMovementDataSO, playerContext);
-      Needle = new(stateMachine, this, playerMovementDataSO, playerContext);
-      Claw = new(stateMachine, this, playerMovementDataSO, playerContext);
-      Gun = new(stateMachine, this, playerMovementDataSO, playerContext);
+      Neutral = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
+      Needle = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
+      Claw = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
+      Gun = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
     }
 
     // In the future we should set the initial state to whatever the currently equipped seed arm is

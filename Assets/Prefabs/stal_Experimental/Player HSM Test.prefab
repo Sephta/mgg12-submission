@@ -125,7 +125,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _animator: {fileID: 5267990119152243958}
   _spriteRenderer: {fileID: 7490230254331191788}
-  _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
+  _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
   _isMoving: 0
   _animationStates:
     m_Keys:
@@ -448,7 +448,8 @@ MonoBehaviour:
     wasGroundedLastFrame: 0
     jumpEndEarly: 0
     drawDebugGizmos: 0
-  _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
+  _playerMovementData: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
+  _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
   _statePath: 
   _mouseScreenToWorldPos: {x: 0, y: 0}
   _aimDirection: {x: 0, y: 0}
@@ -464,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd8fc7e59400474db770daa8f47b9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
+  _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
   _numPoints: 18
   _launchForce: 1
   _pointSpacingValue: 1

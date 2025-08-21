@@ -10,8 +10,8 @@ public class AnimatorController : MonoBehaviour
   [SerializeField] private Animator _animator;
   [SerializeField] private SpriteRenderer _spriteRenderer;
 
-  [Header("Movement Settings")]
-  [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementDataSO;
+  [Header("Player Data")]
+  [SerializeField, Expandable] private PlayerAttributesDataSO _playerAttributesData;
 
   [Header("Debug")]
   [SerializeField, ReadOnly] private bool _isMoving;
@@ -59,6 +59,12 @@ public class AnimatorController : MonoBehaviour
 
   private void Awake()
   {
+    if (_playerAttributesData == null)
+    {
+      Debug.LogError(name + " does not have defined " + _playerAttributesData.GetType().Name + ".  Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
     if (_animator == null) _animator = GetComponent<Animator>();
     if (_spriteRenderer == null) _spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -91,13 +97,13 @@ public class AnimatorController : MonoBehaviour
 
   private int AnimationSelector()
   {
-    if (_playerMovementDataSO.IsGrounded)
+    if (_playerAttributesData.IsGrounded)
     {
-      if (_playerMovementDataSO.IsTakingAim)
+      if (_playerAttributesData.IsTakingAim)
       {
         return _animationStates[nameof(AnimationStates.AIM)];
       }
-      else if (_playerMovementDataSO.IsAttacking)
+      else if (_playerAttributesData.IsAttacking)
       {
         return _animationStates[nameof(AnimationStates.COMBAT01)];
       }
@@ -115,21 +121,21 @@ public class AnimatorController : MonoBehaviour
 
   private bool IsFalling()
   {
-    return _playerMovementDataSO.PlayerVelocity.y < 0 && !_playerMovementDataSO.IsGrounded;
+    return _playerAttributesData.PlayerVelocity.y < 0 && !_playerAttributesData.IsGrounded;
   }
 
   private bool IsMoving()
   {
-    return _playerMovementDataSO.PlayerMoveDirection.x != 0;
+    return _playerAttributesData.PlayerMoveDirection.x != 0;
   }
 
   private void FlipSpriteBasedOnPlayerInput()
   {
-    if (_playerMovementDataSO.IsAttacking) return;
+    if (_playerAttributesData.IsAttacking) return;
 
-    if (_playerMovementDataSO.PlayerMoveDirection.x != 0)
+    if (_playerAttributesData.PlayerMoveDirection.x != 0)
     {
-      _spriteRenderer.flipX = _playerMovementDataSO.PlayerMoveDirection.x < 0;
+      _spriteRenderer.flipX = _playerAttributesData.PlayerMoveDirection.x < 0;
     }
   }
 

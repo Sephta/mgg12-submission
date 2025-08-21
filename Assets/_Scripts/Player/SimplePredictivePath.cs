@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 public class SimplePredictivePath : MonoBehaviour
 {
 
-  [SerializeField] private PlayerMovementDataSO _playerMovementDataSO;
+  [SerializeField, Expandable] private PlayerAttributesDataSO _playerAttributesData;
 
   [Space(10f)]
   [Header("Predictive Path Data")]
@@ -23,9 +24,9 @@ public class SimplePredictivePath : MonoBehaviour
 
   private void Awake()
   {
-    if (_playerMovementDataSO == null)
+    if (_playerAttributesData == null)
     {
-      Debug.LogError(name + " does not have defined " + _playerMovementDataSO.GetType().Name + ".  Deactivating object to avoid null object errors.");
+      Debug.LogError(name + " does not have defined " + _playerAttributesData.GetType().Name + ".  Deactivating object to avoid null object errors.");
       gameObject.SetActive(false);
     }
   }
@@ -37,7 +38,7 @@ public class SimplePredictivePath : MonoBehaviour
 
   private void Update()
   {
-    if (_playerMovementDataSO.IsTakingAim && _playerMovementDataSO.PlayerAimDirection != Vector2.zero && _playerMovementDataSO.IsGrounded)
+    if (_playerAttributesData.IsTakingAim && _playerAttributesData.PlayerAimDirection != Vector2.zero && _playerAttributesData.IsGrounded)
     {
       UpdatePointPositions(_launchForce);
     }
@@ -91,7 +92,7 @@ public class SimplePredictivePath : MonoBehaviour
   {
     Vector3 pointPosition = _pointParent ? _pointParent.transform.position : transform.position;
 
-    return (Vector2)pointPosition + force * t * _playerMovementDataSO.PlayerAimDirection + t * t * _pointsGravityScale * Physics2D.gravity;
+    return (Vector2)pointPosition + force * t * _playerAttributesData.PlayerAimDirection + t * t * _pointsGravityScale * Physics2D.gravity;
   }
 
   private void UpdatePointPositions(float force)

@@ -17,8 +17,8 @@ namespace stal.HSM.Drivers
 
     [Space(10f)]
     [Header("HSM Driver Fields")]
-    // [SerializeField, Expandable] private HSMScratchpadSO _scratchPad;
-    [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementDataSO;
+    [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementData;
+    [SerializeField, Expandable] private PlayerAttributesDataSO _playerAttributesData;
 
     [Space(10f)]
     [Header("Debug")]
@@ -36,9 +36,15 @@ namespace stal.HSM.Drivers
 
     private void Awake()
     {
-      if (_playerMovementDataSO == null)
+      if (_playerMovementData == null)
       {
-        Debug.LogError(name + " does not have defined " + _playerMovementDataSO.GetType().Name + ".  Deactivating object to avoid null object errors.");
+        Debug.LogError(name + " does not have defined " + _playerMovementData.GetType().Name + ".  Deactivating object to avoid null object errors.");
+        gameObject.SetActive(false);
+      }
+
+      if (_playerAttributesData == null)
+      {
+        Debug.LogError(name + " does not have defined " + _playerAttributesData.GetType().Name + ".  Deactivating object to avoid null object errors.");
         gameObject.SetActive(false);
       }
 
@@ -60,14 +66,14 @@ namespace stal.HSM.Drivers
         gameObject.SetActive(false);
       }
 
-      _rootState = new PlayerRoot(null, _playerMovementDataSO, _playerContext);
+      _rootState = new PlayerRoot(null, _playerAttributesData, _playerMovementData, _playerContext);
       HierarchicalStateMachineBuilder stateMachineBuilder = new(_rootState);
       _stateMachine = stateMachineBuilder.BuildStateMachine();
     }
 
     private void Start()
     {
-      _playerContext.jumpCount = _playerMovementDataSO.JumpMaximum;
+      _playerContext.jumpCount = _playerMovementData.JumpMaximum;
     }
 
     private void Update()
@@ -81,32 +87,32 @@ namespace stal.HSM.Drivers
 
       if (_playerContext.drawDebugGizmos)
       {
-        Debug.DrawRay(_playerContext.transform.position + (Vector3.up * 0.5f), _aimDirection * _playerMovementDataSO.AbilityAimRaycastDistance, Color.darkGreen, 0.1f);
+        Debug.DrawRay(_playerContext.transform.position + (Vector3.up * 0.5f), _aimDirection * _playerMovementData.AbilityAimRaycastDistance, Color.darkGreen, 0.1f);
       }
 
-      _playerContext.inputDirection = _playerMovementDataSO.PlayerMoveDirection;
-      _playerMovementDataSO.UpdatePlayerAimDirection(_aimDirection);
-      _playerMovementDataSO.UpdatePlayerVelocity(_playerContext.rigidbody2D.linearVelocity);
-      _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
-      _playerMovementDataSO.UpdateIsJumping(_playerContext.isJumping);
-      _playerMovementDataSO.UpdateIsAttacking(_playerContext.isAtacking);
-      _playerMovementDataSO.UpdateIsTakingAim(_playerContext.isTakingAim);
-      _playerMovementDataSO.UpdateIsConfirmingAim(_playerContext.isConfirmingAim);
+      _playerContext.inputDirection = _playerAttributesData.PlayerMoveDirection;
+      _playerAttributesData.UpdatePlayerAimDirection(_aimDirection);
+      _playerAttributesData.UpdatePlayerVelocity(_playerContext.rigidbody2D.linearVelocity);
+      _playerAttributesData.UpdateIsGrounded(IsGrounded());
+      _playerAttributesData.UpdateIsJumping(_playerContext.isJumping);
+      _playerAttributesData.UpdateIsAttacking(_playerContext.isAtacking);
+      _playerAttributesData.UpdateIsTakingAim(_playerContext.isTakingAim);
+      _playerAttributesData.UpdateIsConfirmingAim(_playerContext.isConfirmingAim);
 
       // Update timers
-      _playerContext.jumpBufferWindow = Mathf.Clamp(_playerContext.jumpBufferWindow - Time.deltaTime, 0f, _playerMovementDataSO.JumpInputBuffer);
-      _playerContext.coyoteTime = Mathf.Clamp(_playerContext.coyoteTime - Time.deltaTime, 0f, _playerMovementDataSO.CoyoteTime);
+      _playerContext.jumpBufferWindow = Mathf.Clamp(_playerContext.jumpBufferWindow - Time.deltaTime, 0f, _playerMovementData.JumpInputBuffer);
+      _playerContext.coyoteTime = Mathf.Clamp(_playerContext.coyoteTime - Time.deltaTime, 0f, _playerMovementData.CoyoteTime);
 
       // Reset timers 
-      if (_playerMovementDataSO.IsGrounded) _playerContext.coyoteTime = _playerMovementDataSO.CoyoteTime;
-      if (!_playerContext.wasGroundedLastFrame && _playerMovementDataSO.IsGrounded) _playerContext.jumpCount = _playerMovementDataSO.JumpMaximum;
+      if (_playerAttributesData.IsGrounded) _playerContext.coyoteTime = _playerMovementData.CoyoteTime;
+      if (!_playerContext.wasGroundedLastFrame && _playerAttributesData.IsGrounded) _playerContext.jumpCount = _playerMovementData.JumpMaximum;
 
       _stateMachine.Tick(Time.deltaTime);
 
       _playerContext.wasGroundedLastFrame = IsGrounded();
 
       // cache grounded state at the end of this frame since next frame we might not be grounded.
-      _playerContext.inputDirectionLastFrame = _playerMovementDataSO.PlayerMoveDirection;
+      _playerContext.inputDirectionLastFrame = _playerAttributesData.PlayerMoveDirection;
 
       _statePath = PlayerStatePathToString(_stateMachine.Root.Leaf());
 
@@ -122,7 +128,7 @@ namespace stal.HSM.Drivers
     /* ---------------------------------------------------------------- */
 
     // For used in the Player Input component.
-    public void OnMove(InputAction.CallbackContext context) => _playerMovementDataSO.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
+    public void OnMove(InputAction.CallbackContext context) => _playerAttributesData.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
 
     // For use in the Player Input component.
     public void OnJump(InputAction.CallbackContext context)
@@ -131,7 +137,7 @@ namespace stal.HSM.Drivers
       if (context.canceled) _playerContext.isJumping = false;
       if (context.performed)
       {
-        _playerContext.jumpBufferWindow = _playerMovementDataSO.JumpInputBuffer;
+        _playerContext.jumpBufferWindow = _playerMovementData.JumpInputBuffer;
       }
     }
 
@@ -188,33 +194,33 @@ namespace stal.HSM.Drivers
       RaycastHit2D leftRay = Physics2D.Raycast(
         leftRayPosition,
         Vector2.down,
-        _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
-        _playerMovementDataSO.LayersConsideredForGroundingPlayer
+        _playerContext.boxCollider2D.bounds.extents.y * _playerMovementData.GroundingRayCastDistance,
+        _playerMovementData.LayersConsideredForGroundingPlayer
       );
 
       RaycastHit2D middleRay = Physics2D.Raycast(
         middleRayPosition,
         Vector2.down,
-        _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
-        _playerMovementDataSO.LayersConsideredForGroundingPlayer
+        _playerContext.boxCollider2D.bounds.extents.y * _playerMovementData.GroundingRayCastDistance,
+        _playerMovementData.LayersConsideredForGroundingPlayer
       );
 
       RaycastHit2D rightRay = Physics2D.Raycast(
         rightRayPosition,
         Vector2.down,
-        _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance,
-        _playerMovementDataSO.LayersConsideredForGroundingPlayer
+        _playerContext.boxCollider2D.bounds.extents.y * _playerMovementData.GroundingRayCastDistance,
+        _playerMovementData.LayersConsideredForGroundingPlayer
       );
 
       if (_playerContext.drawDebugGizmos)
       {
         // For debugging (only appears in the Scene window, not the game window)
-        Debug.DrawRay(leftRayPosition, _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.red, 1f);
-        Debug.DrawRay(middleRayPosition, _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.red, 1f);
-        Debug.DrawRay(rightRayPosition, _playerContext.boxCollider2D.bounds.extents.y * _playerMovementDataSO.GroundingRayCastDistance * Vector3.down, Color.red, 1f);
+        Debug.DrawRay(leftRayPosition, _playerContext.boxCollider2D.bounds.extents.y * _playerMovementData.GroundingRayCastDistance * Vector3.down, Color.red, 1f);
+        Debug.DrawRay(middleRayPosition, _playerContext.boxCollider2D.bounds.extents.y * _playerMovementData.GroundingRayCastDistance * Vector3.down, Color.red, 1f);
+        Debug.DrawRay(rightRayPosition, _playerContext.boxCollider2D.bounds.extents.y * _playerMovementData.GroundingRayCastDistance * Vector3.down, Color.red, 1f);
       }
 
-      // player is grounded if any of the following rays make contact with an object with on the specified LayerMask stored in _playerMovementDataSO
+      // player is grounded if any of the following rays make contact with an object with on the specified LayerMask stored in _playerMovementData
       return leftRay || middleRay || rightRay;
     }
   }

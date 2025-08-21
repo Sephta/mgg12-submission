@@ -10,15 +10,17 @@ namespace stal.HSM.PlayerStates
     public readonly Attack Attack;
     public readonly Nero Nero;
 
+    private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerContext _playerContext;
 
-    public PlayerRoot(HierarchicalStateMachine stateMachine, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, null)
+    public PlayerRoot(HierarchicalStateMachine stateMachine, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, null)
     {
-      Movement = new(stateMachine, this, playerMovementDataSO, playerContext);
-      Attack = new(stateMachine, this, playerMovementDataSO, playerContext);
-      Nero = new(stateMachine, this, playerMovementDataSO, playerContext);
+      Movement = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
+      Attack = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
+      Nero = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
 
+      _playerAttributesDataSO = playerAttributesDataSO;
       _playerMovementDataSO = playerMovementDataSO;
       _playerContext = playerContext;
     }
@@ -27,9 +29,9 @@ namespace stal.HSM.PlayerStates
 
     protected override State GetTransition()
     {
-      if (_playerContext.isTakingAim && _playerMovementDataSO.IsGrounded) return Nero;
+      if (_playerContext.isTakingAim && _playerAttributesDataSO.IsGrounded) return Nero;
 
-      if (_playerContext.isAtacking && !_playerContext.isTakingAim && _playerMovementDataSO.IsGrounded) return Attack;
+      if (_playerContext.isAtacking && !_playerContext.isTakingAim && _playerAttributesDataSO.IsGrounded) return Attack;
 
       return null;
     }

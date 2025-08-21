@@ -6,14 +6,16 @@ namespace stal.HSM.PlayerStates
 {
   public class Attack : State
   {
+    private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerContext _playerContext;
 
     private readonly float _attackOneTime = 1f;
     private float _attackTimer;
 
-    public Attack(HierarchicalStateMachine stateMachine, State Parent, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
+    public Attack(HierarchicalStateMachine stateMachine, State Parent, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
     {
+      _playerAttributesDataSO = playerAttributesDataSO;
       _playerMovementDataSO = playerMovementDataSO;
       _playerContext = playerContext;
     }

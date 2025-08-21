@@ -6,14 +6,16 @@ namespace stal.HSM.PlayerStates
 {
   public class NeroNeutral : State
   {
+    private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerContext _playerContext;
 
     private readonly float _brambleDelayTime = 0.25f;
     private float _brambleDelayTimer = 0f;
 
-    public NeroNeutral(HierarchicalStateMachine stateMachine, State Parent, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
+    public NeroNeutral(HierarchicalStateMachine stateMachine, State Parent, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
     {
+      _playerAttributesDataSO = playerAttributesDataSO;
       _playerMovementDataSO = playerMovementDataSO;
       _playerContext = playerContext;
     }
@@ -35,7 +37,7 @@ namespace stal.HSM.PlayerStates
       // fire ray
       RaycastHit2D aimRaycast = Physics2D.Raycast(
         _playerContext.transform.position + (Vector3.up * 0.5f),
-        _playerMovementDataSO.PlayerAimDirection,
+        _playerAttributesDataSO.PlayerAimDirection,
         _playerMovementDataSO.AbilityAimRaycastDistance,
         _playerMovementDataSO.LayersConsideredForGroundingPlayer
       );
