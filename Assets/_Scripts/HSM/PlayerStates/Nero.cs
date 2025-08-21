@@ -1,33 +1,33 @@
 using stal.HSM.Core;
 using stal.HSM.Drivers;
-using UnityEngine;
 
 namespace stal.HSM.PlayerStates
 {
   public class Nero : State
   {
-    private readonly PlayerMovementDataSO _playerMovementDataSO;
-    private readonly PlayerContext _playerContext;
+    // Nero Substates
+    public readonly NeroNeutral Neutral;
+    public readonly NeroNeedle Needle;
+    public readonly NeroClaw Claw;
+    public readonly NeroGun Gun;
 
-    private readonly float _attackOneTime = 1f;
-    private float _attackTimer;
+    private readonly PlayerContext _playerContext;
 
     public Nero(HierarchicalStateMachine stateMachine, State Parent, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
     {
-      _playerMovementDataSO = playerMovementDataSO;
       _playerContext = playerContext;
+
+      Neutral = new(stateMachine, this, playerMovementDataSO, playerContext);
+      Needle = new(stateMachine, this, playerMovementDataSO, playerContext);
+      Claw = new(stateMachine, this, playerMovementDataSO, playerContext);
+      Gun = new(stateMachine, this, playerMovementDataSO, playerContext);
     }
+
+    // In the future we should set the initial state to whatever the currently equipped seed arm is
+    protected override State GetInitialState() => Neutral;
 
     protected override State GetTransition() => _playerContext.isTakingAim ? null : ((PlayerRoot)Parent).Movement;
 
-    protected override void OnEnter()
-    {
-      _attackTimer = _attackOneTime;
-    }
-
-    protected override void OnUpdate(float deltaTime)
-    {
-      _attackTimer = Mathf.Clamp(_attackTimer - deltaTime, 0f, _attackOneTime);
-    }
+    protected override void OnUpdate(float deltaTime) { }
   }
 }

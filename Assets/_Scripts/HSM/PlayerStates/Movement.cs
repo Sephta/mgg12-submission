@@ -17,7 +17,7 @@ namespace stal.HSM.PlayerStates
 
     protected override void OnUpdate(float deltaTime)
     {
-      _playerContext.targetSpeed = _playerMovementDataSO.PlayerDirectionInput.x * _playerMovementDataSO.RunVelocityMaximum;
+      _playerContext.targetSpeed = _playerMovementDataSO.PlayerMoveDirection.x * _playerMovementDataSO.RunVelocityMaximum;
 
       // Perform actions based on updates
       MovePlayer();

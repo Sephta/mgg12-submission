@@ -27,9 +27,9 @@ namespace stal.HSM.PlayerStates
 
     protected override State GetTransition()
     {
-      if (_playerContext.isAtacking && _playerMovementDataSO.IsGrounded) return Attack;
-
       if (_playerContext.isTakingAim && _playerMovementDataSO.IsGrounded) return Nero;
+
+      if (_playerContext.isAtacking && !_playerContext.isTakingAim && _playerMovementDataSO.IsGrounded) return Attack;
 
       return null;
     }

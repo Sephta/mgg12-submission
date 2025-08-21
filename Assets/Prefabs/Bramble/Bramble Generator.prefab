@@ -105,4 +105,6 @@ MonoBehaviour:
   _brambleSpawnParametersSO: {fileID: 11400000, guid: 94bef4402dfc31e4383bd8ce76b0e9c8, type: 2}
   _brambleComponent: {fileID: 331791985213887051, guid: 7c576f9c41172984399534811606cc70, type: 3}
   _brambleComponents: []
+  _aliveTime: 5
+  _timeLeftAlive: 0
   _isTweening: 0

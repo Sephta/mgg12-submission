@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using NaughtyAttributes;
 using stal.HSM.Core;
@@ -23,6 +24,8 @@ namespace stal.HSM.Drivers
     [Header("Debug")]
     [SerializeField, ReadOnly] private string _statePath;
     private string _previousStatePath;
+    [SerializeField, ReadOnly] private Vector2 _mouseScreenToWorldPos;
+    [SerializeField, ReadOnly] private Vector2 _aimDirection;
 
     private HierarchicalStateMachine _stateMachine;
     private State _rootState;
@@ -35,13 +38,27 @@ namespace stal.HSM.Drivers
     {
       if (_playerMovementDataSO == null)
       {
-        Debug.LogError(name + " does not have defined " + _playerMovementDataSO.GetType().Name);
+        Debug.LogError(name + " does not have defined " + _playerMovementDataSO.GetType().Name + ".  Deactivating object to avoid null object errors.");
         gameObject.SetActive(false);
       }
 
       if (_playerContext.transform == null) _playerContext.transform = transform;
       if (_playerContext.rigidbody2D == null) _playerContext.rigidbody2D = GetComponent<Rigidbody2D>();
       if (_playerContext.boxCollider2D == null) _playerContext.boxCollider2D = GetComponent<BoxCollider2D>();
+
+      // if null, grab main camera. If still null (could not find main camera) then disable gameobject.
+      if (_playerContext.mainCamera == null) _playerContext.mainCamera = Camera.main;
+      if (_playerContext.mainCamera == null)
+      {
+        Debug.LogError(name + " could not find main camera. Deactivating object to avoid null object errors.");
+        gameObject.SetActive(false);
+      }
+
+      if (_playerContext.bramble == null)
+      {
+        Debug.LogError(name + " does not have a prefab selected for spawning bramble. Deactiving object to avoid null object errors.");
+        gameObject.SetActive(false);
+      }
 
       _rootState = new PlayerRoot(null, _playerMovementDataSO, _playerContext);
       HierarchicalStateMachineBuilder stateMachineBuilder = new(_rootState);
@@ -55,12 +72,26 @@ namespace stal.HSM.Drivers
 
     private void Update()
     {
-      _playerContext.inputDirection = _playerMovementDataSO.PlayerDirectionInput;
+      if (_playerContext.mousePosition != Vector2.zero)
+      {
+        _mouseScreenToWorldPos = _playerContext.mainCamera.ScreenToWorldPoint(_playerContext.mousePosition);
+        Vector2 player2DPosition = new(_playerContext.transform.position.x, _playerContext.transform.position.y);
+        _aimDirection = (_mouseScreenToWorldPos - player2DPosition).normalized;
+      }
+
+      if (_playerContext.drawDebugGizmos)
+      {
+        Debug.DrawRay(_playerContext.transform.position + (Vector3.up * 0.5f), _aimDirection * _playerMovementDataSO.AbilityAimRaycastDistance, Color.darkGreen, 0.1f);
+      }
+
+      _playerContext.inputDirection = _playerMovementDataSO.PlayerMoveDirection;
+      _playerMovementDataSO.UpdatePlayerAimDirection(_aimDirection);
+      _playerMovementDataSO.UpdatePlayerVelocity(_playerContext.rigidbody2D.linearVelocity);
       _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
       _playerMovementDataSO.UpdateIsJumping(_playerContext.isJumping);
       _playerMovementDataSO.UpdateIsAttacking(_playerContext.isAtacking);
       _playerMovementDataSO.UpdateIsTakingAim(_playerContext.isTakingAim);
-      _playerMovementDataSO.UpdatePlayerVelocity(_playerContext.rigidbody2D.linearVelocity);
+      _playerMovementDataSO.UpdateIsConfirmingAim(_playerContext.isConfirmingAim);
 
       // Update timers
       _playerContext.jumpBufferWindow = Mathf.Clamp(_playerContext.jumpBufferWindow - Time.deltaTime, 0f, _playerMovementDataSO.JumpInputBuffer);
@@ -75,7 +106,7 @@ namespace stal.HSM.Drivers
       _playerContext.wasGroundedLastFrame = IsGrounded();
 
       // cache grounded state at the end of this frame since next frame we might not be grounded.
-      _playerContext.inputDirectionLastFrame = _playerMovementDataSO.PlayerDirectionInput;
+      _playerContext.inputDirectionLastFrame = _playerMovementDataSO.PlayerMoveDirection;
 
       _statePath = PlayerStatePathToString(_stateMachine.Root.Leaf());
 
@@ -114,6 +145,26 @@ namespace stal.HSM.Drivers
     {
       if (context.started) _playerContext.isTakingAim = true;
       if (context.canceled) _playerContext.isTakingAim = false;
+    }
+
+    public void OnConfirmAim(InputAction.CallbackContext context)
+    {
+      if (context.started) _playerContext.isConfirmingAim = true;
+      if (context.canceled) _playerContext.isConfirmingAim = false;
+    }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {
+      Debug.Log("Control: " + context.control.name);
+      if (context.control.name == "position")
+      {
+        _playerContext.mousePosition = context.ReadValue<Vector2>();
+      }
+      else if (context.control.name == "rightStick")
+      {
+        Debug.Log("RIGHT STICK!");
+        _aimDirection = context.ReadValue<Vector2>().normalized;
+      }
     }
 
     public static string PlayerStatePathToString(State state)
@@ -177,14 +228,20 @@ namespace stal.HSM.Drivers
     public Transform transform;
     public Rigidbody2D rigidbody2D;
     public BoxCollider2D boxCollider2D;
+    public Camera mainCamera;
+
+    [Header("Prefabs")]
+    public GameObject bramble;
 
     [Header("Input Flags")]
 
     [ReadOnly] public Vector2 inputDirection;
     [ReadOnly] public Vector2 inputDirectionLastFrame;
+    [ReadOnly] public Vector2 mousePosition;
     [ReadOnly] public bool isJumping;
     [ReadOnly] public bool isAtacking;
     [ReadOnly] public bool isTakingAim;
+    [ReadOnly] public bool isConfirmingAim;
 
     [Header("Misc.")]
 

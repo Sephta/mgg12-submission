@@ -21,6 +21,11 @@ public class BrambleGenerator : MonoBehaviour
   [SerializeField]
   private List<GameObject> _brambleComponents;
 
+  [Header("Kill Timer")]
+  [SerializeField] private bool _keepAliveForever = false;
+  [SerializeField, Range(0f, 30f)] private float _aliveTime;
+  [SerializeField, ReadOnly] private float _timeLeftAlive;
+
   [Header("Debug")]
   [SerializeField, ReadOnly]
   private bool _isTweening = false;
@@ -48,6 +53,19 @@ public class BrambleGenerator : MonoBehaviour
     if (_brambleComponents.Count == 0) GenerateSplineWithBramble();
 
     BuildGrowthSequence().Play();
+
+    _timeLeftAlive = _aliveTime;
+  }
+
+  private void Update()
+  {
+    _timeLeftAlive = Mathf.Clamp(_timeLeftAlive - Time.deltaTime, 0f, _aliveTime);
+
+    if (_timeLeftAlive == 0f && !_keepAliveForever)
+    {
+      DG.Tweening.Sequence decaySequence = BuildDecaySequence();
+      decaySequence.Play();
+    }
   }
 
   /* ---------------------------------------------------------------- */
@@ -250,5 +268,7 @@ public class BrambleGenerator : MonoBehaviour
     }
 
     _isTweening = false;
+
+    Destroy(gameObject);
   }
 }

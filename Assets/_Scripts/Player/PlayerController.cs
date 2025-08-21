@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
   private void Update()
   {
-    _inputDirection = _playerMovementDataSO.PlayerDirectionInput;
+    _inputDirection = _playerMovementDataSO.PlayerMoveDirection;
 
     // Update runtime movement data
     _playerMovementDataSO.UpdateIsGrounded(IsGrounded());
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
     if (_playerMovementDataSO.IsGrounded) _coyoteTime = _playerMovementDataSO.CoyoteTime;
     if (!_wasGroundedLastFrame && _playerMovementDataSO.IsGrounded) _jumpCount = _playerMovementDataSO.JumpMaximum;
 
-    _targetSpeed = _playerMovementDataSO.PlayerDirectionInput.x * _playerMovementDataSO.RunVelocityMaximum;
+    _targetSpeed = _playerMovementDataSO.PlayerMoveDirection.x * _playerMovementDataSO.RunVelocityMaximum;
 
     // Perform actions based on updates
     MovePlayer();
@@ -72,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
     // cache grounded state at the end of this frame since next frame we might not be grounded.
     _wasGroundedLastFrame = IsGrounded();
-    _inputDirectionLastFrame = _playerMovementDataSO.PlayerDirectionInput;
+    _inputDirectionLastFrame = _playerMovementDataSO.PlayerMoveDirection;
   }
 
   /* ---------------------------------------------------------------- */

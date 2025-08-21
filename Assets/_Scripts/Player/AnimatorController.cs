@@ -120,16 +120,16 @@ public class AnimatorController : MonoBehaviour
 
   private bool IsMoving()
   {
-    return _playerMovementDataSO.PlayerDirectionInput.x != 0;
+    return _playerMovementDataSO.PlayerMoveDirection.x != 0;
   }
 
   private void FlipSpriteBasedOnPlayerInput()
   {
     if (_playerMovementDataSO.IsAttacking) return;
 
-    if (_playerMovementDataSO.PlayerDirectionInput.x != 0)
+    if (_playerMovementDataSO.PlayerMoveDirection.x != 0)
     {
-      _spriteRenderer.flipX = _playerMovementDataSO.PlayerDirectionInput.x < 0;
+      _spriteRenderer.flipX = _playerMovementDataSO.PlayerMoveDirection.x < 0;
     }
   }
 

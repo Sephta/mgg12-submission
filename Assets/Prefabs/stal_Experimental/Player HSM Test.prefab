@@ -152,6 +152,7 @@ GameObject:
   - component: {fileID: 5227456159021041451}
   - component: {fileID: 7342160808839815878}
   - component: {fileID: 8868254424840194047}
+  - component: {fileID: 3980256992576725601}
   m_Layer: 0
   m_Name: Player HSM Test
   m_TagString: Player
@@ -173,6 +174,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2111623017637645467}
+  - {fileID: 6334416162573378182}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &3223607612974835784
@@ -290,7 +292,19 @@ MonoBehaviour:
     m_ActionId: 351f2ccd-1f9f-44bf-9bec-d62ac5c5f408
     m_ActionName: 'Player/Move[/XInputControllerWindows1/leftStick,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]'
   - m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8868254424840194047}
+        m_TargetAssemblyTypeName: stal.HSM.Drivers.PlayerHSMDriver, Assembly-CSharp
+        m_MethodName: OnLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: 6b444451-8a00-4d00-a97e-f47457f736a8
     m_ActionName: 'Player/Look[/XInputControllerWindows1/rightStick,/Mouse/delta]'
   - m_PersistentCalls:
@@ -381,6 +395,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 465ee59c-4cbc-4f49-bbc0-0b86bc601b1c
     m_ActionName: 'Player/Take Aim[/Keyboard/leftCtrl]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8868254424840194047}
+        m_TargetAssemblyTypeName: stal.HSM.Drivers.PlayerHSMDriver, Assembly-CSharp
+        m_MethodName: OnConfirmAim
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: da7e68f2-5797-4779-af2b-5016bc75d7eb
+    m_ActionName: 'Player/Confirm Aim[/XInputControllerWindows/rightTrigger,/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
@@ -402,11 +432,15 @@ MonoBehaviour:
     transform: {fileID: 5696392734424121139}
     rigidbody2D: {fileID: 3223607612974835784}
     boxCollider2D: {fileID: 5227456159021041451}
+    mainCamera: {fileID: 0}
+    bramble: {fileID: 6235908155116825014, guid: 4569688774915d74f957a64d30cf84fc, type: 3}
     inputDirection: {x: 0, y: 0}
     inputDirectionLastFrame: {x: 0, y: 0}
+    mousePosition: {x: 0, y: 0}
     isJumping: 0
     isAtacking: 0
     isTakingAim: 0
+    isConfirmingAim: 0
     targetSpeed: 0
     coyoteTime: 0
     jumpBufferWindow: 0
@@ -416,3 +450,56 @@ MonoBehaviour:
     drawDebugGizmos: 0
   _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
   _statePath: 
+  _mouseScreenToWorldPos: {x: 0, y: 0}
+  _aimDirection: {x: 0, y: 0}
+--- !u!114 &3980256992576725601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753032256456121729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd8fc7e59400474db770daa8f47b9fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerMovementDataSO: {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
+  _numPoints: 18
+  _launchForce: 1
+  _pointSpacingValue: 1
+  _pointsGravityScale: 0
+  _pointPrefab: {fileID: 3420310834004080915, guid: 8937f53dfaa161a44aab24f96e0ad8e0, type: 3}
+  _pointParent: {fileID: 6334416162573378182}
+  _points: []
+--- !u!1 &6592717489559526013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6334416162573378182}
+  m_Layer: 0
+  m_Name: Predictive Path Parent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6334416162573378182
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6592717489559526013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5696392734424121139}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

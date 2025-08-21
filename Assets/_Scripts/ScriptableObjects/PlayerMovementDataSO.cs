@@ -8,6 +8,7 @@ public class PlayerMovementDataSO : ScriptableObject
   /* ---------------------------------------------------------------- */
   /*                           Movement Data                          */
   /* ---------------------------------------------------------------- */
+
   [field: Header("Movement Data")]
 
   [field: SerializeField, Range(0f, 10f), Tooltip("Determines how fast the player will move.")]
@@ -98,7 +99,6 @@ public class PlayerMovementDataSO : ScriptableObject
   [Tooltip("Useful for checking if the player is touching a surface in the specified layer.")]
   public ContactFilter2D SurfaceContactFilter;
 
-
   /* ---------------------------------------------------------------- */
   /*                          Mechanical Data                         */
   /* ---------------------------------------------------------------- */
@@ -109,6 +109,8 @@ public class PlayerMovementDataSO : ScriptableObject
   [field: SerializeField, Range(0f, 1f), Tooltip("Window of time the player has after leaving the ground to jump again.")]
   public float CoyoteTime { get; private set; }
 
+  [field: SerializeField, Range(0f, 100f), Tooltip("Controls how far the raycast goes when the player is aiming in a direction to grow bramble or perform some other ability.")]
+  public float AbilityAimRaycastDistance { get; private set; }
 
   /* ---------------------------------------------------------------- */
   /*                          Derived Data                            */
@@ -140,7 +142,10 @@ public class PlayerMovementDataSO : ScriptableObject
   public Vector2 PlayerVelocity { get; private set; }
 
   [field: SerializeField, ReadOnly]
-  public Vector2 PlayerDirectionInput { get; private set; }
+  public Vector2 PlayerMoveDirection { get; private set; }
+
+  [field: SerializeField, ReadOnly]
+  public Vector2 PlayerAimDirection { get; private set; }
 
   [field: SerializeField, ReadOnly]
   public bool IsGrounded { get; private set; }
@@ -153,6 +158,9 @@ public class PlayerMovementDataSO : ScriptableObject
 
   [field: SerializeField, ReadOnly]
   public bool IsTakingAim { get; private set; }
+
+  [field: SerializeField, ReadOnly]
+  public bool IsConfirmingAim { get; private set; }
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -191,11 +199,13 @@ public class PlayerMovementDataSO : ScriptableObject
 
   // Public Setters for Runtime Data
   public void UpdatePlayerVelocity(Vector2 state) => PlayerVelocity = state;
-  public void UpdatePlayerDirectionInput(Vector2 state) => PlayerDirectionInput = state;
+  public void UpdatePlayerDirectionInput(Vector2 state) => PlayerMoveDirection = state;
+  public void UpdatePlayerAimDirection(Vector2 state) => PlayerAimDirection = state;
   public void UpdateIsGrounded(bool state) => IsGrounded = state;
   public void UpdateIsJumping(bool state) => IsJumping = state;
   public void UpdateIsAttacking(bool state) => IsAttacking = state;
   public void UpdateIsTakingAim(bool state) => IsTakingAim = state;
+  public void UpdateIsConfirmingAim(bool state) => IsConfirmingAim = state;
 
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
@@ -205,7 +215,12 @@ public class PlayerMovementDataSO : ScriptableObject
   private void ResetRuntimeData()
   {
     PlayerVelocity = Vector2.zero;
-    PlayerDirectionInput = Vector2.zero;
+    PlayerMoveDirection = Vector2.zero;
+    PlayerAimDirection = Vector2.zero;
     IsGrounded = false;
+    IsJumping = false;
+    IsAttacking = false;
+    IsTakingAim = false;
+    IsConfirmingAim = false;
   }
 }
