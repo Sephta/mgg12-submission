@@ -37,7 +37,7 @@ public class SimplePredictivePath : MonoBehaviour
 
   private void Update()
   {
-    if (_playerMovementDataSO.IsTakingAim)
+    if (_playerMovementDataSO.IsTakingAim && _playerMovementDataSO.PlayerAimDirection != Vector2.zero && _playerMovementDataSO.IsGrounded)
     {
       UpdatePointPositions(_launchForce);
     }
