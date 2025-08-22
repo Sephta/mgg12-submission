@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using NaughtyAttributes;
+using stal.HSM.Contexts;
 using stal.HSM.Core;
 using stal.HSM.PlayerStates;
 using UnityEngine;
@@ -250,34 +250,5 @@ namespace stal.HSM.Drivers
         _previousStatePath = _statePath;
       }
     }
-  }
-
-  [Serializable]
-  public class PlayerContext
-  {
-
-    [Header("Monobehavior Components")]
-
-    public Transform transform;
-    public Rigidbody2D rigidbody2D;
-    public BoxCollider2D boxCollider2D;
-    public Camera mainCamera;
-
-    [Header("Prefabs")]
-    public GameObject bramble;
-
-
-    [Header("Misc.")]
-
-    [ReadOnly] public float targetSpeed;
-    [ReadOnly] public float coyoteTime;
-    [ReadOnly] public float jumpBufferWindow;
-    [ReadOnly] public int jumpCount;
-    [ReadOnly] public bool wasGroundedLastFrame;
-    [ReadOnly] public bool jumpEndEarly = false;
-
-    [Header("Debug")]
-
-    public bool drawDebugGizmos;
   }
 }
