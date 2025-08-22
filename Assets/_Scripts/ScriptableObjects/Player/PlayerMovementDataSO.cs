@@ -3,7 +3,7 @@ using NaughtyAttributes;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Player Movement Data SO", menuName = "Scriptable Objects/Player/Player Movement Data")]
-public class PlayerMovementDataSO : ScriptableObject
+public class PlayerMovementDataSO : ScratchpadDataSO
 {
   /* ---------------------------------------------------------------- */
   /*                           Movement Data                          */

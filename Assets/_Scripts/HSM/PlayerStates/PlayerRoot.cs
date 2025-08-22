@@ -1,3 +1,4 @@
+using System;
 using stal.HSM.Core;
 using stal.HSM.Drivers;
 using UnityEngine;
@@ -14,24 +15,25 @@ namespace stal.HSM.PlayerStates
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerContext _playerContext;
 
-    public PlayerRoot(HierarchicalStateMachine stateMachine, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, null)
+    public PlayerRoot(HierarchicalStateMachine stateMachine, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, null)
     {
-      Movement = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
-      Attack = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
-      Nero = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
-
-      _playerAttributesDataSO = playerAttributesDataSO;
-      _playerMovementDataSO = playerMovementDataSO;
+      _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
+      _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerContext = playerContext;
+
+      Movement = new(stateMachine, this, playerContext, scratchpad);
+      Attack = new(stateMachine, this, playerContext, scratchpad);
+      Nero = new(stateMachine, this, playerContext, scratchpad);
+
     }
 
     protected override State GetInitialState() => Movement;
 
     protected override State GetTransition()
     {
-      if (_playerContext.isTakingAim && _playerAttributesDataSO.IsGrounded) return Nero;
+      if (_playerAttributesDataSO.IsTakingAim && _playerAttributesDataSO.IsGrounded) return Nero;
 
-      if (_playerContext.isAtacking && !_playerContext.isTakingAim && _playerAttributesDataSO.IsGrounded) return Attack;
+      if (_playerAttributesDataSO.IsAttacking && !_playerAttributesDataSO.IsTakingAim && _playerAttributesDataSO.IsGrounded) return Attack;
 
       return null;
     }

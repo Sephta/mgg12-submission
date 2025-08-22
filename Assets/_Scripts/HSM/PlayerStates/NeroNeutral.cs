@@ -13,10 +13,10 @@ namespace stal.HSM.PlayerStates
     private readonly float _brambleDelayTime = 0.25f;
     private float _brambleDelayTimer = 0f;
 
-    public NeroNeutral(HierarchicalStateMachine stateMachine, State Parent, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
+    public NeroNeutral(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
-      _playerAttributesDataSO = playerAttributesDataSO;
-      _playerMovementDataSO = playerMovementDataSO;
+      _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
+      _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerContext = playerContext;
     }
 
@@ -45,7 +45,7 @@ namespace stal.HSM.PlayerStates
       // check if we hit something
       if (aimRaycast)
       {
-        if (_playerContext.isConfirmingAim && _brambleDelayTimer == 0f)
+        if (_playerAttributesDataSO.IsConfirmingAim && _brambleDelayTimer == 0f)
         {
           _brambleDelayTimer = _brambleDelayTime;
 

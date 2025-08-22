@@ -26,7 +26,7 @@ public class SimplePredictivePath : MonoBehaviour
   {
     if (_playerAttributesData == null)
     {
-      Debug.LogError(name + " does not have defined " + _playerAttributesData.GetType().Name + ".  Deactivating object to avoid null object errors.");
+      Debug.LogError(name + " does not have a PlayerAttributesDataSO referenced in the inspector.  Deactivating object to avoid null object errors.");
       gameObject.SetActive(false);
     }
   }

@@ -12,21 +12,23 @@ namespace stal.HSM.PlayerStates
     public readonly NeroGun Gun;
 
     private readonly PlayerContext _playerContext;
+    private readonly PlayerAttributesDataSO _playerAttributesDataSO;
 
-    public Nero(HierarchicalStateMachine stateMachine, State Parent, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
+    public Nero(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
+      _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerContext = playerContext;
 
-      Neutral = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
-      Needle = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
-      Claw = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
-      Gun = new(stateMachine, this, playerAttributesDataSO, playerMovementDataSO, playerContext);
+      Neutral = new(stateMachine, this, playerContext, scratchpad);
+      Needle = new(stateMachine, this, playerContext, scratchpad);
+      Claw = new(stateMachine, this, playerContext, scratchpad);
+      Gun = new(stateMachine, this, playerContext, scratchpad);
     }
 
     // In the future we should set the initial state to whatever the currently equipped seed arm is
     protected override State GetInitialState() => Neutral;
 
-    protected override State GetTransition() => _playerContext.isTakingAim ? null : ((PlayerRoot)Parent).Movement;
+    protected override State GetTransition() => _playerAttributesDataSO.IsTakingAim ? null : ((PlayerRoot)Parent).Movement;
 
     protected override void OnUpdate(float deltaTime) { }
   }

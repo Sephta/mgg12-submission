@@ -11,6 +11,8 @@ public class AnimatorController : MonoBehaviour
   [SerializeField] private SpriteRenderer _spriteRenderer;
 
   [Header("Player Data")]
+
+  [Required("Must provide a PlayerAttributesDataSO asset.")]
   [SerializeField, Expandable] private PlayerAttributesDataSO _playerAttributesData;
 
   [Header("Debug")]
@@ -61,7 +63,7 @@ public class AnimatorController : MonoBehaviour
   {
     if (_playerAttributesData == null)
     {
-      Debug.LogError(name + " does not have defined " + _playerAttributesData.GetType().Name + ".  Deactivating object to avoid null object errors.");
+      Debug.LogError(name + " does not have a PlayerAttributesDataSO referenced in the inspector.  Deactivating object to avoid null object errors.");
       gameObject.SetActive(false);
     }
 

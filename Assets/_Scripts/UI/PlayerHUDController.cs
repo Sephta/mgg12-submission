@@ -28,7 +28,7 @@ public class PlayerHUDController : MonoBehaviour
     if (_playerHUDDocument == null) _playerHUDDocument = GetComponent<UIDocument>();
     if (_playerHUDDocument == null)
     {
-      Debug.LogError(name + " does not have defined " + _playerHUDDocument.GetType().Name + ".  Deactivating object to avoid null object errors.");
+      Debug.LogError(name + " does not have a UIDocument referenced in the inspector.  Deactivating object to avoid null object errors.");
       gameObject.SetActive(false);
     }
 

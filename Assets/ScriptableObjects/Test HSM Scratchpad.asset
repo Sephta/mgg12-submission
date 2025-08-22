@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a8ad187919cd7e418058d2cf1f4d5b8, type: 3}
+  m_Name: Test HSM Scratchpad
+  m_EditorClassIdentifier: 
+  ScratchpadData:
+  - {fileID: 11400000, guid: 04f66684b5d3613458517bc486613a41, type: 2}
+  - {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}

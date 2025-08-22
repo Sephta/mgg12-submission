@@ -12,23 +12,30 @@ namespace stal.HSM.Drivers
   [RequireComponent(typeof(Rigidbody2D), typeof(BoxCollider2D))]
   public class PlayerHSMDriver : MonoBehaviour
   {
-    [Header("Context")]
+    [Space(10f)]
+    [Header("State Machine Context")]
+    [Space(10)]
+
     [SerializeField] private PlayerContext _playerContext = new();
 
-    [Space(10f)]
-    [Header("HSM Driver Fields")]
-    [SerializeField, Expandable] private PlayerMovementDataSO _playerMovementData;
-    [SerializeField, Expandable] private PlayerAttributesDataSO _playerAttributesData;
+    [Space(15)]
+    [Header("State Machine Scratchpad")]
+    [Space(10)]
 
-    [Space(10f)]
+    [Required("Must provide a HSMScratchpadSO asset.")]
+    [SerializeField, Expandable] private HSMScratchpadSO _scratchpad;
+    private PlayerMovementDataSO _playerMovementData;
+    private PlayerAttributesDataSO _playerAttributesData;
+
+    [Space(15)]
     [Header("Debug")]
     [SerializeField, ReadOnly] private string _statePath;
     private string _previousStatePath;
     [SerializeField, ReadOnly] private Vector2 _mouseScreenToWorldPos;
-    [SerializeField, ReadOnly] private Vector2 _aimDirection;
 
-    private HierarchicalStateMachine _stateMachine;
-    private State _rootState;
+    // State Machine Specific Fields
+    [SerializeField] private HierarchicalStateMachine _stateMachine;
+    [SerializeField] private State _rootState;
 
     /* ---------------------------------------------------------------- */
     /*                           Unity Functions                        */
@@ -36,15 +43,23 @@ namespace stal.HSM.Drivers
 
     private void Awake()
     {
-      if (_playerMovementData == null)
+      if (_scratchpad == null)
       {
-        Debug.LogError(name + " does not have defined " + _playerMovementData.GetType().Name + ".  Deactivating object to avoid null object errors.");
+        Debug.LogError(name + " does not have a HSMScratchpadSO referenced in the inspector. Deactivating object to avoid null object errors.");
         gameObject.SetActive(false);
       }
 
+      _playerMovementData = _scratchpad.GetScratchpadData<PlayerMovementDataSO>();
+      if (_playerMovementData == null)
+      {
+        Debug.LogError(name + " does not have a PlayerMovementDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+        gameObject.SetActive(false);
+      }
+
+      _playerAttributesData = _scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       if (_playerAttributesData == null)
       {
-        Debug.LogError(name + " does not have defined " + _playerAttributesData.GetType().Name + ".  Deactivating object to avoid null object errors.");
+        Debug.LogError(name + " does not have a PlayerAttributesDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
         gameObject.SetActive(false);
       }
 
@@ -66,7 +81,7 @@ namespace stal.HSM.Drivers
         gameObject.SetActive(false);
       }
 
-      _rootState = new PlayerRoot(null, _playerAttributesData, _playerMovementData, _playerContext);
+      _rootState = new PlayerRoot(null, _playerContext, _scratchpad);
       HierarchicalStateMachineBuilder stateMachineBuilder = new(_rootState);
       _stateMachine = stateMachineBuilder.BuildStateMachine();
     }
@@ -78,26 +93,9 @@ namespace stal.HSM.Drivers
 
     private void Update()
     {
-      if (_playerContext.mousePosition != Vector2.zero)
-      {
-        _mouseScreenToWorldPos = _playerContext.mainCamera.ScreenToWorldPoint(_playerContext.mousePosition);
-        Vector2 player2DPosition = new(_playerContext.transform.position.x, _playerContext.transform.position.y);
-        _aimDirection = (_mouseScreenToWorldPos - player2DPosition).normalized;
-      }
-
-      if (_playerContext.drawDebugGizmos)
-      {
-        Debug.DrawRay(_playerContext.transform.position + (Vector3.up * 0.5f), _aimDirection * _playerMovementData.AbilityAimRaycastDistance, Color.darkGreen, 0.1f);
-      }
-
-      _playerContext.inputDirection = _playerAttributesData.PlayerMoveDirection;
-      _playerAttributesData.UpdatePlayerAimDirection(_aimDirection);
+      UpdateMousePositionData();
       _playerAttributesData.UpdatePlayerVelocity(_playerContext.rigidbody2D.linearVelocity);
       _playerAttributesData.UpdateIsGrounded(IsGrounded());
-      _playerAttributesData.UpdateIsJumping(_playerContext.isJumping);
-      _playerAttributesData.UpdateIsAttacking(_playerContext.isAtacking);
-      _playerAttributesData.UpdateIsTakingAim(_playerContext.isTakingAim);
-      _playerAttributesData.UpdateIsConfirmingAim(_playerContext.isConfirmingAim);
 
       // Update timers
       _playerContext.jumpBufferWindow = Mathf.Clamp(_playerContext.jumpBufferWindow - Time.deltaTime, 0f, _playerMovementData.JumpInputBuffer);
@@ -107,20 +105,13 @@ namespace stal.HSM.Drivers
       if (_playerAttributesData.IsGrounded) _playerContext.coyoteTime = _playerMovementData.CoyoteTime;
       if (!_playerContext.wasGroundedLastFrame && _playerAttributesData.IsGrounded) _playerContext.jumpCount = _playerMovementData.JumpMaximum;
 
+      // Tick the state machine every frame
       _stateMachine.Tick(Time.deltaTime);
 
-      _playerContext.wasGroundedLastFrame = IsGrounded();
+      UpdateLoopBookKeeping();
 
-      // cache grounded state at the end of this frame since next frame we might not be grounded.
-      _playerContext.inputDirectionLastFrame = _playerAttributesData.PlayerMoveDirection;
-
-      _statePath = PlayerStatePathToString(_stateMachine.Root.Leaf());
-
-      if (_statePath != _previousStatePath)
-      {
-        Debug.Log("Path Update: " + _statePath);
-        _previousStatePath = _statePath;
-      }
+      // Draw Debug Gizmos
+      DrawGizmoForDebuggingAimDirection();
     }
 
     /* ---------------------------------------------------------------- */
@@ -133,8 +124,8 @@ namespace stal.HSM.Drivers
     // For use in the Player Input component.
     public void OnJump(InputAction.CallbackContext context)
     {
-      if (context.started) _playerContext.isJumping = true;
-      if (context.canceled) _playerContext.isJumping = false;
+      if (context.started) _playerAttributesData.UpdateIsJumping(true);
+      if (context.canceled) _playerAttributesData.UpdateIsJumping(false);
       if (context.performed)
       {
         _playerContext.jumpBufferWindow = _playerMovementData.JumpInputBuffer;
@@ -143,33 +134,37 @@ namespace stal.HSM.Drivers
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-      if (context.started) _playerContext.isAtacking = true;
-      if (context.canceled) _playerContext.isAtacking = false;
+      if (context.started) _playerAttributesData.UpdateIsAttacking(true);
+      if (context.canceled) _playerAttributesData.UpdateIsAttacking(false);
     }
 
     public void OnTakeAim(InputAction.CallbackContext context)
     {
-      if (context.started) _playerContext.isTakingAim = true;
-      if (context.canceled) _playerContext.isTakingAim = false;
+      if (context.started) _playerAttributesData.UpdateIsTakingAim(true);
+      if (context.canceled) _playerAttributesData.UpdateIsTakingAim(false);
     }
 
     public void OnConfirmAim(InputAction.CallbackContext context)
     {
-      if (context.started) _playerContext.isConfirmingAim = true;
-      if (context.canceled) _playerContext.isConfirmingAim = false;
+      if (context.started) _playerAttributesData.UpdateIsConfirmingAim(true);
+      if (context.canceled) _playerAttributesData.UpdateIsConfirmingAim(false);
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
-      Debug.Log("Control: " + context.control.name);
       if (context.control.name == "position")
       {
-        _playerContext.mousePosition = context.ReadValue<Vector2>();
+        // If the control being read is position the vector 2 will represent a
+        // screenspace coordinate. (i.e. x,y could be between 0,0 and 1280,720
+        // for a 720p resolution screen.)
+        _playerAttributesData.UpdatePlayerMousePosition(context.ReadValue<Vector2>());
       }
       else if (context.control.name == "rightStick")
       {
-        Debug.Log("RIGHT STICK!");
-        _aimDirection = context.ReadValue<Vector2>().normalized;
+        // If the control being read is "rightStrick" then the vector 2 will be value between
+        // -1 and 1 on both axis, where y is the axis of moving the right analog stick up and down
+        // and x is the axis of moving the right analog stick left and right.
+        _playerAttributesData.UpdatePlayerAimDirection(context.ReadValue<Vector2>().normalized);
       }
     }
 
@@ -223,6 +218,38 @@ namespace stal.HSM.Drivers
       // player is grounded if any of the following rays make contact with an object with on the specified LayerMask stored in _playerMovementData
       return leftRay || middleRay || rightRay;
     }
+
+    private void UpdateMousePositionData()
+    {
+      if (_playerAttributesData.PlayerMousePosition != Vector2.zero)
+      {
+        _mouseScreenToWorldPos = _playerContext.mainCamera.ScreenToWorldPoint(_playerAttributesData.PlayerMousePosition);
+        Vector2 player2DPosition = new(_playerContext.transform.position.x, _playerContext.transform.position.y);
+        _playerAttributesData.UpdatePlayerAimDirection((_mouseScreenToWorldPos - player2DPosition).normalized);
+      }
+    }
+
+    private void DrawGizmoForDebuggingAimDirection()
+    {
+      if (_playerContext.drawDebugGizmos)
+      {
+        Debug.DrawRay(_playerContext.transform.position + (Vector3.up * 0.5f), _playerAttributesData.PlayerAimDirection * _playerMovementData.AbilityAimRaycastDistance, Color.darkGreen, 0.1f);
+      }
+    }
+
+    private void UpdateLoopBookKeeping()
+    {
+      // cache grounded state at the end of this frame since next frame we might not be grounded.
+      _playerContext.wasGroundedLastFrame = IsGrounded();
+
+      _statePath = PlayerStatePathToString(_stateMachine.Root.Leaf());
+
+      if (_statePath != _previousStatePath)
+      {
+        Debug.Log("Path Update: " + _statePath);
+        _previousStatePath = _statePath;
+      }
+    }
   }
 
   [Serializable]
@@ -239,15 +266,6 @@ namespace stal.HSM.Drivers
     [Header("Prefabs")]
     public GameObject bramble;
 
-    [Header("Input Flags")]
-
-    [ReadOnly] public Vector2 inputDirection;
-    [ReadOnly] public Vector2 inputDirectionLastFrame;
-    [ReadOnly] public Vector2 mousePosition;
-    [ReadOnly] public bool isJumping;
-    [ReadOnly] public bool isAtacking;
-    [ReadOnly] public bool isTakingAim;
-    [ReadOnly] public bool isConfirmingAim;
 
     [Header("Misc.")]
 
@@ -257,7 +275,6 @@ namespace stal.HSM.Drivers
     [ReadOnly] public int jumpCount;
     [ReadOnly] public bool wasGroundedLastFrame;
     [ReadOnly] public bool jumpEndEarly = false;
-
 
     [Header("Debug")]
 

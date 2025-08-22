@@ -13,14 +13,14 @@ namespace stal.HSM.PlayerStates
     private readonly float _attackOneTime = 1f;
     private float _attackTimer;
 
-    public Attack(HierarchicalStateMachine stateMachine, State Parent, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
+    public Attack(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
-      _playerAttributesDataSO = playerAttributesDataSO;
-      _playerMovementDataSO = playerMovementDataSO;
+      _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
+      _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerContext = playerContext;
     }
 
-    protected override State GetTransition() => _playerContext.isAtacking ? null : ((PlayerRoot)Parent).Movement;
+    protected override State GetTransition() => _playerAttributesDataSO.IsAttacking ? null : ((PlayerRoot)Parent).Movement;
 
     // protected override State GetTransition()
     // {

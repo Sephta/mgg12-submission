@@ -10,10 +10,10 @@ namespace stal.HSM.PlayerStates
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerContext _playerContext;
 
-    public Movement(HierarchicalStateMachine stateMachine, State Parent, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
+    public Movement(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
-      _playerAttributesDataSO = playerAttributesDataSO;
-      _playerMovementDataSO = playerMovementDataSO;
+      _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
+      _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerContext = playerContext;
     }
 
@@ -75,7 +75,7 @@ namespace stal.HSM.PlayerStates
 
     private void PerformJump()
     {
-      if (!_playerContext.jumpEndEarly && !_playerAttributesDataSO.IsGrounded && !_playerContext.isJumping && _playerContext.rigidbody2D.linearVelocityY > 0) _playerContext.jumpEndEarly = true;
+      if (!_playerContext.jumpEndEarly && !_playerAttributesDataSO.IsGrounded && !_playerAttributesDataSO.IsJumping && _playerContext.rigidbody2D.linearVelocityY > 0) _playerContext.jumpEndEarly = true;
 
       if (_playerContext.jumpBufferWindow > 0 && _playerContext.coyoteTime > 0 && _playerContext.jumpCount > 0)
       {
@@ -107,7 +107,7 @@ namespace stal.HSM.PlayerStates
 
       if (_playerContext.jumpEndEarly) UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier * _playerMovementDataSO.ShortJumpGravityMultiplier);
 
-      if (_playerContext.isJumping && (Mathf.Abs(_playerContext.rigidbody2D.linearVelocityY) < _playerMovementDataSO.JumpHangTimeThreshold))
+      if (_playerAttributesDataSO.IsJumping && (Mathf.Abs(_playerContext.rigidbody2D.linearVelocityY) < _playerMovementDataSO.JumpHangTimeThreshold))
       {
         UpdateGravityScale(_playerMovementDataSO.JumpHangTimeGravityMultiplier);
       }

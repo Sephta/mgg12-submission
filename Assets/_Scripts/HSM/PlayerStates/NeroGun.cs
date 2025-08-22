@@ -6,12 +6,14 @@ namespace stal.HSM.PlayerStates
 {
   public class NeroGun : State
   {
+    private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerContext _playerContext;
 
-    public NeroGun(HierarchicalStateMachine stateMachine, State Parent, PlayerAttributesDataSO playerAttributesDataSO, PlayerMovementDataSO playerMovementDataSO, PlayerContext playerContext) : base(stateMachine, Parent)
+    public NeroGun(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
-      _playerMovementDataSO = playerMovementDataSO;
+      _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
+      _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerContext = playerContext;
     }
 

@@ -2,7 +2,7 @@ using NaughtyAttributes;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Player Attributes SO", menuName = "Scriptable Objects/Player/Player Attributes Data")]
-public class PlayerAttributesDataSO : ScriptableObject
+public class PlayerAttributesDataSO : ScratchpadDataSO
 {
   /* ---------------------------------------------------------------- */
   /*                       Runtime Player Stats                       */
@@ -19,6 +19,9 @@ public class PlayerAttributesDataSO : ScriptableObject
 
   [field: SerializeField, ReadOnly]
   public Vector2 PlayerMoveDirection { get; private set; }
+
+  [field: SerializeField, ReadOnly]
+  public Vector2 PlayerMousePosition { get; private set; }
 
   [field: SerializeField, ReadOnly]
   public Vector2 PlayerAimDirection { get; private set; }
@@ -59,6 +62,7 @@ public class PlayerAttributesDataSO : ScriptableObject
   // Public Setters for Runtime Data
   public void UpdatePlayerVelocity(Vector2 state) => PlayerVelocity = state;
   public void UpdatePlayerDirectionInput(Vector2 state) => PlayerMoveDirection = state;
+  public void UpdatePlayerMousePosition(Vector2 state) => PlayerMousePosition = state;
   public void UpdatePlayerAimDirection(Vector2 state) => PlayerAimDirection = state;
   public void UpdateIsGrounded(bool state) => IsGrounded = state;
   public void UpdateIsJumping(bool state) => IsJumping = state;
@@ -75,6 +79,7 @@ public class PlayerAttributesDataSO : ScriptableObject
   {
     PlayerVelocity = Vector2.zero;
     PlayerMoveDirection = Vector2.zero;
+    PlayerMousePosition = Vector2.zero;
     PlayerAimDirection = Vector2.zero;
     IsGrounded = false;
     IsJumping = false;
