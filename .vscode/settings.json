@@ -65,7 +65,8 @@
     "**/Assets/Scenes": true,
     "**/Assets/Plugins": true,
     "TEST_BUILDS/**": true,
-    "Packages/**": true
+    "Packages/**": true,
+    "UIElementsSchema/**": true
   },
   "files.associations": {
     "*.asset": "yaml",

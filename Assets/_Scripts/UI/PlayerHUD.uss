@@ -1,0 +1,9 @@
+:root {
+}
+
+.panel {
+}
+
+.hide {
+    display: none;
+}

@@ -1,0 +1,6 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/_Scripts/UI/PlayerHUD.uss?fileID=7433441132597879392&amp;guid=3087e6a543361444e950ec80a6dae97c&amp;type=3#PlayerHUD" />
+    <ui:VisualElement name="panel" class="panel" style="flex-grow: 1;">
+        <ui:Label text="fps-counter" name="fps-counter" style="color: rgb(30, 87, 33);" />
+    </ui:VisualElement>
+</ui:UXML>
