@@ -222,7 +222,13 @@ public class BrambleGenerator : MonoBehaviour
     }
 
     brambleSequence.OnStart(() => GrowthSequenceOnStart());
-    brambleSequence.OnComplete(() => GrowthSequenceOnComplete());
+    brambleSequence.OnComplete(() =>
+    {
+      GrowthSequenceOnComplete();
+      brambleSequence.Kill();
+    });
+
+    brambleSequence.SetLink(gameObject);
 
     return brambleSequence;
   }
@@ -250,7 +256,13 @@ public class BrambleGenerator : MonoBehaviour
     }
 
     brambleSequence.OnStart(() => DecaySequenceOnStart());
-    brambleSequence.OnComplete(() => DecaySequenceOnComplete());
+    brambleSequence.OnComplete(() =>
+    {
+      DecaySequenceOnComplete();
+      brambleSequence.Kill();
+    });
+
+    brambleSequence.SetLink(gameObject);
 
     return brambleSequence;
   }
