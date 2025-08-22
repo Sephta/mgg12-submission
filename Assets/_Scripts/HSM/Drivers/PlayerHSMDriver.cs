@@ -34,8 +34,8 @@ namespace stal.HSM.Drivers
     [SerializeField, ReadOnly] private Vector2 _mouseScreenToWorldPos;
 
     // State Machine Specific Fields
-    [SerializeField] private HierarchicalStateMachine _stateMachine;
-    [SerializeField] private State _rootState;
+    private HierarchicalStateMachine _stateMachine;
+    private State _rootState;
 
     /* ---------------------------------------------------------------- */
     /*                           Unity Functions                        */
