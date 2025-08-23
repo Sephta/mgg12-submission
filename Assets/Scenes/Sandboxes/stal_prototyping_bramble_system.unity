@@ -3454,6 +3454,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player HSM Test
       objectReference: {fileID: 0}
+    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+      propertyPath: _attackClip
+      value: 
+      objectReference: {fileID: -6841456751759041392, guid: c1373b105ea4c1f49be84e3aa72bdc85, type: 3}
+    - target: {fileID: 5112704584201516168, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+      propertyPath: _playerEventData
+      value: 
+      objectReference: {fileID: 11400000, guid: 8992863c5f19e8345aae1d3d1f34b837, type: 2}
     - target: {fileID: 5696392734424121139, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1

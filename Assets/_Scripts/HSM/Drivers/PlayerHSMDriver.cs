@@ -26,6 +26,7 @@ namespace stal.HSM.Drivers
     [SerializeField, Expandable] private HSMScratchpadSO _scratchpad;
     private PlayerMovementDataSO _playerMovementData;
     private PlayerAttributesDataSO _playerAttributesData;
+    private PlayerAbilityDataSO _playerAbilityData;
     private PlayerEventDataSO _playerEventData;
 
     [Space(15)]
@@ -61,6 +62,19 @@ namespace stal.HSM.Drivers
       if (_playerAttributesData == null)
       {
         Debug.LogError(name + " does not have a PlayerAttributesDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+        gameObject.SetActive(false);
+      }
+
+      _playerAbilityData = _scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
+      if (_playerAbilityData == null)
+      {
+        Debug.LogError(name + " does not have a PlayerAbilityDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+        gameObject.SetActive(false);
+      }
+
+      if (_playerAbilityData.ArmData.Count <= 0)
+      {
+        Debug.LogError(name + " contains empty PlayerAbilityDataSO.ArmData. Deactivating object to avoid null object errors.");
         gameObject.SetActive(false);
       }
 
@@ -102,6 +116,8 @@ namespace stal.HSM.Drivers
       _playerEventData.TakeAim.OnEventRaised += OnTakeAim;
       _playerEventData.ConfirmAim.OnEventRaised += OnConfirmAim;
       _playerEventData.Look.OnEventRaised += OnLook;
+      _playerEventData.SwapArmLeft.OnEventRaised += OnSwapArmLeft;
+      _playerEventData.SwampArmRight.OnEventRaised += OnSwapArmRight;
     }
 
     private void OnDisable()
@@ -112,6 +128,8 @@ namespace stal.HSM.Drivers
       _playerEventData.TakeAim.OnEventRaised -= OnTakeAim;
       _playerEventData.ConfirmAim.OnEventRaised -= OnConfirmAim;
       _playerEventData.Look.OnEventRaised -= OnLook;
+      _playerEventData.SwapArmLeft.OnEventRaised -= OnSwapArmLeft;
+      _playerEventData.SwampArmRight.OnEventRaised -= OnSwapArmRight;
     }
 
     private void Start()
@@ -193,6 +211,24 @@ namespace stal.HSM.Drivers
         // -1 and 1 on both axis, where y is the axis of moving the right analog stick up and down
         // and x is the axis of moving the right analog stick left and right.
         _playerAttributesData.UpdatePlayerAimDirection(context.ReadValue<Vector2>().normalized);
+      }
+    }
+
+    private void OnSwapArmLeft(InputAction.CallbackContext context)
+    {
+      UnityEngine.Debug.Log("NERO CLASS SWAP ARM LEFT");
+      if (context.started)
+      {
+        _playerAbilityData.CycleArmLeft();
+      }
+    }
+
+    private void OnSwapArmRight(InputAction.CallbackContext context)
+    {
+      UnityEngine.Debug.Log("NERO CLASS SWAP ARM RIGHT");
+      if (context.started)
+      {
+        _playerAbilityData.CycleArmRight();
       }
     }
 

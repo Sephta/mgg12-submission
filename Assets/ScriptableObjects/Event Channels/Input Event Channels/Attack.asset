@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b893444d20678444b4955867ef2998c, type: 3}
   m_Name: Attack
   m_EditorClassIdentifier: 
-  _logEventWhenRaised: 1
+  _logEventWhenRaised: 0

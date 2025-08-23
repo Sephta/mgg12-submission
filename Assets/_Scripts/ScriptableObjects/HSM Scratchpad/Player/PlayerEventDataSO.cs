@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerEventDataSO : ScratchpadDataSO
 {
   [field: Space(10f)]
-  [field: Header("Events")]
+  [field: Header("Input Events")]
+  [field: Space(5)]
 
   [field: SerializeField, Expandable]
   public CallbackContextEventChannelSO Move { get; private set; }
@@ -71,4 +72,11 @@ public class PlayerEventDataSO : ScratchpadDataSO
   {
     if (SwampArmRight != null) SwampArmRight.RaiseEvent(callbackContext);
   }
+
+  [field: Space(10f)]
+  [field: Header("Combat Events")]
+  [field: Space(5)]
+
+  [field: SerializeField, Expandable]
+  public VoidEventChannelSO AttackChainCompleted { get; private set; }
 }

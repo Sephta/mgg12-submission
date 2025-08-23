@@ -1,5 +1,6 @@
 using stal.HSM.Contexts;
 using stal.HSM.Core;
+using UnityEngine.InputSystem;
 
 namespace stal.HSM.PlayerStates
 {
@@ -18,12 +19,14 @@ namespace stal.HSM.PlayerStates
 
     private readonly PlayerContext _playerContext;
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
+    private readonly PlayerAbilityDataSO _playerAbilityDataSO;
     private readonly PlayerEventDataSO _playerEventDataSO;
 
     public Nero(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
       _playerContext = playerContext;
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
+      _playerAbilityDataSO = scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
       _playerEventDataSO = scratchpad.GetScratchpadData<PlayerEventDataSO>();
 
       // Child States
@@ -34,7 +37,17 @@ namespace stal.HSM.PlayerStates
     }
 
     // In the future we should set the initial state to whatever the currently equipped seed arm is
-    protected override State GetInitialState() => Neutral;
+    protected override State GetInitialState()
+    {
+      return _playerAbilityDataSO.CurrentlyEquippedArmType switch
+      {
+        NeroArmType.Neutral => Neutral,
+        NeroArmType.Needle => Needle,
+        NeroArmType.Claw => Claw,
+        NeroArmType.Gun => Gun,
+        _ => null,
+      };
+    }
 
     protected override State GetTransition() => _playerAttributesDataSO.IsTakingAim ? null : ((PlayerRoot)Parent).Movement;
 

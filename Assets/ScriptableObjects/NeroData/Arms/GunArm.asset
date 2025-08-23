@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ceece4779967aa43ba1d23a85c4f32a, type: 3}
   m_Name: GunArm
   m_EditorClassIdentifier: 
+  ArmType: 3
   <EnvironmentalAbility>k__BackingField: {fileID: 0}
   <CombatAbility>k__BackingField: {fileID: 0}

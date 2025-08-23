@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Player Ability SO", menuName = "Scriptable Objects/Player/Player Ability Data")]
 public class PlayerAbilityDataSO : ScratchpadDataSO
 {
-  [field: SerializeField, Expandable, ReadOnly]
-  public NeroArmDataSO CurrentlyEquippedNeroArm { get; private set; }
+  [SerializeField, ReadOnly]
+  private int _currentArmIndex = 0;
 
   [Expandable] public List<NeroArmDataSO> ArmData = new();
 
@@ -14,11 +14,31 @@ public class PlayerAbilityDataSO : ScratchpadDataSO
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
 
-  private void Awake()
+  /* ---------------------------------------------------------------- */
+  /*                               PUBLIC                             */
+  /* ---------------------------------------------------------------- */
+
+  public NeroArmDataSO CurrentlyEquippedArm => ArmData[_currentArmIndex];
+
+  public NeroArmType CurrentlyEquippedArmType => ArmData[_currentArmIndex].ArmType;
+
+  public void CycleArmLeft()
   {
-    if (!CurrentlyEquippedNeroArm && ArmData.Count > 0)
+    _currentArmIndex = _currentArmIndex - 1;
+    if (_currentArmIndex < 0)
     {
-      CurrentlyEquippedNeroArm = ArmData[0];
+      _currentArmIndex = ArmData.Count - 1;
     }
+    UnityEngine.Debug.Log("Index: " + _currentArmIndex);
   }
+
+  public void CycleArmRight()
+  {
+    _currentArmIndex = (_currentArmIndex + 1) % ArmData.Count;
+    UnityEngine.Debug.Log("Index: " + _currentArmIndex);
+  }
+
+  /* ---------------------------------------------------------------- */
+  /*                               PRIVATE                            */
+  /* ---------------------------------------------------------------- */
 }

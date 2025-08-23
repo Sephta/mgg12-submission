@@ -1,6 +1,7 @@
 using System;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
@@ -9,11 +10,13 @@ public class AnimatorController : MonoBehaviour
   [Header("Data References")]
   [SerializeField] private Animator _animator;
   [SerializeField] private SpriteRenderer _spriteRenderer;
+  [SerializeField] private AnimationClip _attackClip;
 
   [Header("Player Data")]
 
   [Required("Must provide a PlayerAttributesDataSO asset.")]
   [SerializeField, Expandable] private PlayerAttributesDataSO _playerAttributesData;
+  [SerializeField, Expandable] private PlayerEventDataSO _playerEventData;
 
   [Header("Debug")]
   [SerializeField, ReadOnly] private bool _isMoving;
@@ -67,6 +70,12 @@ public class AnimatorController : MonoBehaviour
       gameObject.SetActive(false);
     }
 
+    if (_playerEventData == null)
+    {
+      Debug.LogError(name + " does not have a PlayerEventDataSO referenced in the inspector.  Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
     if (_animator == null) _animator = GetComponent<Animator>();
     if (_spriteRenderer == null) _spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -78,6 +87,16 @@ public class AnimatorController : MonoBehaviour
 
   }
 
+  private void OnEnable()
+  {
+    _playerEventData.Attack.OnEventRaised += OnAttack;
+  }
+
+  private void OnDisable()
+  {
+    _playerEventData.Attack.OnEventRaised -= OnAttack;
+  }
+
   private void Update()
   {
     FlipSpriteBasedOnPlayerInput();
@@ -86,7 +105,22 @@ public class AnimatorController : MonoBehaviour
 
     int transitionDuration = 0;
     int animationLayer = 0;
-    _animator.CrossFade(AnimationSelector(), transitionDuration, animationLayer);
+    if (_attackState)
+    {
+      AnimationEvent evt = new()
+      {
+        time = _attackClip.length,
+        functionName = "TurnOffAttackState"
+      };
+
+      _attackClip.AddEvent(evt);
+
+      _animator.CrossFade(_animationStates[nameof(AnimationStates.COMBAT01)], transitionDuration, animationLayer);
+    }
+    else
+    {
+      _animator.CrossFade(AnimationSelector(), transitionDuration, animationLayer);
+    }
   }
 
   /* ---------------------------------------------------------------- */
@@ -96,6 +130,19 @@ public class AnimatorController : MonoBehaviour
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
+
+  private void TurnOffAttackState()
+  {
+    _attackState = false;
+    _playerEventData.AttackChainCompleted.RaiseEvent();
+  }
+
+  [SerializeField, ReadOnly] private bool _attackState = false;
+
+  private void OnAttack(InputAction.CallbackContext context)
+  {
+    if (context.started) _attackState = true;
+  }
 
   private int AnimationSelector()
   {
@@ -133,7 +180,7 @@ public class AnimatorController : MonoBehaviour
 
   private void FlipSpriteBasedOnPlayerInput()
   {
-    if (_playerAttributesData.IsAttacking) return;
+    if (_playerAttributesData.IsAttacking || _attackState) return;
 
     if (_playerAttributesData.PlayerMoveDirection.x != 0)
     {

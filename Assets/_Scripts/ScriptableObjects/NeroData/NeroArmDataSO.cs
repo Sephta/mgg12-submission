@@ -1,9 +1,21 @@
 using NaughtyAttributes;
 using UnityEngine;
 
+public enum NeroArmType
+{
+  Neutral,
+  Needle,
+  Claw,
+  Gun
+}
+
 [CreateAssetMenu(fileName = "New Nero Arm", menuName = "Scriptable Objects/Nero/Nero Arm")]
 public class NeroArmDataSO : ScriptableObject
 {
+  [Space(10f)]
+
+  public NeroArmType ArmType;
+
   [field: Space(10f)]
   [field: Header("Abilities")]
 

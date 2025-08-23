@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ceece4779967aa43ba1d23a85c4f32a, type: 3}
   m_Name: NeedleArm
   m_EditorClassIdentifier: 
+  ArmType: 1
   <EnvironmentalAbility>k__BackingField: {fileID: 11400000, guid: 2de2ccef6ea81ce4e9f37e3bc8e71fba, type: 2}
   <CombatAbility>k__BackingField: {fileID: 11400000, guid: 2c1c3dd6a56f4ba48b6d2dcaba84c00f, type: 2}

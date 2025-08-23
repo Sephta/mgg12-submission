@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868c1a12e7174be48accd9969e18721f, type: 3}
   m_Name: TestAttributesData
   m_EditorClassIdentifier: 
-  <PlayerVelocity>k__BackingField: {x: -0.000027833434, y: 0}
+  <PlayerVelocity>k__BackingField: {x: 0, y: 0}
   <PlayerMoveDirection>k__BackingField: {x: 0, y: 0}
-  <PlayerAimDirection>k__BackingField: {x: -0.040804107, y: 0.99916714}
-  <IsGrounded>k__BackingField: 1
+  <PlayerMousePosition>k__BackingField: {x: 0, y: 0}
+  <PlayerAimDirection>k__BackingField: {x: 0, y: 0}
+  <IsGrounded>k__BackingField: 0
   <IsJumping>k__BackingField: 0
   <IsAttacking>k__BackingField: 0
   <IsTakingAim>k__BackingField: 0

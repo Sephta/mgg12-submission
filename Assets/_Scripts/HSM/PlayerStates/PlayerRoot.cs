@@ -1,6 +1,7 @@
 using stal.HSM.Contexts;
 using stal.HSM.Core;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace stal.HSM.PlayerStates
 {
@@ -12,12 +13,14 @@ namespace stal.HSM.PlayerStates
 
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
+    private readonly PlayerEventDataSO _playerEventDataSO;
     private readonly PlayerContext _playerContext;
 
     public PlayerRoot(HierarchicalStateMachine stateMachine, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, null)
     {
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
+      _playerEventDataSO = scratchpad.GetScratchpadData<PlayerEventDataSO>();
       _playerContext = playerContext;
 
       // Child States
@@ -38,6 +41,16 @@ namespace stal.HSM.PlayerStates
       return null;
     }
 
+    protected override void OnEnter()
+    {
+      _playerEventDataSO.Attack.OnEventRaised += OnAttack;
+    }
+
+    protected override void OnExit()
+    {
+      _playerEventDataSO.Attack.OnEventRaised -= OnAttack;
+    }
+
     protected override void OnUpdate(float deltaTime)
     {
       // We need to decelerate the player back to zero no matter what state we're in because
@@ -52,6 +65,11 @@ namespace stal.HSM.PlayerStates
         // Multiplying by Vector2.right is a quick way to convert the calculation into a vector
         _playerContext.rigidbody2D.AddForce(force * Time.fixedDeltaTime * Vector2.right, ForceMode2D.Force);
       }
+    }
+
+    private void OnAttack(InputAction.CallbackContext context)
+    {
+      StateMachine.Sequencer.RequestTransition(this, Attack);
     }
 
   }
