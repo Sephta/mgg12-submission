@@ -29,7 +29,9 @@ namespace stal.HSM.Core
     {
       if (!hasStarted) Start();
 
-      InternalTick(deltaTime);
+      // The TransitionSequencer's tick will perform our StateMachine's internal tick as long as
+      // it's not already performing a requested state transition.
+      Sequencer.Tick(deltaTime);
     }
 
     // Having an internal vs. external Tick method makes sequencing easier

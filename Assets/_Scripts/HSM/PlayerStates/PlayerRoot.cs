@@ -39,7 +39,7 @@ namespace stal.HSM.PlayerStates
 
     protected override void OnUpdate(float deltaTime)
     {
-      // We need to decelerate the player back to zero outside of the Movement state because
+      // We need to decelerate the player back to zero no matter what state we're in because
       // otherwise we slide infinitely with no friction. The deceleration is our friction bringing
       // our linear velocity back to zero.
       if (ActiveChild != Movement)

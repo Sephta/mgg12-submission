@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using stal.HSM.Core.Interfaces;
 
 namespace stal.HSM.Core
 {
@@ -15,10 +16,22 @@ namespace stal.HSM.Core
     /// </summary>
     public State ActiveChild;
 
+    private readonly List<IActivity> _activities = new();
+    public IReadOnlyList<IActivity> Activities => _activities;
+
     public State(HierarchicalStateMachine stateMachine, State parent = null)
     {
       StateMachine = stateMachine;
       Parent = parent;
+    }
+
+    /// <summary>
+    /// Attach behavior to the state that runs durring state transitions, such as delays or effects,
+    /// without coupling it with the state's internal logic.
+    /// </summary>
+    public void AddActivity(IActivity activity)
+    {
+      if (activity != null) _activities.Add(activity);
     }
 
 
@@ -63,15 +76,16 @@ namespace stal.HSM.Core
     internal void Update(float deltaTime)
     {
       State stateToTransitionTo = GetTransition();
-      if (stateToTransitionTo != null)
+
+      // if stateToTransitionTo is null then we dont want to transition. Continue update cycle
+      // if its not null we need to make sure we arn't transitioning into and already active child state.
+      if (stateToTransitionTo != null && stateToTransitionTo != ActiveChild)
       {
         StateMachine.Sequencer.RequestTransition(this, stateToTransitionTo);
 
-        // Used to return here if we requested a transition. I think this is for sequencing,
-        // but the current implementation of the sequencer is very basic and does not process
-        // the states prior to the transition... If I update the sequencer in the future 
-        // I may re-enable this...
-        // return;
+        // Return early. If we requested a transition we don't need to update our currently active child state
+        // since that child state is about to change.
+        return;
       }
 
       // If we have an active child state, call its update.
