@@ -26,6 +26,7 @@ namespace stal.HSM.Drivers
     [SerializeField, Expandable] private HSMScratchpadSO _scratchpad;
     private PlayerMovementDataSO _playerMovementData;
     private PlayerAttributesDataSO _playerAttributesData;
+    private PlayerEventDataSO _playerEventData;
 
     [Space(15)]
     [Header("Debug")]
@@ -63,6 +64,13 @@ namespace stal.HSM.Drivers
         gameObject.SetActive(false);
       }
 
+      _playerEventData = _scratchpad.GetScratchpadData<PlayerEventDataSO>();
+      if (_playerEventData == null)
+      {
+        Debug.LogError(name + " does not have a PlayerEventDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+        gameObject.SetActive(false);
+      }
+
       if (_playerContext.transform == null) _playerContext.transform = transform;
       if (_playerContext.rigidbody2D == null) _playerContext.rigidbody2D = GetComponent<Rigidbody2D>();
       if (_playerContext.boxCollider2D == null) _playerContext.boxCollider2D = GetComponent<BoxCollider2D>();
@@ -84,6 +92,26 @@ namespace stal.HSM.Drivers
       _rootState = new PlayerRoot(null, _playerContext, _scratchpad);
       HierarchicalStateMachineBuilder stateMachineBuilder = new(_rootState);
       _stateMachine = stateMachineBuilder.BuildStateMachine();
+    }
+
+    private void OnEnable()
+    {
+      _playerEventData.Move.OnEventRaised += OnMove;
+      _playerEventData.Attack.OnEventRaised += OnAttack;
+      _playerEventData.Jump.OnEventRaised += OnJump;
+      _playerEventData.TakeAim.OnEventRaised += OnTakeAim;
+      _playerEventData.ConfirmAim.OnEventRaised += OnConfirmAim;
+      _playerEventData.Look.OnEventRaised += OnLook;
+    }
+
+    private void OnDisable()
+    {
+      _playerEventData.Move.OnEventRaised -= OnMove;
+      _playerEventData.Attack.OnEventRaised -= OnAttack;
+      _playerEventData.Jump.OnEventRaised -= OnJump;
+      _playerEventData.TakeAim.OnEventRaised -= OnTakeAim;
+      _playerEventData.ConfirmAim.OnEventRaised -= OnConfirmAim;
+      _playerEventData.Look.OnEventRaised -= OnLook;
     }
 
     private void Start()
@@ -119,10 +147,10 @@ namespace stal.HSM.Drivers
     /* ---------------------------------------------------------------- */
 
     // For used in the Player Input component.
-    public void OnMove(InputAction.CallbackContext context) => _playerAttributesData.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
+    private void OnMove(InputAction.CallbackContext context) => _playerAttributesData.UpdatePlayerDirectionInput(context.ReadValue<Vector2>());
 
     // For use in the Player Input component.
-    public void OnJump(InputAction.CallbackContext context)
+    private void OnJump(InputAction.CallbackContext context)
     {
       if (context.started) _playerAttributesData.UpdateIsJumping(true);
       if (context.canceled) _playerAttributesData.UpdateIsJumping(false);
@@ -132,25 +160,25 @@ namespace stal.HSM.Drivers
       }
     }
 
-    public void OnAttack(InputAction.CallbackContext context)
+    private void OnAttack(InputAction.CallbackContext context)
     {
       if (context.started) _playerAttributesData.UpdateIsAttacking(true);
       if (context.canceled) _playerAttributesData.UpdateIsAttacking(false);
     }
 
-    public void OnTakeAim(InputAction.CallbackContext context)
+    private void OnTakeAim(InputAction.CallbackContext context)
     {
       if (context.started) _playerAttributesData.UpdateIsTakingAim(true);
       if (context.canceled) _playerAttributesData.UpdateIsTakingAim(false);
     }
 
-    public void OnConfirmAim(InputAction.CallbackContext context)
+    private void OnConfirmAim(InputAction.CallbackContext context)
     {
       if (context.started) _playerAttributesData.UpdateIsConfirmingAim(true);
       if (context.canceled) _playerAttributesData.UpdateIsConfirmingAim(false);
     }
 
-    public void OnLook(InputAction.CallbackContext context)
+    private void OnLook(InputAction.CallbackContext context)
     {
       if (context.control.name == "position")
       {

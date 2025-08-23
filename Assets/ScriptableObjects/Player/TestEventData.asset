@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 712684ab896f93e49b3e67614b170d2c, type: 3}
+  m_Name: TestEventData
+  m_EditorClassIdentifier: 
+  <Move>k__BackingField: {fileID: 11400000, guid: 53c567b8ebd80ad4f85895163cb18671, type: 2}
+  <Look>k__BackingField: {fileID: 11400000, guid: 80bd5e44066319f498e7278e0d7add83, type: 2}
+  <Attack>k__BackingField: {fileID: 11400000, guid: 0a7ca26b74ec3154d85e3b6eb7fc58e1, type: 2}
+  <Jump>k__BackingField: {fileID: 11400000, guid: aa6998ea3a3c48346b8b4faf07215d47, type: 2}
+  <TakeAim>k__BackingField: {fileID: 11400000, guid: 6caa2cea845e68147942319d11246a7c, type: 2}
+  <ConfirmAim>k__BackingField: {fileID: 11400000, guid: 5c1102662a9a44b4e8f33839017c2b67, type: 2}
+  <SwapArmLeft>k__BackingField: {fileID: 11400000, guid: 1b439b835bd3e6345a4d2b9d7b0c9809, type: 2}
+  <SwampArmRight>k__BackingField: {fileID: 11400000, guid: 2de7e64fdd182da49a43f08dc5f3ba8e, type: 2}

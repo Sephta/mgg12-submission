@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace stal.HSM.PlayerStates
 {
-  public class NeroNeutral : State
+  public class NeroNeutral : NeroSubstate
   {
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;

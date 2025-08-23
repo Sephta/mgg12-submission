@@ -20,6 +20,7 @@ namespace stal.HSM.PlayerStates
       _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerContext = playerContext;
 
+      // Child States
       Movement = new(stateMachine, this, playerContext, scratchpad);
       Attack = new(stateMachine, this, playerContext, scratchpad);
       Nero = new(stateMachine, this, playerContext, scratchpad);

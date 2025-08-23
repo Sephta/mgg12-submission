@@ -3,6 +3,11 @@ using stal.HSM.Core;
 
 namespace stal.HSM.PlayerStates
 {
+  public abstract class NeroSubstate : State
+  {
+    protected NeroSubstate(HierarchicalStateMachine stateMachine, State parent = null) : base(stateMachine, parent) { }
+  }
+
   public class Nero : State
   {
     // Nero Substates
@@ -13,12 +18,15 @@ namespace stal.HSM.PlayerStates
 
     private readonly PlayerContext _playerContext;
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
+    private readonly PlayerEventDataSO _playerEventDataSO;
 
     public Nero(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
-      _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerContext = playerContext;
+      _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
+      _playerEventDataSO = scratchpad.GetScratchpadData<PlayerEventDataSO>();
 
+      // Child States
       Neutral = new(stateMachine, this, playerContext, scratchpad);
       Needle = new(stateMachine, this, playerContext, scratchpad);
       Claw = new(stateMachine, this, playerContext, scratchpad);

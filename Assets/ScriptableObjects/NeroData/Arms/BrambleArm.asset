@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ceece4779967aa43ba1d23a85c4f32a, type: 3}
+  m_Name: BrambleArm
+  m_EditorClassIdentifier: 
+  <EnvironmentalAbility>k__BackingField: {fileID: 11400000, guid: 61d5a795f960ff344ad5e5c95dddb454, type: 2}
+  <CombatAbility>k__BackingField: {fileID: 11400000, guid: edc04a4e0132f9a499ed80fd85d207cb, type: 2}

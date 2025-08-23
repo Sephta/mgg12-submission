@@ -3,7 +3,7 @@ using stal.HSM.Core;
 
 namespace stal.HSM.PlayerStates
 {
-  public class NeroClaw : State
+  public class NeroClaw : NeroSubstate
   {
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
