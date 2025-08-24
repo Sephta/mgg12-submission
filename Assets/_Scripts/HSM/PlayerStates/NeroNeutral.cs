@@ -8,6 +8,7 @@ namespace stal.HSM.PlayerStates
   {
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
+    private readonly PlayerAbilityDataSO _playerAbilityDataSO;
     private readonly PlayerContext _playerContext;
 
     private readonly float _brambleDelayTime = 0.25f;
@@ -17,7 +18,22 @@ namespace stal.HSM.PlayerStates
     {
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
+      _playerAbilityDataSO = scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
       _playerContext = playerContext;
+    }
+
+    protected override State GetTransition()
+    {
+      State checkIfEquippedArmDiffersFromActiveState = _playerAbilityDataSO.CurrentlyEquippedArmType switch
+      {
+        NeroArmType.Neutral => null,
+        NeroArmType.Needle => ((Nero)Parent).Needle,
+        NeroArmType.Claw => ((Nero)Parent).Claw,
+        NeroArmType.Gun => ((Nero)Parent).Gun,
+        _ => null,
+      };
+
+      return checkIfEquippedArmDiffersFromActiveState;
     }
 
     protected override void OnUpdate(float deltaTime)

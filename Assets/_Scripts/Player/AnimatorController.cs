@@ -116,21 +116,26 @@ public class AnimatorController : MonoBehaviour
     // Build/ReBuild the dictionaries on awake.
     PopulateAnimationDictionary();
 
+    AddAnimationEventsToPlayerArmAttacks();
+
+    if (_playerAbilityData.CurrentlyEquippedArm != null && _playerAbilityData.CurrentlyEquippedArm.CombatAbility != null)
+    {
+      _animator.runtimeAnimatorController = _playerAbilityData.CurrentlyEquippedArm.CombatAbility.AnimatorController;
+    }
   }
 
-  private void Start()
-  {
-    AddAnimationEventsToPlayerArmAttacks();
-  }
+  // private void Start() {}
 
   private void OnEnable()
   {
     _playerEventData.Attack.OnEventRaised += OnAttack;
+    _playerEventData.PlayerArmFinishedCycling.OnEventRaised += OnPlayerArmFinishedCycling;
   }
 
   private void OnDisable()
   {
-    _playerEventData.Attack.OnEventRaised += OnAttack;
+    _playerEventData.Attack.OnEventRaised -= OnAttack;
+    _playerEventData.PlayerArmFinishedCycling.OnEventRaised -= OnPlayerArmFinishedCycling;
   }
 
   private void Update()
@@ -143,7 +148,6 @@ public class AnimatorController : MonoBehaviour
     // If the player is in the attacking state we should handle attack animations.
     if (_playerAttributesData.IsAttacking && _playerAbilityData.CurrentlyEquippedArm.CombatAbility != null)
     {
-      Debug.Log("looking for input to buffer: " + _lookForInputToBuffer + " , is holding attack: " + _isHoldingAttackButton);
       if (_lookForInputToBuffer && _isHoldingAttackButton)
       {
         _attackBuffer = true;
@@ -179,15 +183,21 @@ public class AnimatorController : MonoBehaviour
     }
   }
 
+  private void OnPlayerArmFinishedCycling()
+  {
+    if (_playerAbilityData.CurrentlyEquippedArm != null && _playerAbilityData.CurrentlyEquippedArm.CombatAbility != null)
+    {
+      _animator.runtimeAnimatorController = _playerAbilityData.CurrentlyEquippedArm.CombatAbility.AnimatorController;
+    }
+  }
+
   private void HandleAttackInputBuffer()
   {
-    Debug.Log("HandleAttackInputBuffer");
     _lookForInputToBuffer = true;
   }
 
   private void ChainAttackOrFinishCombo()
   {
-    Debug.Log("ChainAttackOrFinishCombo, Attack Buffer: " + _attackBuffer);
     _lookForInputToBuffer = false;
 
     // exit attack state if we have no combat ability with current arm.
@@ -219,8 +229,6 @@ public class AnimatorController : MonoBehaviour
   {
     _attackBuffer = false;
     _currentAttackAnimationIndex = 0;
-    if (_playerAttributesData.IsAttacking) _playerAttributesData.UpdateIsAttacking(false);
-
     _playerEventData.AttackChainCompleted.RaiseEvent();
   }
 
@@ -274,7 +282,7 @@ public class AnimatorController : MonoBehaviour
   {
     if (_playerAttributesData.IsGrounded)
     {
-      if (_playerAttributesData.IsTakingAim)
+      if (_playerAttributesData.IsTakingAim && _playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral)
       {
         return _animationStates[nameof(AnimationStates.AIM)];
       }
@@ -296,7 +304,9 @@ public class AnimatorController : MonoBehaviour
   {
     if (_playerAttributesData.IsAttacking) return;
 
-    if (_playerAttributesData.IsTakingAim)
+    if (_playerAttributesData.IsTakingAim
+      && _playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral
+      && _playerAttributesData.IsGrounded)
     {
       if (_playerAttributesData.PlayerAimDirection.x != 0)
         _spriteRenderer.flipX = _playerAttributesData.PlayerAimDirection.x < 0;

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ArmType: 0
   <EnvironmentalAbility>k__BackingField: {fileID: 11400000, guid: 61d5a795f960ff344ad5e5c95dddb454, type: 2}
-  <CombatAbility>k__BackingField: {fileID: 11400000, guid: edc04a4e0132f9a499ed80fd85d207cb, type: 2}
+  <CombatAbility>k__BackingField: {fileID: 0}

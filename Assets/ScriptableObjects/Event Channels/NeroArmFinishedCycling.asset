@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a6973b467dbcd44b48f00d22e118fb, type: 3}
   m_Name: NeroArmFinishedCycling
   m_EditorClassIdentifier: 
-  _logEventWhenRaised: 1
+  _logEventWhenRaised: 0

@@ -17,6 +17,6 @@ namespace stal.HSM.PlayerStates
       _playerContext = playerContext;
     }
 
-    protected override void OnUpdate(float deltaTime) { }
+    // protected override void OnUpdate(float deltaTime) {}
   }
 }

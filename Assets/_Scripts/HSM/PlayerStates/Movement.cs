@@ -8,13 +8,27 @@ namespace stal.HSM.PlayerStates
   {
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
+    private readonly PlayerAbilityDataSO _playerAbilityDataSO;
     private readonly PlayerContext _playerContext;
 
     public Movement(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
+      _playerAbilityDataSO = scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
       _playerContext = playerContext;
+    }
+
+    protected override State GetTransition()
+    {
+      if (_playerAttributesDataSO.IsTakingAim
+        && _playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Neutral
+        && _playerAttributesDataSO.IsGrounded)
+      {
+        return ((PlayerRoot)Parent).Nero;
+      }
+
+      return null;
     }
 
     protected override void OnUpdate(float deltaTime)

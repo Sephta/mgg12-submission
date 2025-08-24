@@ -32,7 +32,6 @@ public class PlayerAbilityDataSO : ScratchpadDataSO
     {
       _currentArmIndex = ArmData.Count - 1;
     }
-    UnityEngine.Debug.Log("Index: " + _currentArmIndex);
 
     if (ArmCycledEvent != null) ArmCycledEvent.RaiseEvent();
   }
@@ -40,7 +39,6 @@ public class PlayerAbilityDataSO : ScratchpadDataSO
   public void CycleArmRight()
   {
     _currentArmIndex = (_currentArmIndex + 1) % ArmData.Count;
-    UnityEngine.Debug.Log("Index: " + _currentArmIndex);
 
     if (ArmCycledEvent != null) ArmCycledEvent.RaiseEvent();
   }

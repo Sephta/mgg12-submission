@@ -14,6 +14,7 @@ namespace stal.HSM.PlayerStates
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerEventDataSO _playerEventDataSO;
+    private readonly PlayerAbilityDataSO _playerAbilityDataSO;
     private readonly PlayerContext _playerContext;
 
     public PlayerRoot(HierarchicalStateMachine stateMachine, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, null)
@@ -21,6 +22,7 @@ namespace stal.HSM.PlayerStates
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerEventDataSO = scratchpad.GetScratchpadData<PlayerEventDataSO>();
+      _playerAbilityDataSO = scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
       _playerContext = playerContext;
 
       // Child States
@@ -32,12 +34,12 @@ namespace stal.HSM.PlayerStates
 
     protected override State GetInitialState() => Movement;
 
-    protected override State GetTransition()
-    {
-      if (_playerAttributesDataSO.IsTakingAim && _playerAttributesDataSO.IsGrounded) return Nero;
+    // protected override State GetTransition()
+    // {
+    //   if (_playerAttributesDataSO.IsTakingAim && _playerAttributesDataSO.IsGrounded) return Nero;
 
-      return null;
-    }
+    //   return null;
+    // }
 
     protected override void OnEnter()
     {
@@ -67,7 +69,10 @@ namespace stal.HSM.PlayerStates
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-      StateMachine.Sequencer.RequestTransition(this, Attack);
+      if (_playerAbilityDataSO.CurrentlyEquippedArm != null && _playerAbilityDataSO.CurrentlyEquippedArm.CombatAbility != null)
+      {
+        StateMachine.Sequencer.RequestTransition(this, Attack);
+      }
     }
 
   }

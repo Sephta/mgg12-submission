@@ -1,6 +1,6 @@
 using stal.HSM.Contexts;
 using stal.HSM.Core;
-using UnityEngine.InputSystem;
+using UnityEngine;
 
 namespace stal.HSM.PlayerStates
 {
@@ -45,12 +45,15 @@ namespace stal.HSM.PlayerStates
         NeroArmType.Needle => Needle,
         NeroArmType.Claw => Claw,
         NeroArmType.Gun => Gun,
-        _ => null,
+        _ => Neutral,
       };
     }
 
-    protected override State GetTransition() => _playerAttributesDataSO.IsTakingAim ? null : ((PlayerRoot)Parent).Movement;
+    protected override State GetTransition()
+    {
+      if (_playerAttributesDataSO.IsTakingAim && _playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Neutral) return null;
 
-    protected override void OnUpdate(float deltaTime) { }
+      return ((PlayerRoot)Parent).Movement;
+    }
   }
 }

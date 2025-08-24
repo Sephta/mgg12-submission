@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GunArm
   m_EditorClassIdentifier: 
   ArmType: 3
-  <EnvironmentalAbility>k__BackingField: {fileID: 0}
-  <CombatAbility>k__BackingField: {fileID: 0}
+  <EnvironmentalAbility>k__BackingField: {fileID: 11400000, guid: 74815c4c7e46de3469bb47ca4205d786, type: 2}
+  <CombatAbility>k__BackingField: {fileID: 11400000, guid: 2c1c3dd6a56f4ba48b6d2dcaba84c00f, type: 2}

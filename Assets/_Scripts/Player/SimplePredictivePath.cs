@@ -5,7 +5,12 @@ using UnityEngine;
 public class SimplePredictivePath : MonoBehaviour
 {
 
-  [SerializeField, Expandable] private PlayerAttributesDataSO _playerAttributesData;
+  [Required("Must provide a HSMScratchpadSO asset.")]
+  [SerializeField, Expandable] private HSMScratchpadSO _scratchpad;
+  private PlayerMovementDataSO _playerMovementData;
+  private PlayerAttributesDataSO _playerAttributesData;
+  private PlayerAbilityDataSO _playerAbilityData;
+  private PlayerEventDataSO _playerEventData;
 
   [Space(10f)]
   [Header("Predictive Path Data")]
@@ -24,9 +29,43 @@ public class SimplePredictivePath : MonoBehaviour
 
   private void Awake()
   {
+    if (_scratchpad == null)
+    {
+      Debug.LogError(name + " does not have a HSMScratchpadSO referenced in the inspector. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    _playerMovementData = _scratchpad.GetScratchpadData<PlayerMovementDataSO>();
+    if (_playerMovementData == null)
+    {
+      Debug.LogError(name + " does not have a PlayerMovementDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    _playerAttributesData = _scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
     if (_playerAttributesData == null)
     {
-      Debug.LogError(name + " does not have a PlayerAttributesDataSO referenced in the inspector.  Deactivating object to avoid null object errors.");
+      Debug.LogError(name + " does not have a PlayerAttributesDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    _playerAbilityData = _scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
+    if (_playerAbilityData == null)
+    {
+      Debug.LogError(name + " does not have a PlayerAbilityDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    if (_playerAbilityData.ArmData.Count <= 0)
+    {
+      Debug.LogError(name + " contains empty PlayerAbilityDataSO.ArmData. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    _playerEventData = _scratchpad.GetScratchpadData<PlayerEventDataSO>();
+    if (_playerEventData == null)
+    {
+      Debug.LogError(name + " does not have a PlayerEventDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
       gameObject.SetActive(false);
     }
   }
@@ -38,7 +77,10 @@ public class SimplePredictivePath : MonoBehaviour
 
   private void Update()
   {
-    if (_playerAttributesData.IsTakingAim && _playerAttributesData.PlayerAimDirection != Vector2.zero && _playerAttributesData.IsGrounded)
+    if (_playerAttributesData.IsTakingAim
+      && _playerAttributesData.PlayerAimDirection != Vector2.zero
+      && _playerAttributesData.IsGrounded
+      && _playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral)
     {
       UpdatePointPositions(_launchForce);
     }

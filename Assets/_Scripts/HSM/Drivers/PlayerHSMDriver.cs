@@ -211,7 +211,6 @@ namespace stal.HSM.Drivers
 
     private void OnSwapArmLeft(InputAction.CallbackContext context)
     {
-      UnityEngine.Debug.Log("NERO CLASS SWAP ARM LEFT");
       if (context.started)
       {
         _playerAbilityData.CycleArmLeft();
@@ -220,7 +219,6 @@ namespace stal.HSM.Drivers
 
     private void OnSwapArmRight(InputAction.CallbackContext context)
     {
-      UnityEngine.Debug.Log("NERO CLASS SWAP ARM RIGHT");
       if (context.started)
       {
         _playerAbilityData.CycleArmRight();

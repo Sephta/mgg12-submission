@@ -9,22 +9,20 @@ namespace stal.HSM.PlayerStates
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerEventDataSO _playerEventDataSO;
+    private readonly PlayerAbilityDataSO _playerAbilityDataSO;
     private readonly PlayerContext _playerContext;
-
-    private readonly float _attackOneTime = 1f;
-    private float _attackTimer;
 
     public Attack(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerEventDataSO = scratchpad.GetScratchpadData<PlayerEventDataSO>();
+      _playerAbilityDataSO = scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
       _playerContext = playerContext;
     }
 
     protected override void OnEnter()
     {
-      _attackTimer = _attackOneTime;
       _playerEventDataSO.AttackChainCompleted.OnEventRaised += RequestTransitionOutOfAttackState;
     }
 
@@ -35,11 +33,18 @@ namespace stal.HSM.PlayerStates
 
     protected override void OnUpdate(float deltaTime)
     {
-      _attackTimer = Mathf.Clamp(_attackTimer - deltaTime, 0f, _attackOneTime);
+      if (_playerAbilityDataSO.CurrentlyEquippedArm != null)
+      {
+        if (_playerAbilityDataSO.CurrentlyEquippedArm.CombatAbility == null)
+        {
+          RequestTransitionOutOfAttackState();
+        }
+      }
     }
 
     private void RequestTransitionOutOfAttackState()
     {
+      _playerAttributesDataSO.UpdateIsAttacking(false);
       StateMachine.Sequencer.RequestTransition(this, ((PlayerRoot)Parent).Movement);
     }
   }

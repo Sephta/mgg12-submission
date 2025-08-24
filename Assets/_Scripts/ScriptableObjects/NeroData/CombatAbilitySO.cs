@@ -20,7 +20,12 @@ public class CombatAbilitySO : ScriptableObject
   [field: SerializeField, Range(0f, 1f)]
   public float AttackChainingInputBuffer { get; private set; }
 
-  [Space(10f)]
+  [field: Space(10f)]
+  [field: Header("Combat Animation Data")]
+  [field: Space(10f)]
+
+  [field: SerializeField]
+  public RuntimeAnimatorController AnimatorController { get; private set; }
 
   public List<AnimationClip> AttackAnimationClips = new();
 
