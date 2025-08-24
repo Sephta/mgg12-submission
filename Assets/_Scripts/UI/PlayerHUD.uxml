@@ -2,5 +2,6 @@
     <Style src="project://database/Assets/_Scripts/UI/PlayerHUD.uss?fileID=7433441132597879392&amp;guid=3087e6a543361444e950ec80a6dae97c&amp;type=3#PlayerHUD" />
     <ui:VisualElement name="panel" class="panel" style="flex-grow: 1;">
         <ui:Label text="fps-counter" name="fps-counter" style="color: rgb(30, 87, 33);" />
+        <ui:Label text="current-arm" name="current-arm" style="color: rgb(30, 87, 33);" />
     </ui:VisualElement>
 </ui:UXML>

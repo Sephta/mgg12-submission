@@ -9,6 +9,14 @@ public class PlayerHUDController : MonoBehaviour
   [SerializeField] private UIDocument _playerHUDDocument;
 
   [Space(10f)]
+  [Required("Must provide a HSMScratchpadSO asset.")]
+  [SerializeField, Expandable] private HSMScratchpadSO _scratchpad;
+  private PlayerMovementDataSO _playerMovementData;
+  private PlayerAttributesDataSO _playerAttributesData;
+  private PlayerAbilityDataSO _playerAbilityData;
+  private PlayerEventDataSO _playerEventData;
+
+  [Space(10f)]
   [Header("FPS Tracker Settings")]
   [SerializeField] private string _defaultTextContent = "FPS - ";
   [SerializeField] private bool _useTimeInterval = true;
@@ -18,6 +26,7 @@ public class PlayerHUDController : MonoBehaviour
 
   private VisualElement _rootVisualElement;
   private Label _fpsLabel;
+  private Label _currentArmLabel;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -33,15 +42,67 @@ public class PlayerHUDController : MonoBehaviour
     }
 
     _rootVisualElement = _playerHUDDocument.rootVisualElement;
+
+    if (_scratchpad == null)
+    {
+      Debug.LogError(name + " does not have a HSMScratchpadSO referenced in the inspector. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    _playerMovementData = _scratchpad.GetScratchpadData<PlayerMovementDataSO>();
+    if (_playerMovementData == null)
+    {
+      Debug.LogError(name + " does not have a PlayerMovementDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    _playerAttributesData = _scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
+    if (_playerAttributesData == null)
+    {
+      Debug.LogError(name + " does not have a PlayerAttributesDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    _playerAbilityData = _scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
+    if (_playerAbilityData == null)
+    {
+      Debug.LogError(name + " does not have a PlayerAbilityDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    if (_playerAbilityData.ArmData.Count <= 0)
+    {
+      Debug.LogError(name + " contains empty PlayerAbilityDataSO.ArmData. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    _playerEventData = _scratchpad.GetScratchpadData<PlayerEventDataSO>();
+    if (_playerEventData == null)
+    {
+      Debug.LogError(name + " does not have a PlayerEventDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
   }
 
   private void OnEnable()
   {
     _fpsLabel = _rootVisualElement.Q<Label>("fps-counter");
     _fpsLabel.AddToClassList("hide");
+
+    _currentArmLabel = _rootVisualElement.Q<Label>("current-arm");
+
+    _playerEventData.PlayerArmFinishedCycling.OnEventRaised += UpdateCurrentArmLabel;
   }
 
-  // private void Start() {}
+  private void OnDisable()
+  {
+    _playerEventData.PlayerArmFinishedCycling.OnEventRaised -= UpdateCurrentArmLabel;
+  }
+
+  private void Start()
+  {
+    UpdateCurrentArmLabel();
+  }
 
   private void Update()
   {
@@ -81,4 +142,12 @@ public class PlayerHUDController : MonoBehaviour
   private void ResetTimeTracked() => _currentTimeInterval = _timeInterval;
   private string GetReadableDeltaTime() => " (" + Mathf.Floor(Time.deltaTime * 1000f).ToString() + " ms)";
   private string GetReadableAverageFps() => (Mathf.Round(_averageFps * 100) / 100f).ToString();
+
+  private void UpdateCurrentArmLabel()
+  {
+    if (_currentArmLabel != null && _playerAbilityData.CurrentlyEquippedArm != null)
+    {
+      _currentArmLabel.text = _playerAbilityData.CurrentlyEquippedArm.ArmType.ToString();
+    }
+  }
 }

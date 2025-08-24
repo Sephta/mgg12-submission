@@ -3841,10 +3841,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI - PlayerHUD
       objectReference: {fileID: 0}
-    - target: {fileID: 9153470658882264222, guid: 5cebd3c5df7eb8f41bfa203e168191ab, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
