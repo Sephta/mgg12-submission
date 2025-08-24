@@ -79,4 +79,7 @@ public class PlayerEventDataSO : ScratchpadDataSO
 
   [field: SerializeField, Expandable]
   public VoidEventChannelSO AttackChainCompleted { get; private set; }
+
+  [field: SerializeField, Expandable]
+  public VoidEventChannelSO PlayerArmFinishedCycling { get; private set; }
 }

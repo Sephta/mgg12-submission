@@ -36,8 +36,6 @@ namespace stal.HSM.PlayerStates
     {
       if (_playerAttributesDataSO.IsTakingAim && _playerAttributesDataSO.IsGrounded) return Nero;
 
-      if (_playerAttributesDataSO.IsAttacking && !_playerAttributesDataSO.IsTakingAim && _playerAttributesDataSO.IsGrounded) return Attack;
-
       return null;
     }
 
@@ -54,8 +52,8 @@ namespace stal.HSM.PlayerStates
     protected override void OnUpdate(float deltaTime)
     {
       // We need to decelerate the player back to zero no matter what state we're in because
-      // otherwise we slide infinitely with no friction. The deceleration is our friction bringing
-      // our linear velocity back to zero.
+      // otherwise we slide infinitely with no friction outside of the Movement state. 
+      // The deceleration is the friction bringing our linear velocity back to zero.
       if (ActiveChild != Movement)
       {
         float delta = 0 - _playerContext.rigidbody2D.linearVelocityX;

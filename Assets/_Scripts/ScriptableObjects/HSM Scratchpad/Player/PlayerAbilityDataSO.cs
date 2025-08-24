@@ -22,23 +22,36 @@ public class PlayerAbilityDataSO : ScratchpadDataSO
 
   public NeroArmType CurrentlyEquippedArmType => ArmData[_currentArmIndex].ArmType;
 
+  [Expandable] public VoidEventChannelSO ArmCycledEvent;
+
   public void CycleArmLeft()
   {
-    _currentArmIndex = _currentArmIndex - 1;
+    _currentArmIndex--;
+
     if (_currentArmIndex < 0)
     {
       _currentArmIndex = ArmData.Count - 1;
     }
     UnityEngine.Debug.Log("Index: " + _currentArmIndex);
+
+    if (ArmCycledEvent != null) ArmCycledEvent.RaiseEvent();
   }
 
   public void CycleArmRight()
   {
     _currentArmIndex = (_currentArmIndex + 1) % ArmData.Count;
     UnityEngine.Debug.Log("Index: " + _currentArmIndex);
+
+    if (ArmCycledEvent != null) ArmCycledEvent.RaiseEvent();
   }
 
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
+
+  [Button("ResetCurrentArmIndex")]
+  private void ResetCurrentArmIndex()
+  {
+    _currentArmIndex = 0;
+  }
 }

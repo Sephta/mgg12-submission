@@ -22,15 +22,6 @@ namespace stal.HSM.PlayerStates
       _playerContext = playerContext;
     }
 
-    // protected override State GetTransition() => _playerAttributesDataSO.IsAttacking ? null : ((PlayerRoot)Parent).Movement;
-
-    // protected override State GetTransition()
-    // {
-    //   if (_attackTimer == 0f) return ((PlayerRoot)Parent).Movement;
-
-    //   return null;
-    // }
-
     protected override void OnEnter()
     {
       _attackTimer = _attackOneTime;

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using NaughtyAttributes;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Combat Ability", menuName = "Scriptable Objects/Nero/Combat Ability")]
@@ -14,4 +16,34 @@ public class CombatAbilitySO : ScriptableObject
 
   [field: SerializeField, Range(0f, 50f)]
   public float Range { get; private set; }
+
+  [field: SerializeField, Range(0f, 1f)]
+  public float AttackChainingInputBuffer { get; private set; }
+
+  [Space(10f)]
+
+  public List<AnimationClip> AttackAnimationClips = new();
+
+  /* ---------------------------------------------------------------- */
+  /*                           Unity Functions                        */
+  /* ---------------------------------------------------------------- */
+
+  private void OnValidate()
+  {
+    foreach (AnimationClip clip in AttackAnimationClips)
+    {
+      if (clip != null)
+      {
+        // Debug.Log("Clip: " + clip.name);
+      }
+    }
+  }
+
+  /* ---------------------------------------------------------------- */
+  /*                               PUBLIC                             */
+  /* ---------------------------------------------------------------- */
+
+  /* ---------------------------------------------------------------- */
+  /*                               PRIVATE                            */
+  /* ---------------------------------------------------------------- */
 }

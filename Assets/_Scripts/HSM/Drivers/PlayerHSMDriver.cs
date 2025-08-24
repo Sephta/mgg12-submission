@@ -29,12 +29,6 @@ namespace stal.HSM.Drivers
     private PlayerAbilityDataSO _playerAbilityData;
     private PlayerEventDataSO _playerEventData;
 
-    [Space(15)]
-    [Header("Debug")]
-    [SerializeField, ReadOnly] private string _statePath;
-    private string _previousStatePath;
-    [SerializeField, ReadOnly] private Vector2 _mouseScreenToWorldPos;
-
     // State Machine Specific Fields
     private HierarchicalStateMachine _stateMachine;
     private State _rootState;
@@ -110,6 +104,7 @@ namespace stal.HSM.Drivers
 
     private void OnEnable()
     {
+      // Register Input Events
       _playerEventData.Move.OnEventRaised += OnMove;
       _playerEventData.Attack.OnEventRaised += OnAttack;
       _playerEventData.Jump.OnEventRaised += OnJump;
@@ -122,6 +117,7 @@ namespace stal.HSM.Drivers
 
     private void OnDisable()
     {
+      //Un-Register Input Events
       _playerEventData.Move.OnEventRaised -= OnMove;
       _playerEventData.Attack.OnEventRaised -= OnAttack;
       _playerEventData.Jump.OnEventRaised -= OnJump;
@@ -180,8 +176,7 @@ namespace stal.HSM.Drivers
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-      if (context.started) _playerAttributesData.UpdateIsAttacking(true);
-      if (context.canceled) _playerAttributesData.UpdateIsAttacking(false);
+      if (context.started && !_playerAttributesData.IsAttacking) _playerAttributesData.UpdateIsAttacking(true);
     }
 
     private void OnTakeAim(InputAction.CallbackContext context)
@@ -287,9 +282,9 @@ namespace stal.HSM.Drivers
     {
       if (_playerAttributesData.PlayerMousePosition != Vector2.zero)
       {
-        _mouseScreenToWorldPos = _playerContext.mainCamera.ScreenToWorldPoint(_playerAttributesData.PlayerMousePosition);
+        _playerContext.mouseScreenToWorldPos = _playerContext.mainCamera.ScreenToWorldPoint(_playerAttributesData.PlayerMousePosition);
         Vector2 player2DPosition = new(_playerContext.transform.position.x, _playerContext.transform.position.y);
-        _playerAttributesData.UpdatePlayerAimDirection((_mouseScreenToWorldPos - player2DPosition).normalized);
+        _playerAttributesData.UpdatePlayerAimDirection((_playerContext.mouseScreenToWorldPos - player2DPosition).normalized);
       }
     }
 
@@ -306,12 +301,12 @@ namespace stal.HSM.Drivers
       // cache grounded state at the end of this frame since next frame we might not be grounded.
       _playerContext.wasGroundedLastFrame = IsGrounded();
 
-      _statePath = PlayerStatePathToString(_stateMachine.Root.Leaf());
+      _playerContext.statePath = PlayerStatePathToString(_stateMachine.Root.Leaf());
 
-      if (_statePath != _previousStatePath)
+      if (_playerContext.statePath != _playerContext.previousStatePath)
       {
-        Debug.Log("Path Update: " + _statePath);
-        _previousStatePath = _statePath;
+        Debug.Log("Path Update: " + _playerContext.statePath);
+        _playerContext.previousStatePath = _playerContext.statePath;
       }
     }
   }

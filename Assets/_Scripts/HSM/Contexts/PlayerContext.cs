@@ -25,5 +25,8 @@ namespace stal.HSM.Contexts
 
     [Header("Debug")]
     public bool drawDebugGizmos;
+    [ReadOnly] public string statePath;
+    [HideInInspector] public string previousStatePath;
+    [ReadOnly] public Vector2 mouseScreenToWorldPos;
   }
 }
