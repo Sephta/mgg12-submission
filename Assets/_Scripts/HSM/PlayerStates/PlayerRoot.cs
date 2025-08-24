@@ -71,6 +71,7 @@ namespace stal.HSM.PlayerStates
     {
       if (_playerAbilityDataSO.CurrentlyEquippedArm != null && _playerAbilityDataSO.CurrentlyEquippedArm.CombatAbility != null)
       {
+        if (context.started && !_playerAttributesDataSO.IsAttacking) _playerAttributesDataSO.UpdateIsAttacking(true);
         StateMachine.Sequencer.RequestTransition(this, Attack);
       }
     }

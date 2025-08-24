@@ -176,7 +176,7 @@ namespace stal.HSM.Drivers
 
     private void OnAttack(InputAction.CallbackContext context)
     {
-      if (context.started && !_playerAttributesData.IsAttacking) _playerAttributesData.UpdateIsAttacking(true);
+      // if (context.started && !_playerAttributesData.IsAttacking) _playerAttributesData.UpdateIsAttacking(true);
     }
 
     private void OnTakeAim(InputAction.CallbackContext context)
