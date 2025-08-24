@@ -144,6 +144,10 @@ MonoBehaviour:
     - COMBAT02
     - COMABT03
     m_Values: 15b524dcc0a476501606b3a7d4ea3ef40eb56831565d59b9b71ada4f0d4bd3d6a5aec1f4
+  _currentAttackAnimationIndex: 0
+  _isHoldingAttackButton: 0
+  _lookForInputToBuffer: 0
+  _attackBuffer: 0
 --- !u!1 &4753032256456121729
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbd8fc7e59400474db770daa8f47b9fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
+  _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
   _numPoints: 18
   _launchForce: 1
   _pointSpacingValue: 1
