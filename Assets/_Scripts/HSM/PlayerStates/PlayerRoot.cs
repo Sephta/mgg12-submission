@@ -57,6 +57,8 @@ namespace stal.HSM.PlayerStates
 
         // Multiplying by Vector2.right is a quick way to convert the calculation into a vector
         _playerContext.rigidbody2D.AddForce(force * Time.fixedDeltaTime * Vector2.right, ForceMode2D.Force);
+
+        ClampPlayerMovement();
       }
     }
 
@@ -72,5 +74,17 @@ namespace stal.HSM.PlayerStates
       }
     }
 
+    private void ClampPlayerMovement()
+    {
+      // Clamps velocity by the amount configured in _playerMovementDataSO
+      if (_playerMovementDataSO.DoClampHorizontalVelocity)
+      {
+        _playerContext.rigidbody2D.linearVelocityX = Mathf.Clamp(_playerContext.rigidbody2D.linearVelocityX, -_playerMovementDataSO.VelocityHorizontalClamp, _playerMovementDataSO.VelocityHorizontalClamp);
+      }
+      if (_playerMovementDataSO.DoClampVerticalVelocity)
+      {
+        _playerContext.rigidbody2D.linearVelocityY = Mathf.Clamp(_playerContext.rigidbody2D.linearVelocityY, -_playerMovementDataSO.VelocityVerticalClamp, _playerMovementDataSO.VelocityVerticalClamp);
+      }
+    }
   }
 }

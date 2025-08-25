@@ -41,6 +41,9 @@ public class PlayerAttributesDataSO : ScratchpadDataSO
   [field: SerializeField, ReadOnly]
   public bool IsConfirmingAim { get; private set; }
 
+  [field: SerializeField, ReadOnly]
+  public bool IsNeedling { get; private set; }
+
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
@@ -65,6 +68,7 @@ public class PlayerAttributesDataSO : ScratchpadDataSO
   public void UpdateIsAttacking(bool state) => IsAttacking = state;
   public void UpdateIsTakingAim(bool state) => IsTakingAim = state;
   public void UpdateIsConfirmingAim(bool state) => IsConfirmingAim = state;
+  public void UpdateIsNeedling(bool state) => IsNeedling = state;
 
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
@@ -82,5 +86,6 @@ public class PlayerAttributesDataSO : ScratchpadDataSO
     IsAttacking = false;
     IsTakingAim = false;
     IsConfirmingAim = false;
+    IsNeedling = false;
   }
 }

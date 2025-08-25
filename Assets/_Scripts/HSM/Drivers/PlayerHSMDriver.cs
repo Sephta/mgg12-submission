@@ -156,6 +156,21 @@ namespace stal.HSM.Drivers
 
       // Draw Debug Gizmos
       DrawDebugGizmos();
+
+      Vector2 rayDirection = Vector2.zero;
+      if (_playerAttributesData.PlayerMoveDirection != Vector2.zero)
+      {
+        if (Mathf.Abs(_playerAttributesData.PlayerMoveDirection.x) > Mathf.Abs(_playerAttributesData.PlayerMoveDirection.y))
+        {
+          rayDirection.x = Mathf.Sign(_playerAttributesData.PlayerMoveDirection.x) >= 0 ? 1f : -1f;
+        }
+        else
+        {
+          rayDirection.y = Mathf.Sign(_playerAttributesData.PlayerMoveDirection.y) >= 0 ? 1f : -1f;
+        }
+      }
+
+      _playerContext.needleRayDirection = rayDirection;
     }
 
     /* ---------------------------------------------------------------- */

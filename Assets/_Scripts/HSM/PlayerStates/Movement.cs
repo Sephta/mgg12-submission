@@ -1,6 +1,7 @@
 using stal.HSM.Contexts;
 using stal.HSM.Core;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace stal.HSM.PlayerStates
 {
@@ -9,6 +10,7 @@ namespace stal.HSM.PlayerStates
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerAbilityDataSO _playerAbilityDataSO;
+    private readonly PlayerEventDataSO _playerEventDataSO;
     private readonly PlayerContext _playerContext;
 
     public Movement(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
@@ -16,6 +18,7 @@ namespace stal.HSM.PlayerStates
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerAbilityDataSO = scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
+      _playerEventDataSO = scratchpad.GetScratchpadData<PlayerEventDataSO>();
       _playerContext = playerContext;
     }
 
@@ -29,6 +32,16 @@ namespace stal.HSM.PlayerStates
       }
 
       return null;
+    }
+
+    protected override void OnEnter()
+    {
+      _playerEventDataSO.Environment.OnEventRaised += OnEnvironment;
+    }
+
+    protected override void OnExit()
+    {
+      _playerEventDataSO.Environment.OnEventRaised -= OnEnvironment;
     }
 
     protected override void OnUpdate(float deltaTime)
@@ -142,6 +155,19 @@ namespace stal.HSM.PlayerStates
 
     private void ResetGravityScale() => _playerContext.rigidbody2D.gravityScale = _playerMovementDataSO.GravityScale;
     private void UpdateGravityScale(float scale) => _playerContext.rigidbody2D.gravityScale = _playerMovementDataSO.GravityScale * scale;
+
+    private void OnEnvironment(InputAction.CallbackContext context)
+    {
+      if (context.started)
+      {
+        Debug.Log("Environment Button Pressed from with Movement State of player state machine.");
+        if (_playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Needle && !_playerAttributesDataSO.IsNeedling)
+        {
+          _playerAttributesDataSO.UpdateIsNeedling(true);
+          StateMachine.Sequencer.RequestTransition(this, ((PlayerRoot)Parent).Nero);
+        }
+      }
+    }
   }
 
 }

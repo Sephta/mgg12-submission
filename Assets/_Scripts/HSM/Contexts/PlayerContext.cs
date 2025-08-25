@@ -28,5 +28,6 @@ namespace stal.HSM.Contexts
     [ReadOnly] public string statePath;
     [HideInInspector] public string previousStatePath;
     [ReadOnly] public Vector2 mouseScreenToWorldPos;
+    [ReadOnly] public Vector3 needleRayDirection;
   }
 }

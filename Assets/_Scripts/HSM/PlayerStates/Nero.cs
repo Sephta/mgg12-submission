@@ -52,6 +52,7 @@ namespace stal.HSM.PlayerStates
     protected override State GetTransition()
     {
       if (_playerAttributesDataSO.IsTakingAim && _playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Neutral) return null;
+      if (_playerAttributesDataSO.IsNeedling && _playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Needle) return null;
 
       return ((PlayerRoot)Parent).Movement;
     }
