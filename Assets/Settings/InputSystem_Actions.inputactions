@@ -24,6 +24,15 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Environment",
+                    "type": "Button",
+                    "id": "fe9acb43-6ad8-4976-90c6-dd85e960820d",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "6c2ab1b8-8984-453a-af3d-a3c78ae1679a",
@@ -439,6 +448,28 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Swap Arm Right",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f355c99-9c9d-4ceb-b4b5-54666d86dfc1",
+                    "path": "<Gamepad>/buttonNorth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Environment",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1cf6434a-6eed-4530-99fd-7a2ab0b8bcde",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Environment",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

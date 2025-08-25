@@ -20,6 +20,7 @@ MonoBehaviour:
   <ConfirmAim>k__BackingField: {fileID: 11400000, guid: 5c1102662a9a44b4e8f33839017c2b67, type: 2}
   <SwapArmLeft>k__BackingField: {fileID: 11400000, guid: 1b439b835bd3e6345a4d2b9d7b0c9809, type: 2}
   <SwampArmRight>k__BackingField: {fileID: 11400000, guid: 2de7e64fdd182da49a43f08dc5f3ba8e, type: 2}
+  <Environment>k__BackingField: {fileID: 11400000, guid: e497d1cc19d2adb4a937a32af452bdf4, type: 2}
   <AttackChainCompleted>k__BackingField: {fileID: 11400000, guid: 76213fbd41b26a948bb7208da2a45276, type: 2}
   <PlayerArmFinishedCycling>k__BackingField: {fileID: 11400000, guid: ea733e2475cf80e478a43cd3bf5a5748, type: 2}
   <DoDamageToEntity>k__BackingField: {fileID: 11400000, guid: a447d77cdb8a7674d99fde594ada7f2c, type: 2}

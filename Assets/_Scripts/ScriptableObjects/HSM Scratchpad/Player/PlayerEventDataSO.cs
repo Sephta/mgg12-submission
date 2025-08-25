@@ -73,6 +73,15 @@ public class PlayerEventDataSO : ScratchpadDataSO
     if (SwampArmRight != null) SwampArmRight.RaiseEvent(callbackContext);
   }
 
+  [field: SerializeField, Expandable]
+  public CallbackContextEventChannelSO Environment { get; private set; }
+
+  public void RaiseOnEnvironment(InputAction.CallbackContext callbackContext)
+  {
+    if (Environment != null) Environment.RaiseEvent(callbackContext);
+  }
+
+
   [field: Space(10f)]
   [field: Header("Combat Events")]
   [field: Space(5)]
