@@ -106,26 +106,28 @@ namespace stal.HSM.Drivers
     {
       // Register Input Events
       _playerEventData.Move.OnEventRaised += OnMove;
-      _playerEventData.Attack.OnEventRaised += OnAttack;
       _playerEventData.Jump.OnEventRaised += OnJump;
       _playerEventData.TakeAim.OnEventRaised += OnTakeAim;
       _playerEventData.ConfirmAim.OnEventRaised += OnConfirmAim;
       _playerEventData.Look.OnEventRaised += OnLook;
       _playerEventData.SwapArmLeft.OnEventRaised += OnSwapArmLeft;
       _playerEventData.SwampArmRight.OnEventRaised += OnSwapArmRight;
+
+      _playerAttributesData.ResetPlayerAttributesData();
     }
 
     private void OnDisable()
     {
       //Un-Register Input Events
       _playerEventData.Move.OnEventRaised -= OnMove;
-      _playerEventData.Attack.OnEventRaised -= OnAttack;
       _playerEventData.Jump.OnEventRaised -= OnJump;
       _playerEventData.TakeAim.OnEventRaised -= OnTakeAim;
       _playerEventData.ConfirmAim.OnEventRaised -= OnConfirmAim;
       _playerEventData.Look.OnEventRaised -= OnLook;
       _playerEventData.SwapArmLeft.OnEventRaised -= OnSwapArmLeft;
       _playerEventData.SwampArmRight.OnEventRaised -= OnSwapArmRight;
+
+      _playerAttributesData.ResetPlayerAttributesData();
     }
 
     private void Start()
@@ -153,7 +155,7 @@ namespace stal.HSM.Drivers
       UpdateLoopBookKeeping();
 
       // Draw Debug Gizmos
-      DrawGizmoForDebuggingAimDirection();
+      DrawDebugGizmos();
     }
 
     /* ---------------------------------------------------------------- */
@@ -172,11 +174,6 @@ namespace stal.HSM.Drivers
       {
         _playerContext.jumpBufferWindow = _playerMovementData.JumpInputBuffer;
       }
-    }
-
-    private void OnAttack(InputAction.CallbackContext context)
-    {
-      // if (context.started && !_playerAttributesData.IsAttacking) _playerAttributesData.UpdateIsAttacking(true);
     }
 
     private void OnTakeAim(InputAction.CallbackContext context)
@@ -286,7 +283,7 @@ namespace stal.HSM.Drivers
       }
     }
 
-    private void DrawGizmoForDebuggingAimDirection()
+    private void DrawDebugGizmos()
     {
       if (_playerContext.drawDebugGizmos)
       {

@@ -13,6 +13,7 @@ public class AnimatorController : MonoBehaviour
   [SerializeField] private Animator _animator;
   [SerializeField] private SpriteRenderer _spriteRenderer;
   [SerializeField] private AnimationClip _attackClip;
+  [SerializeField] private BoxCollider2D _playerHitZone;
 
   [Header("Player Data"), Space(10f)]
 
@@ -44,7 +45,10 @@ public class AnimatorController : MonoBehaviour
     ENVIRON01,
     COMBAT01,
     COMBAT02,
-    COMBAT03
+    COMBAT03,
+    TRANSITION01,
+    SHOOTBASIC,
+    SHOOTALT
   }
 
   // Dictionaries are not serializable in the inspector by default in Unity. To get around this
@@ -191,6 +195,20 @@ public class AnimatorController : MonoBehaviour
     }
   }
 
+  private void EnablePlayerHitzone()
+  {
+    if (_playerHitZone == null) return;
+
+    if (_playerAttributesData.IsAttacking) _playerHitZone.enabled = true;
+  }
+
+  private void DisablePlayerHitzone()
+  {
+    if (_playerHitZone == null) return;
+
+    _playerHitZone.enabled = false;
+  }
+
   private void HandleAttackInputBuffer()
   {
     _lookForInputToBuffer = true;
@@ -198,6 +216,8 @@ public class AnimatorController : MonoBehaviour
 
   private void ChainAttackOrFinishCombo()
   {
+    DisablePlayerHitzone();
+
     _lookForInputToBuffer = false;
 
     // exit attack state if we have no combat ability with current arm.
@@ -241,6 +261,14 @@ public class AnimatorController : MonoBehaviour
         List<AnimationClip> attackAnimationClips = armData.CombatAbility.AttackAnimationClips;
         foreach (AnimationClip clip in attackAnimationClips)
         {
+          AnimationEvent enableHitZone = new()
+          {
+            time = 0,
+            functionName = nameof(EnablePlayerHitzone)
+          };
+
+          clip.AddEvent(enableHitZone);
+
           float timeDurringClipToRaiseInputBufferEvent = clip.length - armData.CombatAbility.AttackChainingInputBuffer;
 
           AnimationEvent startInputBuffer = new()

@@ -31,16 +31,7 @@ namespace stal.HSM.PlayerStates
       _playerEventDataSO.AttackChainCompleted.OnEventRaised -= RequestTransitionOutOfAttackState;
     }
 
-    protected override void OnUpdate(float deltaTime)
-    {
-      if (_playerAbilityDataSO.CurrentlyEquippedArm != null)
-      {
-        if (_playerAbilityDataSO.CurrentlyEquippedArm.CombatAbility == null)
-        {
-          RequestTransitionOutOfAttackState();
-        }
-      }
-    }
+    protected override void OnUpdate(float deltaTime) { }
 
     private void RequestTransitionOutOfAttackState()
     {

@@ -45,15 +45,11 @@ public class PlayerAttributesDataSO : ScratchpadDataSO
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
 
-  private void Awake()
-  {
-    ResetData();
-  }
+  // private void Awake() {}
+  // private void Reset() {}
 
-  private void Reset()
-  {
-    ResetData();
-  }
+  private void OnEnable() => ResetPlayerAttributesData();
+  private void OnDisable() => ResetPlayerAttributesData();
 
   /* ---------------------------------------------------------------- */
   /*                               PUBLIC                             */
@@ -74,8 +70,8 @@ public class PlayerAttributesDataSO : ScratchpadDataSO
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
 
-  [Button("Reset Data")]
-  private void ResetData()
+  [Button("Reset")]
+  public void ResetPlayerAttributesData()
   {
     PlayerVelocity = Vector2.zero;
     PlayerMoveDirection = Vector2.zero;
