@@ -66,7 +66,6 @@ public class PlayerHitzone : MonoBehaviour
   {
     if (collider.gameObject.CompareTag(_tagToCollideWith))
     {
-      Debug.Log("Collider from: " + collider.gameObject.name);
       if (_playerAbilityData.CurrentlyEquippedArm != null && _playerAbilityData.CurrentlyEquippedArm.CombatAbility != null)
       {
         _playerEventData.DoDamageToEntity.RaiseEvent(

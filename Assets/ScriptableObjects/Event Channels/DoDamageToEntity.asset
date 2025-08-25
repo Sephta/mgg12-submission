@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad1a7b1b5ea75fb4caba9b42af305230, type: 3}
   m_Name: DoDamageToEntity
   m_EditorClassIdentifier: 
-  _logEventWhenRaised: 1
+  _logEventWhenRaised: 0
