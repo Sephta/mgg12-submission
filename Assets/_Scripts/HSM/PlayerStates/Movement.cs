@@ -1,3 +1,4 @@
+using System;
 using stal.HSM.Contexts;
 using stal.HSM.Core;
 using UnityEngine;
@@ -34,16 +35,6 @@ namespace stal.HSM.PlayerStates
       return null;
     }
 
-    protected override void OnEnter()
-    {
-      _playerEventDataSO.Environment.OnEventRaised += OnEnvironment;
-    }
-
-    protected override void OnExit()
-    {
-      _playerEventDataSO.Environment.OnEventRaised -= OnEnvironment;
-    }
-
     protected override void OnUpdate(float deltaTime)
     {
       _playerContext.targetSpeed = _playerAttributesDataSO.PlayerMoveDirection.x * _playerMovementDataSO.RunVelocityMaximum;
@@ -69,7 +60,6 @@ namespace stal.HSM.PlayerStates
         else
         {
           accelRate = _playerMovementDataSO.RunDecelerationAmount;
-
         }
       }
       else
@@ -81,12 +71,11 @@ namespace stal.HSM.PlayerStates
         else
         {
           accelRate = _playerMovementDataSO.RunDecelerationAmount * _playerMovementDataSO.DecelerationAirMultiplier;
-
         }
       }
 
       // Conserve momentum
-      if (Mathf.Abs(_playerContext.rigidbody2D.linearVelocityX) > Mathf.Abs(_playerContext.targetSpeed) && Mathf.Sign(_playerContext.rigidbody2D.linearVelocityX) == Mathf.Sign(_playerContext.targetSpeed) && _playerContext.targetSpeed > 0.01f && !_playerAttributesDataSO.IsGrounded)
+      if (Mathf.Abs(_playerContext.rigidbody2D.linearVelocityX) > Mathf.Abs(_playerContext.targetSpeed) && Mathf.Sign(_playerContext.rigidbody2D.linearVelocityX) == Mathf.Sign(_playerContext.targetSpeed) && Mathf.Abs(_playerContext.targetSpeed) > 0.01f && !_playerAttributesDataSO.IsGrounded)
       {
         accelRate = 0;
       }
@@ -155,58 +144,5 @@ namespace stal.HSM.PlayerStates
 
     private void ResetGravityScale() => _playerContext.rigidbody2D.gravityScale = _playerMovementDataSO.GravityScale;
     private void UpdateGravityScale(float scale) => _playerContext.rigidbody2D.gravityScale = _playerMovementDataSO.GravityScale * scale;
-
-    private void OnEnvironment(InputAction.CallbackContext context)
-    {
-      if (context.started)
-      {
-
-        if (_playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Needle
-          && !_playerAttributesDataSO.IsNeedling
-          && !_playerAttributesDataSO.IsAttacking
-          && PlayerFoundAnchorPointForNeedle())
-        {
-          _playerAttributesDataSO.UpdateIsNeedling(true);
-          StateMachine.Sequencer.RequestTransition(this, ((PlayerRoot)Parent).Nero);
-        }
-      }
-    }
-
-    private bool PlayerFoundAnchorPointForNeedle()
-    {
-      bool result = false;
-      Vector2 rayDirection = Vector2.zero;
-      if (_playerAttributesDataSO.PlayerMoveDirection != Vector2.zero)
-      {
-        if (Mathf.Abs(_playerAttributesDataSO.PlayerMoveDirection.x) > Mathf.Abs(_playerAttributesDataSO.PlayerMoveDirection.y))
-        {
-          rayDirection.x = Mathf.Sign(_playerAttributesDataSO.PlayerMoveDirection.x) >= 0 ? 1f : -1f;
-        }
-        else
-        {
-          rayDirection.y = Mathf.Sign(_playerAttributesDataSO.PlayerMoveDirection.y) >= 0 ? 1f : 0f;
-        }
-      }
-
-      if (rayDirection != Vector2.zero)
-      {
-        // fire ray
-        RaycastHit2D aimRaycast = Physics2D.Raycast(
-          _playerContext.transform.position + (Vector3.up * 0.5f),
-          rayDirection,
-          _playerMovementDataSO.AbilityAimRaycastDistance,
-          _playerMovementDataSO.LayersConsideredForGroundingPlayer
-        );
-
-        // check if we hit something
-        if (aimRaycast)
-        {
-          result = true;
-        }
-      }
-
-      return result;
-    }
   }
-
 }

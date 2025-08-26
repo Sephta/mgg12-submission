@@ -20,8 +20,10 @@ ScriptedImporter:
   _useParallax: 1
   _scaleEntities: 1
   _intGridValues:
-  - _key: BlockingIntGrid_1
+  - _key: GroundIntGrid_1
     _asset: {fileID: 11400000, guid: d4bb3d4daaa7eb94faa0cd485506e596, type: 2}
+  - _key: WallIntGrid_1
+    _asset: {fileID: 11400000, guid: 4ca24703ecdfa4d4d97df7a5715170b1, type: 2}
   _entities:
   - _key: Player
     _asset: {fileID: 2436689383711416720, guid: a7298f226b578df4aa910b40aaedcf37, type: 3}

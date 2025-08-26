@@ -67,6 +67,12 @@ public class PlayerMovementDataSO : ScratchpadDataSO
   [field: SerializeField, Range(0f, 1f), Tooltip("")]
   public float JumpInputBuffer { get; private set; }
 
+  [field: SerializeField, Range(0f, 3f), Tooltip("")]
+  public float WallJumpHorizontalForce { get; private set; }
+
+  [field: SerializeField, Range(0f, 3f), Tooltip("")]
+  public float WallJumpVerticalForce { get; private set; }
+
   /* ---------------------------------------------------------------- */
   /*                          Gravity Data                            */
   /* ---------------------------------------------------------------- */
@@ -83,6 +89,9 @@ public class PlayerMovementDataSO : ScratchpadDataSO
   [field: SerializeField, Range(1f, 2f), Tooltip("If the player leaves the jump early (before reaching max height) this is the multiplier that will be used instead of the falling multiplier.")]
   public float ShortJumpGravityMultiplier { get; private set; }
 
+  [field: SerializeField, Range(0f, 1f)]
+  public float SlideDownWallGravityMultiplier { get; private set; }
+
   /* ---------------------------------------------------------------- */
   /*                          Grounding Data                          */
   /* ---------------------------------------------------------------- */
@@ -92,6 +101,9 @@ public class PlayerMovementDataSO : ScratchpadDataSO
 
   [field: SerializeField, Tooltip("The layer to use when checking if the player is grounded.")]
   public LayerMask LayersConsideredForGroundingPlayer { get; private set; }
+
+  [field: SerializeField, Tooltip("The layer to use when checking if the player is grounded.")]
+  public LayerMask LayersConsideredForPlayerTouchingWall { get; private set; }
 
   [field: SerializeField, Range(0f, 1f), Tooltip("Controls how far the raycast goes to check if player is grounded.")]
   public float GroundingRayCastDistance { get; private set; }
@@ -111,6 +123,9 @@ public class PlayerMovementDataSO : ScratchpadDataSO
 
   [field: SerializeField, Range(0f, 100f), Tooltip("Controls how far the raycast goes when the player is aiming in a direction to grow bramble or perform some other ability.")]
   public float AbilityAimRaycastDistance { get; private set; }
+
+  [field: SerializeField, Range(0f, 1f)]
+  public float TimeTillSlideDownWall { get; private set; }
 
   /* ---------------------------------------------------------------- */
   /*                          Derived Data                            */

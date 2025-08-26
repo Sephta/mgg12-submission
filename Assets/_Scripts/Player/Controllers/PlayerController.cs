@@ -164,7 +164,6 @@ public class PlayerController : MonoBehaviour
       else
       {
         accelRate = _playerMovementData.RunDecelerationAmount;
-
       }
     }
     else
@@ -176,12 +175,11 @@ public class PlayerController : MonoBehaviour
       else
       {
         accelRate = _playerMovementData.RunDecelerationAmount * _playerMovementData.DecelerationAirMultiplier;
-
       }
     }
 
     // Conserve momentum
-    if (Mathf.Abs(_rigidBody2D.linearVelocityX) > Mathf.Abs(_targetSpeed) && Mathf.Sign(_rigidBody2D.linearVelocityX) == Mathf.Sign(_targetSpeed) && _targetSpeed > 0.01f && !_playerAttributesData.IsGrounded)
+    if (Mathf.Abs(_rigidBody2D.linearVelocityX) > Mathf.Abs(_targetSpeed) && Mathf.Sign(_rigidBody2D.linearVelocityX) == Mathf.Sign(_targetSpeed) && Mathf.Abs(_targetSpeed) > 0.01f && !_playerAttributesData.IsGrounded)
     {
       accelRate = 0;
     }
