@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameEntryPoint.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   - enabled: 1
+    path: Assets/Scenes/Game Dependencies.unity
+    guid: ea57f17cda65e1247a33e0b83767d24f
+  - enabled: 1
     path: Assets/Scenes/Sandboxes/stal_prototyping_bramble_system.unity
     guid: 336babfe566c26642bacb933039e8729
   m_configObjects:

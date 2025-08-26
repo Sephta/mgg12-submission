@@ -41,8 +41,6 @@ public class PlayerHUDController : MonoBehaviour
       gameObject.SetActive(false);
     }
 
-    _rootVisualElement = _playerHUDDocument.rootVisualElement;
-
     if (_scratchpad == null)
     {
       Debug.LogError(name + " does not have a HSMScratchpadSO referenced in the inspector. Deactivating object to avoid null object errors.");
@@ -82,6 +80,8 @@ public class PlayerHUDController : MonoBehaviour
       Debug.LogError(name + " does not have a PlayerEventDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
       gameObject.SetActive(false);
     }
+
+    _rootVisualElement = _playerHUDDocument.rootVisualElement;
   }
 
   private void OnEnable()
