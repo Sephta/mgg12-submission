@@ -1,0 +1,91 @@
+fileFormatVersion: 2
+guid: 791ee292f15f3fe4b8aba305497b663f
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f3268c876daf4890b6af6cd462063137, type: 3}
+  _reimportOnDependencyChange: 1
+  _pixelsPerUnit: 32
+  _overrideTexture: {instanceID: 0}
+  _sprites:
+  - name: Lab_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    spriteID: e809e830dc1ce3f48a9a06917eb6ffa3
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Lab_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1
+      y: 0
+      width: 1
+      height: 1
+    spriteID: 73ea7f9e09f1d1648be558d216cfee03
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Lab_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2
+      y: 0
+      width: 1
+      height: 1
+    spriteID: 96f60b0d6549d954a8c806c2a54afd98
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Lab_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 3
+      y: 0
+      width: 1
+      height: 1
+    spriteID: ba2ac8e2ac59e804baaedc181dafe86d
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Lab_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 0
+      width: 1
+      height: 1
+    spriteID: ffc6a11c0a1221b49808e0abf7ceb6e9
+    spriteOutline: []
+    tessellationDetail: 0
+  _secondaryTextures: []
+  _artifacts: {instanceID: 0}

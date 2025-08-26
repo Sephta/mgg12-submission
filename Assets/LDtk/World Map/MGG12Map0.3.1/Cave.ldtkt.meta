@@ -1,0 +1,76 @@
+fileFormatVersion: 2
+guid: a024c9f529798874fbf2b3da37313861
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f3268c876daf4890b6af6cd462063137, type: 3}
+  _reimportOnDependencyChange: 1
+  _pixelsPerUnit: 32
+  _overrideTexture: {instanceID: 0}
+  _sprites:
+  - name: Cave_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 1
+      height: 1
+    spriteID: 7e60817e5149f74449e8a2baf7877c71
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Cave_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 1
+      y: 0
+      width: 1
+      height: 1
+    spriteID: 9c5bcc2b6c1541b4aba6783af11a3bf9
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Cave_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 2
+      y: 0
+      width: 1
+      height: 1
+    spriteID: 48bbaaf6e90ccaa47bc6996aac682cae
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Cave_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 3
+      y: 0
+      width: 1
+      height: 1
+    spriteID: 490c9f2e40450bb4dba184300cbb28e9
+    spriteOutline: []
+    tessellationDetail: 0
+  _secondaryTextures: []
+  _artifacts: {instanceID: 0}
