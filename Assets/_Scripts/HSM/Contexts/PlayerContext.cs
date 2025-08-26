@@ -9,12 +9,14 @@ namespace stal.HSM.Contexts
   {
     [Header("Monobehavior Components")]
     public Transform transform;
+    public Transform bulletSpawnTransform;
     public Rigidbody2D rigidbody2D;
     public BoxCollider2D boxCollider2D;
     public Camera mainCamera;
 
     [Header("Prefabs")]
     public GameObject bramble;
+    public GameObject bullet;
 
     [Header("Misc.")]
     [ReadOnly] public float targetSpeed;
@@ -29,6 +31,5 @@ namespace stal.HSM.Contexts
     [ReadOnly] public string statePath;
     [HideInInspector] public string previousStatePath;
     [ReadOnly] public Vector2 mouseScreenToWorldPos;
-    [ReadOnly] public Vector3 needleRayDirection;
   }
 }

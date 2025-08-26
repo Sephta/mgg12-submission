@@ -24,6 +24,11 @@ namespace stal.HSM.PlayerStates
     protected override void OnEnter()
     {
       _playerEventDataSO.AttackChainCompleted.OnEventRaised += RequestTransitionOutOfAttackState;
+
+      if (_playerAbilityDataSO.CurrentlyEquippedArm != null && _playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Gun)
+      {
+        FireGunArm();
+      }
     }
 
     protected override void OnExit()
@@ -37,6 +42,20 @@ namespace stal.HSM.PlayerStates
     {
       _playerAttributesDataSO.UpdateIsAttacking(false);
       StateMachine.Sequencer.RequestTransition(this, ((PlayerRoot)Parent).Movement);
+    }
+
+    private void FireGunArm()
+    {
+      GameObject bulletObject = Object.Instantiate(
+        _playerContext.bullet,
+        _playerContext.bulletSpawnTransform.position,
+        _playerContext.bulletSpawnTransform.rotation,
+        _playerContext.bulletSpawnTransform
+      );
+
+      BulletHandler bulletHandler = bulletObject.GetComponent<BulletHandler>();
+
+      bulletHandler.DirectionOfFire.x = ((Vector2)(_playerContext.bulletSpawnTransform.position - _playerContext.transform.position)).normalized.x;
     }
   }
 }

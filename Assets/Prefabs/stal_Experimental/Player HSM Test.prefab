@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _spriteRenderer: {fileID: 7490230254331191788}
   _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
+  _playerMovementData: {fileID: 0}
   _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
   _playerAbilityData: {fileID: 11400000, guid: 56713abed363fa1489b17c2ed7fd735b, type: 2}
 --- !u!1 &4550991102000284862
@@ -204,7 +205,7 @@ Transform:
   m_GameObject: {fileID: 4550991102000284862}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.5, z: 0}
+  m_LocalPosition: {x: 0.5, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -268,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 917c59b5b4556484cb50d4e6f612737d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitBoxOffset: {x: 0.5, y: 0.5}
+  _hitBoxOffset: {x: 0.5, y: 0.8}
   _boxCollider2D: {fileID: 4904698661491528826}
   _tagToCollideWith: Enemy
   _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
@@ -399,10 +400,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerContext:
     transform: {fileID: 5696392734424121139}
+    bulletSpawnTransform: {fileID: 8823550523605464601}
     rigidbody2D: {fileID: 3223607612974835784}
     boxCollider2D: {fileID: 5227456159021041451}
     mainCamera: {fileID: 0}
     bramble: {fileID: 6235908155116825014, guid: 4569688774915d74f957a64d30cf84fc, type: 3}
+    bullet: {fileID: 6911646788565879386, guid: 973bd5094e0a2a44abc26aeb075d461f, type: 3}
     targetSpeed: 0
     coyoteTime: 0
     jumpBufferWindow: 0
@@ -413,7 +416,6 @@ MonoBehaviour:
     statePath: 
     previousStatePath: 
     mouseScreenToWorldPos: {x: 0, y: 0}
-    needleRayDirection: {x: 0, y: 0, z: 0}
   _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
 --- !u!1 &6592717489559526013
 GameObject:

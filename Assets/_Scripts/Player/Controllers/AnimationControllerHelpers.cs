@@ -17,8 +17,8 @@ namespace stal.Helpers.Animation
     COMBAT02,
     COMBAT03,
     TRANSITION01,
-    SHOOTBASIC,
-    SHOOTALT,
+    SHOOT_BASIC,
+    SHOOT_ALT,
     WALL_CLING
   }
 

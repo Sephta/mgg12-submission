@@ -84,11 +84,13 @@ namespace stal.HSM.PlayerStates
     private void OnAttack(InputAction.CallbackContext context)
     {
       // If our arm has a combat ability and we are grounded we should immediatly enter the attack state
-      if (_playerAbilityDataSO.CurrentlyEquippedArm != null
+      if (context.started
+        && _playerAbilityDataSO.CurrentlyEquippedArm != null
         && _playerAbilityDataSO.CurrentlyEquippedArm.CombatAbility != null
-        && _playerAttributesDataSO.IsGrounded)
+        && _playerAttributesDataSO.IsGrounded
+        && !_playerAttributesDataSO.IsAttacking)
       {
-        if (context.started && !_playerAttributesDataSO.IsAttacking) _playerAttributesDataSO.UpdateIsAttacking(true);
+        _playerAttributesDataSO.UpdateIsAttacking(true);
         StateMachine.Sequencer.RequestTransition(this, Attack);
       }
     }
