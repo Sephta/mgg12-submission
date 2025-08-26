@@ -38,10 +38,7 @@
 	"backupRelPath": null,
 	"levelNamePattern": "Level_%idx",
 	"tutorialDesc": null,
-	"customCommands": [{
-		"command": "../../../Library/LDtkTilesetExporter/ExportTilesetDefinition.exe \"MGG12Map0.3.3\"",
-		"when": "AfterSave"
-	}],
+	"customCommands": [{ "command": "../../../Library/LDtkTilesetExporter/ExportTilesetDefinition.exe \"MGG12Map0.3.3\"", "when": "AfterSave" }],
 	"flags": [],
 	"defs": { "layers": [
 		{

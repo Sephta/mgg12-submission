@@ -1,0 +1,736 @@
+fileFormatVersion: 2
+guid: 87e5db458728c854081d01006c814e8a
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: f3268c876daf4890b6af6cd462063137, type: 3}
+  _reimportOnDependencyChange: 1
+  _pixelsPerUnit: 32
+  _overrideTexture: {instanceID: 0}
+  _sprites:
+  - name: Tilemap_template_01_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 3e0096280136d4f44b1df80814a25817
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_1
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 16
+      y: 0
+      width: 16
+      height: 16
+    spriteID: b677c4dc7f03e8143b2b799727b3971d
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_2
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 0
+      width: 16
+      height: 16
+    spriteID: f05a15961b37cae4e87edaa9b4438ede
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_3
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 48
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 28e56a795cb92a84a8e28996a5102cbd
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_4
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 64
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 4abf48cc5946cb041b3ca65af0af646f
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_5
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 80
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 46c3f19cae941604a882d8c9853cd16f
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_6
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 96
+      y: 0
+      width: 16
+      height: 16
+    spriteID: d169c024bce777640abe57f751ce7855
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_7
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 112
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 40f5d8970be037a479535b6a07417114
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_8
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 128
+      y: 0
+      width: 16
+      height: 16
+    spriteID: a000eedd259b7fd48ac8eaf768f71ba8
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_9
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 144
+      y: 0
+      width: 16
+      height: 16
+    spriteID: d058625d33b0b1b4e9363d9b37146faa
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_10
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 160
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 316abab9b612f2f43b0f8fb25599313f
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_11
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 176
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 694dd001c678337478755c012223e6f3
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_12
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 192
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 520a241eee55dfb42b89fc57427a22c6
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_13
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 208
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 10def9e3416de274887d17915c5d399e
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_14
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 224
+      y: 0
+      width: 16
+      height: 16
+    spriteID: ef288718e2e28bf46a1583d0bed7291c
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_15
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 240
+      y: 0
+      width: 16
+      height: 16
+    spriteID: b2a14f174a540be429f68e462fb28e9a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_16
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 256
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 284eb62d94f1a4542a04edf6e4df50fb
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_17
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 272
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 0cbb7124ea5c9e7488e65fdf4f918e0a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_18
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 288
+      y: 0
+      width: 16
+      height: 16
+    spriteID: a74c3cece5bf6934aa247c27c02ee1e0
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_19
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 304
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 6c8016e8a5e451a46a0a01db1991645b
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_20
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 320
+      y: 0
+      width: 16
+      height: 16
+    spriteID: c5710f98e25b0104fa858928f6cef7f2
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_21
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 336
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 8cf997678de97284bb677de986f50451
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_22
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 352
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 42b19b4982668a1488309871ab93a836
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_23
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 368
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 32fdd3a72cd87f340a6a0c0ccfdbf17f
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_24
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 384
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 949cc1c5db1b8f24db2747655899bccb
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_25
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 400
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 25dbf1b9ef9095b40bb675632a109a1b
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_26
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 416
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 17269ceaa38638f4ca8fdb3108fad4d0
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_27
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 432
+      y: 0
+      width: 16
+      height: 16
+    spriteID: dc59eb12783502f4081c1ee15b4b4aa3
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_28
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 448
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 1997a976947c1ec4287c276b9f4f2193
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_29
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 464
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 9c87f64e5be28f141a5dac1138c48039
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_30
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 480
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 3d4d8bb7a30ca98448d104ed2bcd0489
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_31
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 496
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 6bb7ffaae6ef8314f8338cfc84d4b146
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_32
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 512
+      y: 0
+      width: 16
+      height: 16
+    spriteID: c13a01410c8fd494a8f655f6981b7313
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_33
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 528
+      y: 0
+      width: 16
+      height: 16
+    spriteID: e312fdd8090707a448a52884ba65b5be
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_34
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 544
+      y: 0
+      width: 16
+      height: 16
+    spriteID: edbc93ac95cb59f45aa822952b0fd4f6
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_35
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 560
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 36411f1cdaf5b734082aea2c96f221a0
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_36
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 576
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 5b6cc423dea12e44f9ba5cf796187400
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_37
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 592
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 9a4aff4d75adeec4fa17d1134130548f
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_38
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 608
+      y: 0
+      width: 16
+      height: 16
+    spriteID: e632ba39df21b8e488d082f9ac81b0eb
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_39
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 624
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 04c30dd7b45012343995a2bd1400ecc4
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_40
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 640
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 8c6ecdedd8c4af847a8a3d67fbbcdf95
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_41
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 656
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 4b6125826c9b43b45873d85af9ccbd2a
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_42
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 672
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 43e5adecbddf0524eae5f74a3fa23210
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_43
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 688
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 423bbcdf19e6c3744afe55f33fefc559
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_44
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 704
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 4dc6647cec9dd594f85140ac1ffd9fde
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_45
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 720
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 3c2ea9f1d8564bd44bfa2648e6a3cd33
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_46
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 736
+      y: 0
+      width: 16
+      height: 16
+    spriteID: 27eb7298593144641ba40587e60ea216
+    spriteOutline: []
+    tessellationDetail: 0
+  - name: Tilemap_template_01_47
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 752
+      y: 0
+      width: 16
+      height: 16
+    spriteID: e43c47f8a5ef7084f9f6d06406525289
+    spriteOutline: []
+    tessellationDetail: 0
+  _secondaryTextures: []
+  _artifacts: {instanceID: 0}
