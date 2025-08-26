@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
-public class AnimatorController : MonoBehaviour
+public class PlayerAnimatorController : MonoBehaviour
 {
   [Header("Component References"), Space(10f)]
 
