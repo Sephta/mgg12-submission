@@ -16,8 +16,7 @@ MonoBehaviour:
   <Damage>k__BackingField: 10
   <Range>k__BackingField: 10
   <AttackChainingInputBuffer>k__BackingField: 0.25
-  <AnimatorController>k__BackingField: {fileID: 1448536407188107168, guid: f4ca18e83f93cc342a7f0990a527062c, type: 3}
   AttackAnimationClips:
-  - {fileID: -6841456751759041392, guid: f4ca18e83f93cc342a7f0990a527062c, type: 3}
-  - {fileID: -5421795995074289662, guid: f4ca18e83f93cc342a7f0990a527062c, type: 3}
-  - {fileID: -1943220141635983029, guid: f4ca18e83f93cc342a7f0990a527062c, type: 3}
+  - {fileID: -6841456751759041392, guid: f84b40c906d2a0a4595ace0924e483e1, type: 3}
+  - {fileID: -5421795995074289662, guid: f84b40c906d2a0a4595ace0924e483e1, type: 3}
+  - {fileID: -1943220141635983029, guid: f84b40c906d2a0a4595ace0924e483e1, type: 3}

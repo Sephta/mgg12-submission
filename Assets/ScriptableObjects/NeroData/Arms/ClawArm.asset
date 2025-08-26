@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: ClawArm
   m_EditorClassIdentifier: 
   ArmType: 2
-  <AnimatorController>k__BackingField: {fileID: 1448536407188107168, guid: f4ca18e83f93cc342a7f0990a527062c, type: 3}
+  <AnimatorController>k__BackingField: {fileID: 1448536407188107168, guid: f84b40c906d2a0a4595ace0924e483e1, type: 3}
   <EnvironmentalAbility>k__BackingField: {fileID: 11400000, guid: 2346fbf08cdeea74cab7142439525e4c, type: 2}
   <CombatAbility>k__BackingField: {fileID: 11400000, guid: b64d0b64c5bfe9d44b7d7b1d3f618874, type: 2}
