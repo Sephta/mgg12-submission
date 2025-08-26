@@ -37,23 +37,42 @@ namespace stal.HSM.PlayerStates
     protected override void OnEnter()
     {
       _playerEventDataSO.Attack.OnEventRaised += OnAttack;
+      _playerEventDataSO.Environment.OnEventRaised += OnEnvironment;
     }
 
     protected override void OnExit()
     {
       _playerEventDataSO.Attack.OnEventRaised -= OnAttack;
+      _playerEventDataSO.Environment.OnEventRaised -= OnEnvironment;
     }
 
     protected override void OnUpdate(float deltaTime)
     {
+      if (_playerAttributesDataSO.IsTouchingWall && _playerAttributesDataSO.IsTakingAim && !_playerAttributesDataSO.IsLatchedOntoWall)
+      {
+        _playerAttributesDataSO.UpdateIsLatchedOntoWall(true);
+        StateMachine.Sequencer.RequestTransition(this, Nero);
+      }
+
       // We need to decelerate the player back to zero no matter what state we're in because
       // otherwise we slide infinitely with no friction outside of the Movement state. 
       // The deceleration is the friction bringing our linear velocity back to zero.
       if (ActiveChild != Movement)
       {
+        float accelRate;
+
+        if (_playerAttributesDataSO.IsGrounded)
+        {
+          accelRate = _playerMovementDataSO.RunDecelerationAmount;
+        }
+        else
+        {
+          accelRate = _playerMovementDataSO.RunDecelerationAmount * _playerMovementDataSO.DecelerationAirMultiplier;
+        }
+
         float delta = 0 - _playerContext.rigidbody2D.linearVelocityX;
 
-        float force = delta * _playerMovementDataSO.RunDecelerationAmount;
+        float force = delta * accelRate;
 
         // Multiplying by Vector2.right is a quick way to convert the calculation into a vector
         _playerContext.rigidbody2D.AddForce(force * Time.fixedDeltaTime * Vector2.right, ForceMode2D.Force);
@@ -72,6 +91,58 @@ namespace stal.HSM.PlayerStates
         if (context.started && !_playerAttributesDataSO.IsAttacking) _playerAttributesDataSO.UpdateIsAttacking(true);
         StateMachine.Sequencer.RequestTransition(this, Attack);
       }
+    }
+
+    private void OnEnvironment(InputAction.CallbackContext context)
+    {
+      if (context.started)
+      {
+
+        if (_playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Needle
+          && !_playerAttributesDataSO.IsNeedling
+          && !_playerAttributesDataSO.IsAttacking
+          && PlayerFoundAnchorPointForNeedle())
+        {
+          _playerAttributesDataSO.UpdateIsNeedling(true);
+          StateMachine.Sequencer.RequestTransition(this, Nero);
+        }
+      }
+    }
+
+    private bool PlayerFoundAnchorPointForNeedle()
+    {
+      bool result = false;
+      Vector2 rayDirection = Vector2.zero;
+      if (_playerAttributesDataSO.PlayerMoveDirection != Vector2.zero)
+      {
+        if (Mathf.Abs(_playerAttributesDataSO.PlayerMoveDirection.x) > Mathf.Abs(_playerAttributesDataSO.PlayerMoveDirection.y))
+        {
+          rayDirection.x = Mathf.Sign(_playerAttributesDataSO.PlayerMoveDirection.x) >= 0 ? 1f : -1f;
+        }
+        else
+        {
+          rayDirection.y = Mathf.Sign(_playerAttributesDataSO.PlayerMoveDirection.y) >= 0 ? 1f : 0f;
+        }
+      }
+
+      if (rayDirection != Vector2.zero)
+      {
+        // fire ray
+        RaycastHit2D aimRaycast = Physics2D.Raycast(
+          _playerContext.transform.position + (Vector3.up * 0.5f),
+          rayDirection,
+          _playerMovementDataSO.AbilityAimRaycastDistance,
+          _playerMovementDataSO.LayersConsideredForGroundingPlayer
+        );
+
+        // check if we hit something
+        if (aimRaycast)
+        {
+          result = true;
+        }
+      }
+
+      return result;
     }
 
     private void ClampPlayerMovement()

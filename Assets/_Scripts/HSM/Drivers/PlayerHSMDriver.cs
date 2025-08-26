@@ -173,6 +173,22 @@ namespace stal.HSM.Drivers
       _playerContext.needleRayDirection = rayDirection;
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+      if ((_playerMovementData.LayersConsideredForPlayerTouchingWall & (1 << collision.gameObject.layer)) != 0)
+      {
+        _playerAttributesData.UpdateIsTouchingWall(true);
+      }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+      if ((_playerMovementData.LayersConsideredForPlayerTouchingWall & (1 << collision.gameObject.layer)) != 0)
+      {
+        _playerAttributesData.UpdateIsTouchingWall(false);
+      }
+    }
+
     /* ---------------------------------------------------------------- */
     /*                               PUBLIC                             */
     /* ---------------------------------------------------------------- */

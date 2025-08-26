@@ -18,7 +18,8 @@ namespace stal.Helpers.Animation
     COMBAT03,
     TRANSITION01,
     SHOOTBASIC,
-    SHOOTALT
+    SHOOTALT,
+    WALL_CLING
   }
 
   // Dictionaries are not serializable in the inspector by default in Unity. To get around this

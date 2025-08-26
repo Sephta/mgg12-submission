@@ -88,6 +88,7 @@ public class PlayerAnimatorController : MonoBehaviour
   private int AnimationSelector()
   {
     if (_playerAttributesData.IsNeedling) return _animationStates.StateNameToHash[nameof(AnimationStates.ENVIRON01)];
+    if (_playerAttributesData.IsLatchedOntoWall) return _animationStates.StateNameToHash[nameof(AnimationStates.WALL_CLING)];
 
     if (_playerAttributesData.IsGrounded)
     {

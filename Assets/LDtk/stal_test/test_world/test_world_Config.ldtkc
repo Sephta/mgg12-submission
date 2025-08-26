@@ -13,10 +13,18 @@
     "UseParallax": true,
     "IntGridValues": [
         {
-            "_key": "BlockingIntGrid_1",
+            "_key": "GroundIntGrid_1",
             "_asset": {
                 "fileID": 11400000,
                 "guid": "d4bb3d4daaa7eb94faa0cd485506e596",
+                "type": 2
+            }
+        },
+        {
+            "_key": "WallIntGrid_1",
+            "_asset": {
+                "fileID": 11400000,
+                "guid": "4ca24703ecdfa4d4d97df7a5715170b1",
                 "type": 2
             }
         }

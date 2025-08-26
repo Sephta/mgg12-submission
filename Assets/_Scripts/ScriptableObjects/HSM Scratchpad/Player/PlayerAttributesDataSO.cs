@@ -30,6 +30,9 @@ public class PlayerAttributesDataSO : ScratchpadDataSO
   public bool IsGrounded { get; private set; }
 
   [field: SerializeField, ReadOnly]
+  public bool IsTouchingWall { get; private set; }
+
+  [field: SerializeField, ReadOnly]
   public bool IsJumping { get; private set; }
 
   [field: SerializeField, ReadOnly]
@@ -43,6 +46,9 @@ public class PlayerAttributesDataSO : ScratchpadDataSO
 
   [field: SerializeField, ReadOnly]
   public bool IsNeedling { get; private set; }
+
+  [field: SerializeField, ReadOnly]
+  public bool IsLatchedOntoWall { get; private set; }
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -64,11 +70,13 @@ public class PlayerAttributesDataSO : ScratchpadDataSO
   public void UpdatePlayerMousePosition(Vector2 state) => PlayerMousePosition = state;
   public void UpdatePlayerAimDirection(Vector2 state) => PlayerAimDirection = state;
   public void UpdateIsGrounded(bool state) => IsGrounded = state;
+  public void UpdateIsTouchingWall(bool state) => IsTouchingWall = state;
   public void UpdateIsJumping(bool state) => IsJumping = state;
   public void UpdateIsAttacking(bool state) => IsAttacking = state;
   public void UpdateIsTakingAim(bool state) => IsTakingAim = state;
   public void UpdateIsConfirmingAim(bool state) => IsConfirmingAim = state;
   public void UpdateIsNeedling(bool state) => IsNeedling = state;
+  public void UpdateIsLatchedOntoWall(bool state) => IsLatchedOntoWall = state;
 
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
@@ -82,10 +90,12 @@ public class PlayerAttributesDataSO : ScratchpadDataSO
     PlayerMousePosition = Vector2.zero;
     PlayerAimDirection = Vector2.zero;
     IsGrounded = false;
+    IsTouchingWall = false;
     IsJumping = false;
     IsAttacking = false;
     IsTakingAim = false;
     IsConfirmingAim = false;
     IsNeedling = false;
+    IsLatchedOntoWall = false;
   }
 }
