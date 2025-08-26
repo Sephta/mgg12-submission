@@ -17,6 +17,11 @@ public class NeroArmDataSO : ScriptableObject
   public NeroArmType ArmType;
 
   [field: Space(10f)]
+
+  [field: SerializeField]
+  public RuntimeAnimatorController AnimatorController { get; private set; }
+
+  [field: Space(10f)]
   [field: Header("Abilities")]
 
   [field: SerializeField, Expandable]

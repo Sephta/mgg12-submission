@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: NeedleArm
   m_EditorClassIdentifier: 
   ArmType: 1
+  <AnimatorController>k__BackingField: {fileID: -3249770948800503350, guid: 81ad00ee30b0bac4c95e5f218dec066d, type: 3}
   <EnvironmentalAbility>k__BackingField: {fileID: 11400000, guid: 2de2ccef6ea81ce4e9f37e3bc8e71fba, type: 2}
   <CombatAbility>k__BackingField: {fileID: 11400000, guid: 2c1c3dd6a56f4ba48b6d2dcaba84c00f, type: 2}

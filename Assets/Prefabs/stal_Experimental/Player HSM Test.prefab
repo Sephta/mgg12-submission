@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7490230254331191788}
   - component: {fileID: 5267990119152243958}
   - component: {fileID: 5112704584201516168}
+  - component: {fileID: 584993099492222139}
+  - component: {fileID: 3451586466980204536}
   m_Layer: 0
   m_Name: Visuals
   m_TagString: Untagged
@@ -123,32 +125,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ade81f0f10b6bf4690aaf829b3286f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _animator: {fileID: 5267990119152243958}
-  _spriteRenderer: {fileID: 7490230254331191788}
-  _attackClip: {fileID: -6841456751759041392, guid: c1373b105ea4c1f49be84e3aa72bdc85, type: 3}
-  _playerHitZone: {fileID: 4904698661491528826}
+  _componentRefs:
+    animator: {fileID: 5267990119152243958}
+    spriteRenderer: {fileID: 7490230254331191788}
+  _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
+  _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
+  _playerAbilityData: {fileID: 11400000, guid: 56713abed363fa1489b17c2ed7fd735b, type: 2}
+  _transitionDuration: 0
+  _animationLayer: 0
+  _animationStates: {fileID: 11400000, guid: 715257ff70964cd479c60a892b94594f, type: 2}
+--- !u!114 &584993099492222139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370699169781847061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d064604dc29d6499eed0655326273b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _componentRefs:
+    animator: {fileID: 5267990119152243958}
+    spriteRenderer: {fileID: 7490230254331191788}
+    playerHitZone: {fileID: 4904698661491528826}
   _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
   _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
   _playerAbilityData: {fileID: 11400000, guid: 56713abed363fa1489b17c2ed7fd735b, type: 2}
   _playerEventData: {fileID: 11400000, guid: 8992863c5f19e8345aae1d3d1f34b837, type: 2}
   _transitionDuration: 0
   _animationLayer: 0
-  _animationStates:
-    m_Keys:
-    - IDLE
-    - RUN
-    - JUMP
-    - FALLING
-    - AIM
-    - ENVIRON01
-    - COMBAT01
-    - COMBAT02
-    - COMABT03
-    m_Values: 15b524dcc0a476501606b3a7d4ea3ef40eb56831565d59b9b71ada4f0d4bd3d6a5aec1f4
+  _animationStates: {fileID: 11400000, guid: 715257ff70964cd479c60a892b94594f, type: 2}
   _currentAttackAnimationIndex: 0
   _isHoldingAttackButton: 0
   _lookForInputToBuffer: 0
   _attackBuffer: 0
+--- !u!114 &3451586466980204536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370699169781847061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e0611426f770404587068346e21b593, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 7490230254331191788}
+  _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
+  _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
+  _playerAbilityData: {fileID: 11400000, guid: 56713abed363fa1489b17c2ed7fd735b, type: 2}
 --- !u!1 &4550991102000284862
 GameObject:
   m_ObjectHideFlags: 0

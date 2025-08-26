@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BrambleArm
   m_EditorClassIdentifier: 
   ArmType: 0
+  <AnimatorController>k__BackingField: {fileID: -3249770948800503350, guid: 81ad00ee30b0bac4c95e5f218dec066d, type: 3}
   <EnvironmentalAbility>k__BackingField: {fileID: 11400000, guid: 61d5a795f960ff344ad5e5c95dddb454, type: 2}
   <CombatAbility>k__BackingField: {fileID: 0}

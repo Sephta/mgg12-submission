@@ -15,3 +15,6 @@ MonoBehaviour:
   <Speed>k__BackingField: 1
   <Damage>k__BackingField: 10
   <Range>k__BackingField: 10
+  <AttackChainingInputBuffer>k__BackingField: 0
+  <AnimatorController>k__BackingField: {fileID: -3249770948800503350, guid: 81ad00ee30b0bac4c95e5f218dec066d, type: 3}
+  AttackAnimationClips: []

@@ -34,7 +34,7 @@ namespace stal.HSM.PlayerStates
       if (_pointToTravelTo != null && _pointToTravelTo != Vector3.zero && _doTravel)
       {
         Debug.Log("Point To Travel to: " + _pointToTravelTo);
-        _playerContext.transform.DOMove(_pointToTravelTo, 2f)
+        _playerContext.transform.DOMove(_pointToTravelTo, 0.5f)
           .SetLink(_playerContext.transform.gameObject)
           .OnComplete(() =>
           {

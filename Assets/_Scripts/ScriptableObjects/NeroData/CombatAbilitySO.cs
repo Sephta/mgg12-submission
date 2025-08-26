@@ -24,9 +24,6 @@ public class CombatAbilitySO : ScriptableObject
   [field: Header("Combat Animation Data")]
   [field: Space(10f)]
 
-  [field: SerializeField]
-  public RuntimeAnimatorController AnimatorController { get; private set; }
-
   public List<AnimationClip> AttackAnimationClips = new();
 
   /* ---------------------------------------------------------------- */

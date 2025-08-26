@@ -1,19 +1,13 @@
-using System;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Rendering;
 
 [RequireComponent(typeof(Animator), typeof(SpriteRenderer))]
-public class AnimatorController : MonoBehaviour
+public class PlayerCombatAnimatorController : MonoBehaviour
 {
   [Header("Component References"), Space(10f)]
-
-  [SerializeField] private Animator _animator;
-  [SerializeField] private SpriteRenderer _spriteRenderer;
-  [SerializeField] private AnimationClip _attackClip;
-  [SerializeField] private BoxCollider2D _playerHitZone;
+  [SerializeField] private CombatAnimatorComponentReferences _componentRefs = new();
 
   [Header("Player Data"), Space(10f)]
 
@@ -32,43 +26,9 @@ public class AnimatorController : MonoBehaviour
 
   [SerializeField] private int _transitionDuration = 0;
   [SerializeField] private int _animationLayer = 0;
+  [SerializeField, Expandable] private PlayerAnimationStatesSO _animationStates;
 
-  // Define animation states here. These should be the names of each node 
-  // in the Animator graph that the aseprite importer generates.
-  private enum AnimationStates
-  {
-    IDLE,
-    RUN,
-    JUMP,
-    FALLING,
-    AIM,
-    ENVIRON01,
-    COMBAT01,
-    COMBAT02,
-    COMBAT03,
-    TRANSITION01,
-    SHOOTBASIC,
-    SHOOTALT
-  }
-
-  // Dictionaries are not serializable in the inspector by default in Unity. To get around this
-  // we use Unity's "SerializedDictionary" wrapper class. This class itself requires that we 
-  // extend it in a new class before use.
-  [Serializable]
-  public class StringIntDictionary : SerializedDictionary<string, int> { }
-  [Serializable]
-  public class IntStringDictionary : SerializedDictionary<int, string> { }
-
-  // Marked read only because they should be visible in the inspector but only editable in code.
-  // We will map an enumeration defined above to an existing state name hash from the animator.
-  // This will make it so that we do not need to rely on the string name of the animation state
-  // to play the animation. We can just use the int hash stored in this dictionary.
-  [ReadOnly] public StringIntDictionary _animationStates = new();
-
-  // Its probably useful to store an easy way to get the animator state name using the int hash.
-  // This container is populated using the button defined bellow (accessible from the inspector)
-  private IntStringDictionary _stateHashToName = new();
-
+  [Space(10f)]
   [Header("Debug")]
   [SerializeField, ReadOnly] private int _currentAttackAnimationIndex = 0;
   [SerializeField, ReadOnly] private bool _isHoldingAttackButton = false;
@@ -114,18 +74,12 @@ public class AnimatorController : MonoBehaviour
       gameObject.SetActive(false);
     }
 
-    if (_animator == null) _animator = GetComponent<Animator>();
-    if (_spriteRenderer == null) _spriteRenderer = GetComponent<SpriteRenderer>();
-
-    // Build/ReBuild the dictionaries on awake.
-    PopulateAnimationDictionary();
+    if (_componentRefs.animator == null) _componentRefs.animator = GetComponent<Animator>();
+    if (_componentRefs.spriteRenderer == null) _componentRefs.spriteRenderer = GetComponent<SpriteRenderer>();
 
     AddAnimationEventsToPlayerArmAttacks();
 
-    if (_playerAbilityData.CurrentlyEquippedArm != null && _playerAbilityData.CurrentlyEquippedArm.CombatAbility != null)
-    {
-      _animator.runtimeAnimatorController = _playerAbilityData.CurrentlyEquippedArm.CombatAbility.AnimatorController;
-    }
+    OnPlayerArmFinishedCycling();
   }
 
   // private void Start() {}
@@ -144,11 +98,6 @@ public class AnimatorController : MonoBehaviour
 
   private void Update()
   {
-    FlipSpriteBasedOnPlayerAttributesData();
-
-    // Check which animation we should be playing next.
-    int nextAnimationToPlay = AnimationSelector();
-
     // If the player is in the attacking state we should handle attack animations.
     if (_playerAttributesData.IsAttacking && _playerAbilityData.CurrentlyEquippedArm.CombatAbility != null)
     {
@@ -160,15 +109,12 @@ public class AnimatorController : MonoBehaviour
       if (_playerAbilityData.CurrentlyEquippedArm.CombatAbility.AttackAnimationClips.Count > 0)
       {
         string stateNameInAttackChain = _playerAbilityData.CurrentlyEquippedArm.CombatAbility.AttackAnimationClips[_currentAttackAnimationIndex].name.ToUpper();
-        _animator.CrossFade(_animationStates[stateNameInAttackChain], _transitionDuration, _animationLayer);
+        _componentRefs.animator.CrossFade(_animationStates.StateNameToHash[stateNameInAttackChain], _transitionDuration, _animationLayer);
       }
     }
-    else
-    {
-      // If we're not in the attacking state just handle animations as we would normally.
-      _animator.CrossFade(nextAnimationToPlay, _transitionDuration, _animationLayer);
-    }
   }
+
+  // private void FixedUpdate() {}
 
   /* ---------------------------------------------------------------- */
   /*                               PUBLIC                             */
@@ -189,24 +135,24 @@ public class AnimatorController : MonoBehaviour
 
   private void OnPlayerArmFinishedCycling()
   {
-    if (_playerAbilityData.CurrentlyEquippedArm != null && _playerAbilityData.CurrentlyEquippedArm.CombatAbility != null)
+    if (_playerAbilityData.CurrentlyEquippedArm != null)
     {
-      _animator.runtimeAnimatorController = _playerAbilityData.CurrentlyEquippedArm.CombatAbility.AnimatorController;
+      _componentRefs.animator.runtimeAnimatorController = _playerAbilityData.CurrentlyEquippedArm.AnimatorController;
     }
   }
 
   private void EnablePlayerHitzone()
   {
-    if (_playerHitZone == null) return;
+    if (_componentRefs.playerHitZone == null) return;
 
-    if (_playerAttributesData.IsAttacking) _playerHitZone.enabled = true;
+    if (_playerAttributesData.IsAttacking) _componentRefs.playerHitZone.enabled = true;
   }
 
   private void DisablePlayerHitzone()
   {
-    if (_playerHitZone == null) return;
+    if (_componentRefs.playerHitZone == null) return;
 
-    _playerHitZone.enabled = false;
+    _componentRefs.playerHitZone.enabled = false;
   }
 
   private void HandleAttackInputBuffer()
@@ -290,59 +236,4 @@ public class AnimatorController : MonoBehaviour
       }
     }
   }
-
-  private void PopulateAnimationDictionary()
-  {
-    // Wipe them away
-    _animationStates.Clear();
-    _stateHashToName.Clear();
-
-    // Build/Re-Build them
-    foreach (AnimationStates animationState in (AnimationStates[])Enum.GetValues(typeof(AnimationStates)))
-    {
-      int hashedStateName = Animator.StringToHash(animationState.ToString().ToLower());
-      _animationStates.Add(animationState.ToString(), hashedStateName);
-      _stateHashToName.Add(hashedStateName, animationState.ToString().ToLower());
-    }
-  }
-
-  private int AnimationSelector()
-  {
-    if (_playerAttributesData.IsGrounded)
-    {
-      if (_playerAttributesData.IsTakingAim && _playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral)
-      {
-        return _animationStates[nameof(AnimationStates.AIM)];
-      }
-
-      return IsMoving() ? _animationStates[nameof(AnimationStates.RUN)] : _animationStates[nameof(AnimationStates.IDLE)];
-    }
-    else
-    {
-      if (IsFalling()) return _animationStates[nameof(AnimationStates.FALLING)];
-      return _animationStates[nameof(AnimationStates.JUMP)];
-    }
-  }
-
-  private bool IsMoving() => _playerAttributesData.PlayerMoveDirection.x != 0;
-
-  private bool IsFalling() => _playerAttributesData.PlayerVelocity.y < 0 && !_playerAttributesData.IsGrounded;
-
-  private void FlipSpriteBasedOnPlayerAttributesData()
-  {
-    if (_playerAttributesData.IsAttacking) return;
-
-    if (_playerAttributesData.IsTakingAim
-      && _playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral
-      && _playerAttributesData.IsGrounded)
-    {
-      if (_playerAttributesData.PlayerAimDirection.x != 0)
-        _spriteRenderer.flipX = _playerAttributesData.PlayerAimDirection.x < 0;
-    }
-    else if (_playerAttributesData.PlayerMoveDirection.x != 0)
-    {
-      _spriteRenderer.flipX = _playerAttributesData.PlayerMoveDirection.x < 0;
-    }
-  }
-
 }
