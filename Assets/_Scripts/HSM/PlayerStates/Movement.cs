@@ -160,13 +160,52 @@ namespace stal.HSM.PlayerStates
     {
       if (context.started)
       {
-        Debug.Log("Environment Button Pressed from with Movement State of player state machine.");
-        if (_playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Needle && !_playerAttributesDataSO.IsNeedling)
+
+        if (_playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Needle
+          && !_playerAttributesDataSO.IsNeedling
+          && !_playerAttributesDataSO.IsAttacking
+          && PlayerFoundAnchorPointForNeedle())
         {
           _playerAttributesDataSO.UpdateIsNeedling(true);
           StateMachine.Sequencer.RequestTransition(this, ((PlayerRoot)Parent).Nero);
         }
       }
+    }
+
+    private bool PlayerFoundAnchorPointForNeedle()
+    {
+      bool result = false;
+      Vector2 rayDirection = Vector2.zero;
+      if (_playerAttributesDataSO.PlayerMoveDirection != Vector2.zero)
+      {
+        if (Mathf.Abs(_playerAttributesDataSO.PlayerMoveDirection.x) > Mathf.Abs(_playerAttributesDataSO.PlayerMoveDirection.y))
+        {
+          rayDirection.x = Mathf.Sign(_playerAttributesDataSO.PlayerMoveDirection.x) >= 0 ? 1f : -1f;
+        }
+        else
+        {
+          rayDirection.y = Mathf.Sign(_playerAttributesDataSO.PlayerMoveDirection.y) >= 0 ? 1f : 0f;
+        }
+      }
+
+      if (rayDirection != Vector2.zero)
+      {
+        // fire ray
+        RaycastHit2D aimRaycast = Physics2D.Raycast(
+          _playerContext.transform.position + (Vector3.up * 0.5f),
+          rayDirection,
+          _playerMovementDataSO.AbilityAimRaycastDistance,
+          _playerMovementDataSO.LayersConsideredForGroundingPlayer
+        );
+
+        // check if we hit something
+        if (aimRaycast)
+        {
+          result = true;
+        }
+      }
+
+      return result;
     }
   }
 

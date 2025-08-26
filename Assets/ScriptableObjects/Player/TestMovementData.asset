@@ -53,11 +53,3 @@ MonoBehaviour:
   <GravityScale>k__BackingField: 3.8226297
   <RunAccelerationAmount>k__BackingField: 83.333336
   <RunDecelerationAmount>k__BackingField: 166.66667
-  <PlayerVelocity>k__BackingField: {x: 0, y: 0}
-  <PlayerMoveDirection>k__BackingField: {x: 0, y: 0}
-  <PlayerAimDirection>k__BackingField: {x: 0, y: 0}
-  <IsGrounded>k__BackingField: 0
-  <IsJumping>k__BackingField: 0
-  <IsAttacking>k__BackingField: 0
-  <IsTakingAim>k__BackingField: 0
-  <IsConfirmingAim>k__BackingField: 0

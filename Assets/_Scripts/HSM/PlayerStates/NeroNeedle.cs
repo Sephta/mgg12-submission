@@ -2,6 +2,7 @@ using DG.Tweening;
 using stal.HSM.Contexts;
 using stal.HSM.Core;
 using UnityEngine;
+using UnityEngine.Splines;
 
 namespace stal.HSM.PlayerStates
 {
@@ -68,7 +69,7 @@ namespace stal.HSM.PlayerStates
         }
         else
         {
-          rayDirection.y = Mathf.Sign(_playerAttributesDataSO.PlayerMoveDirection.y) >= 0 ? 1f : -1f;
+          rayDirection.y = Mathf.Sign(_playerAttributesDataSO.PlayerMoveDirection.y) >= 0 ? 1f : 0f;
         }
       }
 
@@ -96,5 +97,57 @@ namespace stal.HSM.PlayerStates
     {
       _playerAttributesDataSO.UpdateIsNeedling(false);
     }
+
+    // private void CreateNewSpline()
+    // {
+    //   if (_playerContext.splineContainer == null) return;
+
+    //   if (_playerContext.splineContainer.Splines.Count == 0)
+    //   {
+    //     Spline newSpline = new();
+    //     _playerContext.splineContainer.AddSpline(newSpline);
+    //   }
+
+    //   GenerateKnotsAlongSpline();
+    // }
+
+    // private void GenerateKnotsAlongSpline()
+    // {
+    //   if (_playerContext.splineContainer == null) return;
+    //   if (_playerContext.splineContainer.Spline == null || _playerContext.splineContainer.Splines.Count == 0) return;
+
+    //   var initialPosition = Vector3.zero;
+
+    //   BezierKnot startintKnot = new()
+    //   {
+    //     Position = initialPosition,
+    //     Rotation = _playerContext.transform.rotation
+    //   };
+
+    //   _playerContext.splineContainer.Spline.Add(startintKnot, TangentMode.AutoSmooth);
+
+    //   BezierKnot endingKnot = new()
+    //   {
+    //     Position = initialPosition,
+    //     Rotation = _playerContext.transform.rotation
+    //   };
+
+    //   _playerContext.splineContainer.Spline.Add(endingKnot, TangentMode.AutoSmooth);
+
+    //   // for (var i = 0; i < 5; i++)
+    //   // {
+    //   //   BezierKnot newKnot = new()
+    //   //   {
+    //   //     Position = initialPosition,
+    //   //     Rotation = _playerContext.transform.rotation
+    //   //   };
+
+    //   //   _playerContext.splineContainer.Spline.Add(newKnot, TangentMode.AutoSmooth);
+
+    //   //   Vector3 positionOffset = Vector3.up * 1f;
+    //   //   // positionOffset.x = Random.Range(_brambleSpawnParametersSO.KnotVariance.x, _brambleSpawnParametersSO.KnotVariance.y);
+    //   //   initialPosition += positionOffset;
+    //   // }
+    // }
   }
 }

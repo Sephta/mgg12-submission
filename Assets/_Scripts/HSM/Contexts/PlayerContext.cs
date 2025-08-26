@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Splines;
 
 namespace stal.HSM.Contexts
 {
@@ -11,6 +12,7 @@ namespace stal.HSM.Contexts
     public Rigidbody2D rigidbody2D;
     public BoxCollider2D boxCollider2D;
     public Camera mainCamera;
+    public SplineContainer splineContainer;
 
     [Header("Prefabs")]
     public GameObject bramble;

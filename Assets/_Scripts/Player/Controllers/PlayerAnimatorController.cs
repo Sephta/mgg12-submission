@@ -87,6 +87,8 @@ public class PlayerAnimatorController : MonoBehaviour
 
   private int AnimationSelector()
   {
+    if (_playerAttributesData.IsNeedling) return _animationStates.StateNameToHash[nameof(AnimationStates.ENVIRON01)];
+
     if (_playerAttributesData.IsGrounded)
     {
       if (_playerAttributesData.IsTakingAim && _playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral)

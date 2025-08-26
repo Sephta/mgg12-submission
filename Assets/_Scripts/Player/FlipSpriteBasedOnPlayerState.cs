@@ -82,7 +82,7 @@ public class FlipSpriteBasedOnPlayerState : MonoBehaviour
 
   private void FlipSpriteBasedOnPlayerAttributesData()
   {
-    if (_playerAttributesData.IsAttacking) return;
+    if (_playerAttributesData.IsAttacking || _playerAttributesData.IsNeedling) return;
 
     if (_playerAttributesData.IsTakingAim
       && _playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral
