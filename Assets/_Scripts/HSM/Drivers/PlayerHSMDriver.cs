@@ -224,7 +224,10 @@ namespace stal.HSM.Drivers
 
     private void OnSwapArmLeft(InputAction.CallbackContext context)
     {
-      if (context.started && !_playerAttributesData.IsAttacking)
+      if (context.started
+        && !_playerAttributesData.IsAttacking
+        && !_playerAttributesData.IsLatchedOntoWall
+        && !_playerAttributesData.IsNeedling)
       {
         _playerAbilityData.CycleArmLeft();
       }
@@ -232,7 +235,10 @@ namespace stal.HSM.Drivers
 
     private void OnSwapArmRight(InputAction.CallbackContext context)
     {
-      if (context.started && !_playerAttributesData.IsAttacking)
+      if (context.started
+        && !_playerAttributesData.IsAttacking
+        && !_playerAttributesData.IsLatchedOntoWall
+        && !_playerAttributesData.IsNeedling)
       {
         _playerAbilityData.CycleArmRight();
       }

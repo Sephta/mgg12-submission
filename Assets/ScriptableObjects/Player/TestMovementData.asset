@@ -26,12 +26,12 @@ MonoBehaviour:
   <JumpTimeToApex>k__BackingField: 0.4
   <JumpHangTimeThreshold>k__BackingField: 0.5
   <JumpInputBuffer>k__BackingField: 0.1
-  <WallJumpHorizontalForce>k__BackingField: 1
+  <WallJumpHorizontalForce>k__BackingField: 0.5
   <WallJumpVerticalForce>k__BackingField: 1
   <FallingGravityMultiplier>k__BackingField: 1.5
   <JumpHangTimeGravityMultiplier>k__BackingField: 0.5
   <ShortJumpGravityMultiplier>k__BackingField: 1.4
-  <SlideDownWallGravityMultiplier>k__BackingField: 1
+  <SlideDownWallGravityMultiplier>k__BackingField: 0.125
   <LayersConsideredForGroundingPlayer>k__BackingField:
     serializedVersion: 2
     m_Bits: 1216
@@ -55,7 +55,7 @@ MonoBehaviour:
     maxNormalAngle: 0
   <CoyoteTime>k__BackingField: 0.15
   <AbilityAimRaycastDistance>k__BackingField: 18
-  <TimeTillSlideDownWall>k__BackingField: 0.5
+  <TimeTillSlideDownWall>k__BackingField: 1
   <JumpingPower>k__BackingField: 15
   <GravityScale>k__BackingField: 3.8226297
   <RunAccelerationAmount>k__BackingField: 83.333336
