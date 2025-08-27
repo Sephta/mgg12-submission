@@ -42,8 +42,6 @@ namespace stal.HSM.PlayerStates
       UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier);
       Vector2 wallDirection = GetWallDirection();
 
-      Debug.Log("wall jump: " + _playerMovementDataSO.WallJumpHorizontalForce * _wallJumpBaseForce * Time.fixedDeltaTime * -wallDirection.x);
-
       if (wallDirection != Vector2.zero && _jumpPressed)
       {
         _jumpPressed = false;
@@ -58,7 +56,6 @@ namespace stal.HSM.PlayerStates
 
     protected override void OnUpdate(float deltaTime)
     {
-      Debug.Log("jump pressed: " + _jumpPressed);
       _currentTimeTillSlideDownWall = Mathf.Clamp(_currentTimeTillSlideDownWall - deltaTime, 0f, _playerMovementDataSO.TimeTillSlideDownWall);
 
       if (_jumpPressed)

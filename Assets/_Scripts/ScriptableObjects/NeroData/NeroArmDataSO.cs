@@ -1,4 +1,5 @@
 using NaughtyAttributes;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public enum NeroArmType
@@ -19,7 +20,10 @@ public class NeroArmDataSO : ScriptableObject
   [field: Space(10f)]
 
   [field: SerializeField]
-  public RuntimeAnimatorController AnimatorController { get; private set; }
+  public RuntimeAnimatorController RuntimeAnimatorController { get; private set; }
+
+  [field: SerializeField]
+  public AnimatorController AnimatorController { get; private set; }
 
   [field: Space(10f)]
   [field: Header("Abilities")]

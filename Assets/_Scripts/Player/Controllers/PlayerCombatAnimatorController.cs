@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,6 +35,7 @@ public class PlayerCombatAnimatorController : MonoBehaviour
   [SerializeField, ReadOnly] private bool _isHoldingAttackButton = false;
   [SerializeField, ReadOnly] private bool _lookForInputToBuffer = false;
   [SerializeField, ReadOnly] private bool _attackBuffer = false;
+  private readonly float _attackMoveForceBase = 100f;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -79,6 +81,8 @@ public class PlayerCombatAnimatorController : MonoBehaviour
 
     AddAnimationEventsToPlayerArmAttacks();
 
+    ModifyAnimationStateSpeedForEachPlayerArmAttack();
+
     OnPlayerArmFinishedCycling();
   }
 
@@ -101,15 +105,32 @@ public class PlayerCombatAnimatorController : MonoBehaviour
     // If the player is in the attacking state we should handle attack animations.
     if (_playerAttributesData.IsAttacking && _playerAbilityData.CurrentlyEquippedArm.CombatAbility != null)
     {
+      CombatAbilitySO combatAbilityData = _playerAbilityData.CurrentlyEquippedArm.CombatAbility;
+
       if (_lookForInputToBuffer && _isHoldingAttackButton)
       {
         _attackBuffer = true;
       }
 
-      if (_playerAbilityData.CurrentlyEquippedArm.CombatAbility.AttackAnimationClips.Count > 0)
+      List<AnimationClip> attackClips = combatAbilityData.AttackAnimationClips;
+
+      if (attackClips.Count > 0)
       {
-        string stateNameInAttackChain = _playerAbilityData.CurrentlyEquippedArm.CombatAbility.AttackAnimationClips[_currentAttackAnimationIndex].name.ToUpper();
-        _componentRefs.animator.CrossFade(_animationStates.StateNameToHash[stateNameInAttackChain], _transitionDuration, _animationLayer);
+        string stateNameInAttackChain = attackClips[_currentAttackAnimationIndex].name.ToUpper();
+        AnimatorStateInfo stateInfo = _componentRefs.animator.GetCurrentAnimatorStateInfo(_animationLayer);
+        if (!(stateInfo.shortNameHash == _animationStates.StateNameToHash[stateNameInAttackChain]))
+        {
+          _componentRefs.animator.CrossFade(_animationStates.StateNameToHash[stateNameInAttackChain], _transitionDuration, _animationLayer);
+
+          if (_componentRefs.playerRigidBody != null)
+          {
+            // If we have the "IgnoreMoveDirection" toggle enabled we want to avoid using the player's movement input direction
+            // as the direction of our attack force. Instead we apply the force in the direction we're attacking.
+            Vector3 directionOfAttack = combatAbilityData.IgnoreMoveDirection ? (_componentRefs.playerHitZone.transform.position - transform.position).normalized : _playerAttributesData.PlayerMoveDirection;
+            Vector2 forceToApply = combatAbilityData.AttackMovementForce * _attackMoveForceBase * Time.deltaTime * directionOfAttack.x * Vector2.right;
+            _componentRefs.playerRigidBody.AddForce(forceToApply, ForceMode2D.Impulse);
+          }
+        }
       }
     }
   }
@@ -137,7 +158,7 @@ public class PlayerCombatAnimatorController : MonoBehaviour
   {
     if (_playerAbilityData.CurrentlyEquippedArm != null)
     {
-      _componentRefs.animator.runtimeAnimatorController = _playerAbilityData.CurrentlyEquippedArm.AnimatorController;
+      _componentRefs.animator.runtimeAnimatorController = _playerAbilityData.CurrentlyEquippedArm.RuntimeAnimatorController;
     }
   }
 
@@ -232,6 +253,30 @@ public class PlayerCombatAnimatorController : MonoBehaviour
           };
 
           clip.AddEvent(endOfAttackEvent);
+        }
+      }
+    }
+  }
+
+  private void ModifyAnimationStateSpeedForEachPlayerArmAttack()
+  {
+    foreach (NeroArmDataSO armData in _playerAbilityData.ArmData)
+    {
+      if (armData.CombatAbility != null)
+      {
+        List<AnimationClip> attackAnimationClips = armData.CombatAbility.AttackAnimationClips;
+        foreach (AnimationClip clip in attackAnimationClips)
+        {
+          foreach (AnimatorControllerLayer layer in armData.AnimatorController.layers)
+          {
+            foreach (ChildAnimatorState childState in layer.stateMachine.states)
+            {
+              if (childState.state.name == clip.name)
+              {
+                childState.state.speed = armData.CombatAbility.Speed;
+              }
+            }
+          }
         }
       }
     }

@@ -72,8 +72,13 @@ public class PlayerAnimatorController : MonoBehaviour
   {
     if (!_playerAttributesData.IsAttacking)
     {
-      // If we're not in the attacking state just handle animations as we would normally.
-      _componentRefs.animator.CrossFade(AnimationSelector(), _transitionDuration, _animationLayer);
+      AnimatorStateInfo stateInfo = _componentRefs.animator.GetCurrentAnimatorStateInfo(_animationLayer);
+      int animationStateToPlay = AnimationSelector();
+      if (!(stateInfo.shortNameHash == animationStateToPlay))
+      {
+        // If we're not in the attacking state just handle animations as we would normally.
+        _componentRefs.animator.CrossFade(AnimationSelector(), _transitionDuration, _animationLayer);
+      }
     }
   }
 

@@ -12,4 +12,5 @@ public class AnimatorComponentReferences
 public class CombatAnimatorComponentReferences : AnimatorComponentReferences
 {
   [SerializeField] public BoxCollider2D playerHitZone;
+  [SerializeField] public Rigidbody2D playerRigidBody;
 }

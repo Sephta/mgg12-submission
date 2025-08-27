@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726ea3ac1f0210249a5296681a9ce92a, type: 3}
   m_Name: Gun Combat Ability
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 1
+  <Speed>k__BackingField: 3
   <Damage>k__BackingField: 10
   <Range>k__BackingField: 10
+  <AttackMovementForce>k__BackingField: -5
+  <IgnoreMoveDirection>k__BackingField: 1
   <AttackChainingInputBuffer>k__BackingField: 0.25
   AttackAnimationClips:
   - {fileID: -7218867606598462904, guid: 15500a339004b0f4ab2b1019c210ad87, type: 3}

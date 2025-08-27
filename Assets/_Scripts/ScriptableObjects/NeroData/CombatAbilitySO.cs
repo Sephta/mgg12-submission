@@ -17,6 +17,12 @@ public class CombatAbilitySO : ScriptableObject
   [field: SerializeField, Range(0f, 50f)]
   public float Range { get; private set; }
 
+  [field: SerializeField, Range(-50f, 50f)]
+  public float AttackMovementForce { get; private set; }
+
+  [field: SerializeField, Tooltip("Ignores the player move direction when applying attack movement forces.")]
+  public bool IgnoreMoveDirection { get; private set; }
+
   [field: SerializeField, Range(0f, 1f)]
   public float AttackChainingInputBuffer { get; private set; }
 
@@ -30,16 +36,16 @@ public class CombatAbilitySO : ScriptableObject
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
 
-  private void OnValidate()
-  {
-    foreach (AnimationClip clip in AttackAnimationClips)
-    {
-      if (clip != null)
-      {
-        // Debug.Log("Clip: " + clip.name);
-      }
-    }
-  }
+  // private void OnValidate()
+  // {
+  //   foreach (AnimationClip clip in AttackAnimationClips)
+  //   {
+  //     if (clip != null)
+  //     {
+  //       // Debug.Log("Clip: " + clip.name);
+  //     }
+  //   }
+  // }
 
   /* ---------------------------------------------------------------- */
   /*                               PUBLIC                             */

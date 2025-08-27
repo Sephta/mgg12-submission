@@ -19,7 +19,7 @@ MonoBehaviour:
   <DecelerationAirMultiplier>k__BackingField: 0.25
   <VelocityHorizontalClamp>k__BackingField: 18
   <VelocityVerticalClamp>k__BackingField: 18
-  <DoClampHorizontalVelocity>k__BackingField: 0
+  <DoClampHorizontalVelocity>k__BackingField: 1
   <DoClampVerticalVelocity>k__BackingField: 1
   <JumpMaximum>k__BackingField: 1
   <JumpHeight>k__BackingField: 3

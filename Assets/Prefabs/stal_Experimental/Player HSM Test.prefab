@@ -150,6 +150,7 @@ MonoBehaviour:
     animator: {fileID: 5267990119152243958}
     spriteRenderer: {fileID: 7490230254331191788}
     playerHitZone: {fileID: 4904698661491528826}
+    playerRigidBody: {fileID: 3223607612974835784}
   _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
   _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
   _playerAbilityData: {fileID: 11400000, guid: 56713abed363fa1489b17c2ed7fd735b, type: 2}
