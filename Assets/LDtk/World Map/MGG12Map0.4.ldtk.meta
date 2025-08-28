@@ -25,7 +25,7 @@ ScriptedImporter:
   - _key: Collision_1
     _asset: {fileID: 11400000, guid: bf51bafc13e46f54b8a7e56b9e8b02fe, type: 2}
   - _key: Collision_2
-    _asset: {instanceID: 0}
+    _asset: {fileID: 11400000, guid: a9e5b432bf19914449d2ec9ddb114f03, type: 2}
   - _key: Arrows_1
     _asset: {instanceID: 0}
   - _key: Forest_Ground_1

@@ -401,6 +401,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHealth: {fileID: 11400000, guid: 74a0d1688989cb1468a4619d26e9969a, type: 2}
+  _harmfulTerrain:
+    serializedVersion: 2
+    m_Bits: 2048
+  _boxCollider2D: {fileID: 5227456159021041451}
 --- !u!114 &8868254424840194047
 MonoBehaviour:
   m_ObjectHideFlags: 0
