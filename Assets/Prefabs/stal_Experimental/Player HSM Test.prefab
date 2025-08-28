@@ -400,6 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c00b2e01c6c73b458f171fd0342a14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerHealth: {fileID: 11400000, guid: 74a0d1688989cb1468a4619d26e9969a, type: 2}
 --- !u!114 &8868254424840194047
 MonoBehaviour:
   m_ObjectHideFlags: 0
