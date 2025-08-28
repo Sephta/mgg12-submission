@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 726ea3ac1f0210249a5296681a9ce92a, type: 3}
   m_Name: Needle Combat Ability
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 1.75
+  <Speed>k__BackingField: 2
   <Damage>k__BackingField: 10
   <Range>k__BackingField: 10
   <AttackMovementForce>k__BackingField: 10
   <IgnoreMoveDirection>k__BackingField: 1
   <AttackChainingInputBuffer>k__BackingField: 0.35
   AttackAnimationClips:
-  - {fileID: -6841456751759041392, guid: 81ad00ee30b0bac4c95e5f218dec066d, type: 3}
-  - {fileID: -5421795995074289662, guid: 81ad00ee30b0bac4c95e5f218dec066d, type: 3}
-  - {fileID: -1943220141635983029, guid: 81ad00ee30b0bac4c95e5f218dec066d, type: 3}
+  - {fileID: 7400000, guid: 88c4e420597f0704db1084e55df5b2e1, type: 2}
+  - {fileID: 7400000, guid: e4dcbcb6f3ac44e449ee91b6cf07571c, type: 2}
+  - {fileID: 7400000, guid: d41093629150dfe48a596993cc12ac28, type: 2}

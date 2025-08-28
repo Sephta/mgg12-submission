@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
-using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -81,8 +80,6 @@ public class PlayerCombatAnimatorController : MonoBehaviour
 
     AddAnimationEventsToPlayerArmAttacks();
 
-    ModifyAnimationStateSpeedForEachPlayerArmAttack();
-
     OnPlayerArmFinishedCycling();
   }
 
@@ -159,6 +156,7 @@ public class PlayerCombatAnimatorController : MonoBehaviour
     if (_playerAbilityData.CurrentlyEquippedArm != null)
     {
       _componentRefs.animator.runtimeAnimatorController = _playerAbilityData.CurrentlyEquippedArm.RuntimeAnimatorController;
+      SetAttackAnimationSpeedForCurrentAnimator();
     }
   }
 
@@ -258,27 +256,11 @@ public class PlayerCombatAnimatorController : MonoBehaviour
     }
   }
 
-  private void ModifyAnimationStateSpeedForEachPlayerArmAttack()
+  private void SetAttackAnimationSpeedForCurrentAnimator()
   {
-    foreach (NeroArmDataSO armData in _playerAbilityData.ArmData)
-    {
-      if (armData.CombatAbility != null)
-      {
-        List<AnimationClip> attackAnimationClips = armData.CombatAbility.AttackAnimationClips;
-        foreach (AnimationClip clip in attackAnimationClips)
-        {
-          foreach (AnimatorControllerLayer layer in armData.AnimatorController.layers)
-          {
-            foreach (ChildAnimatorState childState in layer.stateMachine.states)
-            {
-              if (childState.state.name == clip.name)
-              {
-                childState.state.speed = armData.CombatAbility.Speed;
-              }
-            }
-          }
-        }
-      }
-    }
+    if (_componentRefs.animator == null) return;
+    if (_playerAbilityData.CurrentlyEquippedArm.CombatAbility == null) return;
+
+    _componentRefs.animator.SetFloat("speed", _playerAbilityData.CurrentlyEquippedArm.CombatAbility.Speed);
   }
 }

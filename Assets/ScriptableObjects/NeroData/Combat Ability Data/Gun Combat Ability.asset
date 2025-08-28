@@ -19,4 +19,4 @@ MonoBehaviour:
   <IgnoreMoveDirection>k__BackingField: 1
   <AttackChainingInputBuffer>k__BackingField: 0.25
   AttackAnimationClips:
-  - {fileID: -7218867606598462904, guid: 15500a339004b0f4ab2b1019c210ad87, type: 3}
+  - {fileID: 7400000, guid: 0a864409c93a9d948b36e8fc7df4c214, type: 2}

@@ -19,6 +19,6 @@ MonoBehaviour:
   <IgnoreMoveDirection>k__BackingField: 1
   <AttackChainingInputBuffer>k__BackingField: 0.25
   AttackAnimationClips:
-  - {fileID: -6841456751759041392, guid: f3f3ff6a4ea633b49a250af1abed8ad1, type: 3}
-  - {fileID: -5421795995074289662, guid: f3f3ff6a4ea633b49a250af1abed8ad1, type: 3}
-  - {fileID: -1943220141635983029, guid: f3f3ff6a4ea633b49a250af1abed8ad1, type: 3}
+  - {fileID: 7400000, guid: 8ad4dd1a8e356124d95c7a1098abdff8, type: 2}
+  - {fileID: 7400000, guid: 9d9352425cd2f6742bf2181c19d893ba, type: 2}
+  - {fileID: 7400000, guid: fc1f1aaa795af054b8947c5f00a72c2b, type: 2}

@@ -36,17 +36,6 @@ public class CombatAbilitySO : ScriptableObject
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
 
-  // private void OnValidate()
-  // {
-  //   foreach (AnimationClip clip in AttackAnimationClips)
-  //   {
-  //     if (clip != null)
-  //     {
-  //       // Debug.Log("Clip: " + clip.name);
-  //     }
-  //   }
-  // }
-
   /* ---------------------------------------------------------------- */
   /*                               PUBLIC                             */
   /* ---------------------------------------------------------------- */

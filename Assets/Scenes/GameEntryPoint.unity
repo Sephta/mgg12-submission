@@ -224,6 +224,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2251866081310607917, guid: 965bdfc6e9f221c45b625bdacd0fdb10, type: 3}
+      propertyPath: _sceneToLoadAfterInitialization
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2384237611105674637, guid: 965bdfc6e9f221c45b625bdacd0fdb10, type: 3}
       propertyPath: m_Name
       value: Game Entry Point
