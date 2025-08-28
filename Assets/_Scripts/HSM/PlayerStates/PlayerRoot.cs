@@ -48,7 +48,11 @@ namespace stal.HSM.PlayerStates
 
     protected override void OnUpdate(float deltaTime)
     {
-      if (_playerAttributesDataSO.IsTouchingWall && _playerAttributesDataSO.IsTakingAim && !_playerAttributesDataSO.IsLatchedOntoWall)
+      if (_playerAttributesDataSO.IsTouchingWall
+        && _playerAttributesDataSO.IsTakingAim
+        && !_playerAttributesDataSO.IsLatchedOntoWall
+        && _playerAbilityDataSO.CurrentlyEquippedArmType == NeroArmType.Claw
+      )
       {
         _playerAttributesDataSO.UpdateIsLatchedOntoWall(true);
         StateMachine.Sequencer.RequestTransition(this, Nero);
