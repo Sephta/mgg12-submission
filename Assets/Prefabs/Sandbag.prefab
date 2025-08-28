@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7442594818761335015}
   - component: {fileID: 6151893896125873935}
   - component: {fileID: 2428141592874295481}
+  - component: {fileID: 800102814323181200}
   m_Layer: 9
   m_Name: Sandbag
   m_TagString: Enemy
@@ -128,7 +129,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -170,7 +171,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -199,3 +200,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damageEvent: {fileID: 11400000, guid: a447d77cdb8a7674d99fde594ada7f2c, type: 2}
+--- !u!114 &800102814323181200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727160350628250392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5a3ed75aab945c4881e4be990631dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

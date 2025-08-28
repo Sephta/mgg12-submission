@@ -3350,10 +3350,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player HSM Test
       objectReference: {fileID: 0}
-    - target: {fileID: 5267990119152243958, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: m_Controller
+    - target: {fileID: 5169039399934971566, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+      propertyPath: _playerHealth
       value: 
-      objectReference: {fileID: 9100000, guid: f61464cf4ef64d148ae5aed2dc1d44af, type: 2}
+      objectReference: {fileID: 11400000, guid: 74a0d1688989cb1468a4619d26e9969a, type: 2}
+    - target: {fileID: 5169039399934971566, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+      propertyPath: _tagThatDealsDamage
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 5169039399934971566, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+      propertyPath: _layersThatDealDamage.m_Bits
+      value: 512
+      objectReference: {fileID: 0}
     - target: {fileID: 5696392734424121139, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -3624,13 +3632,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2073829706}
     m_Modifications:
+    - target: {fileID: 800102814323181200, guid: 2dd9d9b9660a92d4ab4aa4b824e80176, type: 3}
+      propertyPath: _eventToTrigger
+      value: 
+      objectReference: {fileID: 11400000, guid: 40c7317668a2211409c3243dad9aad69, type: 2}
     - target: {fileID: 1727160350628250392, guid: 2dd9d9b9660a92d4ab4aa4b824e80176, type: 3}
       propertyPath: m_Name
       value: Sandbag
-      objectReference: {fileID: 0}
-    - target: {fileID: 6151893896125873935, guid: 2dd9d9b9660a92d4ab4aa4b824e80176, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7098804502564592129, guid: 2dd9d9b9660a92d4ab4aa4b824e80176, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3670,10 +3678,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7098804502564592129, guid: 2dd9d9b9660a92d4ab4aa4b824e80176, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7442594818761335015, guid: 2dd9d9b9660a92d4ab4aa4b824e80176, type: 3}
-      propertyPath: m_GravityScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
