@@ -3341,10 +3341,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 584993099492222139, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
-      propertyPath: _testVoidEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 728e8674e5d768c4a8d200a334070a0a, type: 2}
     - target: {fileID: 4753032256456121729, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
       propertyPath: m_Name
       value: Player HSM Test
