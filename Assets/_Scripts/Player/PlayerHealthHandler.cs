@@ -75,12 +75,8 @@ public class PlayerHealthHandler : MonoBehaviour
   {
     Debug.Log("Player died");
 
-    if (PlayerSpawnManager.Instance != null)
-    {
-      PlayerSpawnManager.Instance.PlayerPositionOnDeath = transform.position;
-    }
-
-    Destroy(gameObject);
+    // Destroy(gameObject);
+    gameObject.SetActive(false);
 
     if (_playerHealth.PlayerRespawnEvent != null)
     {

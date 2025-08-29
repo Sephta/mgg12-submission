@@ -78,14 +78,15 @@ public class PlayerCombatAnimatorController : MonoBehaviour
     if (_componentRefs.animator == null) _componentRefs.animator = GetComponent<Animator>();
     if (_componentRefs.spriteRenderer == null) _componentRefs.spriteRenderer = GetComponent<SpriteRenderer>();
 
-    // AddAnimationEventsToPlayerArmAttacks();
-    OnPlayerArmFinishedCycling();
   }
 
   // private void Start() {}
 
   private void OnEnable()
   {
+    OnPlayerArmFinishedCycling();
+    SetAttackAnimationSpeedForCurrentAnimator();
+
     _playerEventData.Attack.OnEventRaised += OnAttack;
     _playerEventData.PlayerArmFinishedCycling.OnEventRaised += OnPlayerArmFinishedCycling;
   }
@@ -212,7 +213,6 @@ public class PlayerCombatAnimatorController : MonoBehaviour
   private void ExitAttackState()
   {
     _attackBuffer = false;
-    Debug.Log("Setting Attack chain counter to zero");
     _currentAttackAnimationIndex = 0;
     _playerEventData.AttackChainCompleted.RaiseEvent();
   }

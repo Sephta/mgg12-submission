@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using stal.HSM.Drivers;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerSpawnManager))]
@@ -30,16 +31,7 @@ public class PlayerSpawnManager : MonoBehaviour
 
   [SerializeField] private VoidEventChannelSO _playerRespawnEvent;
   [SerializeField] private TransformEventChannelSO _assignPlayerToCamera;
-  [SerializeField] private GameObject _playerPrefab;
   [SerializeField, ReadOnly] private List<PlayerSpawnPoint> _spawnPoints = new();
-
-  [Space(5f)]
-
-  [Header("Debug")]
-
-  [Space(5f)]
-
-  [ReadOnly] public Vector3 PlayerPositionOnDeath = Vector3.negativeInfinity;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -96,35 +88,39 @@ public class PlayerSpawnManager : MonoBehaviour
 
   private void OnPlayerRespawn()
   {
-    if (_playerPrefab == null) return;
-    if (PlayerPositionOnDeath == Vector3.negativeInfinity) return;
-
-    GameObject newPlayer = Instantiate(_playerPrefab);
-
-
-    float closestDistance = float.MaxValue;
-    PlayerSpawnPoint closestSpawn = null;
-
-    foreach (PlayerSpawnPoint spawnPoint in _spawnPoints)
+    PlayerHSMDriver[] playerHSMDrivers = FindObjectsByType<PlayerHSMDriver>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+    if (playerHSMDrivers.Length > 0)
     {
-      float newDistance = Vector3.Distance(spawnPoint.transform.position, PlayerPositionOnDeath);
-      if (newDistance < closestDistance)
+      PlayerHSMDriver player = playerHSMDrivers[0];
+
+      float closestDistance = float.MaxValue;
+      PlayerSpawnPoint closestSpawn = null;
+
+      foreach (PlayerSpawnPoint spawnPoint in _spawnPoints)
       {
-        closestDistance = newDistance;
-        closestSpawn = spawnPoint;
-        Debug.Log("closestSpawn is a new point");
+        float newDistance = Vector3.Distance(spawnPoint.transform.position, player.transform.position);
+        if (newDistance < closestDistance)
+        {
+          closestDistance = newDistance;
+          closestSpawn = spawnPoint;
+        }
       }
-    }
 
-    if (closestSpawn != null)
-    {
-      newPlayer.transform.position = closestSpawn.transform.position;
-      if (_assignPlayerToCamera != null) _assignPlayerToCamera.RaiseEvent(newPlayer.transform);
+      if (closestSpawn != null)
+      {
+        player.transform.position = closestSpawn.transform.position;
+        player.gameObject.SetActive(true);
+        if (_assignPlayerToCamera != null) _assignPlayerToCamera.RaiseEvent(player.transform);
+      }
+      else
+      {
+        Debug.LogError("Unable to spawn new player prefab.");
+      }
     }
     else
     {
-      Destroy(newPlayer);
-      Debug.LogError("Unable to spawn new player prefab.");
+      Debug.LogError("Player not found");
     }
+
   }
 }
