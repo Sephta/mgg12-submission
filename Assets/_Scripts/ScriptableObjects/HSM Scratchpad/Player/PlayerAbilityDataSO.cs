@@ -14,6 +14,11 @@ public class PlayerAbilityDataSO : ScratchpadDataSO
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
 
+  private void OnValidate()
+  {
+    // AddAnimationEventsToPlayerArmAttacks();
+  }
+
   /* ---------------------------------------------------------------- */
   /*                               PUBLIC                             */
   /* ---------------------------------------------------------------- */
@@ -52,4 +57,59 @@ public class PlayerAbilityDataSO : ScratchpadDataSO
   {
     _currentArmIndex = 0;
   }
+
+  // private void EnablePlayerHitzone()
+  // {
+  //   Debug.Log("EnablePlayerHitzone");
+  // }
+
+  // private void HandleAttackInputBuffer()
+  // {
+  //   Debug.Log("HandleAttackInputBuffer");
+  // }
+
+  // private void ChainAttackOrFinishCombo()
+  // {
+  //   Debug.Log("ChainAttackOrFinishCombo");
+  // }
+
+
+  // private void AddAnimationEventsToPlayerArmAttacks()
+  // {
+  //   foreach (NeroArmDataSO armData in ArmData)
+  //   {
+  //     if (armData.CombatAbility != null && armData.CombatAbility.AttackAnimationClips.Count > 0)
+  //     {
+  //       List<AnimationClip> attackAnimationClips = armData.CombatAbility.AttackAnimationClips;
+  //       foreach (AnimationClip clip in attackAnimationClips)
+  //       {
+  //         AnimationEvent enableHitZone = new()
+  //         {
+  //           time = 0,
+  //           functionName = nameof(EnablePlayerHitzone)
+  //         };
+
+  //         clip.AddEvent(enableHitZone);
+
+  //         float timeDurringClipToRaiseInputBufferEvent = clip.length - armData.CombatAbility.AttackChainingInputBuffer;
+
+  //         AnimationEvent startInputBuffer = new()
+  //         {
+  //           time = timeDurringClipToRaiseInputBufferEvent,
+  //           functionName = nameof(HandleAttackInputBuffer)
+  //         };
+
+  //         clip.AddEvent(startInputBuffer);
+
+  //         AnimationEvent endOfAttackEvent = new()
+  //         {
+  //           time = clip.length,
+  //           functionName = nameof(ChainAttackOrFinishCombo)
+  //         };
+
+  //         clip.AddEvent(endOfAttackEvent);
+  //       }
+  //     }
+  //   }
+  // }
 }

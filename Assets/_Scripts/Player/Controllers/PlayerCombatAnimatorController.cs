@@ -78,6 +78,7 @@ public class PlayerCombatAnimatorController : MonoBehaviour
     if (_componentRefs.animator == null) _componentRefs.animator = GetComponent<Animator>();
     if (_componentRefs.spriteRenderer == null) _componentRefs.spriteRenderer = GetComponent<SpriteRenderer>();
 
+    // AddAnimationEventsToPlayerArmAttacks();
     OnPlayerArmFinishedCycling();
   }
 
@@ -85,8 +86,6 @@ public class PlayerCombatAnimatorController : MonoBehaviour
 
   private void OnEnable()
   {
-    AddAnimationEventsToPlayerArmAttacks();
-
     _playerEventData.Attack.OnEventRaised += OnAttack;
     _playerEventData.PlayerArmFinishedCycling.OnEventRaised += OnPlayerArmFinishedCycling;
   }
@@ -181,7 +180,6 @@ public class PlayerCombatAnimatorController : MonoBehaviour
 
   private void ChainAttackOrFinishCombo()
   {
-    // Debug.Log("ChainAttackOrFinishCombo()");
     DisablePlayerHitzone();
 
     _lookForInputToBuffer = false;
@@ -214,47 +212,9 @@ public class PlayerCombatAnimatorController : MonoBehaviour
   private void ExitAttackState()
   {
     _attackBuffer = false;
+    Debug.Log("Setting Attack chain counter to zero");
     _currentAttackAnimationIndex = 0;
     _playerEventData.AttackChainCompleted.RaiseEvent();
-  }
-
-  private void AddAnimationEventsToPlayerArmAttacks()
-  {
-    foreach (NeroArmDataSO armData in _playerAbilityData.ArmData)
-    {
-      if (armData.CombatAbility != null && armData.CombatAbility.AttackAnimationClips.Count > 0)
-      {
-        List<AnimationClip> attackAnimationClips = armData.CombatAbility.AttackAnimationClips;
-        foreach (AnimationClip clip in attackAnimationClips)
-        {
-          AnimationEvent enableHitZone = new()
-          {
-            time = 0,
-            functionName = nameof(EnablePlayerHitzone)
-          };
-
-          clip.AddEvent(enableHitZone);
-
-          float timeDurringClipToRaiseInputBufferEvent = clip.length - armData.CombatAbility.AttackChainingInputBuffer;
-
-          AnimationEvent startInputBuffer = new()
-          {
-            time = timeDurringClipToRaiseInputBufferEvent,
-            functionName = nameof(HandleAttackInputBuffer)
-          };
-
-          clip.AddEvent(startInputBuffer);
-
-          AnimationEvent endOfAttackEvent = new()
-          {
-            time = clip.length,
-            functionName = nameof(ChainAttackOrFinishCombo)
-          };
-
-          clip.AddEvent(endOfAttackEvent);
-        }
-      }
-    }
   }
 
   private void SetAttackAnimationSpeedForCurrentAnimator()

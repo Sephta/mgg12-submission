@@ -28,7 +28,6 @@ public class PlayerSpawnManager : MonoBehaviour
     }
   }
 
-  [SerializeField] private VoidEventChannelSO _playerDeathEvent;
   [SerializeField] private VoidEventChannelSO _playerRespawnEvent;
   [SerializeField] private TransformEventChannelSO _assignPlayerToCamera;
   [SerializeField] private GameObject _playerPrefab;

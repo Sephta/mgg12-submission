@@ -100,7 +100,6 @@ public class PlayerAnimatorController : MonoBehaviour
     {
       if (_playerAttributesData.IsTakingAim && _playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral)
       {
-        Debug.Log("State name and hash: <" + nameof(AnimationStates.AIM) + " : " + _animationStates.StateNameToHash[nameof(AnimationStates.AIM)] + ">");
         return _animationStates.StateNameToHash[nameof(AnimationStates.AIM)];
       }
 
