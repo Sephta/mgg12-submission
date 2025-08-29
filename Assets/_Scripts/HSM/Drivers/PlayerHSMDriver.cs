@@ -149,13 +149,16 @@ namespace stal.HSM.Drivers
       if (_playerAttributesData.IsGrounded) _playerContext.coyoteTime = _playerMovementData.CoyoteTime;
       if (!_playerContext.wasGroundedLastFrame && _playerAttributesData.IsGrounded) _playerContext.jumpCount = _playerMovementData.JumpMaximum;
 
-      // Tick the state machine every frame
-      _stateMachine.Tick(Time.deltaTime);
-
       UpdateLoopBookKeeping();
 
       // Draw Debug Gizmos
       DrawDebugGizmos();
+    }
+
+    private void FixedUpdate()
+    {
+      // Tick the state machine every frame
+      _stateMachine.Tick(Time.fixedDeltaTime);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

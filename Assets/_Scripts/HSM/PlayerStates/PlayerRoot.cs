@@ -79,7 +79,7 @@ namespace stal.HSM.PlayerStates
         float force = delta * accelRate;
 
         // Multiplying by Vector2.right is a quick way to convert the calculation into a vector
-        _playerContext.rigidbody2D.AddForce(force * Time.fixedDeltaTime * Vector2.right, ForceMode2D.Force);
+        _playerContext.rigidbody2D.AddForce(force * Vector2.right, ForceMode2D.Force);
 
         ClampPlayerMovement();
       }

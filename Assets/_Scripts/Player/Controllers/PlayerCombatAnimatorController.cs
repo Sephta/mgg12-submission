@@ -34,7 +34,7 @@ public class PlayerCombatAnimatorController : MonoBehaviour
   [SerializeField, ReadOnly] private bool _isHoldingAttackButton = false;
   [SerializeField, ReadOnly] private bool _lookForInputToBuffer = false;
   [SerializeField, ReadOnly] private bool _attackBuffer = false;
-  private readonly float _attackMoveForceBase = 100f;
+  private readonly float _attackMoveForceBase = 1;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -124,8 +124,10 @@ public class PlayerCombatAnimatorController : MonoBehaviour
             // If we have the "IgnoreMoveDirection" toggle enabled we want to avoid using the player's movement input direction
             // as the direction of our attack force. Instead we apply the force in the direction we're attacking.
             Vector3 directionOfAttack = combatAbilityData.IgnoreMoveDirection ? (_componentRefs.playerHitZone.transform.position - transform.position).normalized : _playerAttributesData.PlayerMoveDirection;
-            Vector2 forceToApply = combatAbilityData.AttackMovementForce * _attackMoveForceBase * Time.deltaTime * directionOfAttack.x * Vector2.right;
+            Vector2 forceToApply = combatAbilityData.AttackMovementForce * _attackMoveForceBase * directionOfAttack.x * Vector2.right;
+            Debug.Log("attack force: " + forceToApply + ", attack direction: " + directionOfAttack.x);
             _componentRefs.playerRigidBody.AddForce(forceToApply, ForceMode2D.Impulse);
+            // _componentRefs.playerRigidBody.linearVelocityX = forceToApply.x;
           }
         }
       }

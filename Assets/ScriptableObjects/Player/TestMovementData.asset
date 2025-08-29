@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: TestMovementData
   m_EditorClassIdentifier: 
   <RunVelocityMaximum>k__BackingField: 6
-  <Acceleration>k__BackingField: 5
+  <Acceleration>k__BackingField: 0.75
   <AccelerationAirMultiplier>k__BackingField: 1
-  <Deceleration>k__BackingField: 10
+  <Deceleration>k__BackingField: 0.5
   <DecelerationAirMultiplier>k__BackingField: 0.25
   <VelocityHorizontalClamp>k__BackingField: 18
   <VelocityVerticalClamp>k__BackingField: 18
@@ -58,5 +58,5 @@ MonoBehaviour:
   <TimeTillSlideDownWall>k__BackingField: 1
   <JumpingPower>k__BackingField: 15
   <GravityScale>k__BackingField: 3.8226297
-  <RunAccelerationAmount>k__BackingField: 83.333336
-  <RunDecelerationAmount>k__BackingField: 166.66667
+  <RunAccelerationAmount>k__BackingField: 12.5
+  <RunDecelerationAmount>k__BackingField: 8.333333

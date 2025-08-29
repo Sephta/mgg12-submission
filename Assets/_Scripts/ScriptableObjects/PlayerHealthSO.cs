@@ -33,6 +33,9 @@ public class PlayerHealthSO : ScriptableObject
   [field: SerializeField, Expandable]
   public VoidEventChannelSO PlayerDeathEvent { get; private set; }
 
+  [field: SerializeField, Expandable]
+  public VoidEventChannelSO PlayerRespawnEvent { get; private set; }
+
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
