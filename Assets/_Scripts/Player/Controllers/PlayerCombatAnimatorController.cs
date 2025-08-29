@@ -84,6 +84,17 @@ public class PlayerCombatAnimatorController : MonoBehaviour
 
   private void OnEnable()
   {
+    _currentAttackAnimationIndex = 0;
+    _isHoldingAttackButton = false;
+    _lookForInputToBuffer = false;
+    _attackBuffer = false;
+
+    ExitAttackState();
+    if (_componentRefs.playerHitZone != null)
+    {
+      _componentRefs.playerHitZone.enabled = false;
+    }
+
     OnPlayerArmFinishedCycling();
     SetAttackAnimationSpeedForCurrentAnimator();
 

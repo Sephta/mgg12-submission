@@ -80,12 +80,12 @@ SpriteRenderer:
   m_SortingLayerID: -1092780423
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: -5073028877702378488, guid: 819b082f50a4cac4bad6954940596091, type: 3}
+  m_Sprite: {fileID: -5073028877702378488, guid: 6b94e18233f4bf04a91e719237136cc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.4375, y: 1.03125}
+  m_Size: {x: 0.46875, y: 1.09375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -101,7 +101,7 @@ Animator:
   m_GameObject: {fileID: 1370699169781847061}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 92a1468c21e27cc4390fea47373ff9e0, type: 2}
+  m_Controller: {fileID: 5599944046065970559, guid: 6b94e18233f4bf04a91e719237136cc0, type: 3}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 3350494558796920100}
   m_Layer: 0
   m_Name: Combat
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
