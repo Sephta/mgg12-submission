@@ -94,6 +94,7 @@ namespace stal.HSM.PlayerStates
         && _playerAttributesDataSO.IsGrounded
         && !_playerAttributesDataSO.IsAttacking)
       {
+        Debug.Log("Requested Transition to Attack");
         _playerAttributesDataSO.UpdateIsAttacking(true);
         StateMachine.Sequencer.RequestTransition(this, Attack);
       }

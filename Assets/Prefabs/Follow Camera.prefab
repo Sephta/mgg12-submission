@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 2415672296009813291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.82765, y: 3.1742196, z: -10}
+  m_LocalPosition: {x: -2.6599998, y: 2.31, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -154,6 +154,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cinemachineCamera: {fileID: 1601070627725553977}
+  _assignPlayerToCameraEvent: {fileID: 11400000, guid: 81d128c02eda4fa48a7f7c80c1f25934, type: 2}
+  _playerDeathEvent: {fileID: 11400000, guid: 0488ede67ea7d2649bac100745168c88, type: 2}
   _playerTransform: {fileID: 0}
 --- !u!1 &7585772071046746812
 GameObject:
@@ -183,7 +185,7 @@ Transform:
   m_GameObject: {fileID: 7585772071046746812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.82765, y: 3.1742196, z: -10}
+  m_LocalPosition: {x: -2.6599998, y: 2.31, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

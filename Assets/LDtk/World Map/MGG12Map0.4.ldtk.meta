@@ -62,7 +62,7 @@ ScriptedImporter:
     _asset: {instanceID: 0}
   _entities:
   - _key: Player_Spawn
-    _asset: {instanceID: 0}
+    _asset: {fileID: 2769435021979840138, guid: 0b9202ed783d4414fb9045a83f1b74fe, type: 3}
   - _key: Needle_Pickup
     _asset: {instanceID: 0}
   - _key: Enemy_Guard

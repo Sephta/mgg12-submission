@@ -37,7 +37,6 @@ public class DealDamageOnContact : MonoBehaviour
   {
     if (collider.CompareTag(_tagToDealDamageTo))
     {
-      Debug.Log("Deal damage to player...");
       _eventToTrigger.RaiseEvent(collider.gameObject.GetInstanceID(), _damageAmount);
     }
   }

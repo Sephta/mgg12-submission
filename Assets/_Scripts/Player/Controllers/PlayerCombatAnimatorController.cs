@@ -78,8 +78,6 @@ public class PlayerCombatAnimatorController : MonoBehaviour
     if (_componentRefs.animator == null) _componentRefs.animator = GetComponent<Animator>();
     if (_componentRefs.spriteRenderer == null) _componentRefs.spriteRenderer = GetComponent<SpriteRenderer>();
 
-    AddAnimationEventsToPlayerArmAttacks();
-
     OnPlayerArmFinishedCycling();
   }
 
@@ -87,6 +85,8 @@ public class PlayerCombatAnimatorController : MonoBehaviour
 
   private void OnEnable()
   {
+    AddAnimationEventsToPlayerArmAttacks();
+
     _playerEventData.Attack.OnEventRaised += OnAttack;
     _playerEventData.PlayerArmFinishedCycling.OnEventRaised += OnPlayerArmFinishedCycling;
   }
@@ -125,9 +125,7 @@ public class PlayerCombatAnimatorController : MonoBehaviour
             // as the direction of our attack force. Instead we apply the force in the direction we're attacking.
             Vector3 directionOfAttack = combatAbilityData.IgnoreMoveDirection ? (_componentRefs.playerHitZone.transform.position - transform.position).normalized : _playerAttributesData.PlayerMoveDirection;
             Vector2 forceToApply = combatAbilityData.AttackMovementForce * _attackMoveForceBase * directionOfAttack.x * Vector2.right;
-            Debug.Log("attack force: " + forceToApply + ", attack direction: " + directionOfAttack.x);
             _componentRefs.playerRigidBody.AddForce(forceToApply, ForceMode2D.Impulse);
-            // _componentRefs.playerRigidBody.linearVelocityX = forceToApply.x;
           }
         }
       }
@@ -183,6 +181,7 @@ public class PlayerCombatAnimatorController : MonoBehaviour
 
   private void ChainAttackOrFinishCombo()
   {
+    // Debug.Log("ChainAttackOrFinishCombo()");
     DisablePlayerHitzone();
 
     _lookForInputToBuffer = false;

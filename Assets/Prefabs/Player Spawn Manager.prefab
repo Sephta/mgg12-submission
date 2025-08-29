@@ -44,3 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a5bac781ceb574a99af3b673f2f81f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerRespawnEvent: {fileID: 11400000, guid: fbd2bb755c8b69944b74d4172832fc9d, type: 2}
+  _assignPlayerToCamera: {fileID: 11400000, guid: 81d128c02eda4fa48a7f7c80c1f25934, type: 2}
+  _playerPrefab: {fileID: 4753032256456121729, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+  _spawnPoints: []

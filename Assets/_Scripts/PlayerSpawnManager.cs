@@ -28,7 +28,19 @@ public class PlayerSpawnManager : MonoBehaviour
     }
   }
 
+  [SerializeField] private VoidEventChannelSO _playerDeathEvent;
+  [SerializeField] private VoidEventChannelSO _playerRespawnEvent;
+  [SerializeField] private TransformEventChannelSO _assignPlayerToCamera;
+  [SerializeField] private GameObject _playerPrefab;
   [SerializeField, ReadOnly] private List<PlayerSpawnPoint> _spawnPoints = new();
+
+  [Space(5f)]
+
+  [Header("Debug")]
+
+  [Space(5f)]
+
+  [ReadOnly] public Vector3 PlayerPositionOnDeath = Vector3.negativeInfinity;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -58,8 +70,20 @@ public class PlayerSpawnManager : MonoBehaviour
     _spawnPoints = new(playerSpawns);
   }
 
-  // private void OnEnable() {}
-  // private void OnDisable() {}
+  private void OnEnable()
+  {
+    if (_playerRespawnEvent == null) return;
+
+    _playerRespawnEvent.OnEventRaised += OnPlayerRespawn;
+  }
+
+  private void OnDisable()
+  {
+    if (_playerRespawnEvent == null) return;
+
+    _playerRespawnEvent.OnEventRaised -= OnPlayerRespawn;
+  }
+
   // private void Update() {}
   // private void FixedUpdate() {}
 
@@ -70,4 +94,38 @@ public class PlayerSpawnManager : MonoBehaviour
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
+
+  private void OnPlayerRespawn()
+  {
+    if (_playerPrefab == null) return;
+    if (PlayerPositionOnDeath == Vector3.negativeInfinity) return;
+
+    GameObject newPlayer = Instantiate(_playerPrefab);
+
+
+    float closestDistance = float.MaxValue;
+    PlayerSpawnPoint closestSpawn = null;
+
+    foreach (PlayerSpawnPoint spawnPoint in _spawnPoints)
+    {
+      float newDistance = Vector3.Distance(spawnPoint.transform.position, PlayerPositionOnDeath);
+      if (newDistance < closestDistance)
+      {
+        closestDistance = newDistance;
+        closestSpawn = spawnPoint;
+        Debug.Log("closestSpawn is a new point");
+      }
+    }
+
+    if (closestSpawn != null)
+    {
+      newPlayer.transform.position = closestSpawn.transform.position;
+      if (_assignPlayerToCamera != null) _assignPlayerToCamera.RaiseEvent(newPlayer.transform);
+    }
+    else
+    {
+      Destroy(newPlayer);
+      Debug.LogError("Unable to spawn new player prefab.");
+    }
+  }
 }

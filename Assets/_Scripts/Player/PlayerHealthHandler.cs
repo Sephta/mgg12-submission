@@ -57,7 +57,7 @@ public class PlayerHealthHandler : MonoBehaviour
 
     if (LayerMaskContainsLayer(_harmfulTerrain, collider.gameObject.layer))
     {
-      Debug.Log("Deal damage to player...");
+      KillPlayer();
     }
   }
 
@@ -74,6 +74,17 @@ public class PlayerHealthHandler : MonoBehaviour
   private void KillPlayer()
   {
     Debug.Log("Player died");
+
+    if (PlayerSpawnManager.Instance != null)
+    {
+      PlayerSpawnManager.Instance.PlayerPositionOnDeath = transform.position;
+    }
+
     Destroy(gameObject);
+
+    if (_playerHealth.PlayerRespawnEvent != null)
+    {
+      _playerHealth.PlayerRespawnEvent.RaiseEvent();
+    }
   }
 }
