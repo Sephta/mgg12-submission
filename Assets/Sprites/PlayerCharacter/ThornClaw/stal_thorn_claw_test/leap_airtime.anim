@@ -21,11 +21,11 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 7526745698427844335, guid: 345a3b3e9040b234c9151669ec1d59b7, type: 3}
+      value: {fileID: 4131409587173063135, guid: e2881252e884b184b8f070e092460197, type: 3}
     - time: 1
-      value: {fileID: 6100507837151064046, guid: 345a3b3e9040b234c9151669ec1d59b7, type: 3}
+      value: {fileID: 314097900485089376, guid: e2881252e884b184b8f070e092460197, type: 3}
     - time: 1.99
-      value: {fileID: 6100507837151064046, guid: 345a3b3e9040b234c9151669ec1d59b7, type: 3}
+      value: {fileID: 314097900485089376, guid: e2881252e884b184b8f070e092460197, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212

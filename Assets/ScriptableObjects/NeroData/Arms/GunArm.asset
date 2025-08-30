@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: GunArm
   m_EditorClassIdentifier: 
   ArmType: 3
-  <RuntimeAnimatorController>k__BackingField: {fileID: 9100000, guid: 0e56f4688dcfb6d4fabfd69bab4f93b1, type: 2}
+  <RuntimeAnimatorController>k__BackingField: {fileID: 9100000, guid: 6efb344412953494481c9dbeac7ff8a2, type: 2}
   <EnvironmentalAbility>k__BackingField: {fileID: 11400000, guid: 74815c4c7e46de3469bb47ca4205d786, type: 2}
   <CombatAbility>k__BackingField: {fileID: 11400000, guid: fe837ccd04164b547961be3e9dd124bc, type: 2}
