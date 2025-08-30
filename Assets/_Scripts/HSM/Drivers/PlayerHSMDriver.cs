@@ -261,9 +261,9 @@ namespace stal.HSM.Drivers
       // using three distinct rays, the middle of which casts from player's origin position, 
       // while the left and right cast from sids of the player's collider
 
-      Vector3 leftRayPosition = new(_playerContext.transform.position.x - _playerContext.boxCollider2D.bounds.extents.x, _playerContext.transform.position.y, _playerContext.transform.position.z);
-      Vector3 middleRayPosition = _playerContext.transform.position;
-      Vector3 rightRayPosition = new(_playerContext.transform.position.x + _playerContext.boxCollider2D.bounds.extents.x, _playerContext.transform.position.y, _playerContext.transform.position.z);
+      Vector3 leftRayPosition = new(_playerContext.transform.position.x - _playerContext.boxCollider2D.bounds.extents.x, _playerContext.transform.position.y + 0.05f, _playerContext.transform.position.z);
+      Vector3 middleRayPosition = new(_playerContext.transform.position.x, _playerContext.transform.position.y + 0.05f, _playerContext.transform.position.z);
+      Vector3 rightRayPosition = new(_playerContext.transform.position.x + _playerContext.boxCollider2D.bounds.extents.x, _playerContext.transform.position.y + 0.05f, _playerContext.transform.position.z);
 
       RaycastHit2D leftRay = Physics2D.Raycast(
         leftRayPosition,

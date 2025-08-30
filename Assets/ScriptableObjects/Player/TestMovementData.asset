@@ -38,7 +38,7 @@ MonoBehaviour:
   <LayersConsideredForPlayerTouchingWall>k__BackingField:
     serializedVersion: 2
     m_Bits: 1024
-  <GroundingRayCastDistance>k__BackingField: 0.1
+  <GroundingRayCastDistance>k__BackingField: 0.15
   SurfaceContactFilter:
     useTriggers: 0
     useLayerMask: 0
