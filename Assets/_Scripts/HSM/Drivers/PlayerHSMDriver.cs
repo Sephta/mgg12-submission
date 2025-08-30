@@ -104,6 +104,11 @@ namespace stal.HSM.Drivers
 
     private void OnEnable()
     {
+      if (_playerAbilityData != null)
+      {
+        _playerAbilityData.ResetCurrentArmIndex();
+      }
+
       // Register Input Events
       _playerEventData.Move.OnEventRaised += OnMove;
       _playerEventData.Jump.OnEventRaised += OnJump;
@@ -137,18 +142,8 @@ namespace stal.HSM.Drivers
 
     private void Update()
     {
-      UpdateMousePositionData();
-      _playerAttributesData.UpdatePlayerVelocity(_playerContext.rigidbody2D.linearVelocity);
-      _playerAttributesData.UpdateIsGrounded(IsGrounded());
-
-      // Update timers
-      _playerContext.jumpBufferWindow = Mathf.Clamp(_playerContext.jumpBufferWindow - Time.deltaTime, 0f, _playerMovementData.JumpInputBuffer);
-      _playerContext.coyoteTime = Mathf.Clamp(_playerContext.coyoteTime - Time.deltaTime, 0f, _playerMovementData.CoyoteTime);
-
-      // Reset timers 
-      if (_playerAttributesData.IsGrounded) _playerContext.coyoteTime = _playerMovementData.CoyoteTime;
-      if (!_playerContext.wasGroundedLastFrame && _playerAttributesData.IsGrounded) _playerContext.jumpCount = _playerMovementData.JumpMaximum;
-
+      UpdatePlayerAttributes();
+      UpdateOrResetTimers();
       UpdateLoopBookKeeping();
 
       // Draw Debug Gizmos
@@ -157,7 +152,7 @@ namespace stal.HSM.Drivers
 
     private void FixedUpdate()
     {
-      // Tick the state machine every frame
+      // Tick the state machine every fixed frame
       _stateMachine.Tick(Time.fixedDeltaTime);
     }
 
@@ -314,6 +309,24 @@ namespace stal.HSM.Drivers
       {
         Debug.DrawRay(_playerContext.transform.position + (Vector3.up * 0.5f), _playerAttributesData.PlayerAimDirection * _playerMovementData.AbilityAimRaycastDistance, Color.darkGreen, 0.1f);
       }
+    }
+
+    private void UpdatePlayerAttributes()
+    {
+      UpdateMousePositionData();
+      _playerAttributesData.UpdatePlayerVelocity(_playerContext.rigidbody2D.linearVelocity);
+      _playerAttributesData.UpdateIsGrounded(IsGrounded());
+    }
+
+    private void UpdateOrResetTimers()
+    {
+      // Update timers
+      _playerContext.jumpBufferWindow = Mathf.Clamp(_playerContext.jumpBufferWindow - Time.deltaTime, 0f, _playerMovementData.JumpInputBuffer);
+      _playerContext.coyoteTime = Mathf.Clamp(_playerContext.coyoteTime - Time.deltaTime, 0f, _playerMovementData.CoyoteTime);
+
+      // Reset timers 
+      if (_playerAttributesData.IsGrounded) _playerContext.coyoteTime = _playerMovementData.CoyoteTime;
+      if (!_playerContext.wasGroundedLastFrame && _playerAttributesData.IsGrounded) _playerContext.jumpCount = _playerMovementData.JumpMaximum;
     }
 
     private void UpdateLoopBookKeeping()

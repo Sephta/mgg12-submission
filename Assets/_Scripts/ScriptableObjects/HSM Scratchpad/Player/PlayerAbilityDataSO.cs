@@ -43,13 +43,29 @@ public class PlayerAbilityDataSO : ScratchpadDataSO
     if (ArmCycledEvent != null) ArmCycledEvent.RaiseEvent();
   }
 
-  /* ---------------------------------------------------------------- */
-  /*                               PRIVATE                            */
-  /* ---------------------------------------------------------------- */
+  public bool AddAbility(NeroArmDataSO ability)
+  {
+    if (!ArmData.Contains(ability))
+    {
+      ArmData.Add(ability);
+      return true;
+    }
 
-  [Button("ResetCurrentArmIndex")]
-  private void ResetCurrentArmIndex()
+    return false;
+  }
+
+  public void RemoveAbility(NeroArmType abilityType)
+  {
+
+  }
+
+  [Button("Reset Current Arm Index")]
+  public void ResetCurrentArmIndex()
   {
     _currentArmIndex = 0;
   }
+
+  /* ---------------------------------------------------------------- */
+  /*                               PRIVATE                            */
+  /* ---------------------------------------------------------------- */
 }
