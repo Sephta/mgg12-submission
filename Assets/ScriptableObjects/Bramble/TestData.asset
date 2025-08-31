@@ -14,7 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <NumberOfKnots>k__BackingField: 15
   <KnotOffset>k__BackingField: 0.25
-  <KnotVariance>k__BackingField: {x: -0.5, y: 0.5}
+  <KnotVariance>k__BackingField: {x: -0.25, y: 0.25}
   <GrowthRate>k__BackingField: 0.5
-  <EaseType>k__BackingField: 12
-  <SurfaceNormal>k__BackingField: {x: 0, y: 0, z: 0}
+  <RandomRotationRange>k__BackingField: {x: -90, y: 90}
+  <StuffToWatchOutForWhenSpawning>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 256
+  <BrambleEaseType>k__BackingField: 30

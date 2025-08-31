@@ -36,6 +36,11 @@ public class PlayerHealthSO : ScriptableObject
   [field: SerializeField, Expandable]
   public VoidEventChannelSO PlayerRespawnEvent { get; private set; }
 
+  [field: Header("Player Attributes Data")]
+
+  [field: SerializeField]
+  private PlayerAttributesDataSO _playerAttributesData;
+
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
@@ -80,7 +85,19 @@ public class PlayerHealthSO : ScriptableObject
 
     if (CurrentHealth == MinHealth && PlayerDeathEvent != null)
     {
-      PlayerDeathEvent.RaiseEvent();
+      if (_playerAttributesData != null)
+      {
+        if (!_playerAttributesData.IsNeedling)
+        {
+          PlayerDeathEvent.RaiseEvent();
+        }
+      }
+      else
+      {
+        Debug.LogWarning("PlayerAttributesDataSO inside of " + name + " is null. Raising PlayerDeathEvent anyways. This may be undesirable behavior.");
+        PlayerDeathEvent.RaiseEvent();
+      }
+
     }
   }
 }

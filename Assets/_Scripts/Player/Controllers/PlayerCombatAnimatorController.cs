@@ -95,6 +95,11 @@ public class PlayerCombatAnimatorController : MonoBehaviour
       _componentRefs.playerHitZone.enabled = false;
     }
 
+    if (_playerAbilityData != null)
+    {
+      _playerAbilityData.ResetCurrentArmIndex();
+    }
+
     OnPlayerArmFinishedCycling();
     SetAttackAnimationSpeedForCurrentAnimator();
 

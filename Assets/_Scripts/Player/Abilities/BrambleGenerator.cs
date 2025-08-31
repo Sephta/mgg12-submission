@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using NaughtyAttributes;
 using Unity.VisualScripting;
@@ -65,6 +66,19 @@ public class BrambleGenerator : MonoBehaviour
     {
       DG.Tweening.Sequence decaySequence = BuildDecaySequence();
       decaySequence.Play();
+    }
+  }
+
+  private void OnDrawGizmos()
+  {
+    foreach (Spline spline in _splineContainer.Splines)
+    {
+      foreach (BezierKnot knot in spline.Knots)
+      {
+        Vector3 worldPositionOfKnot = transform.TransformPoint(knot.Position.ConvertTo<Vector3>());
+
+        Gizmos.DrawSphere(new(worldPositionOfKnot.x, worldPositionOfKnot.y, 0f), 1f);
+      }
     }
   }
 
@@ -144,27 +158,43 @@ public class BrambleGenerator : MonoBehaviour
 
   private void InstantiateBrambleAlongSplineKnots()
   {
+    if (_brambleComponent == null) return;
     if (_brambleComponents.Count > 0) DestroyBrambleAlongSplineKnots();
 
     foreach (Spline spline in _splineContainer.Splines)
     {
       foreach (BezierKnot knot in spline.Knots)
       {
-        if (_brambleComponent == null) return;
 
         Vector3 worldPositionOfKnot = transform.TransformPoint(knot.Position.ConvertTo<Vector3>());
 
-        GameObject result = Instantiate(
-          _brambleComponent,
-          worldPositionOfKnot,
-          transform.rotation,
-          transform
+        Collider2D[] collidersOverlappingCircle = Physics2D.OverlapCircleAll(
+          new(worldPositionOfKnot.x, worldPositionOfKnot.y),
+          1f,
+          _brambleSpawnParametersSO.StuffToWatchOutForWhenSpawning
         );
 
-        result.SetActive(false);
-        result.transform.localScale = Vector3.zero;
+        if (collidersOverlappingCircle.Length <= 0)
+        {
+          float randomEularRotationZ = Random.Range(_brambleSpawnParametersSO.RandomRotationRange.x, _brambleSpawnParametersSO.RandomRotationRange.y);
 
-        if (result != null) _brambleComponents.Add(result);
+          GameObject result = Instantiate(
+            _brambleComponent,
+            worldPositionOfKnot,
+            Quaternion.Euler(0f, 0f, randomEularRotationZ),
+            transform
+          );
+
+          result.SetActive(false);
+          result.transform.localScale = Vector3.zero;
+
+          if (result != null) _brambleComponents.Add(result);
+        }
+        else
+        {
+          Debug.Log("Player colliders found when generating bramble.");
+          return;
+        }
       }
     }
   }
@@ -217,7 +247,7 @@ public class BrambleGenerator : MonoBehaviour
       bramble.SetActive(true);
       brambleSequence.Append(
         bramble.transform.DOScale(1f, _brambleSpawnParametersSO.GrowthRate / _brambleComponents.Count)
-        .SetEase(_brambleSpawnParametersSO.EaseType)
+        .SetEase(_brambleSpawnParametersSO.BrambleEaseType)
       );
     }
 
@@ -251,7 +281,7 @@ public class BrambleGenerator : MonoBehaviour
     {
       brambleSequence.Append(
         bramble.transform.DOScale(0f, _brambleSpawnParametersSO.GrowthRate / _brambleComponents.Count)
-        .SetEase(_brambleSpawnParametersSO.EaseType)
+        .SetEase(_brambleSpawnParametersSO.BrambleEaseType)
       );
     }
 

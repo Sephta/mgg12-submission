@@ -18,3 +18,4 @@ MonoBehaviour:
   <DamageEvent>k__BackingField: {fileID: 11400000, guid: 40c7317668a2211409c3243dad9aad69, type: 2}
   <PlayerDeathEvent>k__BackingField: {fileID: 11400000, guid: 0488ede67ea7d2649bac100745168c88, type: 2}
   <PlayerRespawnEvent>k__BackingField: {fileID: 11400000, guid: fbd2bb755c8b69944b74d4172832fc9d, type: 2}
+  _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}

@@ -85,7 +85,12 @@ namespace stal.HSM.PlayerStates
         // check if we hit something
         if (aimRaycast)
         {
-          _pointToTravelTo = new Vector3(aimRaycast.point.x, aimRaycast.point.y, 0f);
+          _pointToTravelTo = (Vector3)aimRaycast.point;
+          _pointToTravelTo -= new Vector3(
+            rayDirection.x * _playerContext.boxCollider2D.bounds.extents.x,
+            rayDirection.y * _playerContext.boxCollider2D.bounds.extents.y,
+            0f
+          );
           _pointToTravelTo -= Vector3.up * 0.5f;
         }
       }

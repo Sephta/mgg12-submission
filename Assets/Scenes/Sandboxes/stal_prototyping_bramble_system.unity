@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3726,7 +3726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3913,11 +3913,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4263067560497017550, guid: 0b9202ed783d4414fb9045a83f1b74fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.45
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4263067560497017550, guid: 0b9202ed783d4414fb9045a83f1b74fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -7.13
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 4263067560497017550, guid: 0b9202ed783d4414fb9045a83f1b74fe, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4138,6 +4138,10 @@ PrefabInstance:
     - target: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
       propertyPath: m_Name
       value: Ability Pickup
+      objectReference: {fileID: 0}
+    - target: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

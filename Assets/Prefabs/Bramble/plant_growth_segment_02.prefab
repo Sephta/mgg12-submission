@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6099895233350596412}
   - component: {fileID: 3757640656760484353}
   - component: {fileID: 6269000900039845614}
+  - component: {fileID: 5943643274636563129}
   m_Layer: 7
   m_Name: plant_growth_segment_02
   m_TagString: Untagged
@@ -148,3 +149,20 @@ PolygonCollider2D:
       - {x: -0.21875, y: 0.375}
       - {x: -0.3125, y: 0.34375}
   m_UseDelaunayMesh: 0
+--- !u!114 &5943643274636563129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 331791985213887051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 929f2f2ff738509438ad7e7b53d9bf00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 3757640656760484353}
+  plantSprites:
+  - {fileID: 21300000, guid: c7a45fb321994cb4f8408fa9120c0ff6, type: 3}
+  - {fileID: 21300000, guid: 09499f8329dbd7e4089ac0d4f1b2bb44, type: 3}
+  - {fileID: 21300000, guid: a8d897ab6c7ac0c498ed5fcc8f99eaec, type: 3}

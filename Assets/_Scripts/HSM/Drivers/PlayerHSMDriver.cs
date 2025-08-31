@@ -104,11 +104,6 @@ namespace stal.HSM.Drivers
 
     private void OnEnable()
     {
-      if (_playerAbilityData != null)
-      {
-        _playerAbilityData.ResetCurrentArmIndex();
-      }
-
       // Register Input Events
       _playerEventData.Move.OnEventRaised += OnMove;
       _playerEventData.Jump.OnEventRaised += OnJump;
