@@ -70,7 +70,7 @@ ScriptedImporter:
   - _key: Claw_Pickup
     _asset: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
   - _key: Door_Lock
-    _asset: {instanceID: 0}
+    _asset: {fileID: 1798764232389147619, guid: dda31814c704c254a9ded1bc579c6adb, type: 3}
   - _key: Laser_Vertical
     _asset: {instanceID: 0}
   - _key: Laser_Horizontal

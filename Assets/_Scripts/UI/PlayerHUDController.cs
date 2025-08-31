@@ -28,6 +28,11 @@ public class PlayerHUDController : MonoBehaviour
   private Label _fpsLabel;
   private Label _currentArmLabel;
 
+  // private VisualElement _neroBramble;
+  // private VisualElement _neroNeedle;
+  // private VisualElement _neroClaw;
+  // private VisualElement _neroCannon;
+
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
@@ -92,6 +97,19 @@ public class PlayerHUDController : MonoBehaviour
     _currentArmLabel = _rootVisualElement.Q<Label>("current-arm");
 
     _playerEventData.PlayerArmFinishedCycling.OnEventRaised += UpdateCurrentArmLabel;
+
+    // _neroBramble = _rootVisualElement.Q<VisualElement>("nero-bramble");
+    // _neroNeedle = _rootVisualElement.Q<VisualElement>("nero-needle");
+    // _neroClaw = _rootVisualElement.Q<VisualElement>("nero-claw");
+    // _neroCannon = _rootVisualElement.Q<VisualElement>("nero-cannon");
+
+    // _neroNeedle.AddToClassList("hide");
+    // _neroClaw.AddToClassList("hide");
+    // _neroCannon.AddToClassList("hide");
+
+    // foreach (NeroArmDataSO armData in _playerAbilityData.ArmData)
+    // {
+    // }
   }
 
   private void OnDisable()

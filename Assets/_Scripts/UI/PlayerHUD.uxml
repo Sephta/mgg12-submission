@@ -1,7 +1,23 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/_Scripts/UI/PlayerHUD.uss?fileID=7433441132597879392&amp;guid=3087e6a543361444e950ec80a6dae97c&amp;type=3#PlayerHUD" />
-    <ui:VisualElement name="panel" class="panel" style="flex-grow: 1;">
-        <ui:Label text="fps-counter" name="fps-counter" style="color: rgb(30, 87, 33);" />
-        <ui:Label text="current-arm" name="current-arm" style="color: rgb(30, 87, 33);" />
+    <ui:VisualElement name="root" class="panel" style="flex-grow: 1; justify-content: flex-start; align-self: auto; align-items: flex-start;">
+        <ui:VisualElement name="hud" style="flex-grow: 1; align-self: auto; align-items: flex-start; justify-content: flex-start; align-content: auto; flex-wrap: nowrap; flex-direction: column;">
+            <ui:Label text="fps-counter" name="fps-counter" style="color: rgb(30, 87, 33);" />
+            <ui:Label text="current-arm" name="current-arm" style="color: rgb(30, 87, 33);" />
+            <ui:GroupBox name="equipped-nero" class="hide" style="height: auto; width: auto; flex-direction: row; align-items: center; justify-content: space-around; align-self: flex-start; padding-top: 5px; padding-bottom: 5px; padding-left: 0; margin-top: 5px; margin-right: 0; margin-bottom: 5px; margin-left: 0; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(35, 35, 35); border-right-color: rgb(35, 35, 35); border-top-color: rgb(35, 35, 35); border-bottom-color: rgb(35, 35, 35); border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px; background-color: rgb(237, 237, 237); padding-right: 0;">
+                <ui:VisualElement name="nero-bramble" class="nero" style="flex-grow: 1; width: 32px; height: 32px; background-image: none; align-content: auto; justify-content: space-evenly; margin-left: 5px; margin-right: 5px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
+                    <ui:VisualElement name="bramble-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/ability_icons.aseprite?fileID=2837446418391361245&amp;guid=c3ba7097cd7491346a8e6e8e99fdd86c&amp;type=3#ability_icons_0&quot;);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="nero-needle" class="nero" style="flex-grow: 1; width: 32px; height: 32px; background-image: none; align-content: auto; justify-content: space-evenly; margin-left: 5px; margin-right: 5px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
+                    <ui:VisualElement name="needle-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/ability_icons.aseprite?fileID=2837446418391361245&amp;guid=c3ba7097cd7491346a8e6e8e99fdd86c&amp;type=3#ability_icons_0&quot;);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="nero-claw" class="nero" style="flex-grow: 1; width: 32px; height: 32px; background-image: none; align-content: auto; justify-content: space-evenly; margin-left: 5px; margin-right: 5px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
+                    <ui:VisualElement name="claw-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/ability_icons.aseprite?fileID=2837446418391361245&amp;guid=c3ba7097cd7491346a8e6e8e99fdd86c&amp;type=3#ability_icons_0&quot;);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="nero-cannon" class="nero" style="flex-grow: 1; width: 32px; height: 32px; background-image: none; align-content: auto; justify-content: space-evenly; margin-left: 5px; margin-right: 5px; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-top-left-radius: 5px; border-top-right-radius: 5px; border-bottom-right-radius: 5px; border-bottom-left-radius: 5px;">
+                    <ui:VisualElement name="cannon-icon" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Sprites/ability_icons.aseprite?fileID=2837446418391361245&amp;guid=c3ba7097cd7491346a8e6e8e99fdd86c&amp;type=3#ability_icons_0&quot;);" />
+                </ui:VisualElement>
+            </ui:GroupBox>
+        </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
