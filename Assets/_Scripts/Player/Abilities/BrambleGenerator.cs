@@ -69,18 +69,18 @@ public class BrambleGenerator : MonoBehaviour
     }
   }
 
-  private void OnDrawGizmos()
-  {
-    foreach (Spline spline in _splineContainer.Splines)
-    {
-      foreach (BezierKnot knot in spline.Knots)
-      {
-        Vector3 worldPositionOfKnot = transform.TransformPoint(knot.Position.ConvertTo<Vector3>());
+  // private void OnDrawGizmos()
+  // {
+  //   foreach (Spline spline in _splineContainer.Splines)
+  //   {
+  //     foreach (BezierKnot knot in spline.Knots)
+  //     {
+  //       Vector3 worldPositionOfKnot = transform.TransformPoint(knot.Position.ConvertTo<Vector3>());
 
-        Gizmos.DrawSphere(new(worldPositionOfKnot.x, worldPositionOfKnot.y, 0f), 1f);
-      }
-    }
-  }
+  //       Gizmos.DrawSphere(new(worldPositionOfKnot.x, worldPositionOfKnot.y, 0f), 1f);
+  //     }
+  //   }
+  // }
 
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
@@ -181,14 +181,22 @@ public class BrambleGenerator : MonoBehaviour
           GameObject result = Instantiate(
             _brambleComponent,
             worldPositionOfKnot,
-            Quaternion.Euler(0f, 0f, randomEularRotationZ),
+            transform.rotation,
             transform
           );
 
-          result.SetActive(false);
-          result.transform.localScale = Vector3.zero;
+          if (result != null)
+          {
+            SetRandomPlantSprite resultVisuals = result.GetComponentInChildren<SetRandomPlantSprite>();
+            if (resultVisuals != null)
+            {
+              resultVisuals.transform.rotation = Quaternion.Euler(0f, 0f, randomEularRotationZ);
+            }
 
-          if (result != null) _brambleComponents.Add(result);
+            result.SetActive(false);
+            result.transform.localScale = Vector3.zero;
+            _brambleComponents.Add(result);
+          }
         }
         else
         {

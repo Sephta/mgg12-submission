@@ -6,7 +6,7 @@ using UnityEngine;
 public class SetRandomPlantSprite : MonoBehaviour
 {
   [SerializeField, Required] private SpriteRenderer _spriteRenderer = null;
-  [SerializeField] private List<Sprite> plantSprites = new List<Sprite>();
+  [SerializeField] private List<Sprite> plantSprites = new();
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
