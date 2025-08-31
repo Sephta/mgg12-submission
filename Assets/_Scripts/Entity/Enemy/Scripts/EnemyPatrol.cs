@@ -14,20 +14,18 @@ public class EnemyPatrol : MonoBehaviour
   public List<Transform> patrolPoints;
   public Transform player;
   public Transform EnemyGFXTransform;
-  public float speed = 2f;
+  [SerializeField] private float _speed = 2f;
   public float rangeAwakeDistance = 100f;
   public float beginChaseDistance = 5f;
   public float maxChaseDistance = 12f;
   public float nextWaypointDistance = 3f;
 
-  private float _speed;
   private Path _path;
   private int _currentWaypoint = 0;
   private int _currentPatrolPoint = 0;
   private Transform _currentTarget;
   private bool _reachedTarget = false;
   private bool _isPatrolling = false;
-  // private bool _isChasing = false;
   private float _distanceFromTarget = -1f;
   private float _distanceFromPlayer = -1f;
   private Seeker _seeker;
@@ -37,17 +35,12 @@ public class EnemyPatrol : MonoBehaviour
   // Start is called once before the first execution of Update after the MonoBehaviour is created
   private void Start()
   {
-    _speed = 100f * speed;
     _seeker = GetComponent<Seeker>();
     _rb = GetComponent<Rigidbody2D>();
     _collision = GetComponent<Collider2D>();
     _currentTarget = patrolPoints[_currentPatrolPoint];
     _distanceFromTarget = Vector2.Distance(_rb.position, _currentTarget.position);
     _distanceFromPlayer = Vector2.Distance(_rb.position, player.position);
-
-
-    InvokeRepeating("UpdatePath", 0f, 0.5f);
-
   }
 
   // Update is called once per frame
@@ -58,22 +51,22 @@ public class EnemyPatrol : MonoBehaviour
     _isPatrolling = _distanceFromPlayer <= rangeAwakeDistance;
     _reachedTarget = _distanceFromTarget < 1f;
 
-    Debug.Log("Distance from point #" + _currentPatrolPoint + " : " + _distanceFromTarget);
-    Debug.Log("Has reached target? " + _reachedTarget);
+    // Debug.Log("Distance from point #" + _currentPatrolPoint + " : " + _distanceFromTarget);
+    // Debug.Log("Has reached target? " + _reachedTarget);
 
     if (_distanceFromPlayer > rangeAwakeDistance)
     {
-      if (IsInvoking("UpdatePath"))
+      if (IsInvoking(nameof(UpdatePath)))
       {
-        CancelInvoke("UpdatePath");
+        CancelInvoke(nameof(UpdatePath));
         _seeker.CancelCurrentPathRequest();
       }
       return;
     }
 
-    if (!IsInvoking("UpdatePath"))
+    if (!IsInvoking(nameof(UpdatePath)))
     {
-      InvokeRepeating("UpdatePath", 0f, 0.5f);
+      InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
       return;
     }
 
@@ -92,17 +85,33 @@ public class EnemyPatrol : MonoBehaviour
     MoveEnemyOnPath();
   }
 
+  private void OnTriggerEnter2D(Collider2D collider)
+  {
+    if (collider.gameObject.CompareTag("Player"))
+    {
+      Debug.Log("Player has ENTERED our range of detection");
+    }
+  }
+
+  private void OnTriggerExit2D(Collider2D collider)
+  {
+    if (collider.gameObject.CompareTag("Player"))
+    {
+      Debug.Log("Player has EXITED our range of detection");
+    }
+  }
+
   private void UpdatePath()
   {
     if (_seeker.IsDone())
     {
       if (_reachedTarget)
       {
-        Debug.Log("Reached Target...");
+        // Debug.Log("Reached Target...");
         _currentPatrolPoint = _currentPatrolPoint == patrolPoints.Count - 1 ? 0 : _currentPatrolPoint + 1;
         _currentTarget = patrolPoints[_currentPatrolPoint];
       }
-      Debug.Log("current patrol point = " + _currentPatrolPoint);
+      // Debug.Log("current patrol point = " + _currentPatrolPoint);
       _seeker.StartPath(_rb.position, _currentTarget.position, OnPathComplete);
     }
   }
@@ -111,7 +120,7 @@ public class EnemyPatrol : MonoBehaviour
   {
     if (path.error)
     {
-      Debug.LogError("There was a pathing error. Exiting early OnPathComplete early.");
+      // Debug.LogError("There was a pathing error. Exiting early OnPathComplete early.");
       return;
     }
     _path = path;
@@ -122,7 +131,7 @@ public class EnemyPatrol : MonoBehaviour
   private void MoveEnemyOnPath()
   {
     Vector2 direction = ((Vector2)_path.vectorPath[_currentWaypoint] - _rb.position).normalized;
-    Vector2 force = direction * _speed * Time.deltaTime;
+    Vector2 force = direction * _speed;
 
     _rb.AddForce(force);
 
