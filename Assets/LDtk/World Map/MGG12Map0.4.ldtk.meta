@@ -20,6 +20,8 @@ ScriptedImporter:
   _useParallax: 1
   _scaleEntities: 1
   _intGridValues:
+  - _key: Hazard_Collision_1
+    _asset: {instanceID: 0}
   - _key: Wall_Collision_1
     _asset: {fileID: 11400000, guid: a87eba62d0a99d84fba0586d4a05510e, type: 2}
   - _key: Collision_1
