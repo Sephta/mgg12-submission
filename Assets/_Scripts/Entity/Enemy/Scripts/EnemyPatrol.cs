@@ -11,36 +11,35 @@ public class EnemyPatrol : MonoBehaviour
    * -----------------------------------------------
   */
 
-  public List<Transform> patrolPoints;
-  public Transform player;
-  public Transform EnemyGFXTransform;
-  [SerializeField] private float _speed = 2f;
-  public float rangeAwakeDistance = 100f;
-  public float beginChaseDistance = 5f;
-  public float maxChaseDistance = 12f;
-  public float nextWaypointDistance = 3f;
+  [SerializeField] private List<Transform> patrolPoints;
+  [SerializeField] private Transform player;
+  [SerializeField] private Transform EnemyGFXTransform;
+  [SerializeField] private float _patrolSpeed = 2f;
+  [SerializeField] private float _chaseSpeed = 4f;
+  [SerializeField] private float rangeAwakeDistance = 100f;
+  [SerializeField] private float nextWaypointDistance = 1f;
 
   private Path _path;
+  private Transform _currentTarget;
+  private float _speed = 2f;
   private int _currentWaypoint = 0;
   private int _currentPatrolPoint = 0;
-  private Transform _currentTarget;
   private bool _reachedTarget = false;
   private bool _isPatrolling = false;
+  private bool _isChasing = false;
   private float _distanceFromTarget = -1f;
   private float _distanceFromPlayer = -1f;
   private Seeker _seeker;
   private Rigidbody2D _rb;
-  private Collider2D _collision;
 
-  // Start is called once before the first execution of Update after the MonoBehaviour is created
   private void Start()
   {
     _seeker = GetComponent<Seeker>();
     _rb = GetComponent<Rigidbody2D>();
-    _collision = GetComponent<Collider2D>();
     _currentTarget = patrolPoints[_currentPatrolPoint];
     _distanceFromTarget = Vector2.Distance(_rb.position, _currentTarget.position);
     _distanceFromPlayer = Vector2.Distance(_rb.position, player.position);
+    _speed = _patrolSpeed;
   }
 
   // Update is called once per frame
@@ -50,9 +49,6 @@ public class EnemyPatrol : MonoBehaviour
     _distanceFromPlayer = Vector2.Distance(_rb.position, player.position);
     _isPatrolling = _distanceFromPlayer <= rangeAwakeDistance;
     _reachedTarget = _distanceFromTarget < 1f;
-
-    // Debug.Log("Distance from point #" + _currentPatrolPoint + " : " + _distanceFromTarget);
-    // Debug.Log("Has reached target? " + _reachedTarget);
 
     if (_distanceFromPlayer > rangeAwakeDistance)
     {
@@ -75,10 +71,9 @@ public class EnemyPatrol : MonoBehaviour
     if (_currentWaypoint >= _path.vectorPath.Count)
       return;
 
-    if (_reachedTarget)
+    if (_reachedTarget && _isPatrolling)
     {
-      _currentPatrolPoint = _currentPatrolPoint == patrolPoints.Count - 1 ? 0 : _currentPatrolPoint + 1;
-      _currentTarget = patrolPoints[_currentPatrolPoint];
+      UpdatePatrolTarget();
       return;
     }
 
@@ -89,7 +84,10 @@ public class EnemyPatrol : MonoBehaviour
   {
     if (collider.gameObject.CompareTag("Player"))
     {
-      Debug.Log("Player has ENTERED our range of detection");
+      _isChasing = true;
+      _isPatrolling = false;
+      _speed = _chaseSpeed;
+      Debug.Log("Player has ENTERED our chase range");
     }
   }
 
@@ -97,21 +95,34 @@ public class EnemyPatrol : MonoBehaviour
   {
     if (collider.gameObject.CompareTag("Player"))
     {
-      Debug.Log("Player has EXITED our range of detection");
+      _isChasing = false;
+      _isPatrolling = true;
+      _speed = _patrolSpeed;
+      UpdatePatrolTarget();
+      Debug.Log("Player has EXITED our chase detection");
     }
+  }
+
+  // only call if is currently patrolling and has reached target
+  // or is exiting chase behavior
+  private void UpdatePatrolTarget()
+  {
+    _currentPatrolPoint = _currentPatrolPoint == patrolPoints.Count - 1 ? 0 : _currentPatrolPoint + 1;
+    _currentTarget = patrolPoints[_currentPatrolPoint];
   }
 
   private void UpdatePath()
   {
     if (_seeker.IsDone())
     {
-      if (_reachedTarget)
+      if (_reachedTarget && _isPatrolling)
       {
-        // Debug.Log("Reached Target...");
-        _currentPatrolPoint = _currentPatrolPoint == patrolPoints.Count - 1 ? 0 : _currentPatrolPoint + 1;
-        _currentTarget = patrolPoints[_currentPatrolPoint];
+        UpdatePatrolTarget();
       }
-      // Debug.Log("current patrol point = " + _currentPatrolPoint);
+      if (_isChasing && _currentTarget != player)
+      {
+        _currentTarget = player;
+      }
       _seeker.StartPath(_rb.position, _currentTarget.position, OnPathComplete);
     }
   }
@@ -120,7 +131,6 @@ public class EnemyPatrol : MonoBehaviour
   {
     if (path.error)
     {
-      // Debug.LogError("There was a pathing error. Exiting early OnPathComplete early.");
       return;
     }
     _path = path;

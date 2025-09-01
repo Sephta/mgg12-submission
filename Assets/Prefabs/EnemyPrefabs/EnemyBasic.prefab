@@ -13,7 +13,8 @@ GameObject:
   - component: {fileID: 6464321624723579339}
   - component: {fileID: 5041540472987301107}
   - component: {fileID: 6481562686821075725}
-  m_Layer: 0
+  - component: {fileID: 5005695314917488834}
+  m_Layer: 9
   m_Name: EnemyBasic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -154,6 +155,22 @@ MonoBehaviour:
   target: {fileID: 0}
   nextWaypointDistance: 3
   maxChaseDistance: 12
+--- !u!114 &5005695314917488834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2119244702839756279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e859ecade9520f9439896333a895fbc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damageAmount: 1
+  _takeDamageEvent: {fileID: 11400000, guid: a447d77cdb8a7674d99fde594ada7f2c, type: 2}
+  _dealDamageEvent: {fileID: 11400000, guid: 40c7317668a2211409c3243dad9aad69, type: 2}
+  _tagToDealDamageTo: Player
 --- !u!1 &9181660781079547913
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,14 +11,14 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
-  public Transform EnemyGFXTransform;
-  public float speed = 2f;
-  public Transform target;
-  public float nextWaypointDistance = 3f;
-  public float maxChaseDistance = 12f;
+  [SerializeField] private Transform EnemyGFXTransform;
+  [SerializeField] private float speed = 2f;
+  [SerializeField] private Transform target;
+  [SerializeField] private float nextWaypointDistance = 3f;
+  [SerializeField] private float maxChaseDistance = 12f;
 
-  private float _speed;
   private Path _path;
+  private float _speed;
   private int _currentWaypoint = 0;
   private bool _reachedTarget = false;
   private float _distanceFromTarget = -1f;
@@ -103,8 +103,6 @@ public class EnemyAI : MonoBehaviour
     _rb.AddForce(force);
 
     float distance = Vector2.Distance(_rb.position, _path.vectorPath[_currentWaypoint]);
-
-    Debug.Log("pursuit in progress... distance from target = " + _distanceFromTarget);
 
     if (distance < nextWaypointDistance)
     {
