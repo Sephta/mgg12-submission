@@ -24,12 +24,14 @@ public class EnemyAI : MonoBehaviour
   private float _distanceFromTarget = -1f;
   private Seeker _seeker;
   private Rigidbody2D _rb;
+  private Vector3 _originalLocation;
 
   private void Start()
   {
     _speed = 100f * speed;
     _seeker = GetComponent<Seeker>();
     _rb = GetComponent<Rigidbody2D>();
+    _originalLocation = _rb.transform.position;
     _distanceFromTarget = Vector2.Distance(_rb.position, target.position);
 
   }
@@ -47,6 +49,10 @@ public class EnemyAI : MonoBehaviour
       {
         CancelInvoke("UpdatePath");
         _seeker.CancelCurrentPathRequest();
+      }
+      if (_rb.transform.position != _originalLocation)
+      {
+        _rb.transform.position = _originalLocation;
       }
       return;
     }

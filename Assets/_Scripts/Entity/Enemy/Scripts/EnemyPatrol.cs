@@ -31,11 +31,13 @@ public class EnemyPatrol : MonoBehaviour
   private float _distanceFromPlayer = -1f;
   private Seeker _seeker;
   private Rigidbody2D _rb;
+  private Vector3 _originalLocation;
 
   private void Start()
   {
     _seeker = GetComponent<Seeker>();
     _rb = GetComponent<Rigidbody2D>();
+    _originalLocation = _rb.transform.position;
     _currentTarget = patrolPoints[_currentPatrolPoint];
     _distanceFromTarget = Vector2.Distance(_rb.position, _currentTarget.position);
     _distanceFromPlayer = Vector2.Distance(_rb.position, player.position);
@@ -56,6 +58,10 @@ public class EnemyPatrol : MonoBehaviour
       {
         CancelInvoke(nameof(UpdatePath));
         _seeker.CancelCurrentPathRequest();
+      }
+      if (_rb.transform.position != _originalLocation)
+      {
+        _rb.transform.position = _originalLocation;
       }
       return;
     }
