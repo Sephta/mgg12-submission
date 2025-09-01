@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5687076892267347315
 Transform:
   m_ObjectHideFlags: 0
@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e859ecade9520f9439896333a895fbc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyAttributesData: {fileID: 0}
   _damageAmount: 1
   _takeDamageEvent: {fileID: 11400000, guid: a447d77cdb8a7674d99fde594ada7f2c, type: 2}
   _dealDamageEvent: {fileID: 11400000, guid: 40c7317668a2211409c3243dad9aad69, type: 2}

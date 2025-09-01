@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6b0cbb687050aa4ea26e2ea1e7977c8, type: 3}
+  m_Name: Enemy Attributes Data
+  m_EditorClassIdentifier: 
+  <PatrolSpeed>k__BackingField: 2
+  <ChaseSpeed>k__BackingField: 4
+  <RangeAwakeDistance>k__BackingField: 50
+  <KnockbackForce>k__BackingField: 12
+  <MinHealth>k__BackingField: 0
+  <MaxHealth>k__BackingField: 100
+  <CurrentHealth>k__BackingField: 100
+  PlayerTransform: {fileID: 0}

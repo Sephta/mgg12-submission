@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3989931556127509436}
   - component: {fileID: 8028615588236160693}
   - component: {fileID: 4703703063293611388}
+  - component: {fileID: 5017072308851487549}
   m_Layer: 0
   m_Name: EvilShape
   m_TagString: Untagged
@@ -110,6 +111,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5017072308851487549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215818749398373443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67657e1043707fb4880106588d0fd82e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4772510126456114701
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,10 +268,9 @@ MonoBehaviour:
   - {fileID: 0}
   player: {fileID: 0}
   EnemyGFXTransform: {fileID: 3989931556127509436}
-  _patrolSpeed: 2
-  _chaseSpeed: 4
-  rangeAwakeDistance: 50
+  _enemyAttributesData: {fileID: 11400000, guid: f966a7f54ffc19e49a8884c6898c76aa, type: 2}
   nextWaypointDistance: 1
+  _speed: 2
 --- !u!1 &5384284601596586038
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,8 +362,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e859ecade9520f9439896333a895fbc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _parentRigidbody2D: {fileID: 2520790140763642100}
+  _enemyAttributesData: {fileID: 11400000, guid: f966a7f54ffc19e49a8884c6898c76aa, type: 2}
   _damageAmount: 1
   _takeDamageEvent: {fileID: 11400000, guid: a447d77cdb8a7674d99fde594ada7f2c, type: 2}
   _dealDamageEvent: {fileID: 11400000, guid: 40c7317668a2211409c3243dad9aad69, type: 2}
   _tagToDealDamageTo: Player
   _enemyVisuals: {fileID: 4215818749398373443}
+  _howLongToFlashDamageColor: 0.125
+  _coroutineRunning: 0

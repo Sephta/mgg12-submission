@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NaughtyAttributes;
 using Pathfinding;
 using UnityEngine;
 public class EnemyPatrol : MonoBehaviour
@@ -12,16 +13,17 @@ public class EnemyPatrol : MonoBehaviour
   */
 
   [SerializeField] private List<Transform> patrolPoints;
-  [SerializeField] private Transform player;
+  [SerializeField, ReadOnly] private Transform player;
   [SerializeField] private Transform EnemyGFXTransform;
-  [SerializeField] private float _patrolSpeed = 2f;
-  [SerializeField] private float _chaseSpeed = 4f;
-  [SerializeField] private float rangeAwakeDistance = 100f;
+
+  [Header("Attributes Data")]
+
+  [SerializeField, Expandable] private EnemyAttributesDataSO _enemyAttributesData;
+
   [SerializeField] private float nextWaypointDistance = 1f;
 
   private Path _path;
   private Transform _currentTarget;
-  private float _speed = 2f;
   private int _currentWaypoint = 0;
   private int _currentPatrolPoint = 0;
   private bool _reachedTarget = false;
@@ -33,6 +35,23 @@ public class EnemyPatrol : MonoBehaviour
   private Rigidbody2D _rb;
   private Vector3 _originalLocation;
 
+  [Header("Debug")]
+
+  [SerializeField, ReadOnly] private float _speed = 2f;
+
+
+  private void Awake()
+  {
+    if (_enemyAttributesData == null)
+    {
+      Debug.LogError(name + " does not have a reference to EnemyAttributesDataSO in the inspector. Disabling gameobject to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
+    if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
+    if (player != null) _enemyAttributesData.PlayerTransform = player;
+  }
+
   private void Start()
   {
     _seeker = GetComponent<Seeker>();
@@ -41,7 +60,7 @@ public class EnemyPatrol : MonoBehaviour
     _currentTarget = patrolPoints[_currentPatrolPoint];
     _distanceFromTarget = Vector2.Distance(_rb.position, _currentTarget.position);
     _distanceFromPlayer = Vector2.Distance(_rb.position, player.position);
-    _speed = _patrolSpeed;
+    _speed = _enemyAttributesData.PatrolSpeed;
   }
 
   // Update is called once per frame
@@ -49,10 +68,10 @@ public class EnemyPatrol : MonoBehaviour
   {
     _distanceFromTarget = Vector2.Distance(_rb.position, _currentTarget.position);
     _distanceFromPlayer = Vector2.Distance(_rb.position, player.position);
-    _isPatrolling = _distanceFromPlayer <= rangeAwakeDistance;
+    _isPatrolling = _distanceFromPlayer <= _enemyAttributesData.RangeAwakeDistance;
     _reachedTarget = _distanceFromTarget < 1f;
 
-    if (_distanceFromPlayer > rangeAwakeDistance)
+    if (_distanceFromPlayer > _enemyAttributesData.RangeAwakeDistance)
     {
       if (IsInvoking(nameof(UpdatePath)))
       {
@@ -92,7 +111,7 @@ public class EnemyPatrol : MonoBehaviour
     {
       _isChasing = true;
       _isPatrolling = false;
-      _speed = _chaseSpeed;
+      _speed = _enemyAttributesData.ChaseSpeed;
       Debug.Log("Player has ENTERED our chase range");
     }
   }
@@ -103,7 +122,7 @@ public class EnemyPatrol : MonoBehaviour
     {
       _isChasing = false;
       _isPatrolling = true;
-      _speed = _patrolSpeed;
+      _speed = _enemyAttributesData.PatrolSpeed;
       UpdatePatrolTarget();
       Debug.Log("Player has EXITED our chase detection");
     }

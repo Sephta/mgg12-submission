@@ -7,22 +7,22 @@ ScriptedImporter:
       type: UnityEngine:AnimationClip
       assembly: UnityEngine.AnimationModule
       name: idle
-    second: {fileID: 7400000, guid: 6e0796047477e1e4984b55c304440365, type: 2}
+    second: {fileID: 7400000, guid: 71a40c4340d9aa340850aa49a5179fce, type: 2}
   - first:
       type: UnityEngine:AnimationClip
       assembly: UnityEngine.AnimationModule
       name: jump
-    second: {fileID: 7400000, guid: 0d7d045ff54f44548a432fc6fd5d76ef, type: 2}
+    second: {fileID: 7400000, guid: bf9d33f2dd140764eb18256e316c0415, type: 2}
   - first:
       type: UnityEngine:AnimationClip
       assembly: UnityEngine.AnimationModule
       name: recovery
-    second: {fileID: 7400000, guid: 5c48538002bd03b48a1caeae21e708c4, type: 2}
+    second: {fileID: 7400000, guid: f43a50b05b8bc7447b881d15c3c4ae80, type: 2}
   - first:
       type: UnityEngine:AnimationClip
       assembly: UnityEngine.AnimationModule
       name: run
-    second: {fileID: 7400000, guid: d7ee1045e7640bc4c85c6e049d007468, type: 2}
+    second: {fileID: 7400000, guid: fab43173d87de5c49900c68e49490dd7, type: 2}
   serializedVersion: 2
   userData: 
   assetBundleName: 
@@ -44,7 +44,7 @@ ScriptedImporter:
     normalMapFilter: 0
     flipGreenChannel: 0
     swizzle: 50462976
-    isReadable: 0
+    isReadable: 1
     streamingMipmaps: 0
     streamingMipmapsPriority: 0
     vTOnly: 0
@@ -100,7 +100,7 @@ ScriptedImporter:
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 0
     spritePadding: 0
-    generateModelPrefab: 1
+    generateModelPrefab: 0
     generateAnimationClips: 1
     addSortingGroup: 1
     addShadowCasters: 0
@@ -115,14 +115,14 @@ ScriptedImporter:
     customPivotPosition: {x: 0.5, y: 0.5}
     mosaicPadding: 0
     spritePadding: 0
-    generateModelPrefab: 1
+    generateModelPrefab: 0
     generateAnimationClips: 1
     addSortingGroup: 1
     addShadowCasters: 0
     generateIndividualEvents: 1
     generateSpriteAtlas: 1
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638906293703775069
+  platformSettingsDirtyTick: 638923239967739464
   textureAssetName: 
   singleSpriteImportData:
   - name: 
