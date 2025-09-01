@@ -21,10 +21,18 @@ public class EnemyDamageListener : MonoBehaviour
   [SerializeField, Range(0f, 1f)] private float _howLongToFlashDamageColor = 1f;
   [SerializeField, ReadOnly] private bool _coroutineRunning = false;
 
+
+  [field: SerializeField, Range(1, 30)] private int _maxStateDuration = 15;
+  [field: SerializeField, ReadOnly] private int _currentStateTimer = 0;
+  [field: SerializeField, ReadOnly] private bool _isTimerDone = true;
+  // [field: SerializeField, ReadOnly] private bool isStateDone = true;
+
   private bool _isAttacking = false;
+  private bool _isTakingDamage = false;
   private SpriteRenderer _sr;
   private Animator _animator;
   private Color _originalSpriteColor;
+
 
   private void Awake()
   {
@@ -59,18 +67,43 @@ public class EnemyDamageListener : MonoBehaviour
     _takeDamageEvent.OnEventRaised -= DoDamageToEntity;
   }
 
+  private void Update()
+  {
+    if (_currentStateTimer <= 1)
+    {
+      _currentStateTimer = 0;
+      _isTimerDone = true;
+    }
+
+    if (!_isTimerDone)
+    {
+      _currentStateTimer--;
+    }
+    else
+    {
+      _enemyAttributesData.SetCombatState("none");
+      _isAttacking = false;
+      _isTakingDamage = false;
+    }
+  }
+
   private void OnCollisionEnter2D(Collision2D collision) => OnTriggerEnter2D(collision.collider);
 
   // inflict damage
   private void OnTriggerEnter2D(Collider2D collider)
   {
-    if (collider.CompareTag(_tagToDealDamageTo))
+    if (collider.CompareTag(_tagToDealDamageTo) && !_isTakingDamage)
     {
-      _isAttacking = true;
+      if (_isTimerDone)
+      {
+        _isAttacking = true;
+        _currentStateTimer = _maxStateDuration;
+        _enemyAttributesData.SetCombatState("attacking");
+        _isTimerDone = false;
+      }
       _dealDamageEvent.RaiseEvent(collider.gameObject.GetInstanceID(), _damageAmount);
       Debug.Log($"{name} attempting to inflict {_damageAmount} damage to <ID: {collider.gameObject.GetInstanceID()}>");
     }
-    _isAttacking = false;
   }
 
   // take damage
@@ -87,15 +120,19 @@ public class EnemyDamageListener : MonoBehaviour
       _enemyAttributesData.TakeDamage(damageAmount);
 
       var directionToApplyForce = (transform.position - _enemyAttributesData.PlayerTransform.position).normalized;
-
       _parentRigidbody2D.AddForce(directionToApplyForce * _enemyAttributesData.KnockbackForce, ForceMode2D.Impulse);
+
+      if (_isTimerDone)
+      {
+        _isTakingDamage = true;
+        _currentStateTimer = _maxStateDuration;
+        _enemyAttributesData.SetCombatState("taking damage");
+        _isTimerDone = false;
+      }
+
     }
   }
 
-  public bool IsAttacking()
-  {
-    return _isAttacking;
-  }
 
   private void StartDamageFlash()
   {
@@ -117,4 +154,15 @@ public class EnemyDamageListener : MonoBehaviour
 
     _coroutineRunning = false;
   }
+
+
+
+
+  /* ---------------------------------------------------------------- */
+  /*                               PUBLIC                             */
+  /* ---------------------------------------------------------------- */
+
+  public bool IsTakingDamage() { return _isTakingDamage; }
+  public bool IsAttacking() { return _isAttacking; }
+
 }

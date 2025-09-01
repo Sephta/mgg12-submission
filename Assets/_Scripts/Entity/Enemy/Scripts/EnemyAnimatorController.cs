@@ -1,3 +1,4 @@
+using System;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -14,6 +15,9 @@ public class EnemyAnimatorController : MonoBehaviour
 
   [SerializeField] private int _crossfadeTransitionDuration = 0;
   [SerializeField] private int _animatorLayerToUse = 0;
+
+  private Rigidbody2D _rb;
+
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -33,7 +37,8 @@ public class EnemyAnimatorController : MonoBehaviour
 
   private void Start()
   {
-    _animator.SetFloat("speed", 1f);
+    // _animator.SetFloat("speed", 1f);
+    _rb = GetComponentInParent<Rigidbody2D>();
   }
 
   // private void OnEnable() {}
@@ -41,7 +46,28 @@ public class EnemyAnimatorController : MonoBehaviour
 
   private void Update()
   {
-    _animator.CrossFade("idle", _crossfadeTransitionDuration, _animatorLayerToUse);
+    string animationToPlay = AnimationSelector();
+    _animator.CrossFade(animationToPlay, _crossfadeTransitionDuration, _animatorLayerToUse);
+  }
+
+  private string AnimationSelector()
+  {
+    string result = "idle";
+    bool isMoving = Math.Abs(_rb.linearVelocityX) > 0.01f;
+    if (_enemyAttributesData.GetCombatState().Equals("taking damage", StringComparison.OrdinalIgnoreCase))
+    {
+      return "jump";
+    }
+    if (_enemyAttributesData.GetCombatState().Equals("attacking", StringComparison.OrdinalIgnoreCase))
+    {
+      return "jump"; // look this is just a placeholder
+    }
+    if (isMoving)
+    {
+      return "run";
+    }
+
+    return result;
   }
 
   // private void FixedUpdate() {}
