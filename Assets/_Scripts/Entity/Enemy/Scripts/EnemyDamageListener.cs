@@ -15,8 +15,12 @@ public class EnemyDamageListener : MonoBehaviour
   [SerializeField, Tag] private string _tagToDealDamageTo = "Player";
   [Space(5f)]
 
+  [SerializeField] private GameObject _enemyVisuals;
+
   private bool _isTakingDamage = false;
-  private SpriteRenderer _spriteRenderer;
+  private bool _isAttacking = false;
+  private SpriteRenderer _sr;
+  private Animator _animator;
 
   private void Awake()
   {
@@ -32,16 +36,22 @@ public class EnemyDamageListener : MonoBehaviour
     }
   }
 
+  private void Start()
+  {
+    _sr = _enemyVisuals.GetComponent<SpriteRenderer>();
+    _animator = _enemyVisuals.GetComponent<Animator>();
+  }
+
   private void OnEnable()
   {
     _takeDamageEvent.OnEventRaised += DoDamageToEntity;
-    _isTakingDamage = true;
+    // _isTakingDamage = true;
   }
 
   private void OnDisable()
   {
     _takeDamageEvent.OnEventRaised -= DoDamageToEntity;
-    _isTakingDamage = false;
+    // _isTakingDamage = false;
   }
 
   private void OnCollisionEnter2D(Collision2D collision)
@@ -52,21 +62,26 @@ public class EnemyDamageListener : MonoBehaviour
   // inflict damage
   private void OnTriggerEnter2D(Collider2D collider)
   {
-    if (collider.CompareTag(_tagToDealDamageTo))
+    if (collider.CompareTag(_tagToDealDamageTo) && !_isTakingDamage)
     {
+      _isAttacking = true;
       _dealDamageEvent.RaiseEvent(collider.gameObject.GetInstanceID(), _damageAmount);
       Debug.Log($"{name} attempting to inflict {_damageAmount} damage to <ID: {collider.gameObject.GetInstanceID()}>");
-
     }
+    _isAttacking = false;
   }
 
   // take damage
   private void DoDamageToEntity(int objectID, int damageAmount)
   {
+    Color originalColor = _sr.color;
     if (objectID == gameObject.GetInstanceID())
     {
+      _isTakingDamage = true;
+      _sr.color = Color.red;
       Debug.Log($"{name} is taking {damageAmount} damage from <ID: {objectID}>");
     }
+    _isTakingDamage = false;
   }
 
   // I know we talked about putting public at top, but considering the functions of out private
@@ -76,5 +91,9 @@ public class EnemyDamageListener : MonoBehaviour
     return _isTakingDamage;
   }
 
+  public bool IsAttacking()
+  {
+    return _isAttacking;
+  }
 
 }

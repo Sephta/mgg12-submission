@@ -43,7 +43,7 @@ public class EnemyAI : MonoBehaviour
     _reachedTarget = _distanceFromTarget < 1f;
 
     // get all the early exit conditions out of the way
-    if (_distanceFromTarget > maxChaseDistance || _reachedTarget)
+    if (_distanceFromTarget > maxChaseDistance)
     {
       if (IsInvoking("UpdatePath"))
       {

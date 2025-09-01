@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5005695314917488834}
   m_Layer: 9
   m_Name: EnemyBasic
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -153,7 +153,7 @@ MonoBehaviour:
   EnemyGFXTransform: {fileID: 3269975964532214209}
   speed: 0.5
   target: {fileID: 0}
-  nextWaypointDistance: 3
+  nextWaypointDistance: 1
   maxChaseDistance: 12
 --- !u!114 &5005695314917488834
 MonoBehaviour:
@@ -171,6 +171,7 @@ MonoBehaviour:
   _takeDamageEvent: {fileID: 11400000, guid: a447d77cdb8a7674d99fde594ada7f2c, type: 2}
   _dealDamageEvent: {fileID: 11400000, guid: 40c7317668a2211409c3243dad9aad69, type: 2}
   _tagToDealDamageTo: Player
+  _enemyVisuals: {fileID: 9181660781079547913}
 --- !u!1 &9181660781079547913
 GameObject:
   m_ObjectHideFlags: 0

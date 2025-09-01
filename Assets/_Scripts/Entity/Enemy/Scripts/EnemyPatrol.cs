@@ -172,4 +172,5 @@ public class EnemyPatrol : MonoBehaviour
       EnemyGFXTransform.localScale = new Vector3(1f, 1f, 1f);
     }
   }
+
 }

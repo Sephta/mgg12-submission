@@ -125,7 +125,7 @@ GameObject:
   - component: {fileID: 2610977978983703400}
   m_Layer: 0
   m_Name: EnemyPatrol
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -270,9 +270,9 @@ GameObject:
   - component: {fileID: 5961495892779669506}
   - component: {fileID: 6283492811093931299}
   - component: {fileID: 1165357966334554602}
-  m_Layer: 0
-  m_Name: EnemyHurtBox
-  m_TagString: Untagged
+  m_Layer: 9
+  m_Name: EnemyCombat
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -354,3 +354,4 @@ MonoBehaviour:
   _takeDamageEvent: {fileID: 11400000, guid: a447d77cdb8a7674d99fde594ada7f2c, type: 2}
   _dealDamageEvent: {fileID: 11400000, guid: 40c7317668a2211409c3243dad9aad69, type: 2}
   _tagToDealDamageTo: Player
+  _enemyVisuals: {fileID: 4215818749398373443}
