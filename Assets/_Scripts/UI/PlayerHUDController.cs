@@ -1,6 +1,7 @@
 using System;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
 [RequireComponent(typeof(UIDocument))]
@@ -30,10 +31,22 @@ public class PlayerHUDController : MonoBehaviour
   [Header("Health Bar Settings")]
   [SerializeField] private int _baseWidth = 78;
 
+  [Space(10f)]
+  [Header("Ability UI Settings")]
+  [SerializeField] private NeroArmDataSO _needleData;
+  [SerializeField] private NeroArmDataSO _clawData;
+  [SerializeField] private NeroArmDataSO _cannonData;
+
+
   private VisualElement _rootVisualElement;
   private Label _fpsLabel;
   private Label _currentArmLabel;
   private VisualElement _healthBarForeground;
+
+  private VisualElement _neroBramble;
+  private VisualElement _neroNeedle;
+  private VisualElement _neroClaw;
+  private VisualElement _neroCannon;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -100,6 +113,15 @@ public class PlayerHUDController : MonoBehaviour
 
     _playerEventData.PlayerArmFinishedCycling.OnEventRaised += UpdateCurrentArmLabel;
 
+    _neroBramble = _rootVisualElement.Q<VisualElement>("nero-bramble");
+    _neroNeedle = _rootVisualElement.Q<VisualElement>("nero-needle");
+    _neroClaw = _rootVisualElement.Q<VisualElement>("nero-claw");
+    _neroCannon = _rootVisualElement.Q<VisualElement>("nero-cannon");
+
+    _neroNeedle.AddToClassList("hide");
+    _neroClaw.AddToClassList("hide");
+    _neroCannon.AddToClassList("hide");
+
     _healthBarForeground = _rootVisualElement.Q<VisualElement>("health-bar-foreground");
 
     if (_healthBarForeground != null && _playerHealth != null)
@@ -124,6 +146,7 @@ public class PlayerHUDController : MonoBehaviour
   {
     UpdateFPSText();
     SetHealthBarWidthBasedOnPlayerHealth();
+    UpdateAbilityUI();
   }
 
   /* ---------------------------------------------------------------- */
@@ -175,5 +198,67 @@ public class PlayerHUDController : MonoBehaviour
     float healthTranslation = Mathf.InverseLerp(_playerHealth.MinHealth, _playerHealth.MaxHealth, _playerHealth.CurrentHealth);
 
     _healthBarForeground.style.width = Mathf.Lerp(0, _baseWidth, healthTranslation);
+  }
+
+  private void UpdateAbilityUI()
+  {
+    if (_neroNeedle == null || _neroClaw == null || _neroCannon == null) return;
+    if (_needleData == null || _clawData == null || _cannonData == null) return;
+
+    if (!_playerAbilityData.ArmData.Contains(_needleData))
+    {
+      _neroNeedle.AddToClassList("hide");
+    }
+    else
+    {
+      _neroNeedle.RemoveFromClassList("hide");
+    }
+
+    if (!_playerAbilityData.ArmData.Contains(_clawData))
+    {
+      _neroClaw.AddToClassList("hide");
+    }
+    else
+    {
+      _neroClaw.RemoveFromClassList("hide");
+    }
+
+    if (!_playerAbilityData.ArmData.Contains(_cannonData))
+    {
+      _neroCannon.AddToClassList("hide");
+    }
+    else
+    {
+      _neroCannon.RemoveFromClassList("hide");
+    }
+
+    if (_playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral)
+    {
+      _neroBramble.AddToClassList("nero-selected");
+      _neroNeedle.RemoveFromClassList("nero-selected");
+      _neroClaw.RemoveFromClassList("nero-selected");
+      _neroCannon.RemoveFromClassList("nero-selected");
+    }
+    else if (_playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Needle)
+    {
+      _neroBramble.RemoveFromClassList("nero-selected");
+      _neroNeedle.AddToClassList("nero-selected");
+      _neroClaw.RemoveFromClassList("nero-selected");
+      _neroCannon.RemoveFromClassList("nero-selected");
+    }
+    else if (_playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Claw)
+    {
+      _neroBramble.RemoveFromClassList("nero-selected");
+      _neroNeedle.RemoveFromClassList("nero-selected");
+      _neroClaw.AddToClassList("nero-selected");
+      _neroCannon.RemoveFromClassList("nero-selected");
+    }
+    else if (_playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Gun)
+    {
+      _neroBramble.RemoveFromClassList("nero-selected");
+      _neroNeedle.RemoveFromClassList("nero-selected");
+      _neroClaw.RemoveFromClassList("nero-selected");
+      _neroCannon.AddToClassList("nero-selected");
+    }
   }
 }
