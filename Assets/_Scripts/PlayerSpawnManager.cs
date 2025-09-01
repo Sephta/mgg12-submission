@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerSpawnManager : SingletonMonoBehavior<PlayerSpawnManager>
 {
-
+  [SerializeField] private PlayerHealthSO _playerHealth;
   [SerializeField] private VoidEventChannelSO _playerRespawnEvent;
   [SerializeField] private TransformEventChannelSO _assignPlayerToCamera;
   [SerializeField, ReadOnly] private List<PlayerSpawnPoint> _spawnPoints = new();
@@ -13,11 +13,14 @@ public class PlayerSpawnManager : SingletonMonoBehavior<PlayerSpawnManager>
   /*                           Unity Functions                        */
   /* ---------------------------------------------------------------- */
 
-  // private void Awake() {}
-
   private void Start()
   {
     if (Instance == null) return;
+
+    if (_playerHealth == null)
+    {
+      Debug.LogError(name + " needs a reference to PlayerHealthSO plugged into the inspector for this class.");
+    }
 
     PlayerSpawnPoint[] playerSpawns = FindObjectsByType<PlayerSpawnPoint>(FindObjectsSortMode.None);
 
@@ -73,6 +76,7 @@ public class PlayerSpawnManager : SingletonMonoBehavior<PlayerSpawnManager>
       {
         player.transform.position = closestSpawn.transform.position;
         player.gameObject.SetActive(true);
+        _playerHealth.SetCurrentHealth(_playerHealth.MaxHealth);
         if (_assignPlayerToCamera != null) _assignPlayerToCamera.RaiseEvent(player.transform);
       }
       else

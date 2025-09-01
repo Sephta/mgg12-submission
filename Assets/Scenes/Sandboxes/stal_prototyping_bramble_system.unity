@@ -4149,6 +4149,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5682493355291682672, guid: 5cebd3c5df7eb8f41bfa203e168191ab, type: 3}
+      propertyPath: sourceAsset
+      value: 
+      objectReference: {fileID: 9197481963319205126, guid: 97a7390c0f915f147bea032e5ef8504f, type: 3}
     - target: {fileID: 9153470658882264222, guid: 5cebd3c5df7eb8f41bfa203e168191ab, type: 3}
       propertyPath: m_Name
       value: UI - PlayerHUD
@@ -4340,7 +4344,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1727160350628250392, guid: 2dd9d9b9660a92d4ab4aa4b824e80176, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7098804502564592129, guid: 2dd9d9b9660a92d4ab4aa4b824e80176, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4400,6 +4404,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1819731971}
     m_Modifications:
+    - target: {fileID: 27797209521459863, guid: 6605569369ffbea4f91e6bed3f5ab325, type: 3}
+      propertyPath: _playerHealth
+      value: 
+      objectReference: {fileID: 11400000, guid: 74a0d1688989cb1468a4619d26e9969a, type: 2}
     - target: {fileID: 874967103387369657, guid: 6605569369ffbea4f91e6bed3f5ab325, type: 3}
       propertyPath: m_Name
       value: Player Spawn Manager

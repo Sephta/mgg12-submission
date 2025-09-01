@@ -66,6 +66,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerHUDDocument: {fileID: 5682493355291682672}
   _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
+  _playerHealth: {fileID: 11400000, guid: 74a0d1688989cb1468a4619d26e9969a, type: 2}
   _defaultTextContent: 'FPS: '
   _useTimeInterval: 1
   _timeInterval: 0.25

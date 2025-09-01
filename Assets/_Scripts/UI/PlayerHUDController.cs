@@ -1,3 +1,4 @@
+using System;
 using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -15,6 +16,7 @@ public class PlayerHUDController : MonoBehaviour
   private PlayerAttributesDataSO _playerAttributesData;
   private PlayerAbilityDataSO _playerAbilityData;
   private PlayerEventDataSO _playerEventData;
+  [SerializeField] private PlayerHealthSO _playerHealth;
 
   [Space(10f)]
   [Header("FPS Tracker Settings")]
@@ -24,14 +26,14 @@ public class PlayerHUDController : MonoBehaviour
   private float _currentTimeInterval = 0f;
   [SerializeField, ReadOnly] float _averageFps = 0f;
 
+  [Space(10f)]
+  [Header("Health Bar Settings")]
+  [SerializeField] private int _baseWidth = 78;
+
   private VisualElement _rootVisualElement;
   private Label _fpsLabel;
   private Label _currentArmLabel;
-
-  // private VisualElement _neroBramble;
-  // private VisualElement _neroNeedle;
-  // private VisualElement _neroClaw;
-  // private VisualElement _neroCannon;
+  private VisualElement _healthBarForeground;
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */
@@ -98,18 +100,14 @@ public class PlayerHUDController : MonoBehaviour
 
     _playerEventData.PlayerArmFinishedCycling.OnEventRaised += UpdateCurrentArmLabel;
 
-    // _neroBramble = _rootVisualElement.Q<VisualElement>("nero-bramble");
-    // _neroNeedle = _rootVisualElement.Q<VisualElement>("nero-needle");
-    // _neroClaw = _rootVisualElement.Q<VisualElement>("nero-claw");
-    // _neroCannon = _rootVisualElement.Q<VisualElement>("nero-cannon");
+    _healthBarForeground = _rootVisualElement.Q<VisualElement>("health-bar-foreground");
 
-    // _neroNeedle.AddToClassList("hide");
-    // _neroClaw.AddToClassList("hide");
-    // _neroCannon.AddToClassList("hide");
+    if (_healthBarForeground != null && _playerHealth != null)
+    {
+      _healthBarForeground.style.width = _baseWidth;
+    }
 
-    // foreach (NeroArmDataSO armData in _playerAbilityData.ArmData)
-    // {
-    // }
+    SetHealthBarWidthBasedOnPlayerHealth();
   }
 
   private void OnDisable()
@@ -125,6 +123,7 @@ public class PlayerHUDController : MonoBehaviour
   private void Update()
   {
     UpdateFPSText();
+    SetHealthBarWidthBasedOnPlayerHealth();
   }
 
   /* ---------------------------------------------------------------- */
@@ -167,5 +166,14 @@ public class PlayerHUDController : MonoBehaviour
     {
       _currentArmLabel.text = _playerAbilityData.CurrentlyEquippedArm.ArmType.ToString();
     }
+  }
+
+  private void SetHealthBarWidthBasedOnPlayerHealth()
+  {
+    if (_healthBarForeground == null || _playerHealth == null) return;
+
+    float healthTranslation = Mathf.InverseLerp(_playerHealth.MinHealth, _playerHealth.MaxHealth, _playerHealth.CurrentHealth);
+
+    _healthBarForeground.style.width = Mathf.Lerp(0, _baseWidth, healthTranslation);
   }
 }
