@@ -22,7 +22,7 @@ public class EnemyDamageListener : MonoBehaviour
   [SerializeField, ReadOnly] private bool _coroutineRunning = false;
 
 
-  [field: SerializeField, Range(1, 30)] private int _maxStateDuration = 15;
+  [field: SerializeField, Range(1, 60)] private int _maxStateDuration = 30;
   [field: SerializeField, ReadOnly] private int _currentStateTimer = 0;
   [field: SerializeField, ReadOnly] private bool _isTimerDone = true;
   // [field: SerializeField, ReadOnly] private bool isStateDone = true;
@@ -67,7 +67,7 @@ public class EnemyDamageListener : MonoBehaviour
     _takeDamageEvent.OnEventRaised -= DoDamageToEntity;
   }
 
-  private void Update()
+  private void FixedUpdate()
   {
     if (_currentStateTimer <= 1)
     {
@@ -92,7 +92,7 @@ public class EnemyDamageListener : MonoBehaviour
   // inflict damage
   private void OnTriggerEnter2D(Collider2D collider)
   {
-    if (collider.CompareTag(_tagToDealDamageTo) && !_isTakingDamage)
+    if (collider.CompareTag(_tagToDealDamageTo))
     {
       if (_isTimerDone)
       {
