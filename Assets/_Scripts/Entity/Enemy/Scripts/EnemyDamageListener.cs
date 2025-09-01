@@ -148,7 +148,7 @@ public class EnemyDamageListener : MonoBehaviour
   {
     _coroutineRunning = true;
 
-    _sr.color = Color.white;
+    _sr.color = Color.red;
     yield return new WaitForSecondsRealtime(duration);
     _sr.color = _originalSpriteColor;
 

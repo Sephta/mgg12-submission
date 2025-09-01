@@ -56,11 +56,11 @@ public class EnemyAnimatorController : MonoBehaviour
     bool isMoving = Math.Abs(_rb.linearVelocityX) > 0.01f;
     if (_enemyAttributesData.GetCombatState().Equals("taking damage", StringComparison.OrdinalIgnoreCase))
     {
-      return "jump";
+      return "ouch";
     }
     if (_enemyAttributesData.GetCombatState().Equals("attacking", StringComparison.OrdinalIgnoreCase))
     {
-      return "jump"; // look this is just a placeholder
+      return "attack"; // look this is just a placeholder
     }
     if (isMoving)
     {
