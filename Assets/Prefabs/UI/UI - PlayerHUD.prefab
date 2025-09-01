@@ -66,7 +66,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerHUDDocument: {fileID: 5682493355291682672}
   _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
+  _playerHealth: {fileID: 11400000, guid: 74a0d1688989cb1468a4619d26e9969a, type: 2}
   _defaultTextContent: 'FPS: '
   _useTimeInterval: 1
   _timeInterval: 0.25
   _averageFps: 0
+  _baseWidth: 78
+  _needleData: {fileID: 11400000, guid: 45f8d3624e3706149b4583935c185feb, type: 2}
+  _clawData: {fileID: 11400000, guid: ae10c7dae936feb4bbb23ab7d4c42aad, type: 2}
+  _cannonData: {fileID: 11400000, guid: 549e22e4f6330bd46bed0d9d3b786afc, type: 2}

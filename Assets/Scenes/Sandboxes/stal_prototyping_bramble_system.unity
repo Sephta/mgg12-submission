@@ -181,7 +181,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3810,7 +3810,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4400,6 +4400,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1819731971}
     m_Modifications:
+    - target: {fileID: 27797209521459863, guid: 6605569369ffbea4f91e6bed3f5ab325, type: 3}
+      propertyPath: _playerHealth
+      value: 
+      objectReference: {fileID: 11400000, guid: 74a0d1688989cb1468a4619d26e9969a, type: 2}
     - target: {fileID: 874967103387369657, guid: 6605569369ffbea4f91e6bed3f5ab325, type: 3}
       propertyPath: m_Name
       value: Player Spawn Manager
@@ -4572,7 +4576,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
