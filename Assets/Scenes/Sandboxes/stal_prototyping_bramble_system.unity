@@ -3560,7 +3560,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5696392734424121139, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 5696392734424121139, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3598,6 +3598,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7786695724869052213, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+      propertyPath: _collisionCheck.m_Bits
+      value: 1088
+      objectReference: {fileID: 0}
     - target: {fileID: 8868254424840194047, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
       propertyPath: _playerContext.mainCamera
       value: 
@@ -3607,6 +3611,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+--- !u!4 &799815141 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5696392734424121139, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+  m_PrefabInstance: {fileID: 799815140}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &824278526 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3540906186300417843, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
@@ -3620,6 +3629,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1097735547122861207, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
+      propertyPath: _transitionRate
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097735547122861207, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
+      propertyPath: _baseTargetOffset.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1097735547122861207, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
+      propertyPath: _targetOffsetWhileMoving.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601070627725553977, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
+      propertyPath: Target.TrackingTarget
+      value: 
+      objectReference: {fileID: 799815141}
     - target: {fileID: 2469905015375672637, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6599998
@@ -3660,9 +3685,25 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4086989718071505374, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
+      propertyPath: Damping.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4086989718071505374, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
+      propertyPath: TargetOffset.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324345239635964858, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.119999886
+      objectReference: {fileID: 0}
     - target: {fileID: 4781341648348012701, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
       propertyPath: m_Name
       value: Follow Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 9073707533636886448, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.119999886
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4226,7 +4267,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4263067560497017550, guid: 0b9202ed783d4414fb9045a83f1b74fe, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 4263067560497017550, guid: 0b9202ed783d4414fb9045a83f1b74fe, type: 3}
       propertyPath: m_LocalPosition.y

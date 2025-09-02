@@ -75,4 +75,18 @@ public class CameraShake : MonoBehaviour
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
+
+  [Button("Reset")]
+  private void ResetCameraShake()
+  {
+    shakeIntensity = 0f;
+
+    CinemachineBasicMultiChannelPerlin mChannelPerlin =
+      _camera.GetComponentInChildren<CinemachineBasicMultiChannelPerlin>();
+
+    mChannelPerlin.AmplitudeGain = shakeIntensity;
+
+    shakeTimer = 0f;
+    currShakeTime = 0f;
+  }
 }

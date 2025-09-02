@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4086989718071505374}
   - component: {fileID: 3139953975319686538}
   - component: {fileID: 876642519326512128}
+  - component: {fileID: 1097735547122861207}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -29,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2415672296009813291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6599998, y: 2.31, z: -10}
+  m_LocalPosition: {x: -15.66, y: -0.8800001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -60,7 +61,7 @@ MonoBehaviour:
     CustomLookAtTarget: 0
   Lens:
     FieldOfView: 40
-    OrthographicSize: 8
+    OrthographicSize: 7
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -99,11 +100,11 @@ MonoBehaviour:
       Size: {x: 0.2, y: 0.2}
     HardLimits:
       Enabled: 1
-      Size: {x: 0.35, y: 0.47}
-      Offset: {x: 0, y: 0.12}
+      Size: {x: 0.35, y: 0.5}
+      Offset: {x: 0, y: 0.15}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 3.19, z: 0}
-  Damping: {x: 2, y: 5, z: 1}
+  TargetOffset: {x: 0, y: 1, z: 0}
+  Damping: {x: 1, y: 5, z: 1}
   Lookahead:
     Enabled: 0
     Time: 0
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
   PivotOffset: {x: 0, y: 0, z: 0}
-  AmplitudeGain: 5
+  AmplitudeGain: 0
   FrequencyGain: 1
   m_NoiseOffsets: {x: 0, y: 0, z: 0}
 --- !u!114 &876642519326512128
@@ -140,9 +141,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _camera: {fileID: 1601070627725553977}
   _cameraShakeEvent: {fileID: 11400000, guid: 41e4a78006634a34baf8d0f8e8a91628, type: 2}
-  shakeIntensity: 5
-  shakeTimer: 0.1
-  currShakeTime: 0.1
+  shakeIntensity: 0
+  shakeTimer: 0
+  currShakeTime: 0
+--- !u!114 &1097735547122861207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415672296009813291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2fb1fd5f29944a4d84058ad3191c527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
+  _playerAbilityData: {fileID: 11400000, guid: 56713abed363fa1489b17c2ed7fd735b, type: 2}
+  _playerEventData: {fileID: 11400000, guid: 8992863c5f19e8345aae1d3d1f34b837, type: 2}
+  _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
+  _postionComposer: {fileID: 4086989718071505374}
+  _baseTargetOffset: {x: 0, y: 1, z: 0}
+  _targetOffsetWhileMoving: {x: 1.5, y: 0}
+  _targetOffsetWhileIdle: {x: 0, y: 0}
 --- !u!1 &4781341648348012701
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +242,7 @@ Transform:
   m_GameObject: {fileID: 7585772071046746812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.6599998, y: 2.31, z: -10}
+  m_LocalPosition: {x: -15.66, y: -0.8800001, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -294,7 +315,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 8
+  orthographic size: 7
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2

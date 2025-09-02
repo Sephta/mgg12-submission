@@ -112,7 +112,7 @@ public class PlayerAnimatorController : MonoBehaviour
     }
   }
 
-  private bool IsMoving() => _playerAttributesData.PlayerMoveDirection.x != 0;
+  private bool IsMoving() => Mathf.Abs(_playerAttributesData.PlayerMoveDirection.x) > 0.1f;
 
   private bool IsFalling() => _playerAttributesData.PlayerVelocity.y < 0 && !_playerAttributesData.IsGrounded;
 

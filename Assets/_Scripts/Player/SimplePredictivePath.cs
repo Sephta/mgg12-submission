@@ -14,6 +14,7 @@ public class SimplePredictivePath : MonoBehaviour
 
   [Space(10f)]
   [Header("Predictive Path Data")]
+  [SerializeField] private LayerMask _collisionCheck;
   [SerializeField, Range(0f, 50f)] private int _numPoints = 0;
   [SerializeField] private float _launchForce = 0f;
   [SerializeField] private float _pointSpacingValue = 0f;
@@ -139,10 +140,35 @@ public class SimplePredictivePath : MonoBehaviour
 
   private void UpdatePointPositions(float force)
   {
+    bool oneOfThePointsCollidedWithSomething = false;
+
     for (int i = 0; i < _numPoints; i++)
     {
-      _points[i].transform.position = PointPosition((i + 1) * _pointSpacingValue, force);
-      _points[i].SetActive(true);
+      Vector2 newPointPosition = PointPosition((i + 1) * _pointSpacingValue, force);
+
+      if (!oneOfThePointsCollidedWithSomething)
+      {
+        RaycastHit2D circleCastHit = Physics2D.CircleCast(
+          newPointPosition,
+          0.1f,
+          Vector2.up,
+          0f,
+          _collisionCheck
+        );
+
+        oneOfThePointsCollidedWithSomething = circleCastHit;
+      }
+
+      if (Mathf.Round(Vector2.Distance((Vector2)transform.position, newPointPosition)) <= _playerMovementData.AbilityAimRaycastDistance && !oneOfThePointsCollidedWithSomething)
+      {
+        Debug.Log("Point Distance: " + Vector2.Distance((Vector2)transform.position, newPointPosition) + ", ability distance: " + _playerMovementData.AbilityAimRaycastDistance);
+        _points[i].transform.position = newPointPosition;
+        _points[i].SetActive(true);
+      }
+      else
+      {
+        _points[i].SetActive(false);
+      }
     }
   }
 }

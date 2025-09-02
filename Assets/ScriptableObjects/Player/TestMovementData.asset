@@ -54,7 +54,7 @@ MonoBehaviour:
     minNormalAngle: 0
     maxNormalAngle: 0
   <CoyoteTime>k__BackingField: 0.15
-  <AbilityAimRaycastDistance>k__BackingField: 18
+  <AbilityAimRaycastDistance>k__BackingField: 12
   <TimeTillSlideDownWall>k__BackingField: 1
   <JumpingPower>k__BackingField: 15
   <GravityScale>k__BackingField: 3.8226297
