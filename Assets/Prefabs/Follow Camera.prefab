@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4324345239635964858}
   - component: {fileID: 1601070627725553977}
   - component: {fileID: 4086989718071505374}
+  - component: {fileID: 3139953975319686538}
+  - component: {fileID: 876642519326512128}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -107,6 +109,40 @@ MonoBehaviour:
     Time: 0
     Smoothing: 0
     IgnoreY: 0
+--- !u!114 &3139953975319686538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415672296009813291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NoiseProfile: {fileID: 11400000, guid: 69ce8388f6785dd4c8c39915efece2f4, type: 2}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 5
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &876642519326512128
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2415672296009813291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f55282176d1522c48af7b16539d7c281, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 1601070627725553977}
+  _cameraShakeEvent: {fileID: 11400000, guid: 41e4a78006634a34baf8d0f8e8a91628, type: 2}
+  shakeIntensity: 5
+  shakeTimer: 0.1
+  currShakeTime: 0.1
 --- !u!1 &4781341648348012701
 GameObject:
   m_ObjectHideFlags: 0

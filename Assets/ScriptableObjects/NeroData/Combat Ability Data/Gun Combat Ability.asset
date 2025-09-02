@@ -20,3 +20,4 @@ MonoBehaviour:
   <AttackChainingInputBuffer>k__BackingField: 0.25
   AttackAnimationClips:
   - {fileID: 7400000, guid: d36c1a815c274094a9e987ee081bc8dd, type: 2}
+  <CameraShakeSettings>k__BackingField: {fileID: 11400000, guid: 0b86bd57283ddb6429d1737d6d9a644e, type: 2}

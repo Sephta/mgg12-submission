@@ -22,3 +22,4 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 8ad4dd1a8e356124d95c7a1098abdff8, type: 2}
   - {fileID: 7400000, guid: 9d9352425cd2f6742bf2181c19d893ba, type: 2}
   - {fileID: 7400000, guid: fc1f1aaa795af054b8947c5f00a72c2b, type: 2}
+  <CameraShakeSettings>k__BackingField: {fileID: 11400000, guid: d81c79c9b4a412b46a0be26c0cc04bb5, type: 2}

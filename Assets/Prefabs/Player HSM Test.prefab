@@ -78,7 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1092780423
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: -5073028877702378488, guid: 6b94e18233f4bf04a91e719237136cc0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -277,6 +277,7 @@ MonoBehaviour:
   _playerAbilityData: {fileID: 11400000, guid: 56713abed363fa1489b17c2ed7fd735b, type: 2}
   _playerEventData: {fileID: 11400000, guid: 8992863c5f19e8345aae1d3d1f34b837, type: 2}
   _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
+  _cameraShakeEvent: {fileID: 11400000, guid: 41e4a78006634a34baf8d0f8e8a91628, type: 2}
 --- !u!1 &4753032256456121729
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class BulletHandler : MonoBehaviour
 
   [SerializeField, Expandable] private PlayerAbilityDataSO _playerAbilityData;
   [SerializeField, Expandable] private BulletDataSO _bulletData;
+  [SerializeField] private FloatFloatEventChannelSO _cameraShakeEvent;
 
   private readonly float _bulletSpeedBase = 1000f;
 
@@ -78,6 +79,14 @@ public class BulletHandler : MonoBehaviour
             collider.gameObject.GetInstanceID(),
             _playerAbilityData.CurrentlyEquippedArm.CombatAbility.Damage
           );
+
+          if (_cameraShakeEvent != null)
+          {
+            _cameraShakeEvent.RaiseEvent(
+              _playerAbilityData.CurrentlyEquippedArm.CombatAbility.CameraShakeSettings.Intensity,
+              _playerAbilityData.CurrentlyEquippedArm.CombatAbility.CameraShakeSettings.Duration
+            );
+          }
         }
       }
     }

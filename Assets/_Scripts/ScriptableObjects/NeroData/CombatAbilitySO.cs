@@ -27,10 +27,13 @@ public class CombatAbilitySO : ScriptableObject
   public float AttackChainingInputBuffer { get; private set; }
 
   [field: Space(10f)]
-  [field: Header("Combat Animation Data")]
-  [field: Space(10f)]
 
   public List<AnimationClip> AttackAnimationClips = new();
+
+  [field: Space(10f)]
+
+  [field: SerializeField, Expandable]
+  public CameraShakeSettingsSO CameraShakeSettings { get; private set; }
 
   /* ---------------------------------------------------------------- */
   /*                           Unity Functions                        */

@@ -177,3 +177,4 @@ MonoBehaviour:
     m_Bits: 1600
   _playerAbilityData: {fileID: 11400000, guid: 56713abed363fa1489b17c2ed7fd735b, type: 2}
   _bulletData: {fileID: 11400000, guid: ad9a82b35a8487b4da8eb088aad9c47d, type: 2}
+  _cameraShakeEvent: {fileID: 11400000, guid: 41e4a78006634a34baf8d0f8e8a91628, type: 2}

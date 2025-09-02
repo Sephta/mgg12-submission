@@ -15,6 +15,8 @@ public class PlayerHitzone : MonoBehaviour
   [SerializeField, Expandable] private PlayerEventDataSO _playerEventData;
   [SerializeField, Expandable] private PlayerAttributesDataSO _playerAttributesData;
 
+  [SerializeField] private FloatFloatEventChannelSO _cameraShakeEvent;
+
   private void Awake()
   {
     if (_scratchpad == null)
@@ -72,6 +74,14 @@ public class PlayerHitzone : MonoBehaviour
           collider.gameObject.GetInstanceID(),
           _playerAbilityData.CurrentlyEquippedArm.CombatAbility.Damage
         );
+
+        if (_cameraShakeEvent != null)
+        {
+          _cameraShakeEvent.RaiseEvent(
+            _playerAbilityData.CurrentlyEquippedArm.CombatAbility.CameraShakeSettings.Intensity,
+            _playerAbilityData.CurrentlyEquippedArm.CombatAbility.CameraShakeSettings.Duration
+          );
+        }
       }
     }
   }
