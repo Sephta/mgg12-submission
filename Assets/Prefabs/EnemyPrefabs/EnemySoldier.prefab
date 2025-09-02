@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 142732734714297661, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: patrolPoints.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1675609198039701285, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: _damageAmount
       value: 5
@@ -26,11 +30,11 @@ PrefabInstance:
       objectReference: {fileID: -5073028877702378488, guid: 04e224c3abbdfb24dab5776a9a43529e, type: 3}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.79
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.68
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.z

@@ -52,7 +52,6 @@ public class EnemyDamageListener : MonoBehaviour
     if (_parentRigidbody2D == null) _parentRigidbody2D = GetComponentInParent<Rigidbody2D>();
   }
 
-
   private void OnEnable()
   {
     _takeDamageEvent.OnEventRaised += DoDamageToEntity;

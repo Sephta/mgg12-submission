@@ -40,6 +40,7 @@ public class EnemyPatrol : MonoBehaviour
   private Seeker _seeker;
   private Rigidbody2D _rb;
   private Vector3 _originalLocation;
+  private Transform _originalTransform;
 
 
 
@@ -50,7 +51,6 @@ public class EnemyPatrol : MonoBehaviour
       Debug.LogError(name + " does not have a reference to EnemyAttributesDataSO in the inspector. Disabling gameobject to avoid null object errors.");
       gameObject.SetActive(false);
     }
-
     if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
     if (player != null) _enemyAttributesData.PlayerTransform = player;
   }
@@ -60,7 +60,8 @@ public class EnemyPatrol : MonoBehaviour
     _seeker = GetComponent<Seeker>();
     _rb = GetComponent<Rigidbody2D>();
     _originalLocation = _rb.transform.position;
-    _currentTarget = patrolPoints[_currentPatrolPoint];
+    _originalTransform = _rb.transform;
+    _currentTarget = patrolPoints.Count > 0 ? patrolPoints[_currentPatrolPoint] : _originalTransform;
     _distanceFromTarget = Vector2.Distance(_rb.position, _currentTarget.position);
     _distanceFromPlayer = Vector2.Distance(_rb.position, player.position);
     _speed = _enemyAttributesData.PatrolSpeed;
@@ -134,8 +135,15 @@ public class EnemyPatrol : MonoBehaviour
   // or is exiting chase behavior
   private void UpdatePatrolTarget()
   {
-    _currentPatrolPoint = _currentPatrolPoint == patrolPoints.Count - 1 ? 0 : _currentPatrolPoint + 1;
-    _currentTarget = patrolPoints[_currentPatrolPoint];
+    if (patrolPoints.Count == 0)
+    {
+      _currentTarget = _originalTransform;
+    }
+    else
+    {
+      _currentPatrolPoint = _currentPatrolPoint == patrolPoints.Count - 1 ? 0 : _currentPatrolPoint + 1;
+      _currentTarget = patrolPoints[_currentPatrolPoint];
+    }
   }
 
   private void UpdatePath()
