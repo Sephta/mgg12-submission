@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using Pathfinding;
@@ -22,6 +23,10 @@ public class EnemyPatrol : MonoBehaviour
 
   [SerializeField] private float nextWaypointDistance = 1f;
 
+  [Header("Debug")]
+
+  [SerializeField, ReadOnly] private float _speed = 2f;
+
   private Path _path;
   private Transform _currentTarget;
   private int _currentWaypoint = 0;
@@ -29,15 +34,13 @@ public class EnemyPatrol : MonoBehaviour
   private bool _reachedTarget = false;
   private bool _isPatrolling = false;
   private bool _isChasing = false;
+  private bool _isDead = false;
   private float _distanceFromTarget = -1f;
   private float _distanceFromPlayer = -1f;
   private Seeker _seeker;
   private Rigidbody2D _rb;
   private Vector3 _originalLocation;
 
-  [Header("Debug")]
-
-  [SerializeField, ReadOnly] private float _speed = 2f;
 
 
   private void Awake()
@@ -66,22 +69,21 @@ public class EnemyPatrol : MonoBehaviour
   // Update is called once per frame
   private void FixedUpdate()
   {
+
     _distanceFromTarget = Vector2.Distance(_rb.position, _currentTarget.position);
     _distanceFromPlayer = Vector2.Distance(_rb.position, player.position);
     _isPatrolling = _distanceFromPlayer <= _enemyAttributesData.RangeAwakeDistance;
     _reachedTarget = _distanceFromTarget < 1f;
 
+    if (_isDead)
+    {
+      DisposeTheBody(_distanceFromPlayer > _enemyAttributesData.RangeAwakeDistance);
+      return;
+    }
+
     if (_distanceFromPlayer > _enemyAttributesData.RangeAwakeDistance)
     {
-      if (IsInvoking(nameof(UpdatePath)))
-      {
-        CancelInvoke(nameof(UpdatePath));
-        _seeker.CancelCurrentPathRequest();
-      }
-      if (_rb.transform.position != _originalLocation)
-      {
-        _rb.transform.position = _originalLocation;
-      }
+      ResetPositionAndGoToSleep();
       return;
     }
 
@@ -191,5 +193,46 @@ public class EnemyPatrol : MonoBehaviour
       EnemyGFXTransform.localScale = new Vector3(1f, 1f, 1f);
     }
   }
+
+  private void ResetPositionAndGoToSleep()
+  {
+    if (IsInvoking(nameof(UpdatePath)))
+    {
+      CancelInvoke(nameof(UpdatePath));
+      _seeker.CancelCurrentPathRequest();
+    }
+    if (_rb.transform.position != _originalLocation)
+    {
+      _rb.transform.position = _originalLocation;
+    }
+  }
+
+  private void DisposeTheBody(bool playerOutOfRange)
+  {
+    _seeker.CancelCurrentPathRequest();
+    if (IsInvoking(nameof(UpdatePath)))
+    {
+      CancelInvoke(nameof(UpdatePath));
+    }
+
+    if (playerOutOfRange)
+    {
+      Destroy(gameObject);
+    }
+  }
+
+  // I'm making a method in case we need to do more later upon disposal
+  public void KillYourself()
+  {
+    _isDead = true;
+    _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+    _seeker.CancelCurrentPathRequest();
+    if (IsInvoking(nameof(UpdatePath)))
+    {
+      CancelInvoke(nameof(UpdatePath));
+    }
+  }
+
+
 
 }

@@ -15,8 +15,9 @@ MonoBehaviour:
   <PatrolSpeed>k__BackingField: 2
   <ChaseSpeed>k__BackingField: 4
   <RangeAwakeDistance>k__BackingField: 50
-  <KnockbackForce>k__BackingField: 12
+  <KnockbackForce>k__BackingField: 4.7
   <MinHealth>k__BackingField: 0
-  <MaxHealth>k__BackingField: 100
-  <CurrentHealth>k__BackingField: 100
+  <MaxHealth>k__BackingField: 25
+  <CurrentHealth>k__BackingField: 25
+  MaxCombatStateDuration: 30
   PlayerTransform: {fileID: 0}

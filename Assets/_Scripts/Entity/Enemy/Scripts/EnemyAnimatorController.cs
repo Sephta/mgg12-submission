@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
@@ -8,15 +9,21 @@ public class EnemyAnimatorController : MonoBehaviour
   [SerializeField] private Animator _animator;
   [SerializeField] private SpriteRenderer _spriteRenderer;
 
-  [Header("Attributes Data")]
-
-  [SerializeField, Required, Expandable] private EnemyAttributesDataSO _enemyAttributesData;
-
+  [SerializeField, Range(0f, 1f)] private float _howLongToFlashDamageColor = 1f;
+  [SerializeField, ReadOnly] private bool _coroutineRunning = false;
 
   [SerializeField] private int _crossfadeTransitionDuration = 0;
   [SerializeField] private int _animatorLayerToUse = 0;
-
   private Rigidbody2D _rb;
+  private Color _originalSpriteColor;
+
+
+
+  [Header("Attributes Data")]
+  [SerializeField, Required, Expandable] private EnemyAttributesDataSO _enemyAttributesData;
+
+  private string _combatState;
+
 
 
   /* ---------------------------------------------------------------- */
@@ -35,14 +42,16 @@ public class EnemyAnimatorController : MonoBehaviour
     }
   }
 
-  private void Start()
+  private void OnEnable()
   {
-    // _animator.SetFloat("speed", 1f);
     _rb = GetComponentInParent<Rigidbody2D>();
+    _originalSpriteColor = _spriteRenderer.color;
+    _combatState = "none";
   }
-
-  // private void OnEnable() {}
-  // private void OnDisable() {}
+  private void OnDisable()
+  {
+    _spriteRenderer.color = _originalSpriteColor;
+  }
 
   private void Update()
   {
@@ -54,11 +63,20 @@ public class EnemyAnimatorController : MonoBehaviour
   {
     string result = "idle";
     bool isMoving = Math.Abs(_rb.linearVelocityX) > 0.01f;
-    if (_enemyAttributesData.GetCombatState().Equals("taking damage", StringComparison.OrdinalIgnoreCase))
+    if (_combatState.Equals("dead", StringComparison.OrdinalIgnoreCase))
     {
+      return "dead";
+    }
+    if (_combatState.Equals("dying", StringComparison.OrdinalIgnoreCase))
+    {
+      return "death";
+    }
+    if (_combatState.Equals("taking damage", StringComparison.OrdinalIgnoreCase))
+    {
+      StartDamageFlash();
       return "ouch";
     }
-    if (_enemyAttributesData.GetCombatState().Equals("attacking", StringComparison.OrdinalIgnoreCase))
+    if (_combatState.Equals("attacking", StringComparison.OrdinalIgnoreCase))
     {
       return "attack"; // look this is just a placeholder
     }
@@ -75,8 +93,30 @@ public class EnemyAnimatorController : MonoBehaviour
   /* ---------------------------------------------------------------- */
   /*                               PUBLIC                             */
   /* ---------------------------------------------------------------- */
+  public void SetAnimationCombatState(string state) => _combatState = state;
 
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */
+
+  private void StartDamageFlash()
+  {
+    // Don't start another coroutine if we're already running one
+    if (_coroutineRunning) return;
+
+    IEnumerator flashRoutine = Wait(_howLongToFlashDamageColor);
+
+    StartCoroutine(flashRoutine);
+  }
+
+  private IEnumerator Wait(float duration)
+  {
+    _coroutineRunning = true;
+
+    _spriteRenderer.color = Color.red;
+    yield return new WaitForSecondsRealtime(duration);
+    _spriteRenderer.color = _originalSpriteColor;
+
+    _coroutineRunning = false;
+  }
 }

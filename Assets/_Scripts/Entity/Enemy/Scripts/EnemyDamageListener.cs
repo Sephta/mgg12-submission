@@ -15,23 +15,19 @@ public class EnemyDamageListener : MonoBehaviour
   [SerializeField] private IntIntEventChannelSO _dealDamageEvent;
   [Space(5f)]
   [SerializeField, Tag] private string _tagToDealDamageTo = "Player";
+
   [Space(5f)]
 
-  [SerializeField] private GameObject _enemyVisuals;
-  [SerializeField, Range(0f, 1f)] private float _howLongToFlashDamageColor = 1f;
-  [SerializeField, ReadOnly] private bool _coroutineRunning = false;
-
-
-  [field: SerializeField, Range(1, 60)] private int _maxStateDuration = 30;
+  [SerializeField, ReadOnly] private float _currentHealth;
+  [field: SerializeField, ReadOnly] private int _maxStateDuration = 30;
   [field: SerializeField, ReadOnly] private int _currentStateTimer = 0;
   [field: SerializeField, ReadOnly] private bool _isTimerDone = true;
   // [field: SerializeField, ReadOnly] private bool isStateDone = true;
 
   private bool _isAttacking = false;
   private bool _isTakingDamage = false;
-  private SpriteRenderer _sr;
-  private Animator _animator;
-  private Color _originalSpriteColor;
+  private bool _isDead = false;
+  private EnemyCombatStates _combatStates;
 
 
   private void Awake()
@@ -47,19 +43,21 @@ public class EnemyDamageListener : MonoBehaviour
       gameObject.SetActive(false);
     }
 
+    if (_enemyAttributesData == null)
+    {
+      Debug.LogError(name + " does not have a reference to EnemyAttributesDataSO in the inspector. Disabling gameobject to avoid null object errors.");
+      gameObject.SetActive(false);
+    }
+
     if (_parentRigidbody2D == null) _parentRigidbody2D = GetComponentInParent<Rigidbody2D>();
   }
 
-  private void Start()
-  {
-    _sr = _enemyVisuals.GetComponent<SpriteRenderer>();
-    _originalSpriteColor = _sr.color;
-    _animator = _enemyVisuals.GetComponent<Animator>();
-  }
 
   private void OnEnable()
   {
     _takeDamageEvent.OnEventRaised += DoDamageToEntity;
+    _combatStates = GetComponent<EnemyCombatStates>();
+    _maxStateDuration = _enemyAttributesData.MaxCombatStateDuration;
   }
 
   private void OnDisable()
@@ -69,6 +67,7 @@ public class EnemyDamageListener : MonoBehaviour
 
   private void FixedUpdate()
   {
+
     if (_currentStateTimer <= 1)
     {
       _currentStateTimer = 0;
@@ -79,12 +78,24 @@ public class EnemyDamageListener : MonoBehaviour
     {
       _currentStateTimer--;
     }
-    else
+
+    if (_combatStates.GetCombatState().Equals("dying", StringComparison.OrdinalIgnoreCase))
     {
-      _enemyAttributesData.SetCombatState("none");
+      if (_isTimerDone)
+      {
+        _combatStates.SetCombatState("dead");
+        GetComponentInParent<EnemyPatrol>().KillYourself();
+      }
+      return;
+    }
+
+    if (_isTimerDone)
+    {
+      _combatStates.SetCombatState("none");
       _isAttacking = false;
       _isTakingDamage = false;
     }
+
   }
 
   private void OnCollisionEnter2D(Collision2D collision) => OnTriggerEnter2D(collision.collider);
@@ -92,13 +103,13 @@ public class EnemyDamageListener : MonoBehaviour
   // inflict damage
   private void OnTriggerEnter2D(Collider2D collider)
   {
-    if (collider.CompareTag(_tagToDealDamageTo))
+    if (collider.CompareTag(_tagToDealDamageTo) && !_isTakingDamage)
     {
       if (_isTimerDone)
       {
         _isAttacking = true;
         _currentStateTimer = _maxStateDuration;
-        _enemyAttributesData.SetCombatState("attacking");
+        _combatStates.SetCombatState("attacking");
         _isTimerDone = false;
       }
       _dealDamageEvent.RaiseEvent(collider.gameObject.GetInstanceID(), _damageAmount);
@@ -115,47 +126,32 @@ public class EnemyDamageListener : MonoBehaviour
 
     if (objectID == gameObject.GetInstanceID())
     {
-      StartDamageFlash();
       Debug.Log($"{name} is taking {damageAmount} damage from <ID: {objectID}>");
-      _enemyAttributesData.TakeDamage(damageAmount);
+      _isDead = _combatStates.TakeDamage(damageAmount);
 
       var directionToApplyForce = (transform.position - _enemyAttributesData.PlayerTransform.position).normalized;
       _parentRigidbody2D.AddForce(directionToApplyForce * _enemyAttributesData.KnockbackForce, ForceMode2D.Impulse);
+
+      if (_isDead)
+      {
+        _currentStateTimer = _maxStateDuration;
+        _combatStates.SetCombatState("dying");
+        _isTimerDone = false;
+        _isAttacking = false;
+        _isTakingDamage = false;
+        return;
+      }
 
       if (_isTimerDone)
       {
         _isTakingDamage = true;
         _currentStateTimer = _maxStateDuration;
-        _enemyAttributesData.SetCombatState("taking damage");
+        _combatStates.SetCombatState("taking damage");
         _isTimerDone = false;
       }
 
     }
   }
-
-
-  private void StartDamageFlash()
-  {
-    // Don't start another coroutine if we're already running one
-    if (_coroutineRunning) return;
-
-    IEnumerator flashRoutine = Wait(_howLongToFlashDamageColor);
-
-    StartCoroutine(flashRoutine);
-  }
-
-  private IEnumerator Wait(float duration)
-  {
-    _coroutineRunning = true;
-
-    _sr.color = Color.red;
-    yield return new WaitForSecondsRealtime(duration);
-    _sr.color = _originalSpriteColor;
-
-    _coroutineRunning = false;
-  }
-
-
 
 
   /* ---------------------------------------------------------------- */

@@ -35,8 +35,7 @@ public class EnemyAttributesDataSO : ScriptableObject
 
   [field: SerializeField, ReadOnly]
   public float CurrentHealth { get; private set; }
-
-  [field: SerializeField, ReadOnly] private string _combatState = "none";  // look, I'm just getting it done
+  [field: SerializeField, Range(1, 60)] public int MaxCombatStateDuration = 30;
 
   [ReadOnly] public Transform PlayerTransform;
 
@@ -62,19 +61,6 @@ public class EnemyAttributesDataSO : ScriptableObject
   /* ---------------------------------------------------------------- */
   /*                               PUBLIC                             */
   /* ---------------------------------------------------------------- */
-  public void SetCurrentHealth(float amount) => CurrentHealth = amount;
-  public void SetCombatState(string state) => _combatState = state;
-  public string GetCombatState() { return _combatState; }
-
-
-  public void TakeDamage(float damageAmount)
-  {
-    CurrentHealth = Mathf.Clamp(CurrentHealth - damageAmount, MinHealth, MaxHealth);
-    if (CurrentHealth == MinHealth)
-    {
-      Debug.Log("I dieded");
-    }
-  }
 
 
   /* ---------------------------------------------------------------- */
