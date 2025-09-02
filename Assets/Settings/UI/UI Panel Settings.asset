@@ -18,7 +18,7 @@ MonoBehaviour:
   m_RenderMode: 0
   m_WorldSpaceLayer: 0
   m_ScaleMode: 2
-  m_ReferenceSpritePixelsPerUnit: 100
+  m_ReferenceSpritePixelsPerUnit: 32
   m_PixelsPerUnit: 100
   m_Scale: 1
   m_ReferenceDpi: 96
