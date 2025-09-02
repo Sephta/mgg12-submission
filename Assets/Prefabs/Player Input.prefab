@@ -241,6 +241,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: fe9acb43-6ad8-4976-90c6-dd85e960820d
     m_ActionName: 'Player/Environment[/XInputControllerWindows1/buttonNorth,/Mouse/rightButton]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 11400000, guid: 8992863c5f19e8345aae1d3d1f34b837, type: 2}
+        m_TargetAssemblyTypeName: PlayerEventDataSO, Assembly-CSharp
+        m_MethodName: RaiseOnPause
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5a805912-8608-4ec8-a522-b20beb6bf0d7
+    m_ActionName: 'Player/Pause[/XInputControllerWindows/start,/Keyboard/tab]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Keyboard&Mouse
   m_DefaultActionMap: Player
