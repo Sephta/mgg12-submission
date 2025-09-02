@@ -482,6 +482,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _scratchpad: {fileID: 11400000, guid: 8e162ae5405185348b4d7142b7c65e57, type: 2}
+  _collisionCheck:
+    serializedVersion: 2
+    m_Bits: 1088
   _numPoints: 18
   _launchForce: 1
   _pointSpacingValue: 1

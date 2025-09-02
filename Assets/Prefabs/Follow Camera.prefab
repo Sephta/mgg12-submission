@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2415672296009813291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.66, y: -0.8800001, z: -10}
+  m_LocalPosition: {x: -15.66, y: 0.119999886, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -103,8 +103,8 @@ MonoBehaviour:
       Size: {x: 0.35, y: 0.5}
       Offset: {x: 0, y: 0.15}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 1, z: 0}
-  Damping: {x: 1, y: 5, z: 1}
+  TargetOffset: {x: 0, y: 2, z: 0}
+  Damping: {x: 0.5, y: 5, z: 1}
   Lookahead:
     Enabled: 0
     Time: 0
@@ -161,9 +161,14 @@ MonoBehaviour:
   _playerEventData: {fileID: 11400000, guid: 8992863c5f19e8345aae1d3d1f34b837, type: 2}
   _playerAttributesData: {fileID: 11400000, guid: 993deb6b99a0a99479d79a2cf12ef2ad, type: 2}
   _postionComposer: {fileID: 4086989718071505374}
-  _baseTargetOffset: {x: 0, y: 1, z: 0}
+  _baseTargetOffset: {x: 0, y: 2, z: 0}
   _targetOffsetWhileMoving: {x: 1.5, y: 0}
   _targetOffsetWhileIdle: {x: 0, y: 0}
+  _transitionRate: 0.5
+  _desiredTargetOffsetX: 0
+  _currentTargetOffsetX: 0
+  _previousTargetOffsetX: 0
+  _currentTransitionTimer: 0
 --- !u!1 &4781341648348012701
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +247,7 @@ Transform:
   m_GameObject: {fileID: 7585772071046746812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15.66, y: -0.8800001, z: -10}
+  m_LocalPosition: {x: -15.66, y: 0.119999886, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

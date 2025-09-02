@@ -3629,18 +3629,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1097735547122861207, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: _transitionRate
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097735547122861207, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: _baseTargetOffset.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1097735547122861207, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: _targetOffsetWhileMoving.x
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 1601070627725553977, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
@@ -3685,25 +3673,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4086989718071505374, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: Damping.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4086989718071505374, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: TargetOffset.y
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4324345239635964858, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.119999886
-      objectReference: {fileID: 0}
     - target: {fileID: 4781341648348012701, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
       propertyPath: m_Name
       value: Follow Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 9073707533636886448, guid: 017808fd55bdb4844bf2f2196a6a7824, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.119999886
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
