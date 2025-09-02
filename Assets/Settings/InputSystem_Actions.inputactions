@@ -377,7 +377,7 @@
                 {
                     "name": "",
                     "id": "6c740071-5ad5-43f4-8b2b-00d3001867fd",
-                    "path": "<Keyboard>/leftCtrl",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
