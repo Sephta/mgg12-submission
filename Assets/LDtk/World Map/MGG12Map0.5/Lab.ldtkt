@@ -1,0 +1,64 @@
+{
+  "Rects": [
+    {
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "x": 128,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    }
+  ],
+  "Def": {
+    "__cHei": 1,
+    "__cWid": 5,
+    "cachedPixelData": {
+      "opaqueTiles": "00011",
+      "averageColors": "f555f254f09df3f0f3ee"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "Lab",
+    "padding": 0,
+    "pxHei": 32,
+    "pxWid": 160,
+    "relPath": "../../Sprites/Tilesets/Lab.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 32,
+    "uid": 59
+  }
+}

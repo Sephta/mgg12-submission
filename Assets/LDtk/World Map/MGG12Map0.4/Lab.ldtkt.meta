@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e894ffe13b365924ca3daf6f59a8465e
+guid: ff8e705f6b44cf5408f6814eb793212c
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -9,7 +9,7 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: f3268c876daf4890b6af6cd462063137, type: 3}
   _reimportOnDependencyChange: 1
-  _pixelsPerUnit: 32
+  _pixelsPerUnit: 16
   _overrideTexture: {instanceID: 0}
   _sprites:
   - name: Lab_0
@@ -24,7 +24,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: 27ec94c95046eb440b6bf0256b10e6d0
+    spriteID: 62fbe81ba80fa074bba237c764e63939
     spriteOutline: []
     tessellationDetail: 0
   - name: Lab_1
@@ -39,7 +39,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: 99620aa3cb6673e4bbbf7b72a610cc72
+    spriteID: bd56a8bac34f72d48815140d49aaa080
     spriteOutline: []
     tessellationDetail: 0
   - name: Lab_2
@@ -54,7 +54,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: c35ddeacd27ab5f46a26e1e03fcd1fc5
+    spriteID: 55e3b72f4b65c5a41b5d66f0e6bcafa6
     spriteOutline: []
     tessellationDetail: 0
   - name: Lab_3
@@ -69,7 +69,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: 86d7ea1a4efddef4180d9cbe5b2d369e
+    spriteID: 33ef3908a5074144ab30e2ecd5d3f389
     spriteOutline: []
     tessellationDetail: 0
   - name: Lab_4
@@ -84,7 +84,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: 6d4969bded714c64bbb932b3056c527a
+    spriteID: b2f20099ede814d4eadd4914e605e1e8
     spriteOutline: []
     tessellationDetail: 0
   _secondaryTextures: []

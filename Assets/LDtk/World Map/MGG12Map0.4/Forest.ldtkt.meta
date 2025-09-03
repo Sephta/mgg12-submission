@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 7efda4e60ce52e34e94ad611f55505c3
+guid: b55454b27623b4844b06e9564a7b12e1
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -9,7 +9,7 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: f3268c876daf4890b6af6cd462063137, type: 3}
   _reimportOnDependencyChange: 1
-  _pixelsPerUnit: 32
+  _pixelsPerUnit: 16
   _overrideTexture: {instanceID: 0}
   _sprites:
   - name: Forest_0
@@ -24,7 +24,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: 07db7a75386f0374ab951494efc11217
+    spriteID: 4c3c7880c8e51e54ca04c65da144a336
     spriteOutline: []
     tessellationDetail: 0
   - name: Forest_1
@@ -39,7 +39,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: c7f05d8d0cc30b2498e8a358d06df761
+    spriteID: c65015a0e8290314a8d6841900b340d8
     spriteOutline: []
     tessellationDetail: 0
   - name: Forest_2
@@ -54,7 +54,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: 09284d43e74816e47927d24c873ce800
+    spriteID: ba61bc63c79382447805c0bbbdc2fe4a
     spriteOutline: []
     tessellationDetail: 0
   _secondaryTextures: []

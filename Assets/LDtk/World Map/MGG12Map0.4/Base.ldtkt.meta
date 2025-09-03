@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9fe02f3d65fed884c85aa22f0fa82eff
+guid: eb6fbeace1c80db438e279c3456a4212
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -9,7 +9,7 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: f3268c876daf4890b6af6cd462063137, type: 3}
   _reimportOnDependencyChange: 1
-  _pixelsPerUnit: 32
+  _pixelsPerUnit: 16
   _overrideTexture: {instanceID: 0}
   _sprites:
   - name: Base_0
@@ -24,7 +24,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: 968a776e6b473c94a86f3460aa0ba985
+    spriteID: c33a6ec37dc5881499000f47faa4ac34
     spriteOutline: []
     tessellationDetail: 0
   - name: Base_1
@@ -39,7 +39,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: c68318953022cb04fb2799f33e2036ee
+    spriteID: ad446b9d1335c4f46b497eb32bdfa6ad
     spriteOutline: []
     tessellationDetail: 0
   - name: Base_2
@@ -54,7 +54,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: 2f62b4585b8492447b84f39582d7eef8
+    spriteID: aaac6ccfbeea5db4b8913e211d3ce171
     spriteOutline: []
     tessellationDetail: 0
   - name: Base_3
@@ -69,7 +69,7 @@ ScriptedImporter:
       y: 0
       width: 32
       height: 32
-    spriteID: a696a3dfc6fd89b49b2b0985941d9901
+    spriteID: fea988b79d2bd844984024ddc3c02888
     spriteOutline: []
     tessellationDetail: 0
   _secondaryTextures: []
