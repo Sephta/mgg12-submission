@@ -154,4 +154,8 @@ MonoBehaviour:
   _keepAliveForever: 0
   _aliveTime: 5
   _timeLeftAlive: 0
+  _layersForCollisionCheck:
+    serializedVersion: 2
+    m_Bits: 256
+  _collisionDetectionRadius: 0.5
   _isTweening: 0

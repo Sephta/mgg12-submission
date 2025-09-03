@@ -27,6 +27,9 @@ public class BrambleGenerator : MonoBehaviour
   [SerializeField, Range(0f, 30f)] private float _aliveTime;
   [SerializeField, ReadOnly] private float _timeLeftAlive;
 
+  [SerializeField] private LayerMask _layersForCollisionCheck;
+  [SerializeField, Range(0f, 2f)] private float _collisionDetectionRadius = 1f;
+
   [Header("Debug")]
   [SerializeField, ReadOnly]
   private bool _isTweening = false;
@@ -184,6 +187,17 @@ public class BrambleGenerator : MonoBehaviour
             transform.rotation,
             transform
           );
+
+          RaycastHit2D circleCastHit = Physics2D.CircleCast(
+            (Vector2)worldPositionOfKnot,
+            _collisionDetectionRadius,
+            Vector2.up,
+            0f,
+            _layersForCollisionCheck
+          );
+
+          // We dont want to grow where the player is. The layer mask should contain the player layer.
+          if (circleCastHit) return;
 
           if (result != null)
           {
