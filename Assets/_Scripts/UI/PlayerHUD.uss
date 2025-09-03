@@ -9,10 +9,8 @@
 }
 
 .nero-selected {
-    border-left-color: rgb(255, 0, 0);
-    border-right-color: rgb(255, 0, 0);
-    border-top-color: rgb(255, 0, 0);
-    border-bottom-color: rgb(255, 0, 0);
+    background-image: url("project://database/Assets/Sprites/UI/UI_Free_EssentialsPack/01_Flat_Theme/Sprites/UI_Flat_Select01a_1.png?fileID=21300000&guid=1eececc10c69a5a42aae85793a8e5915&type=3#UI_Flat_Select01a_1");
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .nero {

@@ -27,7 +27,7 @@ public class CameraController : MonoBehaviour
   [SerializeField]
   private Vector2 _targetOffsetWhileIdle = Vector2.zero;
 
-  [SerializeField, Range(0f, 3f)]
+  [SerializeField, Range(0f, 1f)]
   private float _transitionRate = 10f;
 
   [Header("Debug")]
@@ -88,7 +88,24 @@ public class CameraController : MonoBehaviour
   private void Update()
   {
     _currentTransitionTimer = Mathf.Clamp(_currentTransitionTimer + (_transitionRate * Time.deltaTime), 0f, 1f);
-    _desiredTargetOffsetX = _baseTargetOffset.x + (_targetOffsetWhileMoving.x * _playerAttributesData.PlayerMoveDirection.x);
+    Debug.Log("player input as int: " + (int)_playerAttributesData.PlayerMoveDirection.x);
+
+    if (_playerAttributesData.IsAttacking
+      || _playerAttributesData.IsNeedling
+      || _playerAttributesData.IsLatchedOntoWall
+      || (_playerAttributesData.IsTakingAim && _playerAbilityData.CurrentlyEquippedArmType == NeroArmType.Neutral))
+    {
+      _desiredTargetOffsetX = _baseTargetOffset.x;
+    }
+    else
+    {
+      float direction = 0f;
+
+      if (_playerAttributesData.PlayerMoveDirection.x > 0) direction = 1f;
+      else if (_playerAttributesData.PlayerMoveDirection.x < 0) direction = -1f;
+
+      _desiredTargetOffsetX = _baseTargetOffset.x + (_targetOffsetWhileMoving.x * direction);
+    }
 
     _currentTargetOffsetX = Mathf.Lerp(
       _currentTargetOffsetX,
@@ -101,21 +118,6 @@ public class CameraController : MonoBehaviour
       _baseTargetOffset.y,
       _baseTargetOffset.z
     );
-    // if (Mathf.Abs(_playerAttributesData.PlayerVelocity.x) > 0.1f
-    //   && !_playerAttributesData.IsAttacking)
-    // {
-    // }
-    // else
-    // {
-    //   _desiredTargetOffsetX = _baseTargetOffset.x;
-    //   _currentTargetOffsetX = _baseTargetOffset.x;
-
-    //   _postionComposer.TargetOffset = new(
-    //     _currentTargetOffsetX + (_playerAttributesData.PlayerMoveDirection.x * _targetOffsetWhileIdle.x),
-    //     _baseTargetOffset.y + (_playerAttributesData.PlayerMoveDirection.y * _targetOffsetWhileIdle.y),
-    //     _baseTargetOffset.z
-    //   );
-    // }
 
     if (_desiredTargetOffsetX != _previousTargetOffsetX)
     {
