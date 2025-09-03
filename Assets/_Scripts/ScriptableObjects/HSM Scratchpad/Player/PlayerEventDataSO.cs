@@ -81,6 +81,14 @@ public class PlayerEventDataSO : ScratchpadDataSO
     if (Environment != null) Environment.RaiseEvent(callbackContext);
   }
 
+  [field: SerializeField, Expandable]
+  public CallbackContextEventChannelSO Pause { get; private set; }
+
+  public void RaiseOnPause(InputAction.CallbackContext callbackContext)
+  {
+    if (Pause != null) Pause.RaiseEvent(callbackContext);
+  }
+
 
   [field: Space(10f)]
   [field: Header("Combat Events")]
