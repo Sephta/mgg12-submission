@@ -36,7 +36,6 @@ namespace stal.HSM.PlayerStates
       Gun = new(stateMachine, this, playerContext, scratchpad);
     }
 
-    // In the future we should set the initial state to whatever the currently equipped seed arm is
     protected override State GetInitialState()
     {
       return _playerAbilityDataSO.CurrentlyEquippedArmType switch
