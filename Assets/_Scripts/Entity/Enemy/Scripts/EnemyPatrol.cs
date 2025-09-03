@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using NaughtyAttributes;
 using Pathfinding;
@@ -26,6 +25,9 @@ public class EnemyPatrol : MonoBehaviour
   [Header("Debug")]
 
   [SerializeField, ReadOnly] private float _speed = 2f;
+  [SerializeField, ReadOnly] private Vector2 _normalizedDirectionFromPath = Vector2.zero;
+  [SerializeField, ReadOnly] private float _directionX = 0f;
+  [SerializeField, ReadOnly] private float _targetSpeed = 0f;
 
   private Path _path;
   private Transform _currentTarget;
@@ -70,7 +72,6 @@ public class EnemyPatrol : MonoBehaviour
   // Update is called once per frame
   private void FixedUpdate()
   {
-
     _distanceFromTarget = Vector2.Distance(_rb.position, _currentTarget.position);
     _distanceFromPlayer = Vector2.Distance(_rb.position, player.position);
     _isPatrolling = _distanceFromPlayer <= _enemyAttributesData.RangeAwakeDistance;
@@ -105,6 +106,13 @@ public class EnemyPatrol : MonoBehaviour
       return;
     }
 
+    _normalizedDirectionFromPath = ((Vector2)_path.vectorPath[_currentWaypoint] - _rb.position).normalized;
+    _directionX = 0f;
+    if (_normalizedDirectionFromPath.x > 0) _directionX = 1;
+    else if (_normalizedDirectionFromPath.x < 0) _directionX = -1;
+
+    _targetSpeed = _directionX * _speed;
+
     MoveEnemyOnPath();
   }
 
@@ -115,7 +123,6 @@ public class EnemyPatrol : MonoBehaviour
       _isChasing = true;
       _isPatrolling = false;
       _speed = _enemyAttributesData.ChaseSpeed;
-      Debug.Log("Player has ENTERED our chase range");
     }
   }
 
@@ -127,7 +134,6 @@ public class EnemyPatrol : MonoBehaviour
       _isPatrolling = true;
       _speed = _enemyAttributesData.PatrolSpeed;
       UpdatePatrolTarget();
-      Debug.Log("Player has EXITED our chase detection");
     }
   }
 
@@ -172,13 +178,24 @@ public class EnemyPatrol : MonoBehaviour
     _currentWaypoint = 0;
   }
 
-
   private void MoveEnemyOnPath()
   {
-    Vector2 direction = ((Vector2)_path.vectorPath[_currentWaypoint] - _rb.position).normalized;
-    Vector2 force = direction * _speed;
+    float accelRate;
 
-    _rb.AddForce(force);
+    if (Mathf.Abs(_targetSpeed) > 0.01f)
+    {
+      accelRate = _enemyAttributesData.Acceleration;
+    }
+    else
+    {
+      accelRate = _enemyAttributesData.Deceleration;
+    }
+
+    float delta = _targetSpeed - _rb.linearVelocityX;
+
+    float force = delta * accelRate;
+
+    _rb.AddForce(force * Vector2.right, ForceMode2D.Force);
 
     float distance = Vector2.Distance(_rb.position, _path.vectorPath[_currentWaypoint]);
 
@@ -190,13 +207,13 @@ public class EnemyPatrol : MonoBehaviour
     ChangeSpriteDirection(force);
   }
 
-  private void ChangeSpriteDirection(Vector2 force)
+  private void ChangeSpriteDirection(float force)
   {
-    if (force.x >= 0.01f)
+    if (force >= 0.01f)
     {
       EnemyGFXTransform.localScale = new Vector3(-1f, 1f, 1f);
     }
-    else if (force.x <= -0.01f)
+    else if (force <= -0.01f)
     {
       EnemyGFXTransform.localScale = new Vector3(1f, 1f, 1f);
     }

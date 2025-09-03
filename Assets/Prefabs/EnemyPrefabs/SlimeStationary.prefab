@@ -8,17 +8,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 605664848763520481, guid: d63fc016426823e48b122dece3f8262f, type: 3}
+      propertyPath: _howLongToFlashDamageColor
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 689606400251440741, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1680203447015739055, guid: d63fc016426823e48b122dece3f8262f, type: 3}
+      propertyPath: m_Size.y
+      value: 0.655
+      objectReference: {fileID: 0}
+    - target: {fileID: 1680203447015739055, guid: d63fc016426823e48b122dece3f8262f, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2542323449437489045, guid: d63fc016426823e48b122dece3f8262f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3959023522102815374, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.73
+      value: -21.85
       objectReference: {fileID: 0}
     - target: {fileID: 3959023522102815374, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.37
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 3959023522102815374, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52,6 +68,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6696103698217276301, guid: d63fc016426823e48b122dece3f8262f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7579305745478007758, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       propertyPath: m_Name
       value: SlimeStationary
@@ -59,6 +79,14 @@ PrefabInstance:
     - target: {fileID: 7579305745478007758, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7953530728097743851, guid: d63fc016426823e48b122dece3f8262f, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7953530728097743851, guid: d63fc016426823e48b122dece3f8262f, type: 3}
+      propertyPath: m_LinearDamping
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

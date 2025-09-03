@@ -12,13 +12,25 @@ PrefabInstance:
       propertyPath: _maxStateDuration
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 2250576978487221751, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6473408
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250576978487221751, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.33246708
+      objectReference: {fileID: 0}
+    - target: {fileID: 3108269075180786893, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -23.79
+      value: -22.922
       objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.68
+      value: -11.982
       objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -52,12 +64,49 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6091040578614460629, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7009278459879794838, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_Name
       value: EnemyPatrol _SlimeVariant
       objectReference: {fileID: 0}
+    - target: {fileID: 7352814663577243827, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_LinearDamping
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5820897747701302482, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 982677469284069064}
   m_SourcePrefab: {fileID: 100100000, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+--- !u!1 &4840799348110417827 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5424329188925885691, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+  m_PrefabInstance: {fileID: 606560933093151576}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6389785837218699146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5820897747701302482, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+  m_PrefabInstance: {fileID: 606560933093151576}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &982677469284069064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6389785837218699146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1b43a93ee5a06458cc5ff5d8fd9d0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyAttributesData: {fileID: 11400000, guid: f966a7f54ffc19e49a8884c6898c76aa, type: 2}
+  <CurrentHealth>k__BackingField: 0
+  _combatState: none
+  _enemyVisuals: {fileID: 4840799348110417827}

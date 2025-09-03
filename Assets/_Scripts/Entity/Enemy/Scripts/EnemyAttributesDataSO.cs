@@ -11,6 +11,12 @@ public class EnemyAttributesDataSO : ScriptableObject
   [field: SerializeField]
   public float ChaseSpeed { get; private set; }
 
+  [field: SerializeField, Range(0f, 2f)]
+  public float Acceleration { get; private set; }
+
+  [field: SerializeField, Range(0f, 2f)]
+  public float Deceleration { get; private set; }
+
   [field: SerializeField]
   public float RangeAwakeDistance { get; private set; }
 

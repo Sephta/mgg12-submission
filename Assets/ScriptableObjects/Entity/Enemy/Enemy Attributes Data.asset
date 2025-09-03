@@ -12,12 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b0cbb687050aa4ea26e2ea1e7977c8, type: 3}
   m_Name: Enemy Attributes Data
   m_EditorClassIdentifier: 
-  <PatrolSpeed>k__BackingField: 2
-  <ChaseSpeed>k__BackingField: 4
+  <PatrolSpeed>k__BackingField: 6
+  <ChaseSpeed>k__BackingField: 12
+  <Acceleration>k__BackingField: 1
+  <Deceleration>k__BackingField: 1
   <RangeAwakeDistance>k__BackingField: 50
-  <KnockbackForce>k__BackingField: 4.7
+  <KnockbackForce>k__BackingField: 10
   <MinHealth>k__BackingField: 0
-  <MaxHealth>k__BackingField: 25
-  <CurrentHealth>k__BackingField: 25
+  <MaxHealth>k__BackingField: 30
+  <CurrentHealth>k__BackingField: 30
   MaxCombatStateDuration: 30
   PlayerTransform: {fileID: 0}

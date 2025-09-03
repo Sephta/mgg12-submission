@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 142732734714297661, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: patrolPoints.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1675609198039701285, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: _damageAmount
@@ -20,6 +20,14 @@ PrefabInstance:
       propertyPath: _maxStateDuration
       value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 2250576978487221751, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_Size.y
+      value: 1.1137676
+      objectReference: {fileID: 0}
+    - target: {fileID: 2250576978487221751, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.5653906
+      objectReference: {fileID: 0}
     - target: {fileID: 2268193241129347260, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_FlipX
       value: 1
@@ -28,13 +36,17 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -5073028877702378488, guid: 04e224c3abbdfb24dab5776a9a43529e, type: 3}
-    - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
-      propertyPath: m_LocalPosition.x
+    - target: {fileID: 3108269075180786893, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.693
+      objectReference: {fileID: 0}
+    - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -11.996
       objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -68,6 +80,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6091040578614460629, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7009278459879794838, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_Name
       value: EnemySoldier
@@ -75,6 +91,10 @@ PrefabInstance:
     - target: {fileID: 7009278459879794838, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352814663577243827, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_LinearDamping
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9131420228638764215, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_Controller

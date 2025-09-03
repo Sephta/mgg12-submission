@@ -1,11 +1,11 @@
 using System;
-using System.Collections;
 using NaughtyAttributes;
 using UnityEngine;
 
 public class EnemyDamageListener : MonoBehaviour
 {
   [SerializeField] private Rigidbody2D _parentRigidbody2D;
+  [SerializeField] private BoxCollider2D _boxCollider2D;
 
   [SerializeField, Expandable] private EnemyAttributesDataSO _enemyAttributesData;
 
@@ -50,6 +50,7 @@ public class EnemyDamageListener : MonoBehaviour
     }
 
     if (_parentRigidbody2D == null) _parentRigidbody2D = GetComponentInParent<Rigidbody2D>();
+    if (_boxCollider2D == null) _boxCollider2D = GetComponent<BoxCollider2D>();
   }
 
   private void OnEnable()
@@ -102,6 +103,8 @@ public class EnemyDamageListener : MonoBehaviour
   // inflict damage
   private void OnTriggerEnter2D(Collider2D collider)
   {
+    if (_isDead) return;
+
     if (collider.CompareTag(_tagToDealDamageTo) && !_isTakingDamage)
     {
       if (_isTimerDone)
@@ -112,7 +115,7 @@ public class EnemyDamageListener : MonoBehaviour
         _isTimerDone = false;
       }
       _dealDamageEvent.RaiseEvent(collider.gameObject.GetInstanceID(), _damageAmount);
-      Debug.Log($"{name} attempting to inflict {_damageAmount} damage to <ID: {collider.gameObject.GetInstanceID()}>");
+      // Debug.Log($"{name} attempting to inflict {_damageAmount} damage to <ID: {collider.gameObject.GetInstanceID()}>");
     }
   }
 
@@ -125,7 +128,7 @@ public class EnemyDamageListener : MonoBehaviour
 
     if (objectID == gameObject.GetInstanceID())
     {
-      Debug.Log($"{name} is taking {damageAmount} damage from <ID: {objectID}>");
+      // Debug.Log($"{name} is taking {damageAmount} damage from <ID: {objectID}>");
       _isDead = _combatStates.TakeDamage(damageAmount);
 
       var directionToApplyForce = (transform.position - _enemyAttributesData.PlayerTransform.position).normalized;
@@ -133,6 +136,8 @@ public class EnemyDamageListener : MonoBehaviour
 
       if (_isDead)
       {
+        _boxCollider2D.enabled = false;
+        _parentRigidbody2D.gravityScale = 0f;
         _currentStateTimer = _maxStateDuration;
         _combatStates.SetCombatState("dying");
         _isTimerDone = false;

@@ -88,7 +88,6 @@ public class CameraController : MonoBehaviour
   private void Update()
   {
     _currentTransitionTimer = Mathf.Clamp(_currentTransitionTimer + (_transitionRate * Time.deltaTime), 0f, 1f);
-    Debug.Log("player input as int: " + (int)_playerAttributesData.PlayerMoveDirection.x);
 
     if (_playerAttributesData.IsAttacking
       || _playerAttributesData.IsNeedling
