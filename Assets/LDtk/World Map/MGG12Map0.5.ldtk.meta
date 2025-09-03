@@ -72,7 +72,7 @@ ScriptedImporter:
   - _key: Enemy_Guard
     _asset: {fileID: 3447058627513306122, guid: 2950263ae92e19c42996f85073b57959, type: 3}
   - _key: Enemy_Slime
-    _asset: {instanceID: 0}
+    _asset: {fileID: 2003264038202121450, guid: d17de7f3ec530aa44a6dcaff47ef5740, type: 3}
   - _key: Claw_Pickup
     _asset: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
   - _key: Door_Lock
