@@ -29,7 +29,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5, y: -11.5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.45, y: 0.45, z: 0.45}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -419506959, guid: 00ec9c5e07ebc914fb85bcd1a7b64d42, type: 3}
+  m_Sprite: {fileID: 1313537609, guid: 831f4fea2a9785b49a24ab47b6dc61c8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -137,12 +137,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85967fe480ed0ad418bf38f458a54968, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 2206215505137243073}
   _circleCollider2D: {fileID: 6358196022585217296}
   _ldtkComponentEntity: {fileID: 0}
+  _brambleIcon: {fileID: 1313537609, guid: 831f4fea2a9785b49a24ab47b6dc61c8, type: 3}
+  _needleIcon: {fileID: 91972486, guid: 831f4fea2a9785b49a24ab47b6dc61c8, type: 3}
+  _clawIcon: {fileID: 2011685313, guid: 831f4fea2a9785b49a24ab47b6dc61c8, type: 3}
+  _cannonIcon: {fileID: 18762274, guid: 831f4fea2a9785b49a24ab47b6dc61c8, type: 3}
   _colliderRadius: 0.5
   _playerTag: Player
-  _ignoreLDtk: 0
-  _armTypeToGivePlayer: 1
+  _ignoreLDtk: 1
+  _armTypeToGivePlayer: 0
+  _iconScale: 0.45
+  _amplitude: 0.1
+  _frequency: 3
+  _randomStartTimeOffsetMinMax: {x: -1, y: 1}
+  _initialPosition: {x: 0, y: 0, z: 0}
+  _amountOfTimeToWaitTillAnimate: 0
+  _randomStartTime: 0
   _needleAbilityData: {fileID: 11400000, guid: 45f8d3624e3706149b4583935c185feb, type: 2}
   _clawAbilityData: {fileID: 11400000, guid: ae10c7dae936feb4bbb23ab7d4c42aad, type: 2}
   _cannonAbilityData: {fileID: 11400000, guid: 549e22e4f6330bd46bed0d9d3b786afc, type: 2}

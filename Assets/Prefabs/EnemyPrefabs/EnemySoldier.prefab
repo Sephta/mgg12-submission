@@ -42,11 +42,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -21.693
+      value: -20.18
       objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.996
+      value: -6.3
       objectReference: {fileID: 0}
     - target: {fileID: 4511385400538773974, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -91,6 +91,14 @@ PrefabInstance:
     - target: {fileID: 7009278459879794838, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352814663577243827, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352814663577243827, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_GravityScale
+      value: 3.82263
       objectReference: {fileID: 0}
     - target: {fileID: 7352814663577243827, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LinearDamping

@@ -72,19 +72,6 @@ public class BrambleGenerator : MonoBehaviour
     }
   }
 
-  // private void OnDrawGizmos()
-  // {
-  //   foreach (Spline spline in _splineContainer.Splines)
-  //   {
-  //     foreach (BezierKnot knot in spline.Knots)
-  //     {
-  //       Vector3 worldPositionOfKnot = transform.TransformPoint(knot.Position.ConvertTo<Vector3>());
-
-  //       Gizmos.DrawSphere(new(worldPositionOfKnot.x, worldPositionOfKnot.y, 0f), 1f);
-  //     }
-  //   }
-  // }
-
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */
   /* ---------------------------------------------------------------- */

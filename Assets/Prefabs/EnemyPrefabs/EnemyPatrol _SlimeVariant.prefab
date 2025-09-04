@@ -73,6 +73,14 @@ PrefabInstance:
       value: EnemyPatrol _SlimeVariant
       objectReference: {fileID: 0}
     - target: {fileID: 7352814663577243827, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352814663577243827, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_GravityScale
+      value: 3.82263
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352814663577243827, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_LinearDamping
       value: 3
       objectReference: {fileID: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb4978c2cd1ba4b469a053966fba7aa5, type: 3}
   m_Name: TestAbilityData
   m_EditorClassIdentifier: 
-  _currentArmIndex: 2
+  _currentArmIndex: 0
   ArmData:
   - {fileID: 11400000, guid: 9e916ae92bcd2314aab847bd8b093b08, type: 2}
   - {fileID: 11400000, guid: 45f8d3624e3706149b4583935c185feb, type: 2}

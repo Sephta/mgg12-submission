@@ -291,7 +291,7 @@ GameObject:
   - component: {fileID: 5227456159021041451}
   - component: {fileID: 5169039399934971566}
   - component: {fileID: 8868254424840194047}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player HSM Test
   m_TagString: Player
   m_Icon: {fileID: 0}

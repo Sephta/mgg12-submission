@@ -26,11 +26,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3675596030364157383, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.72
+      value: -20
       objectReference: {fileID: 0}
     - target: {fileID: 3675596030364157383, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -11.95
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 3675596030364157383, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -67,6 +67,10 @@ PrefabInstance:
     - target: {fileID: 6421648327556742340, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7751697686826331298, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
+      propertyPath: m_Interpolate
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7751697686826331298, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
       propertyPath: m_LinearDamping
