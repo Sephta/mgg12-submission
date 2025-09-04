@@ -1,13 +1,15 @@
-using System;
-using LDtkUnity;
-using Unity.VisualScripting;
+using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-  [SerializeField] private bool _isSplashImagePresent = false;
-  [SerializeField] private bool _isTesting = false;
+  [SerializeField, OnValueChanged(nameof(OnSettingsChanged))]
+  private bool _isSplashImagePresent = false;
+
+  [SerializeField, OnValueChanged(nameof(OnSettingsChanged))]
+  private bool _isTesting = false;
+
   [SerializeField] private GameObject _howToPlayScreen;
   [SerializeField] private GameObject _splashImage;
   [SerializeField] private GameObject _debugButtons;
@@ -52,5 +54,11 @@ public class StartMenu : MonoBehaviour
   public void LoadAshScene()
   {
     SceneManager.LoadScene("Ash_Sandbox");
+  }
+
+  private void OnSettingsChanged()
+  {
+    _splashImage.SetActive(_isSplashImagePresent);
+    _debugButtons.SetActive(_isTesting);
   }
 }

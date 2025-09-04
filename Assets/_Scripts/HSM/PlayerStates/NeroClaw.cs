@@ -39,7 +39,8 @@ namespace stal.HSM.PlayerStates
     protected override void OnExit()
     {
       _playerEventDataSO.Jump.OnEventRaised -= OnJump;
-      UpdateGravityScale(_playerMovementDataSO.FallingGravityMultiplier);
+      UpdateGravityScale(_playerMovementDataSO.GravityScale);
+      _playerContext.jumpEndEarly = false;
       Vector2 wallDirection = GetWallDirection();
 
       if (wallDirection != Vector2.zero && _jumpPressed)
