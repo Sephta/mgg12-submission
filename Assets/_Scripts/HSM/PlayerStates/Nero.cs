@@ -20,14 +20,12 @@ namespace stal.HSM.PlayerStates
     private readonly PlayerContext _playerContext;
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerAbilityDataSO _playerAbilityDataSO;
-    private readonly PlayerEventDataSO _playerEventDataSO;
 
     public Nero(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
     {
       _playerContext = playerContext;
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerAbilityDataSO = scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
-      _playerEventDataSO = scratchpad.GetScratchpadData<PlayerEventDataSO>();
 
       // Child States
       Neutral = new(stateMachine, this, playerContext, scratchpad);

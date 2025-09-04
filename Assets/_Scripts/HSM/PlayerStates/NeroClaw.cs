@@ -26,6 +26,11 @@ namespace stal.HSM.PlayerStates
       _playerContext = playerContext;
     }
 
+    ~NeroClaw()
+    {
+      OnExit();
+    }
+
     protected override void OnEnter()
     {
       _jumpPressed = false;

@@ -13,7 +13,6 @@ namespace stal.HSM.PlayerStates
 
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
-    private readonly PlayerEventDataSO _playerEventDataSO;
     private readonly PlayerAbilityDataSO _playerAbilityDataSO;
     private readonly PlayerContext _playerContext;
 
@@ -21,7 +20,6 @@ namespace stal.HSM.PlayerStates
     {
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
-      _playerEventDataSO = scratchpad.GetScratchpadData<PlayerEventDataSO>();
       _playerAbilityDataSO = scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
       _playerContext = playerContext;
 
@@ -32,19 +30,12 @@ namespace stal.HSM.PlayerStates
 
     }
 
+    ~PlayerRoot()
+    {
+      OnExit();
+    }
+
     protected override State GetInitialState() => Movement;
-
-    protected override void OnEnter()
-    {
-      _playerEventDataSO.Attack.OnEventRaised += OnAttack;
-      _playerEventDataSO.Environment.OnEventRaised += OnEnvironment;
-    }
-
-    protected override void OnExit()
-    {
-      _playerEventDataSO.Attack.OnEventRaised -= OnAttack;
-      _playerEventDataSO.Environment.OnEventRaised -= OnEnvironment;
-    }
 
     protected override void OnUpdate(float deltaTime)
     {
@@ -85,7 +76,7 @@ namespace stal.HSM.PlayerStates
       }
     }
 
-    private void OnAttack(InputAction.CallbackContext context)
+    public void OnAttack(InputAction.CallbackContext context)
     {
       // If our arm has a combat ability and we are grounded we should immediatly enter the attack state
       if (context.started
@@ -94,13 +85,12 @@ namespace stal.HSM.PlayerStates
         && _playerAttributesDataSO.IsGrounded
         && !_playerAttributesDataSO.IsAttacking)
       {
-        Debug.Log("Requested Transition to Attack");
         _playerAttributesDataSO.UpdateIsAttacking(true);
         StateMachine.Sequencer.RequestTransition(this, Attack);
       }
     }
 
-    private void OnEnvironment(InputAction.CallbackContext context)
+    public void OnEnvironment(InputAction.CallbackContext context)
     {
       if (context.started)
       {
@@ -118,6 +108,8 @@ namespace stal.HSM.PlayerStates
 
     private bool PlayerFoundAnchorPointForNeedle()
     {
+      if (_playerContext.transform == null) return false;
+
       bool result = false;
       Vector2 rayDirection = Vector2.zero;
       if (_playerAttributesDataSO.PlayerMoveDirection != Vector2.zero)

@@ -41,6 +41,11 @@ namespace stal.HSM.Core
       StateMachine = stateMachine;
     }
 
+    ~TransitionSequencer()
+    {
+      ChangeToNextPhase = null;
+    }
+
     /// <summary>
     /// Requests a transition from one state to another. Could be used for orchestrating inbetween tasks.
     /// i.e. Delays, animations, async behavior

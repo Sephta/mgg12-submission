@@ -78,7 +78,10 @@ namespace stal.HSM.Drivers
         Debug.LogError(name + " does not have a PlayerEventDataSO referenced in the inspector. Deactivating object to avoid null object errors.");
         gameObject.SetActive(false);
       }
+    }
 
+    private void OnEnable()
+    {
       if (_playerContext.transform == null) _playerContext.transform = transform;
       if (_playerContext.rigidbody2D == null) _playerContext.rigidbody2D = GetComponent<Rigidbody2D>();
       if (_playerContext.boxCollider2D == null) _playerContext.boxCollider2D = GetComponent<BoxCollider2D>();
@@ -100,10 +103,7 @@ namespace stal.HSM.Drivers
       _rootState = new PlayerRoot(null, _playerContext, _scratchpad);
       HierarchicalStateMachineBuilder stateMachineBuilder = new(_rootState);
       _stateMachine = stateMachineBuilder.BuildStateMachine();
-    }
 
-    private void OnEnable()
-    {
       // Register Input Events
       _playerEventData.Move.OnEventRaised += OnMove;
       _playerEventData.Jump.OnEventRaised += OnJump;
@@ -112,6 +112,9 @@ namespace stal.HSM.Drivers
       _playerEventData.Look.OnEventRaised += OnLook;
       _playerEventData.SwapArmLeft.OnEventRaised += OnSwapArmLeft;
       _playerEventData.SwampArmRight.OnEventRaised += OnSwapArmRight;
+
+      _playerEventData.Attack.OnEventRaised += ((PlayerRoot)_rootState).OnAttack;
+      _playerEventData.Environment.OnEventRaised += ((PlayerRoot)_rootState).OnEnvironment;
 
       _playerAttributesData.ResetPlayerAttributesData();
     }
@@ -126,6 +129,9 @@ namespace stal.HSM.Drivers
       _playerEventData.Look.OnEventRaised -= OnLook;
       _playerEventData.SwapArmLeft.OnEventRaised -= OnSwapArmLeft;
       _playerEventData.SwampArmRight.OnEventRaised -= OnSwapArmRight;
+
+      _playerEventData.Attack.OnEventRaised -= ((PlayerRoot)_rootState).OnAttack;
+      _playerEventData.Environment.OnEventRaised -= ((PlayerRoot)_rootState).OnEnvironment;
 
       _playerAttributesData.ResetPlayerAttributesData();
     }

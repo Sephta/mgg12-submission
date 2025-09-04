@@ -11,7 +11,6 @@ namespace stal.HSM.PlayerStates
     private readonly PlayerAttributesDataSO _playerAttributesDataSO;
     private readonly PlayerMovementDataSO _playerMovementDataSO;
     private readonly PlayerAbilityDataSO _playerAbilityDataSO;
-    private readonly PlayerEventDataSO _playerEventDataSO;
     private readonly PlayerContext _playerContext;
 
     public Movement(HierarchicalStateMachine stateMachine, State parent, PlayerContext playerContext, HSMScratchpadSO scratchpad) : base(stateMachine, parent)
@@ -19,7 +18,6 @@ namespace stal.HSM.PlayerStates
       _playerAttributesDataSO = scratchpad.GetScratchpadData<PlayerAttributesDataSO>();
       _playerMovementDataSO = scratchpad.GetScratchpadData<PlayerMovementDataSO>();
       _playerAbilityDataSO = scratchpad.GetScratchpadData<PlayerAbilityDataSO>();
-      _playerEventDataSO = scratchpad.GetScratchpadData<PlayerEventDataSO>();
       _playerContext = playerContext;
     }
 

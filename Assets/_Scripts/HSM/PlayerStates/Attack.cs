@@ -21,6 +21,11 @@ namespace stal.HSM.PlayerStates
       _playerContext = playerContext;
     }
 
+    ~Attack()
+    {
+      OnExit();
+    }
+
     protected override void OnEnter()
     {
       _playerEventDataSO.AttackChainCompleted.OnEventRaised += RequestTransitionOutOfAttackState;
