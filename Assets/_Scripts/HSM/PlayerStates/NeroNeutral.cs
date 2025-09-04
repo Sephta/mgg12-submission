@@ -65,11 +65,13 @@ namespace stal.HSM.PlayerStates
         {
           _brambleDelayTimer = _brambleDelayTime;
 
+          Vector2 growthDirection = (Vector2)_playerContext.transform.position - (Vector2)aimRaycast.point;
+
           // Instantiate Bramble...
           GameObject result = Object.Instantiate(
             _playerContext.bramble,
             new Vector3(aimRaycast.point.x, aimRaycast.point.y, 0f),
-            Quaternion.FromToRotation(Vector2.up, aimRaycast.normal)
+            Quaternion.FromToRotation(Vector2.up, growthDirection.normalized)
           );
         }
       }

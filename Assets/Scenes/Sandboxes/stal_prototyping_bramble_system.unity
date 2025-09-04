@@ -3792,6 +3792,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3223607612974835784, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 5f3c817798d377d42adf266a8a86bb5a, type: 2}
     - target: {fileID: 4753032256456121729, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
       propertyPath: m_Name
       value: Player HSM Test
@@ -3848,6 +3852,10 @@ PrefabInstance:
       propertyPath: _playerContext.mainCamera
       value: 
       objectReference: {fileID: 1554259923}
+    - target: {fileID: 8868254424840194047, guid: e073c74ca2950e649a0e18ed545f279e, type: 3}
+      propertyPath: _playerContext.frictionlessMaterial
+      value: 
+      objectReference: {fileID: 6200000, guid: 5f3c817798d377d42adf266a8a86bb5a, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4667,6 +4675,10 @@ PrefabInstance:
     - target: {fileID: 7844157416699630727, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
       propertyPath: m_Name
       value: EnemySoldier
+      objectReference: {fileID: 0}
+    - target: {fileID: 7844157416699630727, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

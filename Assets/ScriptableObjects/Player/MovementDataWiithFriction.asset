@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6db5580eaf02bae4f92f5701c2ab11e6, type: 3}
+  m_Name: MovementDataWiithFriction
+  m_EditorClassIdentifier: 
+  <RunVelocityMaximum>k__BackingField: 8
+  <Acceleration>k__BackingField: 1
+  <AccelerationAirMultiplier>k__BackingField: 0.5
+  <Deceleration>k__BackingField: 0.25
+  <DecelerationAirMultiplier>k__BackingField: 0.25
+  <VelocityHorizontalClamp>k__BackingField: 18
+  <VelocityVerticalClamp>k__BackingField: 18
+  <DoClampHorizontalVelocity>k__BackingField: 1
+  <DoClampVerticalVelocity>k__BackingField: 1
+  <JumpMaximum>k__BackingField: 1
+  <JumpHeight>k__BackingField: 3
+  <JumpTimeToApex>k__BackingField: 0.4
+  <JumpHangTimeThreshold>k__BackingField: 0.5
+  <JumpInputBuffer>k__BackingField: 0.1
+  <WallJumpHorizontalForce>k__BackingField: 0.5
+  <WallJumpVerticalForce>k__BackingField: 1
+  <FallingGravityMultiplier>k__BackingField: 1.5
+  <JumpHangTimeGravityMultiplier>k__BackingField: 0.5
+  <ShortJumpGravityMultiplier>k__BackingField: 1.4
+  <SlideDownWallGravityMultiplier>k__BackingField: 0.125
+  <LayersConsideredForGroundingPlayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1216
+  <LayersConsideredForPlayerTouchingWall>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 1024
+  <GroundingRayCastDistance>k__BackingField: 0.15
+  SurfaceContactFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
+  <CoyoteTime>k__BackingField: 0.15
+  <AbilityAimRaycastDistance>k__BackingField: 12
+  <TimeTillSlideDownWall>k__BackingField: 1
+  <JumpingPower>k__BackingField: 15
+  <GravityScale>k__BackingField: 3.8226297
+  <RunAccelerationAmount>k__BackingField: 12.5
+  <RunDecelerationAmount>k__BackingField: 3.125
