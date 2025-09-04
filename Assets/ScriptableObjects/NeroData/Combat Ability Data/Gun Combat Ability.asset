@@ -15,7 +15,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 3
   <Damage>k__BackingField: 10
   <Range>k__BackingField: 10
-  <AttackMovementForce>k__BackingField: -5
+  <AttackMovementForce>k__BackingField: -2
   <IgnoreMoveDirection>k__BackingField: 1
   <AttackChainingInputBuffer>k__BackingField: 0.25
   AttackAnimationClips:
