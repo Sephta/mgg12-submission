@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 2415672296009813291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.17, y: 0.23999977, z: -10}
+  m_LocalPosition: {x: -13.72, y: 0.1800003, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -104,7 +104,7 @@ MonoBehaviour:
       Offset: {x: 0, y: 0.15}
   CenterOnActivate: 1
   TargetOffset: {x: 0, y: 2, z: 0}
-  Damping: {x: 0.65, y: 5, z: 1}
+  Damping: {x: 1, y: 5, z: 1}
   Lookahead:
     Enabled: 1
     Time: 0.25
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1601070627725553977}
+  _multiChannelPerlin: {fileID: 3139953975319686538}
   _cameraShakeEvent: {fileID: 11400000, guid: 41e4a78006634a34baf8d0f8e8a91628, type: 2}
   shakeIntensity: 0
   shakeTimer: 0
@@ -249,7 +250,7 @@ Transform:
   m_GameObject: {fileID: 7585772071046746812}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.17, y: 0.23999977, z: -10}
+  m_LocalPosition: {x: -13.72, y: 0.1800003, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
