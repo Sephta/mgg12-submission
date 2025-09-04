@@ -161,7 +161,6 @@ public class SimplePredictivePath : MonoBehaviour
 
       if (Mathf.Round(Vector2.Distance((Vector2)transform.position, newPointPosition)) <= _playerMovementData.AbilityAimRaycastDistance && !oneOfThePointsCollidedWithSomething)
       {
-        Debug.Log("Point Distance: " + Vector2.Distance((Vector2)transform.position, newPointPosition) + ", ability distance: " + _playerMovementData.AbilityAimRaycastDistance);
         _points[i].transform.position = newPointPosition;
         _points[i].SetActive(true);
       }
