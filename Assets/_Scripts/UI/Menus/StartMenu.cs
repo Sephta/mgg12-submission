@@ -48,7 +48,7 @@ public class StartMenu : MonoBehaviour
 
   public void LoadSethScene()
   {
-    SceneManager.LoadScene("Stal_prototyping_bramble_system");
+    SceneManager.LoadScene("stal_Sandbox");
   }
 
   public void LoadAshScene()
