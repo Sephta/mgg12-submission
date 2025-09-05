@@ -214,7 +214,7 @@ namespace stal.HSM.Drivers
       }
       else if (context.control.name == "rightStick")
       {
-        // If the control being read is "rightStrick" then the vector 2 will be value between
+        // If the control being read is "rightStick" then the vector 2 will be value between
         // -1 and 1 on both axis, where y is the axis of moving the right analog stick up and down
         // and x is the axis of moving the right analog stick left and right.
         _playerAttributesData.UpdatePlayerAimDirection(context.ReadValue<Vector2>().normalized);
