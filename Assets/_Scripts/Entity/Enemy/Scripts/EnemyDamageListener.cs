@@ -138,6 +138,7 @@ public class EnemyDamageListener : MonoBehaviour
       {
         _boxCollider2D.enabled = false;
         _parentRigidbody2D.gravityScale = 0f;
+        _parentRigidbody2D.linearVelocity = Vector2.zero;
         _currentStateTimer = _maxStateDuration;
         _combatStates.SetCombatState("dying");
         _isTimerDone = false;

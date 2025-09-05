@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Claw Combat Ability
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 1.5
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 15
   <Range>k__BackingField: 10
   <KnockbackForce>k__BackingField: 20
   <AttackMovementForce>k__BackingField: 25
