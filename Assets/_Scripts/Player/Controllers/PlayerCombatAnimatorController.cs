@@ -197,8 +197,6 @@ public class PlayerCombatAnimatorController : MonoBehaviour
 
   private void ChainAttackOrFinishCombo()
   {
-    DisablePlayerHitzone();
-
     _lookForInputToBuffer = false;
 
     // exit attack state if we have no combat ability with current arm.
