@@ -1,0 +1,58 @@
+{
+  "Rects": [
+    {
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "x": 96,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    }
+  ],
+  "Def": {
+    "__cHei": 5,
+    "__cWid": 9,
+    "cachedPixelData": {
+      "opaqueTiles": "010001000111111110010001000010001001000000000",
+      "averageColors": "f333f333f333f333f233f233f233f133b348f333f333f333f333f233f233f233f133c348f333f333f333f333f233f233f233f133ec52f333f333f333e333f233f233f233e133fc52f333f333f333f333f233f233f233f1330000"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "Cave",
+    "padding": 0,
+    "pxHei": 160,
+    "pxWid": 288,
+    "relPath": "../../Sprites/Tilesets/Cave.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 32,
+    "uid": 57
+  }
+}

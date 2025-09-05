@@ -1,0 +1,52 @@
+{
+  "Rects": [
+    {
+      "x": 10,
+      "y": 10,
+      "w": 1,
+      "h": 1
+    },
+    {
+      "x": 32,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    },
+    {
+      "x": 64,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    }
+  ],
+  "Def": {
+    "__cHei": 5,
+    "__cWid": 9,
+    "cachedPixelData": {
+      "opaqueTiles": "010001000111111110010001000010001000000000000",
+      "averageColors": "f211f211f211f211f210f210f210f210b348f211f211f211f211f210f210f210f210c348f211f211f211f211f210f210f210f2100000f211f211f211e211f210f210f210e2100000f211f211f211f211f210f210f210f2100000"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "Forest",
+    "padding": 0,
+    "pxHei": 160,
+    "pxWid": 288,
+    "relPath": "../../Sprites/Tilesets/Forest.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 32,
+    "uid": 58
+  }
+}

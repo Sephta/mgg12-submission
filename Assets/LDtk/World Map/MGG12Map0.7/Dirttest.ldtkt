@@ -1,0 +1,33 @@
+{
+  "Rects": null,
+  "Def": {
+    "__cHei": 5,
+    "__cWid": 5,
+    "cachedPixelData": {
+      "opaqueTiles": "0100111111010010100100001",
+      "averageColors": "f211f211f211f2110000f211f211f211f2110000f211f211f211f2110000f211f211f211e2110000f211f211f211f2110000"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "Dirttest",
+    "padding": 0,
+    "pxHei": 160,
+    "pxWid": 129,
+    "relPath": "../../Sprites/Tilesets/dirttest.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 32,
+    "uid": 429
+  }
+}
