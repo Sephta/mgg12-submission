@@ -80,6 +80,11 @@ namespace stal.HSM.Drivers
       }
     }
 
+    private void Start()
+    {
+      _playerContext.jumpCount = _playerMovementData.JumpMaximum;
+    }
+
     private void OnEnable()
     {
       if (_playerContext.transform == null) _playerContext.transform = transform;
@@ -134,11 +139,6 @@ namespace stal.HSM.Drivers
       _playerEventData.Environment.OnEventRaised -= ((PlayerRoot)_rootState).OnEnvironment;
 
       _playerAttributesData.ResetPlayerAttributesData();
-    }
-
-    private void Start()
-    {
-      _playerContext.jumpCount = _playerMovementData.JumpMaximum;
     }
 
     private void Update()
