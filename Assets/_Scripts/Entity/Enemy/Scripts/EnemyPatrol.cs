@@ -203,20 +203,6 @@ public class EnemyPatrol : MonoBehaviour
     {
       _currentWaypoint++;
     }
-
-    ChangeSpriteDirection(force);
-  }
-
-  private void ChangeSpriteDirection(float force)
-  {
-    if (force >= 0.01f)
-    {
-      EnemyGFXTransform.localScale = new Vector3(-1f, 1f, 1f);
-    }
-    else if (force <= -0.01f)
-    {
-      EnemyGFXTransform.localScale = new Vector3(1f, 1f, 1f);
-    }
   }
 
   private void ResetPositionAndGoToSleep()
