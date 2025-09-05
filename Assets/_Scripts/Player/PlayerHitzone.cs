@@ -72,7 +72,8 @@ public class PlayerHitzone : MonoBehaviour
       {
         _playerEventData.DoDamageToEntity.RaiseEvent(
           collider.gameObject.GetInstanceID(),
-          _playerAbilityData.CurrentlyEquippedArm.CombatAbility.Damage
+          _playerAbilityData.CurrentlyEquippedArm.CombatAbility.Damage,
+          _playerAbilityData.CurrentlyEquippedArm.CombatAbility.KnockbackForce
         );
 
         if (_cameraShakeEvent != null)

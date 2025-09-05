@@ -24,13 +24,17 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: 0.33
       objectReference: {fileID: 0}
+    - target: {fileID: 2245636245171274877, guid: d63fc016426823e48b122dece3f8262f, type: 3}
+      propertyPath: _takeDamageEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: fd827ce62aec666479400750f74bb38a, type: 2}
     - target: {fileID: 2542323449437489045, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3959023522102815374, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -25
+      value: -19
       objectReference: {fileID: 0}
     - target: {fileID: 3959023522102815374, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       propertyPath: m_LocalPosition.y
@@ -99,36 +103,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4840799348110417827, guid: d63fc016426823e48b122dece3f8262f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7569713040269721937}
-    - targetCorrespondingSourceObject: {fileID: 6389785837218699146, guid: d63fc016426823e48b122dece3f8262f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 550514100204664065}
   m_SourcePrefab: {fileID: 100100000, guid: d63fc016426823e48b122dece3f8262f, type: 3}
 --- !u!50 &2054347741638337743 stripped
 Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 7953530728097743851, guid: d63fc016426823e48b122dece3f8262f, type: 3}
   m_PrefabInstance: {fileID: 8278210316434745124}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &3048664479520731310 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6389785837218699146, guid: d63fc016426823e48b122dece3f8262f, type: 3}
-  m_PrefabInstance: {fileID: 8278210316434745124}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &550514100204664065
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3048664479520731310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe1b43a93ee5a06458cc5ff5d8fd9d0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _enemyAttributesData: {fileID: 11400000, guid: f966a7f54ffc19e49a8884c6898c76aa, type: 2}
-  <CurrentHealth>k__BackingField: 0
-  _combatState: none
-  _enemyVisuals: {fileID: 3589339423466158215}
 --- !u!1 &3589339423466158215 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4840799348110417827, guid: d63fc016426823e48b122dece3f8262f, type: 3}

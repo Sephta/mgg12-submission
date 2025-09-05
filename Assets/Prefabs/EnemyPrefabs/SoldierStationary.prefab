@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: m_FlipX
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1934590378556959540, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
+      propertyPath: _takeDamageEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: fd827ce62aec666479400750f74bb38a, type: 2}
     - target: {fileID: 2790881854041204956, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0

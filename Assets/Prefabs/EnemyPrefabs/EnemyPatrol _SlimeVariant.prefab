@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1675609198039701285, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: _takeDamageEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: fd827ce62aec666479400750f74bb38a, type: 2}
+    - target: {fileID: 1675609198039701285, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: _maxStateDuration
       value: 30
       objectReference: {fileID: 0}

@@ -170,7 +170,7 @@ MonoBehaviour:
     rigidbody2D: {fileID: 7162069604851201553}
     circleCollider2D: {fileID: 944815370875935592}
     spriteRenderer: {fileID: 3295405747632213862}
-  _doDamageToEntity: {fileID: 11400000, guid: a447d77cdb8a7674d99fde594ada7f2c, type: 2}
+  _doDamageToEntity: {fileID: 11400000, guid: fd827ce62aec666479400750f74bb38a, type: 2}
   _tagToCollideWith: Enemy
   _layersToCollideWith:
     serializedVersion: 2

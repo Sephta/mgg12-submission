@@ -17,6 +17,9 @@ public class CombatAbilitySO : ScriptableObject
   [field: SerializeField, Range(0f, 50f)]
   public float Range { get; private set; }
 
+  [field: SerializeField, Range(0f, 50f)]
+  public int KnockbackForce { get; private set; }
+
   [field: SerializeField, Range(-50f, 50f)]
   public float AttackMovementForce { get; private set; }
 

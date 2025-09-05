@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Sandbag : MonoBehaviour
 {
-  [SerializeField] private IntIntEventChannelSO _damageEvent;
+  [SerializeField] private IntIntIntEventChannelSO _damageEvent;
 
   private void Awake()
   {
@@ -27,7 +27,7 @@ public class Sandbag : MonoBehaviour
 
   // private void Update() {}
 
-  private void DoDamageToEntity(int objectID, int damageAmount)
+  private void DoDamageToEntity(int objectID, int damageAmount, int knockbackForce)
   {
     if (objectID == gameObject.GetInstanceID())
     {

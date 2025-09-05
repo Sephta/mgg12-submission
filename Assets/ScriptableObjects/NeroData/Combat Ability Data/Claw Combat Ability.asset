@@ -15,6 +15,7 @@ MonoBehaviour:
   <Speed>k__BackingField: 1.5
   <Damage>k__BackingField: 10
   <Range>k__BackingField: 10
+  <KnockbackForce>k__BackingField: 20
   <AttackMovementForce>k__BackingField: 25
   <IgnoreMoveDirection>k__BackingField: 1
   <AttackChainingInputBuffer>k__BackingField: 0.25

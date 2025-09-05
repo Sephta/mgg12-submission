@@ -11,7 +11,7 @@ public class EnemyDamageListener : MonoBehaviour
 
   [Space(10f)]
   [SerializeField, Range(0f, 1000f)] private int _damageAmount = 10;
-  [SerializeField] private IntIntEventChannelSO _takeDamageEvent;
+  [SerializeField] private IntIntIntEventChannelSO _takeDamageEvent;
   [SerializeField] private IntIntEventChannelSO _dealDamageEvent;
   [Space(5f)]
   [SerializeField, Tag] private string _tagToDealDamageTo = "Player";
@@ -120,7 +120,7 @@ public class EnemyDamageListener : MonoBehaviour
   }
 
   // take damage
-  private void DoDamageToEntity(int objectID, int damageAmount)
+  private void DoDamageToEntity(int objectID, int damageAmount, int knockbackForce)
   {
     if (_parentRigidbody2D == null) return;
     if (_enemyAttributesData == null) return;
@@ -132,7 +132,7 @@ public class EnemyDamageListener : MonoBehaviour
       _isDead = _combatStates.TakeDamage(damageAmount);
 
       var directionToApplyForce = (transform.position - _enemyAttributesData.PlayerTransform.position).normalized;
-      _parentRigidbody2D.AddForce(directionToApplyForce * _enemyAttributesData.KnockbackForce, ForceMode2D.Impulse);
+      _parentRigidbody2D.AddForce(directionToApplyForce * knockbackForce, ForceMode2D.Impulse);
 
       if (_isDead)
       {

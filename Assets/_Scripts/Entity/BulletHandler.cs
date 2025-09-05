@@ -9,7 +9,7 @@ public class BulletHandler : MonoBehaviour
   [Space(10f)]
 
   [SerializeField] private BulletHandlerComponentReferences _componentRefs;
-  [SerializeField] private IntIntEventChannelSO _doDamageToEntity;
+  [SerializeField] private IntIntIntEventChannelSO _doDamageToEntity;
 
   [Space(10f)]
 
@@ -77,7 +77,8 @@ public class BulletHandler : MonoBehaviour
         {
           _doDamageToEntity.RaiseEvent(
             collider.gameObject.GetInstanceID(),
-            _playerAbilityData.CurrentlyEquippedArm.CombatAbility.Damage
+            _playerAbilityData.CurrentlyEquippedArm.CombatAbility.Damage,
+            _playerAbilityData.CurrentlyEquippedArm.CombatAbility.KnockbackForce
           );
 
           if (_cameraShakeEvent != null)

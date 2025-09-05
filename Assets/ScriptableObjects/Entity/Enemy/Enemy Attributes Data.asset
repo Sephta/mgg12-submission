@@ -19,7 +19,7 @@ MonoBehaviour:
   <RangeAwakeDistance>k__BackingField: 50
   <KnockbackForce>k__BackingField: 10
   <MinHealth>k__BackingField: 0
-  <MaxHealth>k__BackingField: 1000
-  <CurrentHealth>k__BackingField: 1000
+  <MaxHealth>k__BackingField: 30
+  <CurrentHealth>k__BackingField: 30
   MaxCombatStateDuration: 30
   PlayerTransform: {fileID: 0}

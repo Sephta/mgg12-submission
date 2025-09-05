@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad1a7b1b5ea75fb4caba9b42af305230, type: 3}
-  m_Name: DoDamageToEntity
+  m_Script: {fileID: 11500000, guid: 5b51d399538a7944a91018d286fb6005, type: 3}
+  m_Name: DoDamageToEntityWithKnockback
   m_EditorClassIdentifier: 
   _logEventWhenRaised: 0
