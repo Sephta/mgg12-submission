@@ -47,7 +47,6 @@ public class DestructableDoor : MonoBehaviour
 
   private void OnEnable()
   {
-    UpdateBoxColliderOffset();
 
     if (_ldtkComponentEntity != null)
     {
@@ -80,8 +79,12 @@ public class DestructableDoor : MonoBehaviour
 
           doorPiecePosition += (Vector3)_doorBuildDirection;
         }
+
+        _colliderOffset.y = -(numberOfDoorPiecesToSpawn / 2f);
       }
     }
+
+    UpdateBoxColliderOffset();
   }
 
   // private void OnDisable() {}
@@ -90,7 +93,13 @@ public class DestructableDoor : MonoBehaviour
 
   private void OnCollisionEnter2D(Collision2D collision)
   {
-    if (collision.gameObject.CompareTag(_tagToCompareTo))
+    OnTriggerEnter2D(collision.collider);
+
+  }
+
+  private void OnTriggerEnter2D(Collider2D collider)
+  {
+    if (collider.gameObject.CompareTag(_tagToCompareTo))
     {
       Debug.Log("Hit made contact with door");
       foreach (GameObject doorPiece in _doorPieces)

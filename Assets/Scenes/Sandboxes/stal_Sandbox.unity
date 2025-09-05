@@ -495,6 +495,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SoldierStationary
       objectReference: {fileID: 0}
+    - target: {fileID: 3447058627513306122, guid: 2950263ae92e19c42996f85073b57959, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8072760671608102218, guid: 2950263ae92e19c42996f85073b57959, type: 3}
       propertyPath: m_LocalPosition.x
       value: -20
@@ -3735,6 +3739,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyPatrol _SlimeVariant
       objectReference: {fileID: 0}
+    - target: {fileID: 7579305745478007758, guid: d63fc016426823e48b122dece3f8262f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4656,6 +4664,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemySoldier
       objectReference: {fileID: 0}
+    - target: {fileID: 7844157416699630727, guid: d9e6b586c199f6b4f9bd92436b4de4b4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4929,11 +4941,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8486502294814159854, guid: dda31814c704c254a9ded1bc579c6adb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6
+      value: -10.53
       objectReference: {fileID: 0}
     - target: {fileID: 8486502294814159854, guid: dda31814c704c254a9ded1bc579c6adb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8
+      value: -9.16
       objectReference: {fileID: 0}
     - target: {fileID: 8486502294814159854, guid: dda31814c704c254a9ded1bc579c6adb, type: 3}
       propertyPath: m_LocalPosition.z
