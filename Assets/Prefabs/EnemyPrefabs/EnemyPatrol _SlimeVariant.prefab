@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyPatrol _SlimeVariant
       objectReference: {fileID: 0}
+    - target: {fileID: 7009278459879794838, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 7352814663577243827, guid: db7bc17ebac9b894f96daa5711509daf, type: 3}
       propertyPath: m_Interpolate
       value: 1
