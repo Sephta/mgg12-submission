@@ -11,6 +11,7 @@ public class StartMenu : MonoBehaviour
   private bool _isTesting = false;
 
   [SerializeField] private GameObject _howToPlayScreen;
+  [SerializeField] private GameObject _startMenuButtons;
   [SerializeField] private GameObject _splashImage;
   [SerializeField] private GameObject _debugButtons;
 
@@ -28,18 +29,19 @@ public class StartMenu : MonoBehaviour
 
   public void HowToPlay()
   {
-    if (!_howToPlayScreen.activeSelf)
-    {
-      _howToPlayScreen.SetActive(true);
-      if (_splashImage.activeSelf) _splashImage.SetActive(false);
-    }
-    else
-    {
-      _howToPlayScreen.SetActive(false);
-      _splashImage.SetActive(_isSplashImagePresent);
-    }
-
+    _howToPlayScreen.SetActive(true);
+    _startMenuButtons.SetActive(false);
+    if (_splashImage.activeSelf) _splashImage.SetActive(false);
   }
+
+  public void ExitControls()
+  {
+    _howToPlayScreen.SetActive(false);
+    _startMenuButtons.SetActive(true);
+    _splashImage.SetActive(_isSplashImagePresent);
+  }
+
+
   public void ExitGame()
   {
     Debug.Log("Quitting the game :C");
