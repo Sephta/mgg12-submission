@@ -869,7 +869,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit Game
+  m_text: Return to Start Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -896,8 +896,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 22
+  m_fontSizeBase: 22
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1296,7 +1296,7 @@ GameObject:
   - component: {fileID: 7705750605081638988}
   - component: {fileID: 7339843400924556003}
   m_Layer: 0
-  m_Name: ExitGameButton
+  m_Name: ReturnToStartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1406,7 +1406,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3550938532546196124}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
-        m_MethodName: Quit
+        m_MethodName: ReturnToStart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

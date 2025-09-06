@@ -161,6 +161,11 @@ public class PauseManager : MonoBehaviour
     }
   }
 
+  public void ReturnToStart()
+  {
+    SceneManager.LoadScene(0);
+  }
+
 
   public void Quit()
   {
