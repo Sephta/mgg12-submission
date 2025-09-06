@@ -32,11 +32,11 @@
     }
   ],
   "Def": {
-    "__cHei": 1,
-    "__cWid": 5,
+    "__cHei": 5,
+    "__cWid": 17,
     "cachedPixelData": {
-      "opaqueTiles": "00011",
-      "averageColors": "f555f254f09df3f0f3ee"
+      "opaqueTiles": "0100010001000000011111111111100000010001000100000000100010001001000000000000000000000",
+      "averageColors": "f333f333f333f333f233f233f233f133f999f999f999f999b3480000000000000000f333f333f333f333f233f233f233f133f999f999f999f999c3480000000000000000f333f333f333f333f233f233f233f133f999f999f999f999e4c20000000000000000f333f333f333e333f233f233f233e132f999f999f999e999f4c20000000000000000f333f333f333f333f132f233f233f133f999f999f999f99900000000000000000000"
     },
     "customData": [
 
@@ -47,8 +47,8 @@
     ],
     "identifier": "Lab",
     "padding": 0,
-    "pxHei": 32,
-    "pxWid": 160,
+    "pxHei": 160,
+    "pxWid": 544,
     "relPath": "../../Sprites/Tilesets/Lab.png",
     "savedSelections": [
 

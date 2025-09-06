@@ -1,0 +1,33 @@
+{
+  "Rects": null,
+  "Def": {
+    "__cHei": 7,
+    "__cWid": 7,
+    "cachedPixelData": {
+      "opaqueTiles": "1111111000000100000010000001000000100000011111111",
+      "averageColors": "f433f444f555f555f344f9cd00007433744475557555734479cd00008433844485558555834489cd00008433844485558555834489cd00008433844385558555834489bc00008433844385558555834489bd00000000000000000000000000000000"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "Backgroundtiles64",
+    "padding": 0,
+    "pxHei": 388,
+    "pxWid": 388,
+    "relPath": "../../Sprites/Tilesets/backgroundtiles32.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 64,
+    "uid": 541
+  }
+}
