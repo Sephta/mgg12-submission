@@ -84,13 +84,13 @@ ScriptedImporter:
   - _key: Player_Spawn
     _asset: {fileID: 2769435021979840138, guid: 0b9202ed783d4414fb9045a83f1b74fe, type: 3}
   - _key: Needle_Pickup
-    _asset: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
+    _asset: {fileID: 1122013013616528673, guid: d88a62ef0fd5e9b4baa17d4f746c301e, type: 3}
   - _key: Enemy_Guard
     _asset: {fileID: 3447058627513306122, guid: 2950263ae92e19c42996f85073b57959, type: 3}
   - _key: Enemy_Slime
     _asset: {fileID: 2003264038202121450, guid: d17de7f3ec530aa44a6dcaff47ef5740, type: 3}
   - _key: Claw_Pickup
-    _asset: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
+    _asset: {fileID: 6331847097968765983, guid: 2f48d4080f6f2b54bbc5381f5281b732, type: 3}
   - _key: Door_Lock
     _asset: {fileID: 1798764232389147619, guid: dda31814c704c254a9ded1bc579c6adb, type: 3}
   - _key: Laser_Vertical
@@ -100,7 +100,7 @@ ScriptedImporter:
   - _key: Landmine
     _asset: {instanceID: 0}
   - _key: Cannon_Pickup
-    _asset: {fileID: 7172070100339459052, guid: 6c152efd8f0ca304da53c19607c2682b, type: 3}
+    _asset: {fileID: 8957009076473352350, guid: 1590c80581de58f47a294f0d66e81a7c, type: 3}
   - _key: Flower_Text
     _asset: {instanceID: 0}
   - _key: Level_End

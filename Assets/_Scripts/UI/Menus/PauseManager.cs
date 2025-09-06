@@ -16,6 +16,8 @@ public class PauseManager : MonoBehaviour
   [SerializeField] private GameObject _keyboardX;
 
   [SerializeField, Expandable] private PlayerEventDataSO _playerEventData;
+  [SerializeField] private PlayerAbilityDataSO _playerArmsSO;
+
 
 
   [SerializeField, ReadOnly] bool _isPaused = false;
@@ -95,21 +97,15 @@ public class PauseManager : MonoBehaviour
     Time.timeScale = 1;
     _pausePanel.SetActive(false);
     _isPaused = false;
+    ResetPlayerArms();
   }
 
   public void ShowControls()
   {
-    Debug.Log("wtf?");
-    // Time.timeScale = 1;
     _pausePanel.SetActive(false);
     _controlsPanel.SetActive(true);
     SwapGamepadControlsVisibility(_isShowingGamepadControls);
     SwapMKBControlsVisibility(_isShowingKeyboardControls);
-    // _gamepadControls.SetActive(true);
-    // _gamepadCheck.SetActive(_isShowingGamepadControls);
-    // _gamepadX.SetActive(!_isShowingGamepadControls);
-    // _keyboardCheck.SetActive(_isShowingKeyboardControls);
-    // _keyboardX.SetActive(!_isShowingKeyboardControls);
   }
 
   public void ExitControls()
@@ -122,7 +118,6 @@ public class PauseManager : MonoBehaviour
   // look this is how I made the UI look whatever lol
   public void ShowGamepadControls()
   {
-    Debug.Log("HELLO");
     if (!_isShowingGamepadControls)
     {
       SwapGamepadControlsVisibility(true);
@@ -163,6 +158,7 @@ public class PauseManager : MonoBehaviour
 
   public void ReturnToStart()
   {
+    ResetPlayerArms();
     SceneManager.LoadScene(0);
   }
 
@@ -186,6 +182,11 @@ public class PauseManager : MonoBehaviour
     _keyboardControls.SetActive(selectShow);
     _keyboardCheck.SetActive(selectShow);
     _keyboardX.SetActive(!selectShow);
+  }
+
+  private void ResetPlayerArms()
+  {
+    _playerArmsSO.ResetArms();
   }
 
 

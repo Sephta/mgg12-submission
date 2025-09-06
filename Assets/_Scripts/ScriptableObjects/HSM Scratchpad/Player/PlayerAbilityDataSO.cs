@@ -24,6 +24,16 @@ public class PlayerAbilityDataSO : ScratchpadDataSO
 
   [Expandable] public VoidEventChannelSO ArmCycledEvent;
 
+  private void OnEnable()
+  {
+    ResetArms();
+  }
+
+  private void OnDisable()
+  {
+    ResetArms();
+  }
+
   public void CycleArmLeft()
   {
     _currentArmIndex--;
@@ -57,6 +67,14 @@ public class PlayerAbilityDataSO : ScratchpadDataSO
   public void RemoveAbility(NeroArmType abilityType)
   {
 
+  }
+
+  public void ResetArms()
+  {
+    if (ArmData.Count > 1)
+    {
+      ArmData.RemoveRange(1, ArmData.Count - 1);
+    }
   }
 
   [Button("Reset Current Arm Index")]

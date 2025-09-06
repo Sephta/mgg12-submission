@@ -15,7 +15,4 @@ MonoBehaviour:
   _currentArmIndex: 0
   ArmData:
   - {fileID: 11400000, guid: 9e916ae92bcd2314aab847bd8b093b08, type: 2}
-  - {fileID: 11400000, guid: 45f8d3624e3706149b4583935c185feb, type: 2}
-  - {fileID: 11400000, guid: ae10c7dae936feb4bbb23ab7d4c42aad, type: 2}
-  - {fileID: 11400000, guid: 549e22e4f6330bd46bed0d9d3b786afc, type: 2}
   ArmCycledEvent: {fileID: 11400000, guid: ea733e2475cf80e478a43cd3bf5a5748, type: 2}
