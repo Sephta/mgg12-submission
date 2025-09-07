@@ -15,7 +15,7 @@ MonoBehaviour:
   <PatrolSpeed>k__BackingField: 6
   <ChaseSpeed>k__BackingField: 12
   <Acceleration>k__BackingField: 1
-  <Deceleration>k__BackingField: 1
+  <Deceleration>k__BackingField: 0.5
   <RangeAwakeDistance>k__BackingField: 50
   <KnockbackForce>k__BackingField: 10
   <MinHealth>k__BackingField: 0

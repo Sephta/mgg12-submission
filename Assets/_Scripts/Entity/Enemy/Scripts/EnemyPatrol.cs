@@ -28,6 +28,10 @@ public class EnemyPatrol : MonoBehaviour
   [SerializeField, ReadOnly] private Vector2 _normalizedDirectionFromPath = Vector2.zero;
   [SerializeField, ReadOnly] private float _directionX = 0f;
   [SerializeField, ReadOnly] private float _targetSpeed = 0f;
+  [SerializeField, ReadOnly] private float _distanceFromTarget = -1f;
+  [SerializeField, ReadOnly] private float _distanceFromPlayer = -1f;
+
+
 
   private Path _path;
   private Transform _currentTarget;
@@ -37,13 +41,10 @@ public class EnemyPatrol : MonoBehaviour
   private bool _isPatrolling = false;
   private bool _isChasing = false;
   private bool _isDead = false;
-  private float _distanceFromTarget = -1f;
-  private float _distanceFromPlayer = -1f;
   private Seeker _seeker;
   private Rigidbody2D _rb;
   private Vector3 _originalLocation;
   private Transform _originalTransform;
-
 
 
   private void Awake()
@@ -177,6 +178,8 @@ public class EnemyPatrol : MonoBehaviour
     _path = path;
     _currentWaypoint = 0;
   }
+
+
 
   private void MoveEnemyOnPath()
   {

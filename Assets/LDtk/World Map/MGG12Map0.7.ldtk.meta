@@ -114,7 +114,7 @@ ScriptedImporter:
   - _key: Flower_Text
     _asset: {instanceID: 0}
   - _key: Level_End
-    _asset: {instanceID: 0}
+    _asset: {fileID: 8612753528218007108, guid: 5ea46687f83761446ace5fe9e262c93f, type: 3}
   _enumGenerate: 0
   _enumPath: 
   _enumNamespace: 
