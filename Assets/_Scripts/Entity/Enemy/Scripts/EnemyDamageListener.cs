@@ -28,6 +28,7 @@ public class EnemyDamageListener : MonoBehaviour
   private bool _isTakingDamage = false;
   private bool _isDead = false;
   private EnemyCombatStates _combatStates;
+  private Collider2D _colliderToDamage;
 
 
   private void Awake()
@@ -91,6 +92,11 @@ public class EnemyDamageListener : MonoBehaviour
 
     if (_isTimerDone)
     {
+      if (_isAttacking && _colliderToDamage != null)
+      {
+        InflictDamageToPlayer(_colliderToDamage);
+        return;
+      }
       _combatStates.SetCombatState("none");
       _isAttacking = false;
       _isTakingDamage = false;
@@ -99,6 +105,8 @@ public class EnemyDamageListener : MonoBehaviour
   }
 
   private void OnCollisionEnter2D(Collision2D collision) => OnTriggerEnter2D(collision.collider);
+  private void OnCollisionExit2D(Collision2D collision) => OnTriggerExit2D(collision.collider);
+
 
   // inflict damage
   private void OnTriggerEnter2D(Collider2D collider)
@@ -107,16 +115,31 @@ public class EnemyDamageListener : MonoBehaviour
 
     if (collider.CompareTag(_tagToDealDamageTo) && !_isTakingDamage)
     {
-      if (_isTimerDone)
-      {
-        _isAttacking = true;
-        _currentStateTimer = _maxStateDuration;
-        _combatStates.SetCombatState("attacking");
-        _isTimerDone = false;
-      }
-      _dealDamageEvent.RaiseEvent(collider.gameObject.GetInstanceID(), _damageAmount);
-      // Debug.Log($"{name} attempting to inflict {_damageAmount} damage to <ID: {collider.gameObject.GetInstanceID()}>");
+      _colliderToDamage = collider;
+      InflictDamageToPlayer(collider);
     }
+  }
+
+  private void OnTriggerExit2D(Collider2D collider)
+  {
+    if (_isDead) return;
+    if (collider.CompareTag(_tagToDealDamageTo))
+    {
+      _isAttacking = false;
+    }
+  }
+
+  private void InflictDamageToPlayer(Collider2D collider)
+  {
+    if (_isTakingDamage || _isDead) return;
+    if (_isTimerDone)
+    {
+      _isAttacking = true;
+      _currentStateTimer = _maxStateDuration;
+      _combatStates.SetCombatState("attacking");
+      _isTimerDone = false;
+    }
+    _dealDamageEvent.RaiseEvent(collider.gameObject.GetInstanceID(), _damageAmount);
   }
 
   // take damage
@@ -147,13 +170,20 @@ public class EnemyDamageListener : MonoBehaviour
         return;
       }
 
-      if (_isTimerDone)
-      {
-        _isTakingDamage = true;
-        _currentStateTimer = _maxStateDuration;
-        _combatStates.SetCombatState("taking damage");
-        _isTimerDone = false;
-      }
+      // if (_isTimerDone)
+      // {
+      //   _isTakingDamage = true;
+      //   _currentStateTimer = _maxStateDuration;
+      //   _combatStates.SetCombatState("taking damage");
+      //   _isTimerDone = false;
+      // }
+
+      // let's see how it feels if the player can stunlock the enemy...
+      _isTakingDamage = true;
+      _isAttacking = false;
+      _currentStateTimer = _maxStateDuration;
+      _combatStates.SetCombatState("taking damage");
+      _isTimerDone = false;
 
     }
   }
