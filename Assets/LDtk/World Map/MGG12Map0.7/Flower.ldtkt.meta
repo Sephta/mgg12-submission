@@ -11,6 +11,21 @@ ScriptedImporter:
   _reimportOnDependencyChange: 1
   _pixelsPerUnit: 32
   _overrideTexture: {instanceID: 0}
-  _sprites: []
+  _sprites:
+  - name: Flower_0
+    originalName: 
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 32
+      height: 32
+    spriteID: 0d2014bdf9c82b344b1251fe2bc10723
+    spriteOutline: []
+    tessellationDetail: 0
   _secondaryTextures: []
   _artifacts: {instanceID: 0}

@@ -1,0 +1,33 @@
+{
+  "Rects": null,
+  "Def": {
+    "__cHei": 8,
+    "__cWid": 8,
+    "cachedPixelData": {
+      "opaqueTiles": "0000000000000000000000000000000000000000000000000000000000000000",
+      "averageColors": "b143d143b143e14300000000114411540143114401443154115411545154414441544154514371430000000000000000415441547144414422222222122202220222022242223222000000000000000062225222022202220000000000000000000000007cb17cb1000000000000000000000000000000000000000000003867"
+    },
+    "customData": [
+
+    ],
+    "embedAtlas": null,
+    "enumTags": [
+
+    ],
+    "identifier": "Details16",
+    "padding": 0,
+    "pxHei": 128,
+    "pxWid": 128,
+    "relPath": "../../Sprites/Tilesets/details32.png",
+    "savedSelections": [
+
+    ],
+    "spacing": 0,
+    "tags": [
+
+    ],
+    "tagsSourceEnumUid": null,
+    "tileGridSize": 16,
+    "uid": 658
+  }
+}

@@ -1,9 +1,19 @@
 {
-  "Rects": null,
+  "Rects": [
+    {
+      "x": 0,
+      "y": 0,
+      "w": 32,
+      "h": 32
+    }
+  ],
   "Def": {
     "__cHei": 1,
     "__cWid": 1,
-    "cachedPixelData": null,
+    "cachedPixelData": {
+      "opaqueTiles": "0",
+      "averageColors": "2858"
+    },
     "customData": [
 
     ],
@@ -15,7 +25,7 @@
     "padding": 0,
     "pxHei": 32,
     "pxWid": 32,
-    "relPath": "../../Sprites/Flower.png",
+    "relPath": "../../Sprites/Tilesets/Flower.png",
     "savedSelections": [
 
     ],
@@ -25,6 +35,6 @@
     ],
     "tagsSourceEnumUid": null,
     "tileGridSize": 32,
-    "uid": 427
+    "uid": 656
   }
 }
