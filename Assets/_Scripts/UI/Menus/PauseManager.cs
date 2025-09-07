@@ -17,8 +17,7 @@ public class PauseManager : MonoBehaviour
 
   [SerializeField, Expandable] private PlayerEventDataSO _playerEventData;
   [SerializeField] private PlayerAbilityDataSO _playerArmsSO;
-  // [SerializeField] private GameObject _player;
-
+  [SerializeField] private PlayerHealthSO _playerHealthSO;
 
   [SerializeField, ReadOnly] bool _isPaused = false;
 
@@ -97,7 +96,7 @@ public class PauseManager : MonoBehaviour
     Time.timeScale = 1;
     _pausePanel.SetActive(false);
     _isPaused = false;
-    ResetPlayerArms();
+    ResetPlayerAttributes();
   }
 
   public void ShowControls()
@@ -158,7 +157,7 @@ public class PauseManager : MonoBehaviour
 
   public void ReturnToStart()
   {
-    ResetPlayerArms();
+    ResetPlayerAttributes();
     SceneManager.LoadScene(0);
   }
 
@@ -184,19 +183,11 @@ public class PauseManager : MonoBehaviour
     _keyboardX.SetActive(!selectShow);
   }
 
-  // private void ResetPlayerAttributes()
-  // {
-  //   _player.GetComponent<PlayerAbilityDataSO>().ResetArms();
-  //   PlayerHealthSO playerHealth = _player.GetComponent<PlayerHealthSO>();
-  //   playerHealth.SetCurrentHealth(playerHealth.MaxHealth);
-  // }
-
-  private void ResetPlayerArms()
+  private void ResetPlayerAttributes()
   {
     _playerArmsSO.ResetArms();
+    _playerHealthSO.SetCurrentHealth(_playerHealthSO.MaxHealth);
   }
-
-
 
 
 }

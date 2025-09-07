@@ -328,6 +328,8 @@ MonoBehaviour:
   _keyboardCheck: {fileID: 3844044480869668553}
   _keyboardX: {fileID: 8707722963787791493}
   _playerEventData: {fileID: 11400000, guid: 8992863c5f19e8345aae1d3d1f34b837, type: 2}
+  _playerArmsSO: {fileID: 11400000, guid: 56713abed363fa1489b17c2ed7fd735b, type: 2}
+  _playerHealthSO: {fileID: 11400000, guid: 74a0d1688989cb1468a4619d26e9969a, type: 2}
   _isPaused: 0
 --- !u!1 &1737689429364981905
 GameObject:
