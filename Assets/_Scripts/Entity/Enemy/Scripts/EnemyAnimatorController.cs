@@ -14,6 +14,8 @@ public class EnemyAnimatorController : MonoBehaviour
 
   [SerializeField] private int _crossfadeTransitionDuration = 0;
   [SerializeField] private int _animatorLayerToUse = 0;
+
+  [SerializeField, ReadOnly] private string _selectedAnimation;
   private Rigidbody2D _rb;
   private Color _originalSpriteColor;
 
@@ -56,6 +58,7 @@ public class EnemyAnimatorController : MonoBehaviour
   private void Update()
   {
     string animationToPlay = AnimationSelector();
+    _selectedAnimation = animationToPlay;
     _animator.CrossFade(animationToPlay, _crossfadeTransitionDuration, _animatorLayerToUse);
   }
 
@@ -94,6 +97,7 @@ public class EnemyAnimatorController : MonoBehaviour
   /*                               PUBLIC                             */
   /* ---------------------------------------------------------------- */
   public void SetAnimationCombatState(string state) => _combatState = state;
+  public string GetCurrentAnimation() { return _selectedAnimation; }
 
   /* ---------------------------------------------------------------- */
   /*                               PRIVATE                            */

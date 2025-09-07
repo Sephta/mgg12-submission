@@ -33,8 +33,10 @@ public class EnemyPatrol : MonoBehaviour
 
 
 
+
   private Path _path;
   private Transform _currentTarget;
+
   private int _currentWaypoint = 0;
   private int _currentPatrolPoint = 0;
   private bool _reachedTarget = false;
@@ -43,8 +45,9 @@ public class EnemyPatrol : MonoBehaviour
   private bool _isDead = false;
   private Seeker _seeker;
   private Rigidbody2D _rb;
-  private Vector3 _originalLocation;
   private Transform _originalTransform;
+  private Vector3 _originalLocation;
+  private EnemyAnimatorController _enemyAnimatorController;
 
 
   private void Awake()
@@ -56,6 +59,7 @@ public class EnemyPatrol : MonoBehaviour
     }
     if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
     if (player != null) _enemyAttributesData.PlayerTransform = player;
+    if (_enemyAnimatorController == null) _enemyAnimatorController = GetComponentInChildren<EnemyAnimatorController>();
   }
 
   private void Start()
@@ -78,6 +82,8 @@ public class EnemyPatrol : MonoBehaviour
     _isPatrolling = _distanceFromPlayer <= _enemyAttributesData.RangeAwakeDistance;
     _reachedTarget = _distanceFromTarget < 1f;
 
+    if (_path == null) Debug.Log("Path is null");
+
     if (_isDead)
     {
       DisposeTheBody(_distanceFromPlayer > _enemyAttributesData.RangeAwakeDistance);
@@ -92,6 +98,7 @@ public class EnemyPatrol : MonoBehaviour
 
     if (!IsInvoking(nameof(UpdatePath)))
     {
+      Debug.Log("!IsInvoking");
       InvokeRepeating(nameof(UpdatePath), 0f, 0.5f);
       return;
     }
@@ -101,7 +108,7 @@ public class EnemyPatrol : MonoBehaviour
     if (_currentWaypoint >= _path.vectorPath.Count)
       return;
 
-    if (_reachedTarget && _isPatrolling)
+    if (_reachedTarget && _isPatrolling && !_isChasing)
     {
       UpdatePatrolTarget();
       return;
@@ -133,6 +140,7 @@ public class EnemyPatrol : MonoBehaviour
     {
       _isChasing = false;
       _isPatrolling = true;
+      _reachedTarget = false;
       _speed = _enemyAttributesData.PatrolSpeed;
       UpdatePatrolTarget();
     }
