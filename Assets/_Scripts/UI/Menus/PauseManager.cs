@@ -8,12 +8,6 @@ public class PauseManager : MonoBehaviour
 
   [SerializeField] private GameObject _pausePanel;
   [SerializeField] private GameObject _controlsPanel;
-  [SerializeField] private GameObject _gamepadControls;
-  [SerializeField] private GameObject _keyboardControls;
-  [SerializeField] private GameObject _gamepadCheck;
-  [SerializeField] private GameObject _gamepadX;
-  [SerializeField] private GameObject _keyboardCheck;
-  [SerializeField] private GameObject _keyboardX;
 
   [SerializeField, Expandable] private PlayerEventDataSO _playerEventData;
   [SerializeField] private PlayerAbilityDataSO _playerArmsSO;
@@ -103,8 +97,6 @@ public class PauseManager : MonoBehaviour
   {
     _pausePanel.SetActive(false);
     _controlsPanel.SetActive(true);
-    SwapGamepadControlsVisibility(_isShowingGamepadControls);
-    SwapMKBControlsVisibility(_isShowingKeyboardControls);
   }
 
   public void ExitControls()
@@ -119,16 +111,12 @@ public class PauseManager : MonoBehaviour
   {
     if (!_isShowingGamepadControls)
     {
-      SwapGamepadControlsVisibility(true);
-      SwapMKBControlsVisibility(false);
       _isShowingGamepadControls = true;
       _isShowingKeyboardControls = false;
 
     }
     else
     {
-      SwapGamepadControlsVisibility(false);
-      SwapMKBControlsVisibility(true);
       _isShowingGamepadControls = false;
       _isShowingKeyboardControls = true;
     }
@@ -140,16 +128,12 @@ public class PauseManager : MonoBehaviour
 
     if (!_isShowingKeyboardControls)
     {
-      SwapGamepadControlsVisibility(false);
-      SwapMKBControlsVisibility(true);
       _isShowingGamepadControls = false;
       _isShowingKeyboardControls = true;
 
     }
     else
     {
-      SwapGamepadControlsVisibility(true);
-      SwapMKBControlsVisibility(false);
       _isShowingGamepadControls = true;
       _isShowingKeyboardControls = false;
     }
@@ -157,6 +141,7 @@ public class PauseManager : MonoBehaviour
 
   public void ReturnToStart()
   {
+    Time.timeScale = 1;
     ResetPlayerAttributes();
     SceneManager.LoadScene(0);
   }
@@ -166,21 +151,6 @@ public class PauseManager : MonoBehaviour
   {
     Debug.Log("Quitting the game :C");
     Application.Quit();
-  }
-
-
-  private void SwapGamepadControlsVisibility(bool selectShow)
-  {
-    _gamepadControls.SetActive(selectShow);
-    _gamepadCheck.SetActive(selectShow);
-    _gamepadX.SetActive(!selectShow);
-  }
-
-  private void SwapMKBControlsVisibility(bool selectShow)
-  {
-    _keyboardControls.SetActive(selectShow);
-    _keyboardCheck.SetActive(selectShow);
-    _keyboardX.SetActive(!selectShow);
   }
 
   private void ResetPlayerAttributes()

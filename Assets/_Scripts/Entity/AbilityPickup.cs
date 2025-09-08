@@ -100,6 +100,12 @@ public class AbilityPickup : MonoBehaviour
     _amountOfTimeToWaitTillAnimate = UnityEngine.Random.Range(_randomStartTimeOffsetMinMax.x, _randomStartTimeOffsetMinMax.y);
     _randomStartTime += _amountOfTimeToWaitTillAnimate;
 
+    transform.position = new(
+      transform.position.x,
+      transform.position.y + 0.5f,
+      transform.position.z
+    );
+
     _circleCollider2D.radius = _colliderRadius;
     _circleCollider2D.isTrigger = true;
   }
