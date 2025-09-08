@@ -1,3 +1,4 @@
+<img src="https://github.com/Sephta/mgg12-submission/blob/main/Assets/Sprites/UI/UI%20Art/cover_thumbnail.png">
 <div style="width:75%">
 <div>
 <h2 data-darkreader-inline-color="" style="color: rgb(98, 175, 123); --darkreader-inline-color: var(--darkreader-text-62af7b, #89ad95);">Magical Knight: Bramble</h2>
