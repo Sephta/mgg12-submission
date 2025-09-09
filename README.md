@@ -20,7 +20,7 @@ Explore the level, collecting different Seeds to transform your arm, granting yo
 <div>
 <h2 data-darkreader-inline-color="" style="color: rgb(98, 175, 123); --darkreader-inline-color: var(--darkreader-text-62af7b, #89ad95);">Controls</h2>
 To view how to use each Seed Arm's special ability, select "How to Play" in the start menu or pause the game and select "View Controls".
-<table><tbody><tr><td></td><td>Keyboard</td><td>Controller</td></tr><tr><td>Move</td><td>WASD</td><td>Left Analog stick</td></tr><tr><td>Jump</td><td>Spacebar</td><td>Bottom Face Button</td></tr><tr><td>Attack</td><td>Left Mouse Button</td><td>Left Face Button</td></tr><tr><td>Cycle Abilities</td><td>Q, E</td><td>Left, Right bumpers</td></tr><tr><td>Enter Aim Mode</td><td>Right Mouse Button</td><td>Left Trigger</td></tr><tr><td>Grow&nbsp;</td><td>Left Mouse Button</td><td>Right Trigger</td></tr></tbody></table>
+<table><tbody><tr><td></td><td>Keyboard</td><td>Controller</td></tr><tr><td>Pause</td><td>Tab</td><td>Start button</td></tr><tr><td>Move</td><td>WASD</td><td>Left Analog stick</td></tr><tr><td>Jump</td><td>Spacebar</td><td>Bottom Face Button</td></tr><tr><td>Attack</td><td>Left Mouse Button</td><td>Left Face Button</td></tr><tr><td>Cycle Abilities</td><td>Q, E</td><td>Left, Right bumpers</td></tr><tr><td>Enter Aim Mode</td><td>Right Mouse Button</td><td>Left Trigger</td></tr><tr><td>Grow&nbsp;</td><td>Left Mouse Button</td><td>Right Trigger</td></tr></tbody></table>
 <em>Note:</em><br>
 <ul>
 <li> Bramble's neutral arm does not have an attack. </li>
